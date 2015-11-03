@@ -15,7 +15,9 @@ set the name of your KeyboardViewController subclass in the Info.plist file.
 
 let kCatTypeEnabled = "kCatTypeEnabled"
 
-class Catboard: KeyboardViewController {
+
+class Catboard: KeyboardViewController, CatboardBannerDelegate {
+    
     
     let takeDebugScreenshot: Bool = false
     
@@ -122,6 +124,13 @@ class Catboard: KeyboardViewController {
             UIImagePNGRepresentation(capturedImage)!.writeToFile(imagePath, atomically: true)
             
             self.view.backgroundColor = oldViewColor
+        }
+    }
+    
+    func appendEmoji(emoji: String) {
+        // Uses the data passed back
+        if let textDocumentProxy = self.textDocumentProxy as? UITextDocumentProxy {
+            textDocumentProxy.insertText(emoji)
         }
     }
 }
