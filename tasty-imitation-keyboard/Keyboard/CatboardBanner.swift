@@ -25,6 +25,7 @@ class CatboardBanner: ExtraView {
     var catSwitch: UISwitch = UISwitch()
     var catLabel: UILabel = UILabel()
     var firstEmojiButton: UIButton = UIButton()
+    var testLabel:UILabel = UILabel()
     
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
@@ -32,13 +33,27 @@ class CatboardBanner: ExtraView {
         self.addSubview(self.catSwitch)
         self.addSubview(self.catLabel)
         self.addSubview(self.firstEmojiButton)
+        self.addSubview(self.testLabel)
         
-        self.firstEmojiButton.setTitle("😈", forState: UIControlState.Normal)
+        self.firstEmojiButton.setTitle("B", forState: UIControlState.Normal)
         
         self.catSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(kCatTypeEnabled)
         self.catSwitch.transform = CGAffineTransformMakeScale(0.75, 0.75)
         self.catSwitch.addTarget(self, action: Selector("respondToSwitch"), forControlEvents: UIControlEvents.ValueChanged)
         
+        self.firstEmojiButton.frame = CGRectMake(10, 10, 40, 40)
+        self.firstEmojiButton.setTitle("😈", forState: UIControlState.Normal)
+        self.firstEmojiButton.sizeToFit()
+//        self.firstEmojiButton.enabled = true
+        self.firstEmojiButton.backgroundColor = UIColor.blueColor()
+        self.firstEmojiButton.setTitle("H", forState: UIControlState.Highlighted)
+        self.firstEmojiButton.addTarget(self, action: Selector("emojiSelected:"), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        self.testLabel.frame = CGRectMake(260, 10, 80, 30)
+        self.testLabel.backgroundColor = UIColor.redColor()
+        self.testLabel.text = "not clicked"
+        self.testLabel.font = self.testLabel.font.fontWithSize(10.0)
+
         
         self.updateAppearance()
     }
@@ -53,25 +68,24 @@ class CatboardBanner: ExtraView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        print("Laying out subviews")
         
         self.catSwitch.center = self.center
         self.catLabel.center = self.center
         self.catLabel.frame.origin = CGPointMake(self.catSwitch.frame.origin.x + self.catSwitch.frame.width + 8, self.catLabel.frame.origin.y)
         
-        self.firstEmojiButton.sizeToFit()
         self.firstEmojiButton.frame.origin = CGPointMake(self.catSwitch.frame.origin.x - 50, self.catSwitch.frame.origin.y)
-        self.firstEmojiButton.addTarget(self, action: Selector("emojiSelected:"), forControlEvents: .TouchUpInside)
+        print(self.firstEmojiButton.frame);
 
     }
     
     func emojiSelected(sender: UIButton!) {
+        self.testLabel.text = self.firstEmojiButton.titleLabel?.text
+        print("emoji button clicked")
         
-        print("clicked emoji button");
-        print(firstEmojiButton.titleLabel?.text)
-        print(sender.titleLabel?.text)
+        NSLog("nslog emoji button clicked")
         
-        delegate?.appendEmoji((firstEmojiButton.titleLabel?.text)!)
+        
+        delegate?.appendEmoji((self.firstEmojiButton.titleLabel?.text)!)
     }
     
     func respondToSwitch() {

@@ -21,9 +21,11 @@ class Catboard: KeyboardViewController, CatboardBannerDelegate {
     
     let takeDebugScreenshot: Bool = false
     
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         NSUserDefaults.standardUserDefaults().registerDefaults([kCatTypeEnabled: true])
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        print("init keyboard")
     }
 
     required init?(coder: NSCoder) {
@@ -99,7 +101,9 @@ class Catboard: KeyboardViewController, CatboardBannerDelegate {
     }
     
     override func createBanner() -> ExtraView? {
-        return CatboardBanner(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
+        var catboardBanner = CatboardBanner(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
+        catboardBanner.delegate = self
+        return catboardBanner
     }
     
     func takeScreenshotDelay() {
@@ -129,6 +133,8 @@ class Catboard: KeyboardViewController, CatboardBannerDelegate {
     
     func appendEmoji(emoji: String) {
         // Uses the data passed back
+        NSLog("emoji button delegate")
+
         if let textDocumentProxy = self.textDocumentProxy as? UITextDocumentProxy {
             textDocumentProxy.insertText(emoji)
         }
