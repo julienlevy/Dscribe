@@ -25,7 +25,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         NSUserDefaults.standardUserDefaults().registerDefaults([kCatTypeEnabled: true])
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        print("init keyboard")
     }
     
     required init?(coder: NSCoder) {
@@ -101,9 +100,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     }
     
     override func createBanner() -> ExtraView? {
-        var catboardBanner = DscribeBanner(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
-        catboardBanner.delegate = self
-        return catboardBanner
+        let dscribeBanner = DscribeBanner(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
+        dscribeBanner.delegate = self
+        return dscribeBanner
     }
     
     func takeScreenshotDelay() {
