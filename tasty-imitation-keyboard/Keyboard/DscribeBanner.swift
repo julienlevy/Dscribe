@@ -66,45 +66,39 @@ class DscribeBanner: ExtraView {
         self.catLabel.frame.origin = CGPointMake(self.catSwitch.frame.origin.x + self.catSwitch.frame.width + 8, self.catLabel.frame.origin.y)
         
         self.firstEmojiButton.frame.origin = CGPointMake(self.catSwitch.frame.origin.x - 50, self.catSwitch.frame.origin.y)
-        print(self.firstEmojiButton.frame);
         
-        self.scrollView.frame = CGRectMake(0, 0, 2*self.frame.width, self.frame.height)
+        
+        // ––––––––––––––––––––––––––
+        self.scrollView.frame = CGRectMake(0, 0, self.frame.width, self.frame.height)
+        self.scrollView.contentSize = CGSizeMake(80, 600)
         self.scrollView.scrollEnabled = true
-//        self.scrollView.contentSize.width = self.scrollView.contentSize.width
-        self.scrollView.backgroundColor = UIColor.purpleColor()
         self.addSubview(self.scrollView)
         
         var xOrigin: CGFloat = 0
-        let width: CGFloat = 50
+        var width: CGFloat = 20
         var lastButton:UIButton = UIButton()
         for  emoji in emojiArray {
-            NSLog("emoji: %@", emoji)
             let button: UIButton = UIButton()
             button.frame = CGRectMake(xOrigin, 0, width, self.frame.height)
             button.setTitle(emoji, forState: UIControlState.Normal)
+            button.sizeToFit()
             button.addTarget(self, action: Selector("emojiSelected:"), forControlEvents: UIControlEvents.TouchUpInside);
             
-            xOrigin += width
+            width = button.frame.width
+            
+            xOrigin += width + 20
             
             self.scrollView.addSubview(button)
             
             lastButton = button
         }
-        wbefore = self.scrollView.frame.size.width
-        wAfter = self.scrollView.frame.size.width
-        NSLog("scrollView frame before %i", self.scrollView.frame.size.width)
-        self.scrollView.frame.size.width = lastButton.frame.origin.x + lastButton.frame.width
-        NSLog("scrollView frame after %i", self.scrollView.frame.size.width)
-
+        self.scrollView.contentSize.width = lastButton.frame.origin.x + lastButton.frame.width
+        self.scrollView.contentSize.height = self.frame.height
     }
     
     func emojiSelected(sender: UIButton!) {
         NSLog("NSLog emoji button clicked")
-        
-        NSLog("scrollView frame before %i", wbefore)
-        NSLog("scrollView frame after %i", self.scrollView.frame.size.width)
-        self.scrollView.backgroundColor = UIColor.brownColor()
-        
+
         delegate?.appendEmoji((sender.titleLabel?.text)!)
     }
     
