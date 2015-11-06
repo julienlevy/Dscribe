@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0DE2F8961BEC274B000F9B5F /* Emojis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2F8951BEC274B000F9B5F /* Emojis.swift */; };
 		0DE2F8981BECE232000F9B5F /* DscribeBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2F8971BECE232000F9B5F /* DscribeBanner.swift */; };
+		0DE2F89A1BED3AF0000F9B5F /* Dscribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2F8991BED3AF0000F9B5F /* Dscribe.swift */; };
 		4E00A6E5197183EE009414F2 /* KeyboardKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E807DC81946209600D875D1 /* KeyboardKey.swift */; };
 		4E3B5A941A0654A8003366F6 /* KeyboardInputTraits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3B5A931A0654A8003366F6 /* KeyboardInputTraits.swift */; };
 		4E52A6D21A06A61F006A08CE /* ImageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E52A6D11A06A61F006A08CE /* ImageKey.swift */; };
@@ -99,6 +100,7 @@
 /* Begin PBXFileReference section */
 		0DE2F8951BEC274B000F9B5F /* Emojis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emojis.swift; sourceTree = "<group>"; };
 		0DE2F8971BECE232000F9B5F /* DscribeBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeBanner.swift; sourceTree = "<group>"; };
+		0DE2F8991BED3AF0000F9B5F /* Dscribe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dscribe.swift; sourceTree = "<group>"; };
 		4E3B5A931A0654A8003366F6 /* KeyboardInputTraits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardInputTraits.swift; sourceTree = "<group>"; };
 		4E52A6D11A06A61F006A08CE /* ImageKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageKey.swift; sourceTree = "<group>"; };
 		4E52A6D31A06A626006A08CE /* ExtraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraView.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				4E6AEE4B19D246D700931E8F /* Catboard.swift */,
 				4EEFD78819E0DC6B004D4974 /* CatboardBanner.swift */,
 				0DE2F8971BECE232000F9B5F /* DscribeBanner.swift */,
+				0DE2F8991BED3AF0000F9B5F /* Dscribe.swift */,
 			);
 			name = Demo;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				0DE2F8961BEC274B000F9B5F /* Emojis.swift in Sources */,
 				4E52A6D21A06A61F006A08CE /* ImageKey.swift in Sources */,
 				4E52A6D41A06A626006A08CE /* ExtraView.swift in Sources */,
+				0DE2F89A1BED3AF0000F9B5F /* Dscribe.swift in Sources */,
 				4EC2A47019DF811E00F789E1 /* ForwardingView.swift in Sources */,
 				4EC2A46E19DF811E00F789E1 /* KeyboardLayout.swift in Sources */,
 				4E60A13A1979FA5C00854CC8 /* KeyboardKeyBackground.swift in Sources */,
