@@ -76,6 +76,23 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 textDocumentProxy.insertText(keyOutput)
                 return
             }
+            //––––––––––––––––––
+            if keyOutput == "|" {
+                //Check predecessor : if star also :
+                    //toggle escape mode (when escaped mode, change design to darker or funnier)
+                    //if escapeMode just gone out, delete string between escaping keys (and if emoji swiped down?)
+            }
+            //If in escape mode
+                //search for last occurence of escape key and store string since
+                //Send string to Model to analyse and compare to emoji tag
+                //Get back array of emoji and display array of emoji
+            
+            
+            //OVERWRITE case when DELETE key is hit
+            //if escape && deleted/to delete key is "|"
+                //go out of escape mode
+            //Same, OVERWRITE return button
+            
         }
     }
     
