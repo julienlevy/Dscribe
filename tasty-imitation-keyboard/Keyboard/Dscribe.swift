@@ -21,6 +21,10 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     
     let takeDebugScreenshot: Bool = false
     
+    var escapeMode: Bool = false
+    
+    var stringToSearch: String = ""
+    
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         NSUserDefaults.standardUserDefaults().registerDefaults([kCatTypeEnabled: true])
@@ -35,47 +39,47 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         if let textDocumentProxy = self.textDocumentProxy as? UITextDocumentProxy {
             let keyOutput = key.outputForCase(self.shiftState.uppercase())
             
-            if !NSUserDefaults.standardUserDefaults().boolForKey(kCatTypeEnabled) {
-                textDocumentProxy.insertText(keyOutput)
-                return
-            }
-            
-            if key.type == .Character || key.type == .SpecialCharacter {
-                let context = textDocumentProxy.documentContextBeforeInput
-                if context != nil {
-                    if context?.characters.count < 2 {
-                        textDocumentProxy.insertText(keyOutput)
-                        return
-                    }
-                    
-                    var index = context!.endIndex
-                    
-                    index = index.predecessor()
-                    if context![index] != " " {
-                        textDocumentProxy.insertText(keyOutput)
-                        return
-                    }
-                    
-                    index = index.predecessor()
-                    if context![index] == " " {
-                        textDocumentProxy.insertText(keyOutput)
-                        return
-                    }
-                    
-                    textDocumentProxy.insertText("DSCRIBE")
-                    textDocumentProxy.insertText(" ")
-                    textDocumentProxy.insertText(keyOutput)
-                    return
-                }
-                else {
-                    textDocumentProxy.insertText(keyOutput)
-                    return
-                }
-            }
-            else {
-                textDocumentProxy.insertText(keyOutput)
-                return
-            }
+//            if !NSUserDefaults.standardUserDefaults().boolForKey(kCatTypeEnabled) {
+//                textDocumentProxy.insertText(keyOutput)
+//                return
+//            }
+//            
+//            if key.type == .Character || key.type == .SpecialCharacter {
+//                let context = textDocumentProxy.documentContextBeforeInput
+//                if context != nil {
+//                    if context?.characters.count < 2 {
+//                        textDocumentProxy.insertText(keyOutput)
+//                        return
+//                    }
+//                    
+//                    var index = context!.endIndex
+//                    
+//                    index = index.predecessor()
+//                    if context![index] != " " {
+//                        textDocumentProxy.insertText(keyOutput)
+//                        return
+//                    }
+//                    
+//                    index = index.predecessor()
+//                    if context![index] == " " {
+//                        textDocumentProxy.insertText(keyOutput)
+//                        return
+//                    }
+//                    
+//                    textDocumentProxy.insertText("DSCRIBE")
+//                    textDocumentProxy.insertText(" ")
+//                    textDocumentProxy.insertText(keyOutput)
+//                    return
+//                }
+//                else {
+//                    textDocumentProxy.insertText(keyOutput)
+//                    return
+//                }
+//            }
+//            else {
+//                textDocumentProxy.insertText(keyOutput)
+//                return
+//            }
             //––––––––––––––––––
             if keyOutput == "|" {
                 //Check predecessor : if star also :
@@ -93,6 +97,46 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 //go out of escape mode
             //Same, OVERWRITE return button
             
+            let context = textDocumentProxy.documentContextBeforeInput
+            let firstRange = context!.rangeOfString("|", options:NSStringCompareOptions.BackwardsSearch)
+            
+            if keyOutput == "|" {
+                if escapeMode {
+                    escapeMode = false
+                    // TODO : Store the string inputted in a variable instead because context might not be
+                    if (firstRange != nil) {
+                        let lastIndex = context!.endIndex
+                        let count = (firstRange!.startIndex..<lastIndex).count
+                        for var i = 0; i < count; i++ {
+                            textDocumentProxy.deleteBackward()
+                        }
+                    }
+                    return
+                } else {
+                    escapeMode = true
+                    self.stringToSearch = ""
+                    textDocumentProxy.insertText(keyOutput)
+                    return
+                }
+            }
+            else if escapeMode {
+                //Not going to work because of delete, spaces etc..
+                self.stringToSearch += keyOutput
+                //Call search function
+                //
+                textDocumentProxy.insertText(keyOutput)
+                if (firstRange != nil) {
+                    let lastIndex = context!.endIndex
+                    self.stringToSearch = (context?.substringWithRange(firstRange!.startIndex..<lastIndex))!
+                    self.stringToSearch += keyOutput
+                }
+                //Send to search function
+                //Display emojis
+            }
+            else {
+                textDocumentProxy.insertText(keyOutput)
+                return
+            }
         }
     }
     
@@ -150,6 +194,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     func appendEmoji(emoji: String) {
         // Uses the data passed back
         NSLog("emoji button delegate")
+        //TODO clear search text if any
         
         if let textDocumentProxy = self.textDocumentProxy as? UITextDocumentProxy {
             textDocumentProxy.insertText(emoji)
