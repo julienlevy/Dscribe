@@ -38,54 +38,12 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     override func keyPressed(key: Key) {
         if let textDocumentProxy = self.textDocumentProxy as? UITextDocumentProxy {
             let keyOutput = key.outputForCase(self.shiftState.uppercase())
-            
-//            if !NSUserDefaults.standardUserDefaults().boolForKey(kCatTypeEnabled) {
-//                textDocumentProxy.insertText(keyOutput)
-//                return
-//            }
-//            
-//            if key.type == .Character || key.type == .SpecialCharacter {
-//                let context = textDocumentProxy.documentContextBeforeInput
-//                if context != nil {
-//                    if context?.characters.count < 2 {
-//                        textDocumentProxy.insertText(keyOutput)
-//                        return
-//                    }
-//                    
-//                    var index = context!.endIndex
-//                    
-//                    index = index.predecessor()
-//                    if context![index] != " " {
-//                        textDocumentProxy.insertText(keyOutput)
-//                        return
-//                    }
-//                    
-//                    index = index.predecessor()
-//                    if context![index] == " " {
-//                        textDocumentProxy.insertText(keyOutput)
-//                        return
-//                    }
-//                    
-//                    textDocumentProxy.insertText("DSCRIBE")
-//                    textDocumentProxy.insertText(" ")
-//                    textDocumentProxy.insertText(keyOutput)
-//                    return
-//                }
-//                else {
-//                    textDocumentProxy.insertText(keyOutput)
-//                    return
-//                }
-//            }
-//            else {
-//                textDocumentProxy.insertText(keyOutput)
-//                return
-//            }
-            //––––––––––––––––––
-            if keyOutput == "|" {
+
+            //if keyOutput == "|" {
                 //Check predecessor : if star also :
                     //toggle escape mode (when escaped mode, change design to darker or funnier)
                     //if escapeMode just gone out, delete string between escaping keys (and if emoji swiped down?)
-            }
+            // }
             //If in escape mode
                 //search for last occurence of escape key and store string since
                 //Send string to Model to analyse and compare to emoji tag
@@ -97,6 +55,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 //go out of escape mode
             //Same, OVERWRITE return button
             
+            // TODO refacto :
             let context = textDocumentProxy.documentContextBeforeInput
             let firstRange = context!.rangeOfString("|", options:NSStringCompareOptions.BackwardsSearch)
             
@@ -121,7 +80,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             }
             else if escapeMode {
                 //Not going to work because of delete, spaces etc..
-                self.stringToSearch += keyOutput
+                //self.stringToSearch += keyOutput
                 //Call search function
                 //
                 textDocumentProxy.insertText(keyOutput)
@@ -138,6 +97,30 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 return
             }
         }
+    }
+    
+    override func backspaceDown(sender: KeyboardKey) {
+        
+        
+        let context = self.textDocumentProxy.documentContextBeforeInput
+        
+        if context?.characters.last == "|" {
+            self.escapeMode = false
+        }
+        
+        if escapeMode {
+            let context = textDocumentProxy.documentContextBeforeInput
+            let firstRange = context!.rangeOfString("|", options:NSStringCompareOptions.BackwardsSearch)
+            
+            if (firstRange != nil) {
+                let lastIndex = context!.endIndex
+                self.stringToSearch = (context?.substringWithRange(firstRange!.startIndex..<lastIndex.predecessor()))!
+            }
+        }
+        
+        
+        super.backspaceDown(sender)
+        
     }
     
     override func setupKeys() {
@@ -190,7 +173,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             self.view.backgroundColor = oldViewColor
         }
     }
-    
+        
     func appendEmoji(emoji: String) {
         // Uses the data passed back
         NSLog("emoji button delegate")

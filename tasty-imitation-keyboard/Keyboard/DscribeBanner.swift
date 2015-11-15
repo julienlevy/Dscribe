@@ -21,8 +21,6 @@ protocol DscribeBannerDelegate {
 class DscribeBanner: ExtraView {
     var delegate: DscribeBannerDelegate?
     
-    var firstEmojiButton: UIButton = UIButton()
-    
     var scrollView: UIScrollView = UIScrollView()
     var buttons: NSMutableArray = NSMutableArray()
     var wbefore: CGFloat = CGFloat()
@@ -31,13 +29,7 @@ class DscribeBanner: ExtraView {
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
 
-        self.addSubview(self.firstEmojiButton)
-        
-        self.firstEmojiButton.frame = CGRectMake(10, 10, 40, 40)
-        self.firstEmojiButton.setTitle("😈", forState: UIControlState.Normal)
-        self.firstEmojiButton.sizeToFit()
-        self.firstEmojiButton.addTarget(self, action: Selector("emojiSelected:"), forControlEvents: UIControlEvents.TouchUpInside)
-        
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -51,7 +43,6 @@ class DscribeBanner: ExtraView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        // ––––––––––––––––––––––––––
         self.scrollView.frame = CGRectMake(0, 0, self.frame.width, self.frame.height)
         self.scrollView.contentSize = CGSizeMake(80, 600)
         self.scrollView.scrollEnabled = true
