@@ -14,6 +14,7 @@ set the name of your KeyboardViewController subclass in the Info.plist file.
 */
 
 let kEscapeTypeEnabled = "kEscapeTypeEnabled"
+let kEscapeCue = "|"
 
 
 class Dscribe: KeyboardViewController, DscribeBannerDelegate {
@@ -39,7 +40,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         if let textDocumentProxy = self.textDocumentProxy as? UITextDocumentProxy {
             let keyOutput = key.outputForCase(self.shiftState.uppercase())
 
-            //if keyOutput == "|" {
+            //if keyOutput == kEscapeCue {
                 //Check predecessor : if star also :
                     //toggle escape mode (when escaped mode, change design to darker or funnier)
                     //if escapeMode just gone out, delete string between escaping keys (and if emoji swiped down?)
@@ -51,15 +52,15 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             
             
             //OVERWRITE case when DELETE key is hit
-            //if escape && deleted/to delete key is "|"
+            //if escape && deleted/to delete key is kEscapeCue
                 //go out of escape mode
             //Same, OVERWRITE return button
             
             // TODO refacto :
             let context = textDocumentProxy.documentContextBeforeInput
-            let firstRange = context!.rangeOfString("|", options:NSStringCompareOptions.BackwardsSearch)
+            let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
             
-            if keyOutput == "|" {
+            if keyOutput == kEscapeCue {
                 if escapeMode {
                     escapeMode = false
                     // TODO : Store the string inputted in a variable instead because context might not be
@@ -104,13 +105,13 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         
         let context = self.textDocumentProxy.documentContextBeforeInput
         
-        if context?.characters.last == "|" {
+        if context?.characters.last == kEscapeCue.characters.first {
             self.escapeMode = false
         }
         
         if escapeMode {
             let context = textDocumentProxy.documentContextBeforeInput
-            let firstRange = context!.rangeOfString("|", options:NSStringCompareOptions.BackwardsSearch)
+            let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
             
             if (firstRange != nil) {
                 let lastIndex = context!.endIndex
