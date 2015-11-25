@@ -32,6 +32,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         NSUserDefaults.standardUserDefaults().registerDefaults([kCatTypeEnabled: true])
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: kSmallLowercase)
     }
     
     required init?(coder: NSCoder) {
