@@ -26,6 +26,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     
     var stringToSearch: String = ""
     
+    var overlayView: UIView = UIView()
+    
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         NSUserDefaults.standardUserDefaults().registerDefaults([kCatTypeEnabled: true])
@@ -34,6 +36,22 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // TODO: call this in a more appropriate place: viewDidLayoutSubviews is called everytime a key is hit
+        if overlayView.frame == CGRectZero {
+            overlayView.backgroundColor = UIColor.blackColor()
+            overlayView.alpha = 0.2
+            overlayView.frame = self.view.frame
+            overlayView.frame.origin = CGPointMake(0, (self.bannerView?.frame.size.height)!)
+            overlayView.userInteractionEnabled = false
+            overlayView.hidden = true
+            self.view.addSubview(overlayView)
+        }
+        
     }
     
     override func keyPressed(key: Key) {
@@ -63,6 +81,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             if keyOutput == kEscapeCue {
                 if escapeMode {
                     escapeMode = false
+                    self.toggleSearchMode()
+                    
                     // TODO : Store the string inputted in a variable instead because context might not be
                     if (firstRange != nil) {
                         let lastIndex = context!.endIndex
@@ -74,6 +94,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                     return
                 } else {
                     escapeMode = true
+                    self.toggleSearchMode()
+                    
                     self.stringToSearch = ""
                     textDocumentProxy.insertText(keyOutput)
                     return
@@ -174,6 +196,14 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             self.view.backgroundColor = oldViewColor
         }
     }
+    
+    func toggleSearchMode() {
+        if self.escapeMode {
+            overlayView.hidden = false
+        } else {
+            overlayView.hidden = true
+        }
+    }
         
     func appendEmoji(emoji: String) {
         // Uses the data passed back
@@ -183,6 +213,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         if let textDocumentProxy = self.textDocumentProxy as? UITextDocumentProxy {
             textDocumentProxy.insertText(emoji)
         }
+        self.dynamicType.globalColors
     }
 }
 
