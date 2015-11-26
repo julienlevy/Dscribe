@@ -42,7 +42,10 @@ func defaultKeyboard() -> Keyboard {
     defaultKeyboard.addKey(keyboardChange, row: 3, page: 0)
     
     let settings = Key(.Settings)
-    defaultKeyboard.addKey(settings, row: 3, page: 0)
+//    defaultKeyboard.addKey(settings, row: 3, page: 0)
+    let searchKey = Key(.SpecialCharacter)
+    searchKey.setLetter("|")
+    defaultKeyboard.addKey(searchKey, row: 3, page: 0)
     
     let space = Key(.Space)
     space.uppercaseKeyCap = "space"

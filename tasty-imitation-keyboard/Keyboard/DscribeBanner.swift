@@ -42,7 +42,7 @@ class DscribeBanner: ExtraView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-                
+        
         self.scrollView.frame = CGRectMake(0, 0, self.frame.width, self.frame.height)
         self.scrollView.contentSize = CGSizeMake(80, 600)
         self.scrollView.scrollEnabled = true
