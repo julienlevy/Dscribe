@@ -34,6 +34,11 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: kSmallLowercase)
+        
+        //To change the height of the banner
+        metrics = [
+        "topBanner": 35
+        ]
     }
     
     required init?(coder: NSCoder) {
@@ -42,6 +47,10 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        if view.bounds == CGRectZero {
+            return
+        }
         
         // TODO: call this in a more appropriate place: viewDidLayoutSubviews is called everytime a key is hit
         if overlayView.frame == CGRectZero {
@@ -53,74 +62,79 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             overlayView.hidden = true
             self.view.addSubview(overlayView)
         }
-        
     }
     
     override func keyPressed(key: Key) {
-        if let textDocumentProxy = self.textDocumentProxy as? UITextDocumentProxy {
-            let keyOutput = key.outputForCase(self.shiftState.uppercase())
-
-            //if keyOutput == kEscapeCue {
-                //Check predecessor : if star also :
-                    //toggle escape mode (when escaped mode, change design to darker or funnier)
-                    //if escapeMode just gone out, delete string between escaping keys (and if emoji swiped down?)
-            // }
-            //If in escape mode
-                //search for last occurence of escape key and store string since
-                //Send string to Model to analyse and compare to emoji tag
-                //Get back array of emoji and display array of emoji
-            
-            
-            //OVERWRITE case when DELETE key is hit
-            //if escape && deleted/to delete key is kEscapeCue
-                //go out of escape mode
-            //Same, OVERWRITE return button
-            
-            // TODO refacto :
-            let context = textDocumentProxy.documentContextBeforeInput
-            let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
-            
-            if keyOutput == kEscapeCue {
-                if escapeMode {
-                    escapeMode = false
-                    self.toggleSearchMode()
-                    
-                    // TODO : Store the string inputted in a variable instead because context might not be
-                    if (firstRange != nil) {
-                        let lastIndex = context!.endIndex
-                        let count = (firstRange!.startIndex..<lastIndex).count
-                        for var i = 0; i < count; i++ {
-                            textDocumentProxy.deleteBackward()
-                        }
-                    }
-                    return
-                } else {
-                    escapeMode = true
-                    self.toggleSearchMode()
-                    
-                    self.stringToSearch = ""
-                    textDocumentProxy.insertText(keyOutput)
-                    return
-                }
-            }
-            else if escapeMode {
-                //Not going to work because of delete, spaces etc..
-                //self.stringToSearch += keyOutput
-                //Call search function
-                //
-                textDocumentProxy.insertText(keyOutput)
+        let textDocumentProxy = self.textDocumentProxy as UITextDocumentProxy
+        
+        let keyOutput = key.outputForCase(self.shiftState.uppercase())
+        
+        //if keyOutput == kEscapeCue {
+        //Check predecessor : if star also :
+        //toggle escape mode (when escaped mode, change design to darker or funnier)
+        //if escapeMode just gone out, delete string between escaping keys (and if emoji swiped down?)
+        // }
+        //If in escape mode
+        //search for last occurence of escape key and store string since
+        //Send string to Model to analyse and compare to emoji tag
+        //Get back array of emoji and display array of emoji
+        
+        
+        //OVERWRITE case when DELETE key is hit
+        //if escape && deleted/to delete key is kEscapeCue
+        //go out of escape mode
+        //Same, OVERWRITE return button
+        
+        // TODO refacto :
+        let context = textDocumentProxy.documentContextBeforeInput
+        let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
+        
+        if keyOutput == kEscapeCue {
+            if escapeMode {
+                escapeMode = false;
+                self.toggleSearchMode()
+                
+                // TODO : Store the string inputted in a variable instead because context might not be
                 if (firstRange != nil) {
                     let lastIndex = context!.endIndex
-                    self.stringToSearch = (context?.substringWithRange(firstRange!.startIndex..<lastIndex))!
-                    self.stringToSearch += keyOutput
+                    let count = (firstRange!.startIndex..<lastIndex).count
+                    for var i = 0; i < count; i++ {
+                        textDocumentProxy.deleteBackward()
+                    }
                 }
-                //Send to search function
-                //Display emojis
-            }
-            else {
+                return
+            } else {
+                escapeMode = true
+                self.toggleSearchMode()
+                
+                self.stringToSearch = ""
                 textDocumentProxy.insertText(keyOutput)
                 return
             }
+        }
+        else if escapeMode {
+            //Not going to work because of delete, spaces etc..
+            //self.stringToSearch += keyOutput
+            //Call search function
+            //
+            textDocumentProxy.insertText(keyOutput)
+            if keyOutput == "\n" {
+                escapeMode = false
+                self.toggleSearchMode()
+                return
+            }
+            
+            if (firstRange != nil) {
+                let lastIndex = context!.endIndex
+                self.stringToSearch = (context?.substringWithRange(firstRange!.startIndex..<lastIndex))!
+                self.stringToSearch += keyOutput
+            }
+            //Send to search function
+            //Display emojis
+        }
+        else {
+            textDocumentProxy.insertText(keyOutput)
+            return
         }
     }
     
@@ -131,6 +145,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         
         if context?.characters.last == kEscapeCue.characters.first {
             self.escapeMode = false
+            self.toggleSearchMode()
         }
         
         if escapeMode {
@@ -211,10 +226,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         // Uses the data passed back
         NSLog("emoji button delegate")
         //TODO clear search text if any
+
+        self.textDocumentProxy.insertText(emoji)
         
-        if let textDocumentProxy = self.textDocumentProxy as? UITextDocumentProxy {
-            textDocumentProxy.insertText(emoji)
-        }
         self.dynamicType.globalColors
     }
 }

@@ -33,50 +33,50 @@ class Catboard: KeyboardViewController, DscribeBannerDelegate {
     }
     
     override func keyPressed(key: Key) {
-        if let textDocumentProxy = self.textDocumentProxy as? UITextDocumentProxy {
-            let keyOutput = key.outputForCase(self.shiftState.uppercase())
-            
-            if !NSUserDefaults.standardUserDefaults().boolForKey(kCatTypeEnabled) {
+        let textDocumentProxy = self.textDocumentProxy as UITextDocumentProxy
+        
+        let keyOutput = key.outputForCase(self.shiftState.uppercase())
+        
+        if !NSUserDefaults.standardUserDefaults().boolForKey(kCatTypeEnabled) {
+            textDocumentProxy.insertText(keyOutput)
+            return
+        }
+        
+        if key.type == .Character || key.type == .SpecialCharacter {
+            let context = textDocumentProxy.documentContextBeforeInput
+            if context != nil {
+                if context?.characters.count < 2 {
+                    textDocumentProxy.insertText(keyOutput)
+                    return
+                }
+                
+                var index = context!.endIndex
+                
+                index = index.predecessor()
+                if context![index] != " " {
+                    textDocumentProxy.insertText(keyOutput)
+                    return
+                }
+                
+                index = index.predecessor()
+                if context![index] == " " {
+                    textDocumentProxy.insertText(keyOutput)
+                    return
+                }
+                
+                textDocumentProxy.insertText("\(randomCat())")
+                textDocumentProxy.insertText(" ")
                 textDocumentProxy.insertText(keyOutput)
                 return
-            }
-            
-            if key.type == .Character || key.type == .SpecialCharacter {
-                let context = textDocumentProxy.documentContextBeforeInput
-                if context != nil {
-                    if context?.characters.count < 2 {
-                        textDocumentProxy.insertText(keyOutput)
-                        return
-                    }
-                    
-                    var index = context!.endIndex
-                    
-                    index = index.predecessor()
-                    if context![index] != " " {
-                        textDocumentProxy.insertText(keyOutput)
-                        return
-                    }
-                    
-                    index = index.predecessor()
-                    if context![index] == " " {
-                        textDocumentProxy.insertText(keyOutput)
-                        return
-                    }
-
-                    textDocumentProxy.insertText("\(randomCat())")
-                    textDocumentProxy.insertText(" ")
-                    textDocumentProxy.insertText(keyOutput)
-                    return
-                }
-                else {
-                    textDocumentProxy.insertText(keyOutput)
-                    return
-                }
             }
             else {
                 textDocumentProxy.insertText(keyOutput)
                 return
             }
+        }
+        else {
+            textDocumentProxy.insertText(keyOutput)
+            return
         }
     }
     
@@ -135,9 +135,7 @@ class Catboard: KeyboardViewController, DscribeBannerDelegate {
         // Uses the data passed back
         NSLog("emoji button delegate")
 
-        if let textDocumentProxy = self.textDocumentProxy as? UITextDocumentProxy {
-            textDocumentProxy.insertText(emoji)
-        }
+        self.textDocumentProxy.insertText(emoji)
     }
 }
 

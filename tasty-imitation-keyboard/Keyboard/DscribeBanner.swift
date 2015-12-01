@@ -28,8 +28,6 @@ class DscribeBanner: ExtraView {
     
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
-
-
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -44,23 +42,24 @@ class DscribeBanner: ExtraView {
         super.layoutSubviews()
         
         self.scrollView.frame = CGRectMake(0, 0, self.frame.width, self.frame.height)
-        self.scrollView.contentSize = CGSizeMake(80, 600)
+        self.scrollView.contentSize = CGSizeMake(140, 600)
         self.scrollView.scrollEnabled = true
         self.addSubview(self.scrollView)
         
         var xOrigin: CGFloat = 0
-        var width: CGFloat = 20
+        var width: CGFloat = 80
         var lastButton:UIButton = UIButton()
         for  emoji in emojiArray {
             let button: UIButton = UIButton()
-            button.frame = CGRectMake(xOrigin, 0, width, self.frame.height)
+            button.layer.borderWidth = 0.5
+            button.layer.borderColor = UIColor.whiteColor().CGColor
+            button.frame = CGRectMake(xOrigin, -1, width, self.frame.height + 2)
             button.setTitle(emoji, forState: UIControlState.Normal)
-            button.sizeToFit()
             button.addTarget(self, action: Selector("emojiSelected:"), forControlEvents: UIControlEvents.TouchUpInside);
             
             width = button.frame.width
             
-            xOrigin += width + 20
+            xOrigin += width
             
             self.scrollView.addSubview(button)
             
