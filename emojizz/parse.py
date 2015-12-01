@@ -14,9 +14,12 @@ for element in data:
 # TODO: this script only work for unicode emojis with 5 chars in the unicode. A lot of emojis are missing !!
 stringResult = "["
 for key in result.keys():
-    if result[key] and len(key) == 5:
+    if result[key] and len(key) <= 5:
         words = result[key].split()
-        emoji = '\U000' + key[:5]
+        if len(key) == 5:
+            emoji = '\U000' + key[:len(key)]
+        if len(key) == 4:
+            emoji = '\U0000' + key[:len(key)]
         emoji = emoji.decode('unicode-escape')
         stringResult += "\"" + emoji + "\":["
         for word in words:
@@ -24,6 +27,8 @@ for key in result.keys():
                 stringResult += "\"" + word.lower() + "\","
         stringResult = stringResult[:-1]
         stringResult += "],"
+    else:
+        print key
 
 stringResult = stringResult[:-1]
 stringResult += "]"
