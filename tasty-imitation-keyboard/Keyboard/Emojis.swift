@@ -20,7 +20,7 @@ class Emoji {
     
     
     func tagSearch(word: NSString) -> NSMutableArray {
-        var result: NSMutableArray = NSMutableArray();
+        let result: NSMutableArray = NSMutableArray();
         for (key, tagArray) in emojiDict {
             for tag in tagArray {
                 if tag == word {

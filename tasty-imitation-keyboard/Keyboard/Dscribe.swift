@@ -190,7 +190,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     }
     
     func takeScreenshotDelay() {
-        var timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("takeScreenshot"), userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("takeScreenshot"), userInfo: nil, repeats: false)
     }
     
     func takeScreenshot() {
@@ -202,7 +202,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             
             let rect = self.view.bounds
             UIGraphicsBeginImageContextWithOptions(rect.size, true, 0)
-            var context = UIGraphicsGetCurrentContext()
             self.view.drawViewHierarchyInRect(self.view.bounds, afterScreenUpdates: true)
             let capturedImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
