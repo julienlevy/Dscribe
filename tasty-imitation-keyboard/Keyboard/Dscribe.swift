@@ -28,7 +28,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     
     var overlayView: UIView = UIView()
     
-    var emojis: Emoji = Emoji()
+    var emojiClass: Emoji = Emoji()
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -224,8 +224,19 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     }
     
     func searchEmojis(string: String) {
-//        self.emojis.
+        var words: [String] = string.componentsSeparatedByString(" ")
+        var word = ""
+        if words.count > 0 {
+            word = words[0]
+        }
+//        let emojiMutableArray: NSMutableArray = self.emojiClass.tagSearch(word)
+//        
+//        let emojiList: [String] = self.emojiClass.tagSearch(word) as [String]
+//        
+//        //Change display
+//        (self.bannerView as! DscribeBanner).displayEmojis(emojiList)
     }
+    
         
     func appendEmoji(emoji: String) {
         // Uses the data passed back

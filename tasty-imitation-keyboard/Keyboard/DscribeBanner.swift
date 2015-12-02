@@ -46,10 +46,20 @@ class DscribeBanner: ExtraView {
         self.scrollView.scrollEnabled = true
         self.addSubview(self.scrollView)
         
+        self.displayEmojis(emojiArray)
+    }
+    
+    func emojiSelected(sender: UIButton!) {
+        NSLog("NSLog emoji button clicked")
+
+        delegate?.appendEmoji((sender.titleLabel?.text)!)
+    }
+    
+    func displayEmojis(emojiList: [String]) {
         var xOrigin: CGFloat = 0
         var width: CGFloat = 80
         var lastButton:UIButton = UIButton()
-        for  emoji in emojiArray {
+        for  emoji in emojiList {
             let button: UIButton = UIButton()
             button.layer.borderWidth = 0.5
             button.layer.borderColor = UIColor.whiteColor().CGColor
@@ -68,11 +78,4 @@ class DscribeBanner: ExtraView {
         self.scrollView.contentSize.width = lastButton.frame.origin.x + lastButton.frame.width
         self.scrollView.contentSize.height = self.frame.height
     }
-    
-    func emojiSelected(sender: UIButton!) {
-        NSLog("NSLog emoji button clicked")
-
-        delegate?.appendEmoji((sender.titleLabel?.text)!)
-    }
-    
 }
