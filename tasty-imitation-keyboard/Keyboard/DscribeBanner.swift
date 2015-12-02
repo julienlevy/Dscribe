@@ -55,10 +55,21 @@ class DscribeBanner: ExtraView {
         delegate?.appendEmoji((sender.titleLabel?.text)!)
     }
     
-    func displayEmojis(emojiList: [String]) {
+    func displayEmojis(emojiList: [String], stringToSearch: String = "") {
+        for subview in self.scrollView.subviews {
+            subview.removeFromSuperview()
+        }
+        
         var xOrigin: CGFloat = 0
         var width: CGFloat = 80
         var lastButton:UIButton = UIButton()
+        
+//        let label:UILabel = UILabel(frame: CGRectMake(0, 0, 10, self.frame.height))
+//        label.text = stringToSearch
+//        label.sizeToFit()
+//        xOrigin = label.frame.width
+//        self.scrollView.addSubview(label)
+        
         for  emoji in emojiList {
             let button: UIButton = UIButton()
             button.layer.borderWidth = 0.5

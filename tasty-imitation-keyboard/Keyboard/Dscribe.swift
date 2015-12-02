@@ -128,8 +128,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             
             if (firstRange != nil) {
                 let lastIndex = context!.endIndex
-                self.stringToSearch = (context?.substringWithRange(firstRange!.startIndex..<lastIndex))!
+                self.stringToSearch = (context?.substringWithRange(firstRange!.startIndex.successor()..<lastIndex))!
                 self.stringToSearch += keyOutput
+                self.searchEmojis(self.stringToSearch)
             }
             //Send to search function
             //Display emojis
@@ -156,7 +157,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             
             if (firstRange != nil) {
                 let lastIndex = context!.endIndex
-                self.stringToSearch = (context?.substringWithRange(firstRange!.startIndex..<lastIndex.predecessor()))!
+                self.stringToSearch = (context?.substringWithRange(firstRange!.startIndex.successor()..<lastIndex.predecessor()))!
             }
         }
         
@@ -229,12 +230,11 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         if words.count > 0 {
             word = words[0]
         }
-//        let emojiMutableArray: NSMutableArray = self.emojiClass.tagSearch(word)
-//        
-//        let emojiList: [String] = self.emojiClass.tagSearch(word) as [String]
-//        
-//        //Change display
-//        (self.bannerView as! DscribeBanner).displayEmojis(emojiList)
+
+        let emojiList: [String] = self.emojiClass.tagSearch(word) as [String]
+        
+        //Change display
+        (self.bannerView as! DscribeBanner).displayEmojis(emojiList, stringToSearch: word)
     }
     
         
