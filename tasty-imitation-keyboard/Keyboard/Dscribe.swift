@@ -28,6 +28,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     
     var overlayView: UIView = UIView()
     
+    var emojis: Emoji = Emoji()
+    
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         NSUserDefaults.standardUserDefaults().registerDefaults([kCatTypeEnabled: true])
@@ -219,6 +221,10 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         } else {
             overlayView.hidden = true
         }
+    }
+    
+    func searchEmojis(string: String) {
+//        self.emojis.
     }
         
     func appendEmoji(emoji: String) {
