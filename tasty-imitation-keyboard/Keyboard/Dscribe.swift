@@ -28,6 +28,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     
     var overlayView: UIView = UIView()
     
+    var emojiClass: Emoji = Emoji()
+    
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         NSUserDefaults.standardUserDefaults().registerDefaults([kCatTypeEnabled: true])
@@ -220,6 +222,21 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             overlayView.hidden = true
         }
     }
+    
+    func searchEmojis(string: String) {
+        var words: [String] = string.componentsSeparatedByString(" ")
+        var word = ""
+        if words.count > 0 {
+            word = words[0]
+        }
+//        let emojiMutableArray: NSMutableArray = self.emojiClass.tagSearch(word)
+//        
+//        let emojiList: [String] = self.emojiClass.tagSearch(word) as [String]
+//        
+//        //Change display
+//        (self.bannerView as! DscribeBanner).displayEmojis(emojiList)
+    }
+    
         
     func appendEmoji(emoji: String) {
         // Uses the data passed back
