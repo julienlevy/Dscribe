@@ -74,7 +74,7 @@ class DscribeBanner: ExtraView {
             let button: UIButton = UIButton()
             button.layer.borderWidth = 0.5
             button.layer.borderColor = UIColor.whiteColor().CGColor
-            button.frame = CGRectMake(xOrigin, -1, width, self.frame.height + 2)
+            button.frame = CGRectMake(xOrigin, -1, width, self.frame.height + 1)
             button.setTitle(emoji, forState: UIControlState.Normal)
             button.addTarget(self, action: Selector("emojiSelected:"), forControlEvents: UIControlEvents.TouchUpInside);
             

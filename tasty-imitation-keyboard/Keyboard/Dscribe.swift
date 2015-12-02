@@ -62,7 +62,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             overlayView.frame.origin = CGPointMake(0, (self.bannerView?.frame.size.height)!)
             overlayView.userInteractionEnabled = false
             overlayView.hidden = true
-            self.view.addSubview(overlayView)
+            self.view.insertSubview(overlayView, atIndex: 0)
         }
     }
     
@@ -158,6 +158,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             if (firstRange != nil) {
                 let lastIndex = context!.endIndex
                 self.stringToSearch = (context?.substringWithRange(firstRange!.startIndex.successor()..<lastIndex.predecessor()))!
+                self.searchEmojis(self.stringToSearch)
             }
         }
         
