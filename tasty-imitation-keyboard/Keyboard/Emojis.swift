@@ -22,7 +22,7 @@ class Emoji {
         for word in tagsArray {
             for (key, tagArray) in emojiDict {
                 for tag in tagArray {
-                    if tag == word {
+                    if tag.rangeOfString(word) != nil {
                         result.append(key);
                     }
                 }
