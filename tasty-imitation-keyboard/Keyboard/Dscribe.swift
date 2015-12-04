@@ -39,7 +39,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         
         //To change the height of the banner
         metrics = [
-        "topBanner": 35
+        "topBanner": 38
         ]
     }
     
@@ -238,11 +238,24 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         (self.bannerView as! DscribeBanner).displayEmojis(emojiList, stringToSearch: word)
     }
     
-        
+    
     func appendEmoji(emoji: String) {
         // Uses the data passed back
         NSLog("emoji button delegate")
         //TODO clear search text if any
+        if self.escapeMode {
+            let textDocumentProxy = self.textDocumentProxy as UITextDocumentProxy
+            let context = textDocumentProxy.documentContextBeforeInput
+            let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
+            
+            if (firstRange != nil) {
+                let lastIndex = context!.endIndex
+                self.stringToSearch = (context?.substringWithRange(firstRange!.startIndex.successor()..<lastIndex.predecessor()))!
+            }
+            
+            self.escapeMode = false
+            self.toggleSearchMode()
+        }
 
         self.textDocumentProxy.insertText(emoji)
         
