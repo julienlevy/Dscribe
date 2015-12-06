@@ -259,6 +259,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
         self.textDocumentProxy.insertText(emoji)
         
+        self.emojiClass.incrementScore(emoji)
+        
         self.dynamicType.globalColors
     }
 }

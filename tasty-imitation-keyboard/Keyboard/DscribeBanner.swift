@@ -74,7 +74,7 @@ class DscribeBanner: ExtraView {
 //        xOrigin = label.frame.width
 //        self.scrollView.addSubview(label)
         
-        for  emoji in emojiList {
+        for emoji in emojiList {
             let button: UIButton = UIButton()
             button.layer.borderWidth = 0.4
             button.layer.borderColor = UIColor.whiteColor().CGColor

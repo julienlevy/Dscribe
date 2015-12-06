@@ -12,23 +12,29 @@ var emojiArray = ["😍","😎","😏","😊","😋","😌","🕥","🃏","🕧"
 
 
 class Emoji {
-    var emojiScore = ["🔣":1,"🏸":1,"😔":1,"😆":1,"😵":1,"😴":1,"😳":1,"😲":1,"😱":1,"🔱":1,"💊":1,"🛃":1,"🔲":1,"😹":1,"😸":1,"🔳":1,"🔢":1,"🔴":1,"🗂":1,"🗃":1,"🗄":1,"📂":1,"®":1,"♉":1,"♈":1,"🔶":1,"✨":1,"🌘":1,"😁":1,"🌙":1,"♌":1,"♋":1,"♊":1,"♏":1,"♎":1,"♍":1,"🌔":1,"🌕":1,"🙂":1,"😷":1,"😾":1,"🗡":1,"😼":1,"😻":1,"😺":1,"😶":1,"🙈":1,"🙉":1,"🙊":1,"‼":1,"🙏":1,"🙁":1,"🇯":1,"🌌":1,"🌋":1,"🌊":1,"🚁":1,"⛪":1,"🌎":1,"🌍":1,"😐":1,"😰":1,"🔟":1,"🔝":1,"🔞":1,"🔛":1,"🔜":1,"🔚":1,"😮":1,"⏮":1,"🎖":1,"🎗":1,"🎐":1,"🎑":1,"🎒":1,"🎓":1,"👟":1,"👞":1,"👝":1,"👜":1,"🎙":1,"👚":1,"㊗":1,"3":1,"0":1,"⏯":1,"6":1,"7":1,"4":1,"5":1,"⏪":1,"8":1,"9":1,"㊙":1,"📨":1,"😒":1,"🍣":1,"🏓":1,"⏫":1,"🎞":1,"🎟":1];
+    var emojiScore = ["🔣":1,"🏸":1,"😔":1,"😆":2,"😵":1,"😴":1,"😳":1,"😲":1,"😱":1,"🔱":1,"💊":1,"🛃":1,"🔲":1,"😹":1,"😸":1,"🔳":1,"🔢":1,"🔴":1,"🗂":1,"🗃":1,"🗄":1,"📂":1,"®":1,"♉":1,"♈":1,"🔶":1,"✨":1,"🌘":1,"😁":1,"🌙":1,"♌":1,"♋":1,"♊":1,"♏":1,"♎":1,"♍":1,"🌔":1,"🌕":1,"🙂":1,"😷":1,"😾":1,"🗡":1,"😼":1,"😻":1,"😺":1,"😶":1,"🙈":1,"🙉":1,"🙊":1,"‼":1,"🙏":1,"🙁":1,"🇯":1,"🌌":1,"🌋":1,"🌊":1,"🚁":1,"⛪":1,"🌎":1,"🌍":1,"😐":1,"😰":1,"🔟":1,"🔝":1,"🔞":1,"🔛":1,"🔜":1,"🔚":1,"😮":1,"⏮":1,"🎖":1,"🎗":1,"🎐":1,"🎑":1,"🎒":1,"🎓":1,"👟":1,"👞":1,"👝":1,"👜":1,"🎙":1,"👚":1,"㊗":1,"3":1,"0":1,"⏯":1,"6":1,"7":1,"4":1,"5":1,"⏪":1,"8":1,"9":1,"㊙":1,"📨":1,"😒":1,"🍣":1,"🏓":1,"⏫":1,"🎞":1,"🎟":1];
     
     var emojiDict = ["😍":["smiling","face","heart-shaped","eyes"],"😎":["smiling","face","sunglasses"],"😏":["smirking","face"],"😊":["smiling","face","smiling","eyes"],"😋":["face","savouring","delicious","food"],"😌":["relieved","face"],"🕥":["clock","face","ten-thirty"],"🃏":["playing","card","black","joker"],"🕧":["clock","face","twelve-thirty"],"🕦":["clock","face","eleven-thirty"],"🕡":["clock","face","six-thirty"],"🕠":["clock","face","five-thirty"],"🕣":["clock","face","eight-thirty"],"🕢":["clock","face","seven-thirty"],"🦄":["unicorn","face"],"🚩":["triangular","flag","on","post"],"🔘":["radio","button"],"🎿":["ski","ski","boot"],"🎾":["tennis","racquet","ball"],"🎽":["running","shirt","sash"],"🎼":["musical","score"],"🎻":["violin"],"🎺":["trumpet"],"🕤":["clock","face","nine-thirty"],"🌊":["water","wave"],"🔑":["key"],"🌌":["milky","way"],"🌋":["volcano"],"🌎":["earth","globe","americas"],"🌍":["earth","globe","europe-africa"],"🔖":["bookmark"],"🌏":["earth","globe","asia-australia"],"🌉":["bridge","at","night"],"🌈":["rainbow"],"🎵":["musical","note"],"🎴":["flower","playing","cards"],"🎳":["bowling"],"🎲":["game","die"],"🎱":["billiards"],"🎰":["slot","machine"],"🌁":["foggy"],"🌀":["cyclone"],"🌃":["night","stars"],"🌂":["closed","umbrella"],"🌅":["sunrise"],"🌄":["sunrise","over","mountains"],"🌇":["sunset","over","buildings"],"🌆":["cityscape","at","dusk"],"🚺":["womens"],"🏣":["japanese","post","office"],"🏉":["rugby","football"],"😄":["smiling","face","open","mouth","smiling","eyes"],"😅":["smiling","face","open","mouth","cold","sweat"],"😆":["smiling","face","open","mouth","tightly-closed","eyes"],"😇":["smiling","face","halo"],"😀":["grinning","face"],"😁":["grinning","face","smiling","eyes"],"😂":["face","tears","of","joy"]]
     
     func tagSearch(sentence: String) -> [String] {
         let tagsArray = sentence.componentsSeparatedByString(" ");
-        var result: [String] = [String]();
+        var result: [String: Int] = [String: Int]();
         for word in tagsArray {
             for (key, tagArray) in emojiDict {
                 for tag in tagArray {
                     if tag.rangeOfString(word) != nil {
-                        result.append(key);
+                        result[key] = emojiScore[key];
                     }
                 }
             }
         }
-        return result;
+        let myArr = Array(result.keys)
+        let sortedKeys = myArr.sort( {
+            let obj1 = emojiScore[$0]
+            let obj2 = emojiScore[$1]
+            return obj1 > obj2
+        })
+        return sortedKeys
     }
     
     func getScoresFromMemory() -> [String: Int] {
@@ -44,8 +50,12 @@ class Emoji {
     }
     
     func incrementScore(emoji: String) -> Int {
-        self.emojiScore[emoji] = (self.emojiScore[emoji] as Int!) + 1;
-        return (self.emojiScore[emoji] as Int!);
+        if self.emojiScore[emoji] != nil {
+            self.emojiScore[emoji] = (self.emojiScore[emoji] as Int!) + 1;
+            return (self.emojiScore[emoji] as Int!);
+        }
+        self.emojiScore[emoji] = 0;
+        return 0
     }
     
 }
