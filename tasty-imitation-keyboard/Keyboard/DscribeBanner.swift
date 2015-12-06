@@ -50,12 +50,12 @@ class DscribeBanner: ExtraView {
         self.scrollView.scrollEnabled = true
         self.addSubview(self.scrollView)
         
-        self.displayEmojis(emojiArray)
+        self.displayEmojis(Array(emojiScore.keys))
     }
     
     func emojiSelected(sender: UIButton!) {
         NSLog("NSLog emoji button clicked")
-
+    
         delegate?.appendEmoji((sender.titleLabel?.text)!)
     }
     
