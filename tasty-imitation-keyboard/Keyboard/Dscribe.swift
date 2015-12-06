@@ -255,12 +255,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             
             self.escapeMode = false
             self.toggleSearchMode()
+            self.emojiClass.incrementScore(emoji)
         }
-
         self.textDocumentProxy.insertText(emoji)
-        
-        self.emojiClass.incrementScore(emoji)
-        
         self.dynamicType.globalColors
     }
 }
