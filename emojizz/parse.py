@@ -24,6 +24,7 @@ for element in data:
 # TODO: find better tags
 stringResult = "["
 emojiArray = "["
+tagDict = {}
 for key in result.keys():
     if result[key]:
         words = result[key].split()
@@ -33,6 +34,14 @@ for key in result.keys():
         for word in words:
             if word.lower() not in ['with', 'and', 'symbol']:
                 stringResult += "\"" + word.lower() + "\","
+            if word.lower() == 'smiling':
+                stringResult += "\"smile\","
+            print(word)
+            tag = str(word.lower())
+            if tag in tagDict:
+                tagDict[tag] += 1
+            else:
+                tagDict[tag] = 1
         stringResult = stringResult[:-1]
         stringResult += "],"
 
@@ -42,6 +51,9 @@ stringResult += "]"
 emojiArray = emojiArray[:-1]
 emojiArray += "]"
 
+mostUsedTags = sorted(tagDict.items(), key=operator.itemgetter(1))
+
+
 print(stringResult)
 print("Opening result file")
 resultFile = open('emoji.txt', 'r+')
@@ -50,4 +62,5 @@ resultFile.truncate()
 print("Writing result")
 # resultFile.write(stringResult)
 print("All good.")
-print(len(emojiArray))
+# print(emojiArray)
+# print(mostUsedTags)
