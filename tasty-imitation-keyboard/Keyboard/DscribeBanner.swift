@@ -60,6 +60,12 @@ class DscribeBanner: ExtraView {
     }
     
     func displayEmojis(emojiList: [String], stringToSearch: String = "") {
+        let numberEmoji: Int = emojiList.count
+        
+        if numberEmoji == 0 {
+            return
+        }
+
         for subview in self.scrollView.subviews {
             subview.removeFromSuperview()
         }
@@ -73,6 +79,14 @@ class DscribeBanner: ExtraView {
 //        label.sizeToFit()
 //        xOrigin = label.frame.width
 //        self.scrollView.addSubview(label)
+        
+        scrollView.scrollEnabled = true
+        
+        if numberEmoji <= 3 {
+            width = (self.frame.width) / CGFloat(numberEmoji)
+            scrollView.scrollEnabled = false
+        }
+        
         
         for  emoji in emojiList {
             let button: UIButton = UIButton()
