@@ -94,7 +94,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         if keyOutput == kEscapeCue {
             if escapeMode {
                 escapeMode = false;
-                self.toggleSearchMode()
+                self.displaySearchMode()
                 
                 // TODO : Store the string inputted in a variable instead because context might not be
                 if (firstRange != nil) {
@@ -107,7 +107,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 return
             } else {
                 escapeMode = true
-                self.toggleSearchMode()
+                self.displaySearchMode()
                 
                 self.stringToSearch = ""
                 textDocumentProxy.insertText(keyOutput)
@@ -122,7 +122,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             textDocumentProxy.insertText(keyOutput)
             if keyOutput == "\n" {
                 escapeMode = false
-                self.toggleSearchMode()
+                self.displaySearchMode()
                 return
             }
             
@@ -148,7 +148,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         
         if context?.characters.last == kEscapeCue.characters.first {
             self.escapeMode = false
-            self.toggleSearchMode()
+            self.displaySearchMode()
         }
         
         if escapeMode {
@@ -217,7 +217,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         }
     }
     
-    func toggleSearchMode() {
+    
+    func displaySearchMode() {
         if self.escapeMode {
             overlayView.hidden = false
         } else {
@@ -250,15 +251,17 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             
             if (firstRange != nil) {
                 let lastIndex = context!.endIndex
-                self.stringToSearch = (context?.substringWithRange(firstRange!.startIndex.successor()..<lastIndex.predecessor()))!
+                let count = (firstRange!.startIndex..<lastIndex).count
+                for var i = 0; i < count; i++ {
+                    textDocumentProxy.deleteBackward()
+                }
             }
             
             self.escapeMode = false
-            self.toggleSearchMode()
+            self.displaySearchMode()
             self.emojiClass.incrementScore(emoji)
         }
         self.textDocumentProxy.insertText(emoji)
-        self.dynamicType.globalColors
     }
 }
 
