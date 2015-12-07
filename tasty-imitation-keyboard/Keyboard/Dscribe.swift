@@ -227,16 +227,11 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     }
     
     func searchEmojis(string: String) {
-        var words: [String] = string.componentsSeparatedByString(" ")
-        var word = ""
-        if words.count > 0 {
-            word = words[0]
-        }
 
-        let emojiList: [String] = self.emojiClass.tagSearch(word) as [String]
+        let emojiList: [String] = self.emojiClass.tagSearch(string) as [String]
         
         //Change display
-        (self.bannerView as! DscribeBanner).displayEmojis(emojiList, stringToSearch: word)
+        (self.bannerView as! DscribeBanner).displayEmojis(emojiList)
     }
     
     
