@@ -89,7 +89,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         
         // TODO refacto :
         let context = textDocumentProxy.documentContextBeforeInput
-        let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
+        let firstRange = context?.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
         
         if keyOutput == kEscapeCue {
             if escapeMode {
@@ -255,10 +255,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             
             self.escapeMode = false
             self.toggleSearchMode()
+            self.emojiClass.incrementScore(emoji)
         }
-
         self.textDocumentProxy.insertText(emoji)
-        
         self.dynamicType.globalColors
     }
 }

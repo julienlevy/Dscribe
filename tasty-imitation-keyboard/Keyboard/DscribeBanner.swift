@@ -50,12 +50,12 @@ class DscribeBanner: ExtraView {
         self.scrollView.scrollEnabled = true
         self.addSubview(self.scrollView)
         
-        self.displayEmojis(emojiArray)
+        self.displayEmojis(Array(emojiScore.keys))
     }
     
     func emojiSelected(sender: UIButton!) {
         NSLog("NSLog emoji button clicked")
-
+    
         delegate?.appendEmoji((sender.titleLabel?.text)!)
     }
     
@@ -87,8 +87,7 @@ class DscribeBanner: ExtraView {
             scrollView.scrollEnabled = false
         }
         
-        
-        for  emoji in emojiList {
+        for emoji in emojiList {
             let button: UIButton = UIButton()
             button.layer.borderWidth = 0.4
             button.layer.borderColor = UIColor.whiteColor().CGColor
