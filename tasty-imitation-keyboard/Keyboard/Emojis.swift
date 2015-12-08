@@ -23,17 +23,21 @@ class Emoji {
         for word in tagsArray {
             for (key, tagArray) in emojiDict {
                 for tag in tagArray {
-                    //TODO only match the beginning of words, not a substring in the middle ?
                     if tag.rangeOfString(word) != nil {
-                        result[key] = emojiScore[key];
+                        if (result[key] != nil) {
+                            result[key] = result[key]! + emojiScore[key]!
+                        } else {
+                            result[key] = emojiScore[key];
+                        }
                     }
                 }
             }
         }
+        
         let myArr = Array(result.keys)
         let sortedKeys = myArr.sort( {
-            let obj1 = emojiScore[$0]
-            let obj2 = emojiScore[$1]
+            let obj1 = result[$0]
+            let obj2 = result[$1]
             return obj1 > obj2
         })
         return sortedKeys
