@@ -19,26 +19,43 @@ class Emoji {
     
     func tagSearch(sentence: String) -> [String] {
         let tagsArray = sentence.componentsSeparatedByString(" ");
-        var result: [String: Int] = [String: Int]();
+        var result: [String: [Int]] = [String: [Int]](); //key=emoji, value=[Number of occurrences, score]
         for word in tagsArray {
             for (key, tagArray) in emojiDict {
                 for tag in tagArray {
                     if tag.rangeOfString(word) != nil {
                         if (result[key] != nil) {
-                            result[key] = result[key]! + emojiScore[key]!
+                            if result[key]?.count > 1 {
+                                result[key]![0]++
+                                if emojiScore[key] != nil {
+                                    result[key]![1] = result[key]![1] + emojiScore[key]!
+                                }
+                            }
                         } else {
-                            result[key] = emojiScore[key];
+                            result[key] = [Int]()
+                            result[key]!.append(1)
+                            if emojiScore[key] != nil {
+                                result[key]!.append(emojiScore[key]!)
+                            }
+                            else {
+                                result[key]!.append(0)
+                            }
                         }
                     }
                 }
             }
         }
-        
+
         let myArr = Array(result.keys)
         let sortedKeys = myArr.sort( {
-            let obj1 = result[$0]
-            let obj2 = result[$1]
-            return obj1 > obj2
+            let obj1Number = result[$0]![0] as Int
+            let obj2Number = result[$1]![0] as Int
+            let obj1Score = result[$0]![1] as Int
+            let obj2Score = result[$1]![1] as Int
+            if obj1Number == obj2Number {
+                return obj1Score > obj2Score
+            }
+            return obj1Number > obj2Number
         })
         return sortedKeys
     }
