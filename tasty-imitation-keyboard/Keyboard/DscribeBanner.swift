@@ -25,7 +25,12 @@ class DscribeBanner: ExtraView {
     var buttons: NSMutableArray = NSMutableArray()
     var wbefore: CGFloat = CGFloat()
     var wAfter: CGFloat = CGFloat()
-    
+
+    var beforeScrollView: UIView = UIView()
+    var afterScrollView: UIView = UIView()
+
+    var buttonsBackgroundColor: UIColor?
+
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
     }
@@ -40,35 +45,44 @@ class DscribeBanner: ExtraView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-//        self.backgroundColor = UIColor(red: 187.0/255, green: 194.0/255, blue: 201.0/255, alpha: 1)
-        self.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.9)
-        //187, 194, 201
-        self.backgroundColor = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode)
-        
+
+        self.backgroundColor = UIColor.clearColor()
+
+        buttonsBackgroundColor = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode)
+
         self.scrollView.frame = CGRectMake(0, 0, self.frame.width, self.frame.height)
         self.scrollView.contentSize = CGSizeMake(140, 600)
         self.scrollView.scrollEnabled = true
         self.addSubview(self.scrollView)
-        
+
+        self.beforeScrollView.frame = CGRectMake( -self.frame.width - 1, 0, self.frame.width, self.frame.height)
+        self.beforeScrollView.backgroundColor = buttonsBackgroundColor
+        self.scrollView.addSubview(self.beforeScrollView)
+
+        //Frame defined at the end of displayEmojis function
+        self.afterScrollView.backgroundColor = buttonsBackgroundColor
+        self.scrollView.addSubview(self.afterScrollView)
+
         self.displayEmojis(Array(emojiScore.keys))
     }
     
     func emojiSelected(sender: UIButton!) {
         NSLog("NSLog emoji button clicked")
-    
+
         delegate?.appendEmoji((sender.titleLabel?.text)!)
     }
     
     func displayEmojis(emojiList: [String], stringToSearch: String = "") {
         let numberEmoji: Int = emojiList.count
-        
+
         if numberEmoji == 0 {
             return
         }
 
         for subview in self.scrollView.subviews {
-            subview.removeFromSuperview()
+            if subview is UIButton {
+                subview.removeFromSuperview()
+            }
         }
         
         var xOrigin: CGFloat = 0
@@ -88,22 +102,23 @@ class DscribeBanner: ExtraView {
             scrollView.scrollEnabled = false
         }
         
-        let color: UIColor? = (self.darkMode ? self.globalColors?.darkModeUnderColor : self.globalColors?.lightModeUnderColor)
-        var cgColor = color?.CGColor
         
+        var count: Int = 0
         for emoji in emojiList {
+            count++
+            if count > 7 {
+                break
+            }
             let button: UIButton = UIButton()
+            button.backgroundColor = buttonsBackgroundColor
             button.layer.borderWidth = 0.4
-            button.layer.borderColor = cgColor // UIColor(hue: (220/360.0), saturation: 0.04, brightness: 0.56, alpha: 1).CGColor //UIColor.whiteColor().CGColor
-            // TODO (self.darkMode ? self.globalColors?.darkModeUnderColor : self.globalColors?.lightModeUnderColor)?.CGColor
+            button.layer.borderColor = UIColor.clearColor().CGColor
             button.frame = CGRectMake(xOrigin, -1, width, self.frame.height + 2)
             button.setTitle(emoji, forState: UIControlState.Normal)
             button.addTarget(self, action: Selector("emojiSelected:"), forControlEvents: UIControlEvents.TouchUpInside);
-            button.titleLabel?.font = button.titleLabel?.font.fontWithSize(18)
-
-            width = button.frame.width
+            button.titleLabel?.font = button.titleLabel?.font.fontWithSize(22)
             
-            xOrigin += width
+            xOrigin += width + 1
             
             self.scrollView.addSubview(button)
             
@@ -111,5 +126,7 @@ class DscribeBanner: ExtraView {
         }
         self.scrollView.contentSize.width = lastButton.frame.origin.x + lastButton.frame.width
         self.scrollView.contentSize.height = self.frame.height
+
+        self.afterScrollView.frame = CGRectMake( self.scrollView.contentSize.width - 1, 0, self.frame.width, self.frame.height)
     }
 }

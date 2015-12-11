@@ -236,8 +236,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     
     func appendEmoji(emoji: String) {
         // Uses the data passed back
-        NSLog("emoji button delegate")
-        //TODO clear search text if any
+
         if self.escapeMode {
             let textDocumentProxy = self.textDocumentProxy as UITextDocumentProxy
             let context = textDocumentProxy.documentContextBeforeInput
