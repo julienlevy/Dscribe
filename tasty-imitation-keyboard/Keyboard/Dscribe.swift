@@ -162,7 +162,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             }
         }
         
-        
         super.backspaceDown(sender)
         
     }

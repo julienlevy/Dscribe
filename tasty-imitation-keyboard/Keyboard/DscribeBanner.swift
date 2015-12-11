@@ -41,9 +41,10 @@ class DscribeBanner: ExtraView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.backgroundColor = UIColor(red: 187.0/255, green: 194.0/255, blue: 201.0/255, alpha: 1)
-//        self.backgroundColor = UIColor.whiteColor()
+//        self.backgroundColor = UIColor(red: 187.0/255, green: 194.0/255, blue: 201.0/255, alpha: 1)
+        self.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.9)
         //187, 194, 201
+        self.backgroundColor = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode)
         
         self.scrollView.frame = CGRectMake(0, 0, self.frame.width, self.frame.height)
         self.scrollView.contentSize = CGSizeMake(140, 600)
@@ -87,14 +88,19 @@ class DscribeBanner: ExtraView {
             scrollView.scrollEnabled = false
         }
         
+        let color: UIColor? = (self.darkMode ? self.globalColors?.darkModeUnderColor : self.globalColors?.lightModeUnderColor)
+        var cgColor = color?.CGColor
+        
         for emoji in emojiList {
             let button: UIButton = UIButton()
             button.layer.borderWidth = 0.4
-            button.layer.borderColor = UIColor.whiteColor().CGColor
+            button.layer.borderColor = cgColor // UIColor(hue: (220/360.0), saturation: 0.04, brightness: 0.56, alpha: 1).CGColor //UIColor.whiteColor().CGColor
+            // TODO (self.darkMode ? self.globalColors?.darkModeUnderColor : self.globalColors?.lightModeUnderColor)?.CGColor
             button.frame = CGRectMake(xOrigin, -1, width, self.frame.height + 2)
             button.setTitle(emoji, forState: UIControlState.Normal)
             button.addTarget(self, action: Selector("emojiSelected:"), forControlEvents: UIControlEvents.TouchUpInside);
-            
+            button.titleLabel?.font = button.titleLabel?.font.fontWithSize(18)
+
             width = button.frame.width
             
             xOrigin += width
