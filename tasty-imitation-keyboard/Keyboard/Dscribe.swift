@@ -39,9 +39,15 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         NSUserDefaults.standardUserDefaults().registerDefaults([kCatTypeEnabled: true])
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        if let savedEmojis = loadEmojis() {
+            emojiClass = savedEmojis
+//            emojiClass.emojiScore["😦"] = 10
+//            emojiClass.emojiTag["😦"] = ["frowning","face","open","mouth"]
+        } else {
+            loadSampleEmojis()
+        }
         
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: kSmallLowercase)
-        
         //To change the height of the banner
         metrics = [
         "topBanner": 38
@@ -309,8 +315,24 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             self.escapeMode = false
             self.displaySearchMode()
             self.emojiClass.incrementScore(emoji)
+            self.saveEmojis()
         }
         self.textDocumentProxy.insertText(emoji)
+    }
+    
+    func saveEmojis() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(emojiClass, toFile: Emoji.ArchiveURL.path!)
+        if !isSuccessfulSave {
+            print("Failed to save emojis...")
+        }
+    }
+    
+    func loadEmojis() -> Emoji? {
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(Emoji.ArchiveURL.path!) as? Emoji
+    }
+    
+    func loadSampleEmojis() {
+        self.emojiClass = Emoji()
     }
 }
 
