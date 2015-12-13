@@ -2,25 +2,53 @@ import json
 import re
 import operator
 
-with open('emoji.json') as data_file:
+with open('apple_emoji.json') as data_file:
     data = json.load(data_file)
 
 result = {}
+i = 0
 for element in data:
-    code = element['unified']
-    if len(code) == 5:
-        emoji = '\U000' + code[:len(code)]
-    if len(code) == 4:
-        emoji = '\U0000' + code[:len(code)]
-    else:
-        code = code.split('-')[0]
+    print(element)
+    for thing in data[element]:
+        code = thing[0].split("x")[1]
+        name = thing[1]
         if len(code) == 5:
-            emoji = '\U000' + code[:len(code)]
-        if len(code) == 4:
-            emoji = '\U0000' + code[:len(code)]
-    result[emoji] = element['name']
+            i += 1
+            emoji = '\U0000' + code[:-1]
+        if len(code) == 6:
+            i += 1
+            emoji = '\U000' + code[:-1]
+        # elif len(code) == 4:
+        #     emoji = '\U00000' + code[:-1]
+        # else:
+        #     code = code.split('-')[0]
+        #     if len(code) == 5:
+        #         emoji = '\U000' + code[:-1]
+        #     if len(code) == 4:
+        #         emoji = '\U0000' + code[:-1]
+        # print(emoji.decode('unicode-escape'))
 
+        result[emoji] = name
 
+# with open('emoji.json') as data_file:
+#     data = json.load(data_file)
+#
+# result = {}
+# for element in data:
+#     code = element['unified']
+#     if len(code) == 5:
+#         emoji = '\U000' + code[:len(code)]
+#     if len(code) == 4:
+#         emoji = '\U0000' + code[:len(code)]
+#     else:
+#         code = code.split('-')[0]
+#         if len(code) == 5:
+#             emoji = '\U000' + code[:len(code)]
+#         if len(code) == 4:
+#             emoji = '\U0000' + code[:len(code)]
+#     result[emoji] = element['name']
+#
+#
 # TODO: find better tags
 stringResult = "["
 emojiArray = "["
@@ -36,7 +64,6 @@ for key in result.keys():
                 stringResult += "\"" + word.lower() + "\","
             if word.lower() == 'smiling':
                 stringResult += "\"smile\","
-            print(word)
             tag = str(word.lower())
             if tag in tagDict:
                 tagDict[tag] += 1
@@ -62,5 +89,6 @@ resultFile.truncate()
 print("Writing result")
 # resultFile.write(stringResult)
 print("All good.")
+print(i)
 # print(emojiArray)
 # print(mostUsedTags)
