@@ -59,7 +59,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             overlayView.backgroundColor = UIColor.blackColor()
             overlayView.alpha = 0.2
             overlayView.frame = self.view.frame
-            overlayView.frame.origin = CGPointMake(0, (self.bannerView?.frame.size.height)!)
             overlayView.userInteractionEnabled = false
             overlayView.hidden = true
             self.view.insertSubview(overlayView, atIndex: 0)
@@ -228,12 +227,12 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     func searchEmojis(string: String) {
 
         let emojiList: [String] = self.emojiClass.tagSearch(string) as [String]
-        
+
         //Change display
         (self.bannerView as! DscribeBanner).displayEmojis(emojiList)
     }
-    
-    
+
+
     func appendEmoji(emoji: String) {
         // Uses the data passed back
 
@@ -249,7 +248,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                     textDocumentProxy.deleteBackward()
                 }
             }
-            
+
             self.escapeMode = false
             self.displaySearchMode()
             self.emojiClass.incrementScore(emoji)
