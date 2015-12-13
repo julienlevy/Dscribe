@@ -106,7 +106,7 @@ class DscribeBanner: ExtraView {
         var count: Int = 0
         for emoji in emojiList {
             count++
-            if count > 7 {
+            if count > 15 {
                 break
             }
             let button: UIButton = UIButton()
