@@ -16,7 +16,7 @@ set the name of your KeyboardViewController subclass in the Info.plist file.
 let kCatTypeEnabled = "kCatTypeEnabled"
 
 
-class Catboard: KeyboardViewController, DscribeBannerDelegate {
+class Catboard: KeyboardViewController {
     
     
     let takeDebugScreenshot: Bool = false
@@ -101,8 +101,7 @@ class Catboard: KeyboardViewController, DscribeBannerDelegate {
     }
     
     override func createBanner() -> ExtraView? {
-        var catboardBanner = DscribeBanner(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
-        catboardBanner.delegate = self
+        var catboardBanner = CatboardBanner(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
         return catboardBanner
     }
     

@@ -165,44 +165,48 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             
             var contextString: String = keyOutput
             if context != nil {
-                contextString.appendContentsOf(context!)
+                contextString = context! + keyOutput
             }
             
             //TEST AUTOCORRECT TODO move
-            if context != nil {
-                let lastWord = context!.componentsSeparatedByString(" ").last
-                let rangeOfLast = NSMakeRange(contextString.characters.count - lastWord!.characters.count, lastWord!.characters.count)
-                
-                suggestions = []
-                var guesses: [String]? = []
-                var completion: [String]? = []
-
-                //Contacts and stuff
-                for lexiconEntry in self.appleLexicon.entries {
-                    if (lexiconEntry.userInput == lastWord) {
-                        print("Found a Lexicon Entry")
-                        print(lexiconEntry.documentText)
-                        suggestions.append(lexiconEntry.documentText)
-                    }
+            let lastWord = contextString.componentsSeparatedByString(" ").last
+            let rangeOfLast = NSMakeRange(contextString.characters.count - lastWord!.characters.count, lastWord!.characters.count)
+            
+            suggestions = []
+            var guesses: [String]? = []
+            var completion: [String]? = []
+            
+            //Contacts and stuff
+            for lexiconEntry in self.appleLexicon.entries {
+                if (lexiconEntry.userInput == lastWord) {
+                    print("Found a Lexicon Entry")
+                    print(lexiconEntry.documentText)
+                    suggestions.append(lexiconEntry.documentText)
                 }
-
-                // Spelling and Autocorrect
-                let misspelledRange = checker.rangeOfMisspelledWordInString(contextString, range: rangeOfLast, startingAt: 0, wrap: false, language: "en")
-                if misspelledRange.location == NSNotFound {
-                    print("No mispelled word")
-                } else {
-                    guesses = checker.guessesForWordRange(misspelledRange, inString: contextString, language: language) as! [String]?
-                }
-
-                completion = checker.completionsForPartialWordRange(rangeOfLast, inString: contextString, language: language) as! [String]?
-
-                suggestions += completion! + guesses!
-
-                print("Suggestions: ")
-                print(suggestions)
-
-                (self.bannerView as! DscribeBanner).displaySuggestions(suggestions, originalString: lastWord!)
             }
+            
+            // Spelling and Autocorrect
+            let misspelledRange = checker.rangeOfMisspelledWordInString(contextString, range: rangeOfLast, startingAt: 0, wrap: false, language: "en")
+            if misspelledRange.location == NSNotFound {
+                print("No mispelled word")
+            } else {
+                guesses = checker.guessesForWordRange(misspelledRange, inString: contextString, language: language) as! [String]?
+            }
+            
+            completion = checker.completionsForPartialWordRange(rangeOfLast, inString: contextString, language: language) as! [String]?
+            
+            if completion != nil {
+                suggestions += completion!
+            }
+            if guesses != nil {
+                suggestions += guesses!
+            }
+            
+            print("Suggestions: ")
+            print(suggestions)
+            
+            (self.bannerView as! DscribeBanner).displaySuggestions(suggestions, originalString: lastWord!)
+            
             return
         }
     }
@@ -216,7 +220,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             self.escapeMode = false
             self.displaySearchMode()
         }
-        
+
         if escapeMode {
             let context = textDocumentProxy.documentContextBeforeInput
             let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
@@ -302,7 +306,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     func appendEmoji(emoji: String) {
         // Uses the data passed back
-
         if self.escapeMode {
             let textDocumentProxy = self.textDocumentProxy as UITextDocumentProxy
             let context = textDocumentProxy.documentContextBeforeInput
@@ -322,6 +325,19 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             self.saveEmojis()
         }
         self.textDocumentProxy.insertText(emoji)
+    }
+    
+    func appendSuggestion(suggestion: String) {
+        // Uses the data passed back
+        let textDocumentProxy = self.textDocumentProxy as UITextDocumentProxy
+        let context = textDocumentProxy.documentContextBeforeInput
+        let lastWord = context!.componentsSeparatedByString(" ").last
+        
+        for var i = 0; i < lastWord?.characters.count; i++ {
+            textDocumentProxy.deleteBackward()
+        }
+
+        self.textDocumentProxy.insertText(suggestion)
     }
     
     func saveEmojis() {

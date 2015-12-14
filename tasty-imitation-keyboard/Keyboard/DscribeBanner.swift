@@ -16,6 +16,7 @@ with something (or leave it blank if you like.)
 
 protocol DscribeBannerDelegate {
     func appendEmoji(emoji: String)
+    func appendSuggestion(suggestion: String)
 }
 
 class DscribeBanner: ExtraView {
@@ -29,52 +30,55 @@ class DscribeBanner: ExtraView {
     var beforeScrollView: UIView = UIView()
     var afterScrollView: UIView = UIView()
 
-    var buttonsBackgroundColor: UIColor?
+    var emojiBackgroundColor: UIColor?
+    var suggestionBackgroundColor: UIColor?
     
-    
+    let space: CGFloat = 0.8
+
 
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func setNeedsLayout() {
         super.setNeedsLayout()
         
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
 
         self.backgroundColor = UIColor.clearColor()
 
-        buttonsBackgroundColor = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode)
+        emojiBackgroundColor = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode)
+        suggestionBackgroundColor = self.globalColors?.specialKey(self.darkMode, solidColorMode: self.solidColorMode)
 
         self.scrollView.frame = CGRectMake(0, 0, self.frame.width, self.frame.height)
         self.scrollView.contentSize = CGSizeMake(140, 600)
         self.scrollView.scrollEnabled = true
         self.addSubview(self.scrollView)
 
-        self.beforeScrollView.frame = CGRectMake( -self.frame.width - 1, 0.8, self.frame.width, self.frame.height)
-        self.beforeScrollView.backgroundColor = buttonsBackgroundColor
+        self.beforeScrollView.frame = CGRectMake( -self.frame.width - 1, space, self.frame.width, self.frame.height)
+        self.beforeScrollView.backgroundColor = emojiBackgroundColor
         self.scrollView.addSubview(self.beforeScrollView)
 
         //Frame defined at the end of displayEmojis function
-        self.afterScrollView.backgroundColor = buttonsBackgroundColor
+        self.afterScrollView.backgroundColor = emojiBackgroundColor
         self.scrollView.addSubview(self.afterScrollView)
 
         self.displayEmojis(Array(emojiScore.keys))
     }
     
     func emojiSelected(sender: UIButton!) {
-        NSLog("NSLog emoji button clicked")
-
-        print("print emoji clicked")
-
         delegate?.appendEmoji((sender.titleLabel?.text)!)
+    }
+
+    func suggestionSelected(sender: UIButton!) {
+        delegate?.appendSuggestion((sender.titleLabel?.text)!)
     }
     
     func displayEmojis(emojiList: [String], stringToSearch: String = "") {
@@ -112,10 +116,8 @@ class DscribeBanner: ExtraView {
                 break
             }
             let button: UIButton = UIButton()
-            button.backgroundColor = buttonsBackgroundColor
-            button.layer.borderWidth = 0.4
-            button.layer.borderColor = UIColor.clearColor().CGColor
-            button.frame = CGRectMake(xOrigin, 0.8, width, self.frame.height + 1)
+            button.backgroundColor = emojiBackgroundColor
+            button.frame = CGRectMake(xOrigin, space, width, self.frame.height + 1)
             button.setTitle(emoji, forState: UIControlState.Normal)
             button.addTarget(self, action: Selector("emojiSelected:"), forControlEvents: UIControlEvents.TouchUpInside);
             button.titleLabel?.font = button.titleLabel?.font.fontWithSize(22)
@@ -129,34 +131,33 @@ class DscribeBanner: ExtraView {
         self.scrollView.contentSize.width = lastButton.frame.origin.x + lastButton.frame.width
         self.scrollView.contentSize.height = self.frame.height
 
-        self.afterScrollView.frame = CGRectMake( self.scrollView.contentSize.width - 1, 0.8, self.frame.width, self.frame.height)
+        self.afterScrollView.frame = CGRectMake( self.scrollView.contentSize.width - 1, space, self.frame.width, self.frame.height)
     }
 
     func displaySuggestions(suggestionList: [String], originalString: String) {
         print("Last word: ".stringByAppendingString(originalString))
+        
+        let numberSuggestion: Int = suggestionList.count
 
         if suggestionList.count == 0 {
             return
         }
         
         self.removeAllButtonsFromScrollView()
-        
-        let width: CGFloat = ((self.frame.width)/3)-1
+
+        let width: CGFloat = ((self.frame.width - CGFloat(min(3, numberSuggestion) - 1) * space) / CGFloat(min(3, numberSuggestion)))
         scrollView.scrollEnabled = false
-        
+
         var count: CGFloat = 0
         for suggestion in suggestionList {
-            print("A suggestion:")
-            print(suggestion)
-            print(count*(width+1))
             
             let button: UIButton = UIButton()
-            button.backgroundColor = UIColor.lightGrayColor()
+            button.backgroundColor = suggestionBackgroundColor
             button.layer.borderWidth = 0.4
             button.layer.borderColor = UIColor.clearColor().CGColor
-            button.frame = CGRectMake(count*(width+1), 0.8, width, self.frame.height + 1)
+            button.frame = CGRectMake(count * (width + space), space, width, self.frame.height + 1)
             button.setTitle(suggestion, forState: UIControlState.Normal)
-            button.addTarget(self, action: Selector("emojiSelected:"), forControlEvents: UIControlEvents.TouchUpInside);
+            button.addTarget(self, action: Selector("suggestionSelected:"), forControlEvents: UIControlEvents.TouchUpInside);
             button.titleLabel?.textColor = UIColor.blackColor()
             self.scrollView.addSubview(button)
             
