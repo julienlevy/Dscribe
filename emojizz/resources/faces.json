@@ -7,27 +7,30 @@
    ],
    "👤":[
       "bust",
-      "in",
       "silhouette"
    ],
    "👑":[
       "crown",
-      "king"
+      "king",
+      "queen"
    ],
    "👢":[
       "womans",
-      "boots"
+      "boots",
+      "shoe"
    ],
    "👣":[
       "footprints"
    ],
    "👠":[
       "high-heeled",
-      "shoe"
+      "shoe",
+      "heels"
    ],
    "👡":[
       "womans",
-      "sandal"
+      "sandal",
+      "shoe"
    ],
    "👨":[
       "man",
@@ -41,11 +44,17 @@
       "alien"
    ],
    "👿":[
-      "imp"
+      "imp",
+      "devil",
+      "evil",
+      "purple"
    ],
    "👺":[
       "japanese",
-      "goblin"
+      "goblin",
+      "devil",
+      "evil",
+      "red"
    ],
    "👼":[
       "baby",
@@ -54,7 +63,8 @@
    "👐":[
       "open",
       "hands",
-      "sign"
+      "sign",
+      "massage"
    ],
    "💙":[
       "blue",
@@ -62,7 +72,8 @@
    ],
    "💘":[
       "heart",
-      "arrow"
+      "arrow",
+      "pink"
    ],
    "💓":[
       "beating",
@@ -128,7 +139,8 @@
       "man",
       "gua",
       "pi",
-      "mao"
+      "mao",
+      "soldier"
    ],
    "🌟":[
       "glowing",
@@ -137,7 +149,9 @@
    "👹":[
       "japanese",
       "ogre",
-      "devil"
+      "devil",
+      "evil",
+      "red"
    ],
    "👸":[
       "princess"
@@ -180,11 +194,14 @@
       "family"
    ],
    "🎀":[
-      "ribbon"
+      "ribbon",
+      "knot",
+      "surprise"
    ],
    "💋":[
       "kiss",
-      "mark"
+      "mark",
+      "lips"
    ],
    "👒":[
       "womans",
