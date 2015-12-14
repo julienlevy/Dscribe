@@ -34,7 +34,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     var checker: UITextChecker = UITextChecker()
     let language = "en"
     var suggestions: [String] = [String]()
-    
+
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         NSUserDefaults.standardUserDefaults().registerDefaults([kCatTypeEnabled: true])
@@ -52,16 +52,16 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         metrics = [
         "topBanner": 38
         ]
-        
+
         self.requestSupplementaryLexiconWithCompletion({
             lexicon in
-            
+
             self.appleLexicon = lexicon
-            
+
             print("LEXICON")
-            
+
             NSLog("Number of lexicon entries : %i", self.appleLexicon.entries.count)
-            
+
             for lexiconEntry in self.appleLexicon.entries {
                 NSLog("%@ -> %@", lexiconEntry.userInput, lexiconEntry.documentText)
             }
@@ -115,8 +115,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         let context = textDocumentProxy.documentContextBeforeInput
         let firstRange = context?.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
 
-        
-        
+
         if keyOutput == kEscapeCue {
             if escapeMode {
                 escapeMode = false;
@@ -164,15 +163,20 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         else {
             textDocumentProxy.insertText(keyOutput)
             
+            var contextString: String = keyOutput
+            if context != nil {
+                contextString.appendContentsOf(context!)
+            }
+            
             //TEST AUTOCORRECT TODO move
             if context != nil {
                 let lastWord = context!.componentsSeparatedByString(" ").last
-                let rangeOfLast = NSMakeRange(context!.characters.count - lastWord!.characters.count, lastWord!.characters.count)
+                let rangeOfLast = NSMakeRange(contextString.characters.count - lastWord!.characters.count, lastWord!.characters.count)
                 
                 suggestions = []
                 var guesses: [String]? = []
                 var completion: [String]? = []
-                
+
                 //Contacts and stuff
                 for lexiconEntry in self.appleLexicon.entries {
                     if (lexiconEntry.userInput == lastWord) {
@@ -181,22 +185,22 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                         suggestions.append(lexiconEntry.documentText)
                     }
                 }
-                
+
                 // Spelling and Autocorrect
-                let misspelledRange = checker.rangeOfMisspelledWordInString(context!, range: rangeOfLast, startingAt: 0, wrap: false, language: "en")
+                let misspelledRange = checker.rangeOfMisspelledWordInString(contextString, range: rangeOfLast, startingAt: 0, wrap: false, language: "en")
                 if misspelledRange.location == NSNotFound {
                     print("No mispelled word")
                 } else {
-                    guesses = checker.guessesForWordRange(misspelledRange, inString: context!, language: language) as! [String]?
+                    guesses = checker.guessesForWordRange(misspelledRange, inString: contextString, language: language) as! [String]?
                 }
-                
-                completion = checker.completionsForPartialWordRange(rangeOfLast, inString: context, language: language) as! [String]?
-                
+
+                completion = checker.completionsForPartialWordRange(rangeOfLast, inString: contextString, language: language) as! [String]?
+
                 suggestions += completion! + guesses!
-                
+
                 print("Suggestions: ")
                 print(suggestions)
-                
+
                 (self.bannerView as! DscribeBanner).displaySuggestions(suggestions, originalString: lastWord!)
             }
             return

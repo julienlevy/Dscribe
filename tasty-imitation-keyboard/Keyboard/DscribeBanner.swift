@@ -30,6 +30,8 @@ class DscribeBanner: ExtraView {
     var afterScrollView: UIView = UIView()
 
     var buttonsBackgroundColor: UIColor?
+    
+    
 
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
@@ -41,6 +43,7 @@ class DscribeBanner: ExtraView {
     
     override func setNeedsLayout() {
         super.setNeedsLayout()
+        
     }
     
     override func layoutSubviews() {
@@ -68,7 +71,7 @@ class DscribeBanner: ExtraView {
     
     func emojiSelected(sender: UIButton!) {
         NSLog("NSLog emoji button clicked")
-        
+
         print("print emoji clicked")
 
         delegate?.appendEmoji((sender.titleLabel?.text)!)
@@ -128,39 +131,42 @@ class DscribeBanner: ExtraView {
 
         self.afterScrollView.frame = CGRectMake( self.scrollView.contentSize.width - 1, 0.8, self.frame.width, self.frame.height)
     }
-    
+
     func displaySuggestions(suggestionList: [String], originalString: String) {
         print("Last word: ".stringByAppendingString(originalString))
+
+        if suggestionList.count == 0 {
+            return
+        }
         
-//        if suggestionList.count == 0 {
-//            return
-//        }
-//        
-//        self.removeAllButtonsFromScrollView()
-//        
-//        let width: CGFloat = ((self.frame.width)/3)-1
-//        scrollView.scrollEnabled = false
-//        
-//        var count: CGFloat = 0
-//        for suggestion in suggestionList {
-//            count++
-//            if count > 2 {
-//                break
-//            }
-//            let button: UIButton = UIButton()
-//            button.backgroundColor = buttonsBackgroundColor
-//            button.layer.borderWidth = 0.4
-//            button.layer.borderColor = UIColor.clearColor().CGColor
-//            button.frame = CGRectMake(count*(width+1), 0.8, width, self.frame.height + 1)
-//            button.setTitle(suggestion, forState: UIControlState.Normal)
-//            button.addTarget(self, action: Selector("emojiSelected:"), forControlEvents: UIControlEvents.TouchUpInside);
-//            button.titleLabel?.textColor = UIColor.blackColor()
-//            self.scrollView.addSubview(button)
-//        }
+        self.removeAllButtonsFromScrollView()
         
+        let width: CGFloat = ((self.frame.width)/3)-1
+        scrollView.scrollEnabled = false
         
+        var count: CGFloat = 0
+        for suggestion in suggestionList {
+            print("A suggestion:")
+            print(suggestion)
+            print(count*(width+1))
+            
+            let button: UIButton = UIButton()
+            button.backgroundColor = UIColor.lightGrayColor()
+            button.layer.borderWidth = 0.4
+            button.layer.borderColor = UIColor.clearColor().CGColor
+            button.frame = CGRectMake(count*(width+1), 0.8, width, self.frame.height + 1)
+            button.setTitle(suggestion, forState: UIControlState.Normal)
+            button.addTarget(self, action: Selector("emojiSelected:"), forControlEvents: UIControlEvents.TouchUpInside);
+            button.titleLabel?.textColor = UIColor.blackColor()
+            self.scrollView.addSubview(button)
+            
+            count++
+            if count > 2 {
+                break
+            }
+        }
     }
-    
+
     func removeAllButtonsFromScrollView() {
         for subview in self.scrollView.subviews {
             if subview is UIButton {
