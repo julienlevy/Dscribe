@@ -41,8 +41,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         if let savedEmojis = loadEmojis() {
             emojiClass = savedEmojis
-//            emojiClass.emojiScore["😦"] = 10
-//            emojiClass.emojiTag["😦"] = ["frowning","face","open","mouth"]
         } else {
             loadSampleEmojis()
         }
@@ -134,6 +132,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 escapeMode = true
                 self.displaySearchMode()
                 
+                //TODO replace with most used emoji
+                (self.bannerView as! DscribeBanner).displayEmojis(Array(emojiScore.keys))
+                
                 self.stringToSearch = ""
                 textDocumentProxy.insertText(keyOutput)
                 return
@@ -162,51 +163,14 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         }
         else {
             textDocumentProxy.insertText(keyOutput)
-            
+
             var contextString: String = keyOutput
             if context != nil {
                 contextString = context! + keyOutput
             }
-            
-            //TEST AUTOCORRECT TODO move
-            let lastWord = contextString.componentsSeparatedByString(" ").last
-            let rangeOfLast = NSMakeRange(contextString.characters.count - lastWord!.characters.count, lastWord!.characters.count)
-            
-            suggestions = []
-            var guesses: [String]? = []
-            var completion: [String]? = []
-            
-            //Contacts and stuff
-            for lexiconEntry in self.appleLexicon.entries {
-                if (lexiconEntry.userInput == lastWord) {
-                    print("Found a Lexicon Entry")
-                    print(lexiconEntry.documentText)
-                    suggestions.append(lexiconEntry.documentText)
-                }
-            }
-            
-            // Spelling and Autocorrect
-            let misspelledRange = checker.rangeOfMisspelledWordInString(contextString, range: rangeOfLast, startingAt: 0, wrap: false, language: "en")
-            if misspelledRange.location == NSNotFound {
-                print("No mispelled word")
-            } else {
-                guesses = checker.guessesForWordRange(misspelledRange, inString: contextString, language: language) as! [String]?
-            }
-            
-            completion = checker.completionsForPartialWordRange(rangeOfLast, inString: contextString, language: language) as! [String]?
-            
-            if completion != nil {
-                suggestions += completion!
-            }
-            if guesses != nil {
-                suggestions += guesses!
-            }
-            
-            print("Suggestions: ")
-            print(suggestions)
-            
-            (self.bannerView as! DscribeBanner).displaySuggestions(suggestions, originalString: lastWord!)
-            
+
+            self.searchSuggestions(contextString)
+
             return
         }
     }
@@ -230,6 +194,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 self.stringToSearch = (context?.substringWithRange(firstRange!.startIndex.successor()..<lastIndex.predecessor()))!
                 self.searchEmojis(self.stringToSearch)
             }
+        } else {
+            let contextString: String = String(context?.characters.dropLast())
+            self.searchSuggestions(contextString)
         }
         
         super.backspaceDown(sender)
@@ -303,6 +270,46 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         (self.bannerView as! DscribeBanner).displayEmojis(emojiList)
     }
 
+    func searchSuggestions(contextString: String) {
+        //TEST AUTOCORRECT TODO move
+        let lastWord = contextString.componentsSeparatedByString(" ").last
+        let rangeOfLast = NSMakeRange(contextString.characters.count - lastWord!.characters.count, lastWord!.characters.count)
+        
+        suggestions = []
+        var guesses: [String]? = []
+        var completion: [String]? = []
+        
+        //Contacts and stuff
+        for lexiconEntry in self.appleLexicon.entries {
+            if (lexiconEntry.userInput == lastWord) {
+                print("Found a Lexicon Entry")
+                print(lexiconEntry.documentText)
+                suggestions.append(lexiconEntry.documentText)
+            }
+        }
+        
+        // Spelling and Autocorrect
+        let misspelledRange = checker.rangeOfMisspelledWordInString(contextString, range: rangeOfLast, startingAt: 0, wrap: false, language: "en")
+        if misspelledRange.location == NSNotFound {
+            print("No mispelled word")
+        } else {
+            guesses = checker.guessesForWordRange(misspelledRange, inString: contextString, language: language) as! [String]?
+        }
+        
+        completion = checker.completionsForPartialWordRange(rangeOfLast, inString: contextString, language: language) as! [String]?
+        
+        if completion != nil {
+            suggestions += completion!
+        }
+        if guesses != nil {
+            suggestions += guesses!
+        }
+        
+        print("Suggestions: ")
+        print(suggestions)
+        
+        (self.bannerView as! DscribeBanner).displaySuggestions(suggestions, originalString: lastWord!)
+    }
 
     func appendEmoji(emoji: String) {
         // Uses the data passed back

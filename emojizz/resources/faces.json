@@ -252,7 +252,9 @@
       "hand",
       "sign",
       "fist",
-      "bump"
+      "bump",
+      "punch",
+      "force"
    ],
    "👋":[
       "waving",
@@ -264,25 +266,32 @@
    "👌":[
       "ok",
       "hand",
-      "sign"
+      "sign",
+      "perfect",
+      "nice",
+      "delicious"
    ],
    "👍":[
       "thumbs",
       "up",
       "sign",
-      "hand"
+      "hand",
+      "good",
+      "approve"
    ],
    "👎":[
       "thumbs",
       "down",
       "sign",
-      "hand"
+      "hand",
+      "bad"
    ],
    "👏":[
       "clapping",
       "hands",
       "sign",
-      "applause"
+      "applause",
+      "congrats"
    ],
    "💢":[
       "anger"
@@ -303,10 +312,9 @@
       "sleeping"
    ],
    "💩":[
-      "pile",
-      "of",
-      "poo",
-      "smile"
+      "poop",
+      "smile",
+      "crotte"
    ],
    "💨":[
       "dash"
