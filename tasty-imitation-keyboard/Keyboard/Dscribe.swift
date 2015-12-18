@@ -89,37 +89,13 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     }
 
     override func keyPressed(key: Key) {
-        let textDocumentProxy = self.textDocumentProxy as UITextDocumentProxy
-        
         let keyOutput = key.outputForCase(self.shiftState.uppercase())
-        
-        //if keyOutput == kEscapeCue {
-        //Check predecessor : if star also :
-        //toggle escape mode (when escaped mode, change design to darker or funnier)
-        //if escapeMode just gone out, delete string between escaping keys (and if emoji swiped down?)
-        // }
-        //If in escape mode
-        //search for last occurence of escape key and store string since
-        //Send string to Model to analyse and compare to emoji tag
-        //Get back array of emoji and display array of emoji
-        
-        
-        //OVERWRITE case when DELETE key is hit
-        //if escape && deleted/to delete key is kEscapeCue
-        //go out of escape mode
-        //Same, OVERWRITE return button
-        
-        // TODO refacto :
-        let context = textDocumentProxy.documentContextBeforeInput
-        let firstRange = context?.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
-
-
         if keyOutput == kEscapeCue {
             if escapeMode {
-                escapeMode = false;
-                self.displaySearchMode()
+
+                let context = self.textDocumentProxy.documentContextBeforeInput
+                let firstRange = context?.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
                 
-                // TODO : Store the string inputted in a variable instead because context might not be
                 if (firstRange != nil) {
                     let lastIndex = context!.endIndex
                     let count = (firstRange!.startIndex..<lastIndex).count
@@ -127,58 +103,46 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                         textDocumentProxy.deleteBackward()
                     }
                 }
-                return
             } else {
-                escapeMode = true
-                self.displaySearchMode()
-                
                 //TODO replace with most used emoji
                 (self.bannerView as! DscribeBanner).displayEmojis(Array(emojiScore.keys))
                 
-                self.stringToSearch = ""
-                textDocumentProxy.insertText(keyOutput)
-                return
-            }
-        }
-        else if escapeMode {
-            //Not going to work because of delete, spaces etc..
-            //self.stringToSearch += keyOutput
-            //Call search function
-            //
-            textDocumentProxy.insertText(keyOutput)
-            if keyOutput == "\n" {
-                escapeMode = false
-                self.displaySearchMode()
-                return
+                self.textDocumentProxy.insertText(keyOutput)
             }
             
-            if (firstRange != nil) {
-                let lastIndex = context!.endIndex
-                self.stringToSearch = (context?.substringWithRange(firstRange!.startIndex.successor()..<lastIndex))!
-                self.stringToSearch += keyOutput
-                self.searchEmojis(self.stringToSearch)
+            escapeMode = !escapeMode
+            self.displaySearchMode()
+        } else {
+            self.textDocumentProxy.insertText(keyOutput)
+            let context = self.textDocumentProxy.documentContextBeforeInput
+            if escapeMode {
+                if keyOutput == "\n" {
+                    escapeMode = false
+                    self.displaySearchMode()
+                    return
+                }
+                let firstRange = context?.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
+                if (firstRange != nil) {
+                    let lastIndex = context!.endIndex
+                    self.stringToSearch = (context?.substringWithRange(firstRange!.startIndex.successor()..<lastIndex))!
+                    self.searchEmojis(self.stringToSearch)
+                }
+            } else {
+                if context != nil {
+                    self.searchSuggestions(context!)
+                } else {
+                    print("That was unexpected, context is nil, here is the key output:")
+                    print(keyOutput)
+                }
             }
-            //Send to search function
-            //Display emojis
-        }
-        else {
-            textDocumentProxy.insertText(keyOutput)
-
-            var contextString: String = keyOutput
-            if context != nil {
-                contextString = context! + keyOutput
-            }
-
-            self.searchSuggestions(contextString)
-
-            return
         }
     }
     
     override func backspaceDown(sender: KeyboardKey) {
-        
-        
         let context = self.textDocumentProxy.documentContextBeforeInput
+        print("Context :")
+        print(context)
+        print(context.dynamicType)
         
         if context?.characters.last == kEscapeCue.characters.first {
             self.escapeMode = false
@@ -186,7 +150,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         }
 
         if escapeMode {
-            let context = textDocumentProxy.documentContextBeforeInput
             let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
             
             if (firstRange != nil) {
@@ -195,8 +158,13 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 self.searchEmojis(self.stringToSearch)
             }
         } else {
-            let contextString: String = String(context?.characters.dropLast())
-            self.searchSuggestions(contextString)
+            print(context)
+            print(context.dynamicType)
+            if context != nil {
+                let contextString: String = String(context?.characters.dropLast())
+                print(contextString)
+                self.searchSuggestions(contextString)
+            }
         }
         
         super.backspaceDown(sender)
@@ -205,12 +173,11 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     
     override func setupKeys() {
         super.setupKeys()
-        
+
         if takeDebugScreenshot {
             if self.layout == nil {
                 return
             }
-            
             for page in keyboard.pages {
                 for rowKeys in page.rows {
                     for key in rowKeys {
@@ -273,6 +240,12 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     func searchSuggestions(contextString: String) {
         //TEST AUTOCORRECT TODO move
         let lastWord = contextString.componentsSeparatedByString(" ").last
+        if lastWord == nil {
+            print("Was nil")
+        }
+        if lastWord == "nil" {
+            print("was string nil")
+        }
         let rangeOfLast = NSMakeRange(contextString.characters.count - lastWord!.characters.count, lastWord!.characters.count)
         
         suggestions = []
@@ -316,13 +289,15 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         if self.escapeMode {
             let textDocumentProxy = self.textDocumentProxy as UITextDocumentProxy
             let context = textDocumentProxy.documentContextBeforeInput
-            let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
-            
-            if (firstRange != nil) {
-                let lastIndex = context!.endIndex
-                let count = (firstRange!.startIndex..<lastIndex).count
-                for var i = 0; i < count; i++ {
-                    textDocumentProxy.deleteBackward()
+            if context != nil {
+                let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
+                
+                if (firstRange != nil) {
+                    let lastIndex = context!.endIndex
+                    let count = (firstRange!.startIndex..<lastIndex).count
+                    for var i = 0; i < count; i++ {
+                        textDocumentProxy.deleteBackward()
+                    }
                 }
             }
 

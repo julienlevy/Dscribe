@@ -135,7 +135,7 @@ class DscribeBanner: ExtraView {
     }
 
     func displaySuggestions(suggestionList: [String], originalString: String) {
-        print("Last word: ".stringByAppendingString(originalString))
+//        print("Last word: ".stringByAppendingString(originalString))
         
         let numberSuggestion: Int = suggestionList.count
 
