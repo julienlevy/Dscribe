@@ -303,10 +303,12 @@
    "💦":[
       "splashing",
       "sweat",
-      "water"
+      "water",
+      "splashes"
    ],
    "💥":[
-      "collision"
+      "collision",
+      "boom"
    ],
    "💤":[
       "sleeping"
@@ -317,7 +319,9 @@
       "crotte"
    ],
    "💨":[
-      "dash"
+      "dash",
+      "air",
+      "fart"
    ],
    "❤":[
       "heavy",
@@ -330,34 +334,38 @@
    ],
    "👥":[
       "busts",
-      "in",
       "silhouette"
    ],
    "💫":[
-      "dizzy"
+      "dizzy",
+      "stars"
    ],
    "💪":[
-      "flexed",
-      "biceps"
+      "biceps",
+      "strong",
+      "muscle"
    ],
    "💭":[
       "thought",
-      "balloon"
+      "balloon",
+      "bubble"
    ],
    "👈":[
-      "white",
       "left",
+      "finger",
       "pointing",
       "backhand",
       "hand",
+      "white",
       "index"
    ],
    "👉":[
-      "white",
       "right",
+      "finger",
       "pointing",
       "backhand",
       "hand",
+      "white",
       "index"
    ],
    "🏃":[
@@ -379,11 +387,11 @@
       "tongue"
    ],
    "👆":[
-      "white",
       "up",
+      "finger",
       "pointing",
-      "backhand",
       "hand",
+      "white",
       "index"
    ],
    "👇":[
@@ -395,7 +403,8 @@
       "index"
    ],
    "💇":[
-      "haircut"
+      "haircut",
+      "hairdress"
    ],
    "💄":[
       "lipstick"
@@ -418,7 +427,10 @@
    ],
    "😟":[
       "worried",
-      "face"
+      "face",
+      "sad",
+      "surprised",
+      "disappointed"
    ],
    "😚":[
       "kissing",
@@ -431,7 +443,8 @@
       "stuck-out",
       "tongue",
       "winking",
-      "eye"
+      "eye",
+      "crazy"
    ],
    "😛":[
       "face",
@@ -443,7 +456,9 @@
       "smile",
       "face",
       "horns",
-      "purple"
+      "purple",
+      "evil",
+      "devil"
    ],
    "😉":[
       "winking",
@@ -451,7 +466,7 @@
    ],
    "😆":[
       "smiling",
-      "smile",
+      "laughing",
       "face",
       "open",
       "mouth",
@@ -516,40 +531,51 @@
    ],
    "💬":[
       "speech",
-      "balloon"
+      "balloon",
+      "bubble"
    ],
    "👙":[
-      "bikini"
+      "bikini",
+      "swimsuit",
+      "tan"
    ],
    "👘":[
-      "kimono"
+      "kimono",
+      "japanese"
    ],
    "👗":[
       "dress"
    ],
    "👖":[
-      "jeans"
+      "jeans",
+      "trousers",
+      "clothes"
    ],
    "👕":[
-      "t-shirt"
+      "t-shirt",
+      "clothes"
    ],
    "👔":[
-      "necktie"
+      "necktie",
+      "shirt",
+      "clothes"
    ],
    "😏":[
       "smirking",
-      "face"
+      "face",
+      "gotcha"
    ],
    "👟":[
       "athletic",
-      "shoe"
+      "shoe",
+      "white"
    ],
    "😍":[
       "smiling",
       "smile",
       "face",
       "love",
-      "heart",
+      "hearts",
       "heart-shaped",
       "eyes"
    ],
@@ -563,7 +589,8 @@
       "face",
       "savouring",
       "delicious",
-      "food"
+      "food",
+      "tongue"
    ],
    "😌":[
       "relieved",
@@ -598,11 +625,14 @@
    ],
    "😕":[
       "confused",
-      "face"
+      "face",
+      ":/"
    ],
    "😔":[
       "pensive",
-      "face"
+      "face",
+      "sad",
+      "disappointed"
    ],
    "😗":[
       "kissing",
@@ -610,7 +640,8 @@
    ],
    "😖":[
       "confounded",
-      "face"
+      "face",
+      "crying"
    ],
    "😑":[
       "expressionless",
@@ -632,42 +663,55 @@
       "face"
    ],
    "💀":[
-      "skull"
+      "skull",
+      "death"
    ],
    "🙋":[
       "happy",
       "person",
       "raising",
       "one",
-      "hand"
+      "hand",
+      "girl",
+      "woman"
    ],
    "🙌":[
       "person",
       "raising",
       "both",
       "hands",
-      "celebration"
+      "celebration",
+      "massage",
+      "pervert",
+      "touchy"
    ],
    "🙊":[
       "speak-no-evil",
-      "monkey"
+      "monkey",
+      "hihi",
+      "mouth"
    ],
    "🙏":[
       "person",
       "folded",
-      "hands"
+      "hands",
+      "pray",
+      "please"
    ],
    "🙍":[
       "person",
-      "frowning"
+      "frowning",
+      "girl"
    ],
    "🙎":[
       "person",
       "pouting",
-      "face"
+      "face",
+      "girl"
    ],
    "💍":[
-      "ring"
+      "ring",
+      "wedding"
    ],
    "😿":[
       "crying",
@@ -715,7 +759,8 @@
       "polish"
    ],
    "💼":[
-      "briefcase"
+      "briefcase",
+      "corporate"
    ],
    "💆":[
       "face",
@@ -728,7 +773,9 @@
    "😡":[
       "pouting",
       "face",
-      "red"
+      "red",
+      "angry",
+      "pissed"
    ],
    "😢":[
       "crying",
@@ -743,7 +790,8 @@
       "face",
       "look",
       "smoking",
-      "triumph"
+      "triumph",
+      "pffff"
    ],
    "😥":[
       "disappointed",
@@ -768,7 +816,8 @@
    ],
    "😩":[
       "weary",
-      "face"
+      "face",
+      "tired"
    ],
    "🎽":[
       "running",
@@ -800,24 +849,29 @@
       "face",
       "no",
       "good",
-      "gesture"
+      "gesture",
+      "cross"
    ],
    "🙈":[
       "see-no-evil",
       "eyes",
-      "monkey"
+      "monkey",
+      "oups"
    ],
    "🙉":[
       "hear-no-evil",
       "ears",
-      "monkey"
+      "monkey",
+      "hey"
    ],
    "💏":[
-      "kiss"
+      "kiss",
+      "love"
    ],
    "💎":[
       "gem",
-      "stone"
+      "stone",
+      "diamond"
    ],
    "👓":[
       "eyeglasses"
@@ -850,10 +904,12 @@
    ],
    "😯":[
       "hushed",
-      "face"
+      "face",
+      "ooh"
    ],
    "💃":[
-      "dancer"
+      "dancer",
+      "tango"
    ],
    "💌":[
       "love",
@@ -861,15 +917,19 @@
    ],
    "✋":[
       "raised",
-      "hand"
+      "hand",
+      "bye"
    ],
    "✌":[
       "victory",
-      "hand"
+      "hand",
+      "yes",
+      "cool"
    ],
    "✊":[
       "raised",
-      "fist"
+      "fist",
+      "power"
    ],
    "😷":[
       "face",
