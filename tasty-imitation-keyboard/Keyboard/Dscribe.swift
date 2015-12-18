@@ -140,9 +140,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     
     override func backspaceDown(sender: KeyboardKey) {
         let context = self.textDocumentProxy.documentContextBeforeInput
-        print("Context :")
-        print(context)
-        print(context.dynamicType)
         
         if context?.characters.last == kEscapeCue.characters.first {
             self.escapeMode = false
@@ -151,18 +148,14 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
         if escapeMode {
             let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
-            
             if (firstRange != nil) {
                 let lastIndex = context!.endIndex
                 self.stringToSearch = (context?.substringWithRange(firstRange!.startIndex.successor()..<lastIndex.predecessor()))!
                 self.searchEmojis(self.stringToSearch)
             }
         } else {
-            print(context)
-            print(context.dynamicType)
             if context != nil {
-                let contextString: String = String(context?.characters.dropLast())
-                print(contextString)
+                let contextString: String = String(context!.characters.dropLast())
                 self.searchSuggestions(contextString)
             }
         }
@@ -195,11 +188,11 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         dscribeBanner.delegate = self
         return dscribeBanner
     }
-    
+
     func takeScreenshotDelay() {
         NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("takeScreenshot"), userInfo: nil, repeats: false)
     }
-    
+
     func takeScreenshot() {
         if !CGRectIsEmpty(self.view.bounds) {
             UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
@@ -219,8 +212,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             self.view.backgroundColor = oldViewColor
         }
     }
-    
-    
+
     func displaySearchMode() {
         if self.escapeMode {
             overlayView.hidden = false
@@ -240,18 +232,12 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     func searchSuggestions(contextString: String) {
         //TEST AUTOCORRECT TODO move
         let lastWord = contextString.componentsSeparatedByString(" ").last
-        if lastWord == nil {
-            print("Was nil")
-        }
-        if lastWord == "nil" {
-            print("was string nil")
-        }
         let rangeOfLast = NSMakeRange(contextString.characters.count - lastWord!.characters.count, lastWord!.characters.count)
-        
+
         suggestions = []
         var guesses: [String]? = []
         var completion: [String]? = []
-        
+
         //Contacts and stuff
         for lexiconEntry in self.appleLexicon.entries {
             if (lexiconEntry.userInput == lastWord) {
@@ -260,7 +246,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 suggestions.append(lexiconEntry.documentText)
             }
         }
-        
+
         // Spelling and Autocorrect
         let misspelledRange = checker.rangeOfMisspelledWordInString(contextString, range: rangeOfLast, startingAt: 0, wrap: false, language: "en")
         if misspelledRange.location == NSNotFound {
@@ -268,19 +254,19 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         } else {
             guesses = checker.guessesForWordRange(misspelledRange, inString: contextString, language: language) as! [String]?
         }
-        
+
         completion = checker.completionsForPartialWordRange(rangeOfLast, inString: contextString, language: language) as! [String]?
-        
+
         if completion != nil {
             suggestions += completion!
         }
         if guesses != nil {
             suggestions += guesses!
         }
-        
+
         print("Suggestions: ")
         print(suggestions)
-        
+
         (self.bannerView as! DscribeBanner).displaySuggestions(suggestions, originalString: lastWord!)
     }
 
@@ -291,7 +277,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             let context = textDocumentProxy.documentContextBeforeInput
             if context != nil {
                 let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
-                
+
                 if (firstRange != nil) {
                     let lastIndex = context!.endIndex
                     let count = (firstRange!.startIndex..<lastIndex).count
@@ -308,31 +294,31 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         }
         self.textDocumentProxy.insertText(emoji)
     }
-    
+
     func appendSuggestion(suggestion: String) {
         // Uses the data passed back
         let textDocumentProxy = self.textDocumentProxy as UITextDocumentProxy
         let context = textDocumentProxy.documentContextBeforeInput
         let lastWord = context!.componentsSeparatedByString(" ").last
-        
+
         for var i = 0; i < lastWord?.characters.count; i++ {
             textDocumentProxy.deleteBackward()
         }
 
         self.textDocumentProxy.insertText(suggestion)
     }
-    
+
     func saveEmojis() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(emojiClass, toFile: Emoji.ArchiveURL.path!)
         if !isSuccessfulSave {
             print("Failed to save emojis...")
         }
     }
-    
+
     func loadEmojis() -> Emoji? {
         return NSKeyedUnarchiver.unarchiveObjectWithFile(Emoji.ArchiveURL.path!) as? Emoji
     }
-    
+
     func loadSampleEmojis() {
         self.emojiClass = Emoji()
     }
