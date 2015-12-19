@@ -90,7 +90,6 @@ class DscribeBanner: ExtraView {
     func displayEmojis(emojiList: [String], stringToSearch: String = "") {
         let numberEmoji: Int = emojiList.count
 
-        // TODO decide if this is relevant
         if numberEmoji == 0 {
             return
         }
@@ -100,13 +99,7 @@ class DscribeBanner: ExtraView {
         var xOrigin: CGFloat = 0
         var width: CGFloat = 80
         var lastButton:UIButton = UIButton()
-        
-//        let label:UILabel = UILabel(frame: CGRectMake(0, 0, 10, self.frame.height))
-//        label.text = stringToSearch
-//        label.sizeToFit()
-//        xOrigin = label.frame.width
-//        self.scrollView.addSubview(label)
-        
+
         scrollView.scrollEnabled = true
         
         if numberEmoji <= 3 {
@@ -141,12 +134,10 @@ class DscribeBanner: ExtraView {
     }
 
     func displaySuggestions(var suggestionList: [String], originalString: String) {
+        suggestionList.insert(originalString, atIndex: 0)
+        print(suggestionList)
         
         let numberSuggestion: Int = suggestionList.count
-
-        if suggestionList.count == 0 {
-            return
-        }
         
         self.removeAllButtonsFromScrollView()
 
@@ -154,8 +145,6 @@ class DscribeBanner: ExtraView {
         scrollView.scrollEnabled = false
 
         var count: CGFloat = 0
-        suggestionList.insert(originalString, atIndex: 0)
-        print(suggestionList)
         for suggestion in suggestionList {
             let button: UIButton = UIButton()
             button.backgroundColor = suggestionBackgroundColor

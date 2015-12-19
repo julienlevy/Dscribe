@@ -222,15 +222,12 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     }
     
     func searchEmojis(string: String) {
-
         let emojiList: [String] = self.emojiClass.tagSearch(string) as [String]
 
-        //Change display
         (self.bannerView as! DscribeBanner).displayEmojis(emojiList)
     }
 
     func searchSuggestions(contextString: String) {
-        //TEST AUTOCORRECT TODO move
         let lastWord = contextString.componentsSeparatedByString(" ").last
         let rangeOfLast = NSMakeRange(contextString.characters.count - lastWord!.characters.count, lastWord!.characters.count)
 
@@ -296,7 +293,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     }
 
     func appendSuggestion(suggestion: String) {
-        // Uses the data passed back
         let textDocumentProxy = self.textDocumentProxy as UITextDocumentProxy
         let context = textDocumentProxy.documentContextBeforeInput
         let lastWord = context!.componentsSeparatedByString(" ").last
