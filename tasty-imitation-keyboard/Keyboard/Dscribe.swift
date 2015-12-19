@@ -308,6 +308,10 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         self.textDocumentProxy.insertText(suggestion)
     }
 
+    func refusedSuggestion() {
+        self.textDocumentProxy.insertText(" ")
+    }
+
     func saveEmojis() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(emojiClass, toFile: Emoji.ArchiveURL.path!)
         if !isSuccessfulSave {

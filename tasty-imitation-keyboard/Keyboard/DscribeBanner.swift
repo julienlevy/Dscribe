@@ -17,6 +17,7 @@ with something (or leave it blank if you like.)
 protocol DscribeBannerDelegate {
     func appendEmoji(emoji: String)
     func appendSuggestion(suggestion: String)
+    func refusedSuggestion()
 }
 
 class DscribeBanner: ExtraView {
@@ -81,6 +82,11 @@ class DscribeBanner: ExtraView {
         delegate?.appendSuggestion((sender.titleLabel?.text)!)
     }
     
+    func alreadyTypedWord(sender: UIButton!) {
+        print("already typed word")
+        delegate?.refusedSuggestion()
+    }
+
     func displayEmojis(emojiList: [String], stringToSearch: String = "") {
         let numberEmoji: Int = emojiList.count
 
@@ -134,8 +140,7 @@ class DscribeBanner: ExtraView {
         self.afterScrollView.frame = CGRectMake( self.scrollView.contentSize.width - 1, space, self.frame.width, self.frame.height)
     }
 
-    func displaySuggestions(suggestionList: [String], originalString: String) {
-//        print("Last word: ".stringByAppendingString(originalString))
+    func displaySuggestions(var suggestionList: [String], originalString: String) {
         
         let numberSuggestion: Int = suggestionList.count
 
@@ -149,18 +154,24 @@ class DscribeBanner: ExtraView {
         scrollView.scrollEnabled = false
 
         var count: CGFloat = 0
+        suggestionList.insert(originalString, atIndex: 0)
+        print(suggestionList)
         for suggestion in suggestionList {
-            
             let button: UIButton = UIButton()
             button.backgroundColor = suggestionBackgroundColor
             button.layer.borderWidth = 0.4
             button.layer.borderColor = UIColor.clearColor().CGColor
             button.frame = CGRectMake(count * (width + space), space, width, self.frame.height + 1)
-            button.setTitle(suggestion, forState: UIControlState.Normal)
-            button.addTarget(self, action: Selector("suggestionSelected:"), forControlEvents: UIControlEvents.TouchUpInside);
             button.titleLabel?.textColor = UIColor.blackColor()
+            if count == 0 {
+                button.setTitle("\"" + suggestion + "\"", forState: UIControlState.Normal)
+                button.addTarget(self, action: Selector("alreadyTypedWord:"), forControlEvents: UIControlEvents.TouchUpInside);
+            } else {
+                button.setTitle(suggestion, forState: UIControlState.Normal)
+                button.addTarget(self, action: Selector("suggestionSelected:"), forControlEvents: UIControlEvents.TouchUpInside);
+            }
             self.scrollView.addSubview(button)
-            
+
             count++
             if count > 2 {
                 break
