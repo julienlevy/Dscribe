@@ -1,4 +1,4 @@
-{  
+{
    "📯":[
       "postal",
       "horn"
@@ -25,7 +25,8 @@
    ],
    "💿":[
       "optical",
-      "disc"
+      "disc",
+      "CD"
    ],
    "📢":[
       "public",
@@ -40,13 +41,17 @@
       "toilet"
    ],
    "💽":[
-      "minidisc"
+      "minidisc",
+      "CD",
+      "disc"
    ],
    "🚿":[
-      "shower"
+      "shower",
+      "water"
    ],
    "👻":[
-      "ghost"
+      "ghost",
+      "crazy"
    ],
    "💾":[
       "floppy",
@@ -55,7 +60,9 @@
    "💡":[
       "electric",
       "light",
-      "bulb"
+      "bulb",
+      "idea",
+      "smart"
    ],
    "🍞":[
       "bread"
@@ -107,24 +114,31 @@
       "keyboard"
    ],
    "🎤":[
-      "microphone"
+      "microphone",
+      "singer"
    ],
    "🚴":[
-      "bicyclist"
+      "bicyclist",
+      "cyclist",
+      "bike"
    ],
    "🚵":[
       "mountain",
-      "bicyclist"
+      "bicyclist",
+      "cyclist",
+      "bike"
    ],
    "🎸":[
       "guitar"
    ],
    "🍔":[
-      "hamburger"
+      "hamburger",
+      "burger",
+      "macdonalds",
+      "fat"
    ],
    "🍕":[
       "slice",
-      "of",
       "pizza"
    ],
    "🚪":[
@@ -135,7 +149,8 @@
       "tray"
    ],
    "🚬":[
-      "smoking"
+      "smoking",
+      "cigarette"
    ],
    "📊":[
       "bar",
@@ -155,7 +170,8 @@
       "ruler"
    ],
    "🎱":[
-      "billiards"
+      "billiards",
+      "8"
    ],
    "🎬":[
       "clapper",
@@ -172,14 +188,16 @@
       "custard"
    ],
    "🍭":[
-      "lollipop"
+      "lollipop",
+      "candy"
    ],
    "🎲":[
       "game",
-      "die"
+      "dice"
    ],
    "🍪":[
-      "cookie"
+      "cookie",
+      "dough"
    ],
    "🛁":[
       "bathtub"
@@ -206,48 +224,57 @@
    ],
    "🍷":[
       "wine",
-      "glass"
+      "glass",
+      "drink",
+      "alcohol",
+      "dinner"
    ],
    "🍴":[
       "fork",
-      "knife"
+      "knife",
+      "dinner"
    ],
    "🍵":[
       "teacup",
-      "without",
       "handle"
    ],
    "🍲":[
       "pot",
-      "of",
       "food"
    ],
    "🎷":[
-      "saxophone"
+      "saxophone",
+      "music"
    ],
    "🍰":[
-      "shortcake"
+      "shortcake",
+      "cake",
+      "pastry",
+      "food"
    ],
    "🍱":[
       "bento",
-      "box"
+      "box",
    ],
    "🍻":[
       "clinking",
       "beer",
-      "mugs"
+      "mugs",
+      "pints",
+      "drinks"
    ],
    "🎶":[
-      "multiple",
       "musical",
       "notes"
    ],
    "🎧":[
-      "headphone"
+      "headphone",
+      "music"
    ],
    "🍸":[
       "cocktail",
-      "glass"
+      "glass",
+      "martini"
    ],
    "🍼":[
       "baby",
@@ -268,7 +295,8 @@
    ],
    "🍺":[
       "beer",
-      "mug"
+      "mug",
+      "pint"
    ],
    "💣":[
       "bomb"
@@ -281,7 +309,9 @@
       "balloon"
    ],
    "🎃":[
-      "jack-o-lantern"
+      "jack-o-lantern",
+      "halloween",
+      "pumpkin"
    ],
    "🎂":[
       "birthday",
@@ -289,7 +319,8 @@
    ],
    "🎁":[
       "wrapped",
-      "present"
+      "present",
+      "gift"
    ],
    "🎇":[
       "firework",
@@ -318,7 +349,8 @@
       "stroke"
    ],
    "🔒":[
-      "lock"
+      "lock",
+      "closed"
    ],
    "🔓":[
       "open",
@@ -333,14 +365,16 @@
       "key"
    ],
    "🍧":[
-      "shaved",
-      "ice"
+      "ice",
+      "icecream",
+      "scoops",
+      "food"
    ],
    "🍥":[
       "fish",
       "cake",
       "swirl",
-      "design"
+      "sushi"
    ],
    "🍤":[
       "fried",
@@ -354,18 +388,24 @@
    "🍦":[
       "soft",
       "ice",
-      "cream"
+      "cream",
+      "italian",
+      "icecream"
    ],
    "🍡":[
-      "dango"
+      "dango",
+      "skewer",
+      "marshmallow",
+      "sweets"
    ],
    "🍠":[
       "roasted",
-      "sweet",
+      "eggplant"
       "potato"
    ],
    "🍣":[
-      "sushi"
+      "sushi",
+      "japan"
    ],
    "🍢":[
       "oden"
@@ -375,7 +415,8 @@
    ],
    "🍨":[
       "ice",
-      "cream"
+      "cream",
+      "icecream"
    ],
    "🎌":[
       "crossed",

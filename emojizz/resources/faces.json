@@ -442,6 +442,7 @@
       "face",
       "stuck-out",
       "tongue",
+      "happy",
       "winking",
       "eye",
       "crazy"
@@ -469,6 +470,7 @@
       "laughing",
       "face",
       "open",
+      "happy",
       "mouth",
       "tightly-closed",
       "eyes"
@@ -512,11 +514,13 @@
       "smiling",
       "smile",
       "face",
+      "happy",
       "open",
       "mouth"
    ],
    "😀":[
       "grinning",
+      "happy",
       "face",
       "smile",
       "smiling"
@@ -951,14 +955,17 @@
    ],
    "😳":[
       "flushed",
-      "face"
+      "face",
+      "oops",
+      "sorry"
    ],
    "😲":[
       "astonished",
       "face"
    ],
    "💂":[
-      "guardsman"
+      "guardsman",
+      "english"
    ],
    "😰":[
       "face",

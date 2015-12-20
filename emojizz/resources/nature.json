@@ -1,4 +1,4 @@
-{  
+{
    "🌌":[
       "milky",
       "way"
@@ -63,7 +63,8 @@
    ],
    "🌑":[
       "new",
-      "moon"
+      "moon",
+      "black"
    ],
    "🌒":[
       "waxing",
@@ -93,6 +94,7 @@
    "🌚":[
       "new",
       "moon",
+      "black"
       "face"
    ],
    "🌛":[
@@ -122,7 +124,9 @@
       "sign"
    ],
    "🌼":[
-      "blossom"
+      "blossom",
+      "sunflower",
+      "flowers"
    ],
    "🐘":[
       "elephant"
@@ -133,17 +137,20 @@
       "drops"
    ],
    "🐨":[
-      "koala"
+      "koala",
+      "australia"
    ],
    "🐩":[
       "poodle"
    ],
    "🐢":[
-      "turtle"
+      "turtle",
+      "slow"
    ],
    "🐣":[
       "hatching",
-      "chick"
+      "chick",
+      "egg"
    ],
    "🐠":[
       "tropical",
@@ -258,7 +265,8 @@
    ],
    "🍂":[
       "fallen",
-      "leaf"
+      "leaf",
+      "autumn"
    ],
    "🐫":[
       "bactrian",
@@ -285,7 +293,8 @@
    ],
    "🌸":[
       "cherry",
-      "blossom"
+      "blossom",
+      "japan"
    ],
    "🐈":[
       "cat"
@@ -407,12 +416,13 @@
    ],
    "🌾":[
       "ear",
-      "of",
       "rice"
    ],
    "🍁":[
       "maple",
-      "leaf"
+      "leaf",
+      "canada",
+      "syrup"
    ],
    "🐍":[
       "snake"
@@ -431,9 +441,11 @@
       "crocodile"
    ],
    "🐋":[
-      "whale"
+      "whale",
+      "big"
    ],
    "🐌":[
-      "snail"
+      "snail",
+      "slow"
    ]
 }
