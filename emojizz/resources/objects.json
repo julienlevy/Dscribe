@@ -443,13 +443,15 @@
       "decoration"
    ],
    "📷":[
-      "camera"
+      "camera",
+      "photo"
    ],
    "🃏":[
       "playing",
       "card",
       "black",
-      "joker"
+      "joker",
+      "game"
    ],
    "📲":[
       "mobile",
@@ -461,72 +463,74 @@
    ],
    "☕":[
       "hot",
-      "beverage"
+      "beverage",
+      "drink",
+      "tea"
    ],
    "📰":[
       "newspaper"
    ],
    "📱":[
       "mobile",
-      "phone"
+      "phone",
+      "iphone"
    ],
    "📹":[
       "video",
       "camera"
    ],
    "🔅":[
-      "low",
       "brightness"
    ],
    "🍙":[
       "rice",
-      "ball"
+      "sushi"
    ],
    "🔇":[
       "speaker",
       "cancellation",
-      "stroke"
+      "sound"
    ],
    "🔆":[
-      "high",
       "brightness"
    ],
    "📫":[
       "closed",
-      "mailbox",
-      "raised",
-      "flag"
+      "mailbox"
    ],
    "🍑":[
-      "peach"
+      "peach",
+      "fruit"
    ],
    "🍒":[
-      "cherries"
+      "cherries",
+      "fruit"
    ],
    "🍓":[
-      "strawberry"
+      "strawberry",
+      "fruit"
    ],
    "🔉":[
       "speaker",
-      "one",
-      "sound",
-      "wave"
+      "sound"
    ],
    "🔈":[
       "speaker"
    ],
    "🍖":[
       "meat",
-      "on",
-      "bone"
+      "bone",
+      "chicken",
+      "wings"
    ],
    "🍗":[
       "poultry",
-      "leg"
+      "leg",
+      "chicken",
+      "wings"
    ],
    "🍯":[
-      "honey",
-      "pot"
+      "honey"
    ],
    "🎣":[
       "fishing",
@@ -539,61 +543,85 @@
    ],
    "🍏":[
       "green",
-      "apple"
+      "apple",
+      "fruit"
    ],
    "🍎":[
       "red",
-      "apple"
+      "apple",
+      "fruit"
    ],
    "🍍":[
-      "pineapple"
+      "pineapple",
+      "fruit"
    ],
    "🍌":[
-      "banana"
+      "banana",
+      "fruit"
    ],
    "🍋":[
-      "lemon"
+      "lemon",
+      "fruit"
    ],
    "🍊":[
-      "tangerine"
+      "tangerine",
+      "fruit"
    ],
    "🏈":[
       "american",
-      "football"
+      "football",
+      "sport"
    ],
    "🏉":[
       "rugby",
-      "football"
+      "sport"
    ],
    "🍬":[
-      "candy"
+      "candy",
+      "sweet"
    ],
    "🏂":[
-      "snowboarder"
+      "snowboarder",
+      "sport",
+      "winter",
+      "snow"
    ],
    "🏀":[
       "basketball",
-      "hoop"
+      "hoop",
+      "sport"
    ],
    "🏁":[
       "chequered",
-      "flag"
+      "flag",
+      "arrival",
+      "race"
    ],
    "🏆":[
-      "trophy"
+      "trophy",
+      "victory",
+      "cup"
    ],
    "🏇":[
       "horse",
-      "racing"
+      "racing",
+      "sport"
    ],
    "🏄":[
-      "surfer"
+      "surfer",
+      "summer",
+      "sea",
+      "sun",
+      "sport"
    ],
    "🎺":[
-      "trumpet"
+      "trumpet",
+      "music",
+      "instrument"
    ],
    "📚":[
-      "books"
+      "books",
+      "read"
    ],
    "📛":[
       "name",
@@ -603,7 +631,9 @@
       "scroll"
    ],
    "📝":[
-      "memo"
+      "memo",
+      "write",
+      "note"
    ],
    "📞":[
       "telephone",
@@ -613,34 +643,44 @@
       "pager"
    ],
    "🎿":[
-      "ski",
-      "ski",
-      "boot"
+      "skis",
+      "boot",
+      "winter",
+      "snow",
+      "sport"
    ],
    "🍉":[
-      "watermelon"
+      "watermelon",
+      "fruit"
    ],
    "🍈":[
-      "melon"
+      "melon",
+      "fruit"
    ],
    "🍇":[
-      "grapes"
+      "grapes",
+      "fruit"
    ],
    "🍆":[
-      "aubergine"
+      "aubergine",
+      "eggplant",
+      "vegetable"
    ],
    "🍅":[
-      "tomato"
+      "tomato",
+      "fruit",
+      "vegetable"
    ],
    "🔎":[
-      "right-pointing",
       "magnifying",
-      "glass"
+      "glass",
+      "loupe",
+      "search"
    ],
    "🔍":[
-      "left-pointing",
       "magnifying",
-      "glass"
+      "glass",
+      "loupe"
    ],
    "🔏":[
       "lock",
@@ -649,9 +689,7 @@
    ],
    "🔊":[
       "speaker",
-      "three",
-      "sound",
-      "waves"
+      "sound"
    ],
    "🔌":[
       "electric",
@@ -662,26 +700,35 @@
    ],
    "🍚":[
       "cooked",
-      "rice"
+      "rice",
+      "food"
    ],
    "🍛":[
       "curry",
-      "rice"
+      "rice",
+      "food"
    ],
    "🍜":[
       "steaming",
-      "bowl"
+      "bowl",
+      "food"
    ],
    "🍝":[
-      "spaghetti"
+      "spaghetti",
+      "food",
+      "italian"
    ],
    "🎼":[
       "musical",
-      "score"
+      "score",
+      "note"
    ],
    "🍟":[
       "french",
-      "fries"
+      "fries",
+      "food",
+      "junk",
+      "macdonalds"
    ],
    "📘":[
       "blue",
@@ -693,14 +740,19 @@
    ],
    "☎":[
       "black",
+      "pink",
       "telephone"
    ],
    "🎻":[
-      "violin"
+      "violin",
+      "music",
+      "instrument"
    ],
    "📐":[
       "triangular",
-      "ruler"
+      "ruler",
+      "school",
+      "geometry"
    ],
    "📑":[
       "bookmark",
@@ -710,7 +762,9 @@
       "ledger"
    ],
    "📓":[
-      "notebook"
+      "notebook",
+      "write",
+      "book"
    ],
    "📔":[
       "notebook",
@@ -730,25 +784,37 @@
       "book"
    ],
    "🏊":[
-      "swimmer"
+      "swimmer",
+      "sport"
    ],
    "🍳":[
-      "cooking"
+      "cooking",
+      "eggs",
+      "breakfast",
+      "pan"
    ],
    "🎾":[
       "tennis",
       "racquet",
-      "ball"
+      "ball",
+      "sport"
    ],
    "⚾":[
-      "baseball"
+      "baseball",
+      "sport"
    ],
    "⚽":[
       "soccer",
-      "ball"
+      "ball",
+      "sport",
+      "football"
    ],
    "🔬":[
-      "microscope"
+      "microscope",
+      "science",
+      "biology",
+      "study",
+      "research"
    ],
    "🍘":[
       "rice",
@@ -756,32 +822,37 @@
    ],
    "🎨":[
       "artist",
-      "palette"
+      "palette",
+      "paint"
    ],
    "💊":[
-      "pill"
+      "pill",
+      "drug",
+      "medicine"
    ],
    "📩":[
-      "envelope",
-      "downwards",
-      "arrow",
-      "above"
+      "envelope"
    ],
    "📨":[
-      "incoming",
       "envelope"
    ],
    "💻":[
       "personal",
-      "computer"
+      "computer",
+      "mac",
+      "imac",
+      "design"
    ],
    "🎥":[
       "movie",
-      "camera"
+      "camera",
+      "film"
    ],
    "🔮":[
       "crystal",
-      "ball"
+      "ball",
+      "guess",
+      "magic"
    ],
    "📤":[
       "outbox",
@@ -789,14 +860,21 @@
    ],
    "📣":[
       "cheering",
-      "megaphone"
+      "megaphone",
+      "speaker"
    ],
    "🔫":[
-      "pistol"
+      "pistol",
+      "gun",
+      "firearm",
+      "kill",
+      "shoot"
    ],
    "📡":[
       "satellite",
-      "antenna"
+      "antenna",
+      "space",
+      "technology"
    ],
    "📠":[
       "fax",
@@ -807,42 +885,51 @@
    ],
    "🍹":[
       "tropical",
-      "drink"
+      "drink",
+      "cocktail",
+      "alcohol"
    ],
    "✂":[
-      "black",
       "scissors"
    ],
    "🎮":[
       "video",
-      "game"
+      "game",
+      "geek"
    ],
    "📦":[
-      "package"
+      "package",
+      "box",
+      "delivery",
+      "amazon"
    ],
    "⌚":[
       "watch"
    ],
    "⌛":[
-      "hourglass"
+      "hourglass",
+      "time",
+      "long"
    ],
    "🀄":[
       "mahjong",
       "tile",
-      "red",
-      "dragon"
+      "chinese"
    ],
    "🌽":[
-      "ear",
-      "of",
-      "maize"
+      "maize",
+      "corn",
+      "vegetable"
    ],
    "🔪":[
-      "hocho"
+      "hocho",
+      "knife",
+      "cut"
    ],
    "⏰":[
       "alarm",
-      "clock"
+      "clock",
+      "morning"
    ],
    "⏳":[
       "hourglass",
@@ -854,54 +941,62 @@
    ],
    "🎯":[
       "direct",
-      "hit"
+      "hit",
+      "dart",
+      "tagert"
    ],
    "✏":[
       "pencil"
    ],
    "📬":[
-      "open",
-      "mailbox",
-      "raised",
-      "flag"
+      "mailbox"
    ],
    "💉":[
-      "syringe"
+      "syringe",
+      "drug",
+      "doctor",
+      "hospital"
    ],
    "📧":[
       "e-mail"
    ],
    "💸":[
       "money",
-      "wings"
+      "wings",
+      "cash",
+      "rich"
    ],
    "🍫":[
       "chocolate",
       "bar"
    ],
    "📪":[
-      "closed",
-      "mailbox",
-      "lowered",
-      "flag"
+      "mailbox"
    ],
    "🔩":[
       "nut",
       "bolt"
    ],
    "🔨":[
-      "hammer"
+      "hammer",
+      "tool",
+      "builder"
    ],
    "🔧":[
-      "wrench"
+      "wrench",
+      "tool",
+      "builder"
    ],
    "💳":[
       "credit",
-      "card"
+      "card",
+      "gold",
+      "rich"
    ],
    "💰":[
       "money",
-      "bag"
+      "cash",
+      "rich"
    ],
    "📭":[
       "open",
@@ -912,21 +1007,21 @@
    "💶":[
       "banknote",
       "euro",
-      "sign"
+      "cash"
    ],
    "💷":[
       "banknote",
       "pound",
-      "sign"
+      "cash"
    ],
    "💴":[
       "banknote",
       "yen",
-      "sign"
+      "cash"
    ],
    "💵":[
       "banknote",
       "dollar",
-      "sign"
+      "cash"
    ]
 }
