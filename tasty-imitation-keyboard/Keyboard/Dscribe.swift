@@ -242,6 +242,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         suggestions = []
         var guesses: [String]? = []
         var completion: [String]? = []
+        var autoReplace: Bool = false
+        var stringToReplaceWith: String = ""
 
         //Contacts and stuff
         for lexiconEntry in self.appleLexicon.entries {
@@ -257,6 +259,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         if misspelledRange.location == NSNotFound {
             print("No mispelled word")
         } else {
+            autoReplace = true
             guesses = checker.guessesForWordRange(misspelledRange, inString: contextString, language: language) as! [String]?
         }
 
@@ -269,10 +272,16 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             suggestions += guesses!
         }
 
+        if autoReplace && suggestions.count > 0 {
+            stringToReplaceWith = suggestions.removeFirst()
+            print("Will replace with:")
+            print(stringToReplaceWith)
+        }
+
         print("Suggestions: ")
         print(suggestions)
 
-        (self.bannerView as! DscribeBanner).displaySuggestions(suggestions, originalString: lastWord!)
+        (self.bannerView as! DscribeBanner).displaySuggestions(suggestions, originalString: lastWord!, willReplaceString: stringToReplaceWith)
     }
 
     func appendEmoji(emoji: String) {
