@@ -161,7 +161,15 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         }
         
         super.backspaceDown(sender)
+    }
+    
+    override func backspaceRepeatCallback() {
+        if self.textDocumentProxy.documentContextBeforeInput?.characters.last == kEscapeCue.characters.first {
+            self.escapeMode = false
+            self.displaySearchMode()
+        }
         
+        super.backspaceRepeatCallback()
     }
     
     override func setupKeys() {

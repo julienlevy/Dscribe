@@ -137,11 +137,12 @@ class DscribeBanner: ExtraView {
         suggestionList.insert(originalString, atIndex: 0)
         print(suggestionList)
         
-        let numberSuggestion: Int = suggestionList.count
         
         self.removeAllButtonsFromScrollView()
-
-        let width: CGFloat = ((self.frame.width - CGFloat(min(3, numberSuggestion) - 1) * space) / CGFloat(min(3, numberSuggestion)))
+        
+//        let numberSuggestion: Int = suggestionList.count
+//        let width: CGFloat = ((self.frame.width - CGFloat(min(3, numberSuggestion) - 1) * space) / CGFloat(min(3, numberSuggestion)))
+        let width: CGFloat = ((self.frame.width - CGFloat(2) * space) / CGFloat(3))
         scrollView.scrollEnabled = false
 
         var count: CGFloat = 0
