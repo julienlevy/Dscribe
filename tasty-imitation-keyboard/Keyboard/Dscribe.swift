@@ -18,18 +18,18 @@ let kEscapeCue = "|"
 
 
 class Dscribe: KeyboardViewController, DscribeBannerDelegate {
-    
-    
+
     let takeDebugScreenshot: Bool = false
-    
+
     var escapeMode: Bool = false
-    
+
+    // TODO delete
     var stringToSearch: String = ""
-    
+
     var overlayView: UIView = UIView()
-    
+
     var emojiClass: Emoji = Emoji()
-    
+
     var appleLexicon: UILexicon = UILexicon()
     var checker: UITextChecker = UITextChecker()
     let language = "en"
@@ -56,8 +56,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
             self.appleLexicon = lexicon
 
-            print("LEXICON")
-
+            // TODO delete
             NSLog("Number of lexicon entries : %i", self.appleLexicon.entries.count)
 
             for lexiconEntry in self.appleLexicon.entries {

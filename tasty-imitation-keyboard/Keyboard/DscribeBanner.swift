@@ -147,34 +147,6 @@ class DscribeBanner: ExtraView {
         let width: CGFloat = ((self.frame.width - CGFloat(2) * space) / CGFloat(3))
         scrollView.scrollEnabled = false
 
-//        var count: CGFloat = 0
-////        var suggIndex: Int = 0
-//        for suggestion in suggestionList {
-//            let button: UIButton = UIButton()
-//            button.backgroundColor = suggestionBackgroundColor
-//            button.layer.borderWidth = 0.4
-//            button.layer.borderColor = UIColor.clearColor().CGColor
-//            button.frame = CGRectMake(count * (width + space), 0, width, self.frame.height)
-//            button.titleLabel?.textColor = UIColor.blackColor()
-//            if count == 0 {
-//                button.setTitle("\"" + suggestion + "\"", forState: UIControlState.Normal)
-//                button.addTarget(self, action: Selector("alreadyTypedWord:"), forControlEvents: UIControlEvents.TouchUpInside);
-//            } else {
-//                button.setTitle(suggestion, forState: UIControlState.Normal)
-//                button.addTarget(self, action: Selector("suggestionSelected:"), forControlEvents: UIControlEvents.TouchUpInside);
-//                if count == 1 && willReplaceString != "" {
-//                    button.backgroundColor = UIColor.whiteColor()
-//                    button.setTitleColor(self.tintColor, forState: UIControlState.Normal)
-//                }
-//            }
-//            self.scrollView.addSubview(button)
-//
-//            count++
-//            if count > 2 {
-//                break
-//            }
-//        }
-
         //OTHER WAY
         for (var index = 0; index < 3; index++) {
             let button: UIButton = UIButton()
