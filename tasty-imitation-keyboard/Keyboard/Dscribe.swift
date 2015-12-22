@@ -140,11 +140,29 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     override func backspaceDown(sender: KeyboardKey) {
         self.autoreplaceSuggestion = ""
 
-        let context = self.textDocumentProxy.documentContextBeforeInput
-        
-        if context?.characters.last == kEscapeCue.characters.first {
+        if self.textDocumentProxy.documentContextBeforeInput?.characters.last == kEscapeCue.characters.first {
             self.escapeMode = false
             self.displaySearchMode()
+        }
+
+        super.backspaceDown(sender)
+    }
+
+    override func backspaceRepeatCallback() {
+        if self.textDocumentProxy.documentContextBeforeInput?.characters.last == kEscapeCue.characters.first {
+            self.escapeMode = false
+            self.displaySearchMode()
+        }
+
+        super.backspaceRepeatCallback()
+    }
+
+    override func backspaceUp(sender: KeyboardKey) {
+        super.backspaceUp(sender)
+
+        let context = self.textDocumentProxy.documentContextBeforeInput
+        if context == nil {
+            return
         }
 
         if escapeMode {
@@ -155,22 +173,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 self.searchEmojis(self.stringToSearch)
             }
         } else {
-            if context != nil {
-                let contextString: String = String(context!.characters.dropLast())
-                self.searchSuggestions(contextString, shouldAutoReplace: false)
-            }
+            let contextString: String = String(context!.characters.dropLast())
+            self.searchSuggestions(contextString, shouldAutoReplace: false)
         }
-        
-        super.backspaceDown(sender)
-    }
-    
-    override func backspaceRepeatCallback() {
-        if self.textDocumentProxy.documentContextBeforeInput?.characters.last == kEscapeCue.characters.first {
-            self.escapeMode = false
-            self.displaySearchMode()
-        }
-        
-        super.backspaceRepeatCallback()
     }
     
     override func setupKeys() {
