@@ -34,6 +34,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     var checker: UITextChecker = UITextChecker()
     let language = "en"
     var suggestions: [String] = [String]()
+    var autoreplaceSuggestion: String = ""
 
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -89,9 +90,22 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     override func keyPressed(key: Key) {
         let keyOutput = key.outputForCase(self.shiftState.uppercase())
+        if ["-", "/", ":", ";", "(", ")", "$", "&", "@", "\"",".", ",", "?", "!", "'", " ", "\n"].contains(keyOutput) {
+            print("Just pressed a punctuation:")
+            if self.autoreplaceSuggestion != "" {
+                let context = self.textDocumentProxy.documentContextBeforeInput
+                let lastWord = context!.componentsSeparatedByString(" ").last
+                for var i = 0; i < lastWord?.characters.count; i++ {
+                    self.textDocumentProxy.deleteBackward()
+                }
+                self.textDocumentProxy.insertText(autoreplaceSuggestion)
+            }
+        }
+
+        self.autoreplaceSuggestion = ""
+
         if keyOutput == kEscapeCue {
             if escapeMode {
-
                 let context = self.textDocumentProxy.documentContextBeforeInput
                 let firstRange = context?.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
                 
@@ -99,7 +113,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                     let lastIndex = context!.endIndex
                     let count = (firstRange!.startIndex..<lastIndex).count
                     for var i = 0; i < count; i++ {
-                        textDocumentProxy.deleteBackward()
+                        self.textDocumentProxy.deleteBackward()
                     }
                 }
             } else {
@@ -242,7 +256,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         var guesses: [String]? = []
         var completion: [String]? = []
         var autoReplace: Bool = false
-        var stringToReplaceWith: String = ""
 
         //Contacts and stuff
         for lexiconEntry in self.appleLexicon.entries {
@@ -272,22 +285,21 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         }
 
         if autoReplace && suggestions.count > 0 {
-            stringToReplaceWith = suggestions.removeFirst()
+            self.autoreplaceSuggestion = suggestions.removeFirst()
             print("Will replace with:")
-            print(stringToReplaceWith)
+            print(self.autoreplaceSuggestion)
         }
 
         print("Suggestions: ")
         print(suggestions)
 
-        (self.bannerView as! DscribeBanner).displaySuggestions(suggestions, originalString: lastWord!, willReplaceString: stringToReplaceWith)
+        (self.bannerView as! DscribeBanner).displaySuggestions(suggestions, originalString: lastWord!, willReplaceString: self.autoreplaceSuggestion)
     }
 
     func appendEmoji(emoji: String) {
         // Uses the data passed back
         if self.escapeMode {
-            let textDocumentProxy = self.textDocumentProxy as UITextDocumentProxy
-            let context = textDocumentProxy.documentContextBeforeInput
+            let context = self.textDocumentProxy.documentContextBeforeInput
             if context != nil {
                 let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
 
@@ -295,7 +307,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                     let lastIndex = context!.endIndex
                     let count = (firstRange!.startIndex..<lastIndex).count
                     for var i = 0; i < count; i++ {
-                        textDocumentProxy.deleteBackward()
+                        self.textDocumentProxy.deleteBackward()
                     }
                 }
             }
@@ -309,12 +321,11 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     }
 
     func appendSuggestion(suggestion: String) {
-        let textDocumentProxy = self.textDocumentProxy as UITextDocumentProxy
-        let context = textDocumentProxy.documentContextBeforeInput
+        let context = self.textDocumentProxy.documentContextBeforeInput
         let lastWord = context!.componentsSeparatedByString(" ").last
 
         for var i = 0; i < lastWord?.characters.count; i++ {
-            textDocumentProxy.deleteBackward()
+            self.textDocumentProxy.deleteBackward()
         }
 
         self.textDocumentProxy.insertText(suggestion)
