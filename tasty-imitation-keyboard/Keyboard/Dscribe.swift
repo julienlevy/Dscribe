@@ -319,7 +319,20 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     }
 
     func refusedSuggestion() {
+        let context = self.textDocumentProxy.documentContextBeforeInput
+        if context != nil {
+            let lastWord = context!.componentsSeparatedByString(" ").last
+            if !(lastWord ?? "").isEmpty {
+                UITextChecker.learnWord(lastWord!)
+            }
+        }
+
         self.textDocumentProxy.insertText(" ")
+
+        self.autoreplaceSuggestion = ""
+        if context != nil {
+            self.searchSuggestions(context! + " ")
+        }
     }
 
     func saveEmojis() {
