@@ -93,12 +93,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         if ["-", "/", ":", ";", "(", ")", "$", "&", "@", "\"",".", ",", "?", "!", "'", " ", "\n"].contains(keyOutput) {
             print("Just pressed a punctuation:")
             if self.autoreplaceSuggestion != "" {
-                let context = self.textDocumentProxy.documentContextBeforeInput
-                let lastWord = context!.componentsSeparatedByString(" ").last
-                for var i = 0; i < lastWord?.characters.count; i++ {
-                    self.textDocumentProxy.deleteBackward()
-                }
-                self.textDocumentProxy.insertText(autoreplaceSuggestion)
+                self.appendSuggestion(autoreplaceSuggestion)
             }
         }
 
@@ -106,16 +101,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
         if keyOutput == kEscapeCue {
             if escapeMode {
-                let context = self.textDocumentProxy.documentContextBeforeInput
-                let firstRange = context?.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
-                
-                if (firstRange != nil) {
-                    let lastIndex = context!.endIndex
-                    let count = (firstRange!.startIndex..<lastIndex).count
-                    for var i = 0; i < count; i++ {
-                        self.textDocumentProxy.deleteBackward()
-                    }
-                }
+                self.deleteSearchText()
             } else {
                 //TODO replace with most used emoji
                 (self.bannerView as! DscribeBanner).displayEmojis(Array(emojiScore.keys))
@@ -234,6 +220,20 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         }
     }
 
+    func deleteSearchText() {
+        let context = self.textDocumentProxy.documentContextBeforeInput
+        if context != nil {
+            let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
+            if (firstRange != nil) {
+                let lastIndex = context!.endIndex
+                let count = (firstRange!.startIndex..<lastIndex).count
+                for var i = 0; i < count; i++ {
+                    self.textDocumentProxy.deleteBackward()
+                }
+            }
+        }
+    }
+
     func displaySearchMode() {
         if self.escapeMode {
             overlayView.hidden = false
@@ -299,19 +299,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     func appendEmoji(emoji: String) {
         // Uses the data passed back
         if self.escapeMode {
-            let context = self.textDocumentProxy.documentContextBeforeInput
-            if context != nil {
-                let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
-
-                if (firstRange != nil) {
-                    let lastIndex = context!.endIndex
-                    let count = (firstRange!.startIndex..<lastIndex).count
-                    for var i = 0; i < count; i++ {
-                        self.textDocumentProxy.deleteBackward()
-                    }
-                }
-            }
-
+            self.deleteSearchText()
             self.escapeMode = false
             self.displaySearchMode()
             self.emojiClass.incrementScore(emoji)
@@ -322,12 +310,12 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     func appendSuggestion(suggestion: String) {
         let context = self.textDocumentProxy.documentContextBeforeInput
-        let lastWord = context!.componentsSeparatedByString(" ").last
-
-        for var i = 0; i < lastWord?.characters.count; i++ {
-            self.textDocumentProxy.deleteBackward()
+        if context != nil {
+            let lastWord = context!.componentsSeparatedByString(" ").last
+            for var i = 0; i < lastWord?.characters.count; i++ {
+                self.textDocumentProxy.deleteBackward()
+            }
         }
-
         self.textDocumentProxy.insertText(suggestion)
     }
 
