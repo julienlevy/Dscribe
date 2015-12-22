@@ -138,6 +138,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     }
     
     override func backspaceDown(sender: KeyboardKey) {
+        self.autoreplaceSuggestion = ""
+
         let context = self.textDocumentProxy.documentContextBeforeInput
         
         if context?.characters.last == kEscapeCue.characters.first {
@@ -155,7 +157,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         } else {
             if context != nil {
                 let contextString: String = String(context!.characters.dropLast())
-                self.searchSuggestions(contextString)
+                self.searchSuggestions(contextString, shouldAutoReplace: false)
             }
         }
         
@@ -248,7 +250,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         (self.bannerView as! DscribeBanner).displayEmojis(emojiList)
     }
 
-    func searchSuggestions(contextString: String) {
+    func searchSuggestions(contextString: String, shouldAutoReplace: Bool = true) {
         let lastWord = contextString.componentsSeparatedByString(" ").last
         let rangeOfLast = NSMakeRange(contextString.characters.count - lastWord!.characters.count, lastWord!.characters.count)
 
@@ -268,13 +270,10 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
         // Spelling and Autocorrect
         let misspelledRange = checker.rangeOfMisspelledWordInString(contextString, range: rangeOfLast, startingAt: 0, wrap: false, language: "en")
-        if misspelledRange.location == NSNotFound {
-            print("No mispelled word")
-        } else {
+        if misspelledRange.location != NSNotFound && shouldAutoReplace {
             autoReplace = true
-            guesses = checker.guessesForWordRange(misspelledRange, inString: contextString, language: language) as! [String]?
         }
-
+        guesses = checker.guessesForWordRange(rangeOfLast, inString: contextString, language: language) as! [String]?
         completion = checker.completionsForPartialWordRange(rangeOfLast, inString: contextString, language: language) as! [String]?
 
         if completion != nil {
