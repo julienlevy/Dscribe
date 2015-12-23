@@ -45,7 +45,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: kSmallLowercase)
         //To change the height of the banner
         metrics = [
-        "topBanner": 38
+        "topBanner": 45
         ]
 
         self.requestSupplementaryLexiconWithCompletion({
@@ -125,7 +125,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     override func keyPressed(key: Key) {
         let keyOutput = key.outputForCase(self.shiftState.uppercase())
         if ["-", "/", ":", ";", "(", ")", "$", "&", "@", "\"",".", ",", "?", "!", "'", " ", "\n"].contains(keyOutput) {
-            print("Just pressed a punctuation:")
             if self.autoreplaceSuggestion != "" {
                 self.appendSuggestion(autoreplaceSuggestion)
             }
@@ -238,14 +237,17 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     }
 
     func takeScreenshotDelay() {
+        print("Take Screenshot Delay")
         NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("takeScreenshot"), userInfo: nil, repeats: false)
     }
 
     func takeScreenshot() {
         if !CGRectIsEmpty(self.view.bounds) {
+            print("Taking screenshot")
             UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
 
             let oldViewColor = self.view.backgroundColor
+            print(oldViewColor)
             self.view.backgroundColor = UIColor(hue: (216/360.0), saturation: 0.05, brightness: 0.86, alpha: 1)
 
             let rect = self.view.bounds
@@ -324,8 +326,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
         if autoReplace && suggestions.count > 0 {
             self.autoreplaceSuggestion = suggestions.removeFirst()
-            print("Will replace with:")
-            print(self.autoreplaceSuggestion)
         }
 
 //        print("Suggestions: ")

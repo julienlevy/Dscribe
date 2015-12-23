@@ -33,6 +33,7 @@ class DscribeBanner: ExtraView {
 
     var emojiBackgroundColor: UIColor?
     var suggestionBackgroundColor: UIColor?
+    var selectedSuggestionBackgroungColor: UIColor?
     
     let space: CGFloat = 0.8
 
@@ -57,6 +58,7 @@ class DscribeBanner: ExtraView {
 
         emojiBackgroundColor = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode)
         suggestionBackgroundColor = self.globalColors?.specialKey(self.darkMode, solidColorMode: self.solidColorMode)
+        selectedSuggestionBackgroungColor = UIColor(red: CGFloat(235)/CGFloat(255), green: CGFloat(237)/CGFloat(255), blue: CGFloat(239)/CGFloat(255), alpha: 1)
 
         self.scrollView.frame = CGRectMake(0, 0, self.frame.width, self.frame.height)
         self.scrollView.contentSize = CGSizeMake(140, 600)
@@ -83,7 +85,6 @@ class DscribeBanner: ExtraView {
     }
     
     func alreadyTypedWord(sender: UIButton!) {
-        print("already typed word")
         delegate?.refusedSuggestion()
     }
 
@@ -138,7 +139,6 @@ class DscribeBanner: ExtraView {
             suggestionList.insert(willReplaceString, atIndex: 0)
         }
         suggestionList.insert(originalString, atIndex: 0)
-        print(suggestionList)
 
         self.removeAllButtonsFromScrollView()
 
@@ -154,7 +154,10 @@ class DscribeBanner: ExtraView {
             button.layer.borderWidth = 0.4
             button.layer.borderColor = UIColor.clearColor().CGColor
             button.frame = CGRectMake(CGFloat(index) * (width + space), 0, width, self.frame.height)
-            button.titleLabel?.textColor = UIColor.blackColor()
+            button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
+            button.tag = 1;
+            button.addTarget(self, action: Selector("cancelHighlight:"), forControlEvents: [UIControlEvents.TouchUpInside, UIControlEvents.TouchDragExit, UIControlEvents.TouchUpOutside, UIControlEvents.TouchCancel, UIControlEvents.TouchDragOutside])
+            button.addTarget(self, action: Selector("highlightButton:"), forControlEvents: [.TouchDown, .TouchDragInside])
 
             if suggestionList.count > index {
                 var suggestion: String = ""
@@ -166,8 +169,10 @@ class DscribeBanner: ExtraView {
                     button.setTitle(suggestion, forState: UIControlState.Normal)
                     button.addTarget(self, action: Selector("suggestionSelected:"), forControlEvents: UIControlEvents.TouchUpInside);
                     if index == 1 && willReplaceString != "" {
-                        button.backgroundColor = UIColor.whiteColor()
-                        button.setTitleColor(self.tintColor, forState: UIControlState.Normal)
+                        button.backgroundColor = selectedSuggestionBackgroungColor
+                        button.setTitleColor(self.tintColor, forState: [UIControlState.Normal, UIControlState.Highlighted])
+                        button.setTitleColor(self.tintColor, forState: .Normal)
+                        button.tag = 2
                     }
                 }
             }
@@ -181,6 +186,14 @@ class DscribeBanner: ExtraView {
             if subview is UIButton {
                 subview.removeFromSuperview()
             }
+        }
+    }
+    func highlightButton(sender: UIButton) {
+        sender.backgroundColor = selectedSuggestionBackgroungColor
+    }
+    func cancelHighlight(sender: UIButton) {
+        if sender.tag == 1 {
+            sender.backgroundColor = suggestionBackgroundColor
         }
     }
 }
