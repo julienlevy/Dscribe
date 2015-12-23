@@ -8,10 +8,6 @@
 
 import UIKit
 
-/*
-This is the demo keyboard. If you're implementing your own keyboard, simply follow the example here and then
-set the name of your KeyboardViewController subclass in the Info.plist file.
-*/
 
 let kEscapeTypeEnabled = "kEscapeTypeEnabled"
 let kEscapeCue = "|"
@@ -88,6 +84,44 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         }
     }
 
+    // For when some text in selected (and deleted), 
+    //selection functions not working, never called...
+    override func selectionWillChange(textInput: UITextInput?) {
+        print("SELECTION WILL change")
+        print(textInput)
+        print(textInputContextIdentifier)
+    }
+    override func selectionDidChange(textInput: UITextInput?) {
+        print("SELECTION DID change")
+        print(textInput)
+        print(textInputContextIdentifier)
+    }
+    override func textWillChange(textInput: UITextInput?) {
+        super.textWillChange(textInput)
+
+        var fullTextBefore: String = ""
+        if self.textDocumentProxy.documentContextBeforeInput != nil {
+            fullTextBefore = self.textDocumentProxy.documentContextBeforeInput!
+        }
+        if self.textDocumentProxy.documentContextAfterInput != nil {
+            fullTextBefore = fullTextBefore + self.textDocumentProxy.documentContextAfterInput!
+        }
+    }
+    override func textDidChange(textInput: UITextInput?) {
+        super.textDidChange(textInput)
+
+        var fullTextAfter: String = ""
+        if self.textDocumentProxy.documentContextBeforeInput != nil {
+            fullTextAfter = self.textDocumentProxy.documentContextBeforeInput!
+        }
+        if self.textDocumentProxy.documentContextAfterInput != nil {
+            fullTextAfter = fullTextAfter + self.textDocumentProxy.documentContextAfterInput!
+        }
+
+//        var selectedText:String = "" // equals difference between fullTextAfter and fullTextBefore
+    }
+
+
     override func keyPressed(key: Key) {
         let keyOutput = key.outputForCase(self.shiftState.uppercase())
         if ["-", "/", ":", ";", "(", ")", "$", "&", "@", "\"",".", ",", "?", "!", "'", " ", "\n"].contains(keyOutput) {
@@ -108,7 +142,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 
                 self.textDocumentProxy.insertText(keyOutput)
             }
-            
+
             escapeMode = !escapeMode
             self.displaySearchMode()
         } else {
@@ -136,7 +170,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             }
         }
     }
-    
+
     override func backspaceDown(sender: KeyboardKey) {
         self.autoreplaceSuggestion = ""
 
@@ -177,7 +211,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             self.searchSuggestions(contextString, shouldAutoReplace: false)
         }
     }
-    
+
     override func setupKeys() {
         super.setupKeys()
 
@@ -196,7 +230,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             }
         }
     }
-    
+
     override func createBanner() -> ExtraView? {
         let dscribeBanner = DscribeBanner(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
         dscribeBanner.delegate = self
@@ -210,10 +244,10 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     func takeScreenshot() {
         if !CGRectIsEmpty(self.view.bounds) {
             UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
-            
+
             let oldViewColor = self.view.backgroundColor
             self.view.backgroundColor = UIColor(hue: (216/360.0), saturation: 0.05, brightness: 0.86, alpha: 1)
-            
+
             let rect = self.view.bounds
             UIGraphicsBeginImageContextWithOptions(rect.size, true, 0)
             self.view.drawViewHierarchyInRect(self.view.bounds, afterScreenUpdates: true)
@@ -222,7 +256,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             let name = (self.interfaceOrientation.isPortrait ? "Screenshot-Portrait" : "Screenshot-Landscape")
             let imagePath = "/Users/archagon/Documents/Programming/OSX/RussianPhoneticKeyboard/External/tasty-imitation-keyboard/\(name).png"
             UIImagePNGRepresentation(capturedImage)!.writeToFile(imagePath, atomically: true)
-            
+
             self.view.backgroundColor = oldViewColor
         }
     }
@@ -294,8 +328,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             print(self.autoreplaceSuggestion)
         }
 
-        print("Suggestions: ")
-        print(suggestions)
+//        print("Suggestions: ")
+//        print(suggestions)
 
         (self.bannerView as! DscribeBanner).displaySuggestions(suggestions, originalString: lastWord!, willReplaceString: self.autoreplaceSuggestion)
     }
