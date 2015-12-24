@@ -156,7 +156,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 let firstRange = context?.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
                 if (firstRange != nil) {
                     let lastIndex = context!.endIndex
-                    self.stringToSearch = (context?.substringWithRange(firstRange!.startIndex.successor()..<lastIndex))!
+                    self.stringToSearch = context!.substringWithRange(firstRange!.startIndex.successor()..<lastIndex)
                     self.searchEmojis(self.stringToSearch)
                 }
             } else {
@@ -198,11 +198,11 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             return
         }
 
-        if escapeMode {
+        if self.escapeMode {
             let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
             if (firstRange != nil) {
                 let lastIndex = context!.endIndex
-                self.stringToSearch = (context?.substringWithRange(firstRange!.startIndex.successor()..<lastIndex.predecessor()))!
+                self.stringToSearch = context!.substringWithRange(firstRange!.startIndex.successor()..<lastIndex)
                 self.searchEmojis(self.stringToSearch)
             }
         } else {
