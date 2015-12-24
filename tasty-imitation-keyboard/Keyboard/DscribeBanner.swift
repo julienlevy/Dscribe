@@ -63,9 +63,10 @@ class DscribeBanner: ExtraView {
         self.scrollView.frame = CGRectMake(0, 0, self.frame.width, self.frame.height)
         self.scrollView.contentSize = CGSizeMake(140, 600)
         self.scrollView.scrollEnabled = true
+        self.scrollView.showsHorizontalScrollIndicator = false
         self.addSubview(self.scrollView)
 
-        self.beforeScrollView.frame = CGRectMake( -self.frame.width - 1, space, self.frame.width, self.frame.height)
+        self.beforeScrollView.frame = CGRectMake( -self.frame.width, space, self.frame.width, self.frame.height)
         self.beforeScrollView.backgroundColor = emojiBackgroundColor
         self.scrollView.addSubview(self.beforeScrollView)
 

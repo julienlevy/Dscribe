@@ -45,7 +45,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: kSmallLowercase)
         //To change the height of the banner
         metrics = [
-        "topBanner": 45
+        "topBanner": 43
         ]
 
         self.requestSupplementaryLexiconWithCompletion({
