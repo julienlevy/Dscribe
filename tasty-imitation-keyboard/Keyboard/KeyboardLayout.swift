@@ -162,7 +162,7 @@ class GlobalColors: NSObject {
     class var darkModeRegularKey: UIColor { get { return UIColor.whiteColor().colorWithAlphaComponent(CGFloat(0.3)) }}
     class var darkModeSolidColorRegularKey: UIColor { get { return UIColor(red: CGFloat(83)/CGFloat(255), green: CGFloat(83)/CGFloat(255), blue: CGFloat(83)/CGFloat(255), alpha: 1) }}
     class var lightModeSpecialKey: UIColor { get { return GlobalColors.lightModeSolidColorSpecialKey }}
-    class var lightModeSolidColorSpecialKey: UIColor { get { return UIColor(red: CGFloat(182)/CGFloat(255), green: CGFloat(186)/CGFloat(255), blue: CGFloat(194)/CGFloat(255), alpha: 0.83) }}
+    class var lightModeSolidColorSpecialKey: UIColor { get { return UIColor(red: CGFloat(96)/CGFloat(255), green: CGFloat(96)/CGFloat(255), blue: CGFloat(88)/CGFloat(255), alpha: 0.30) }}
     class var darkModeSpecialKey: UIColor { get { return UIColor.grayColor().colorWithAlphaComponent(CGFloat(0.3)) }}
     class var darkModeSolidColorSpecialKey: UIColor { get { return UIColor(red: CGFloat(45)/CGFloat(255), green: CGFloat(45)/CGFloat(255), blue: CGFloat(45)/CGFloat(255), alpha: 1) }}
     class var darkModeShiftKeyDown: UIColor { get { return UIColor(red: CGFloat(214)/CGFloat(255), green: CGFloat(220)/CGFloat(255), blue: CGFloat(208)/CGFloat(255), alpha: 1) }}
