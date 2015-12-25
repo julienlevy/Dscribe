@@ -12,23 +12,22 @@
    "🚨":[
       "police",
       "cars",
-      "revolving",
-      "light"
+      "siren"
    ],
    "🚥":[
-      "horizontal",
       "traffic",
-      "light"
+      "lights"
    ],
    "🚤":[
-      "speedboat"
+      "speedboat",
+      "boat",
+      "sea"
    ],
    "🚧":[
       "construction",
       "sign"
    ],
    "🚦":[
-      "vertical",
       "traffic",
       "light"
    ],
@@ -41,65 +40,80 @@
       "cableway"
    ],
    "🚣":[
-      "rowboat"
+      "rowboat",
+      "kayak"
    ],
    "🚢":[
       "ship"
    ],
    "💒":[
-      "wedding"
+      "wedding",
+      "church"
    ],
    "🚲":[
-      "bicycle"
+      "bicycle",
+      "bike"
    ],
    "🌃":[
       "night",
-      "stars"
+      "stars",
+      "view",
+      "postcard"
    ],
    "🌇":[
       "sunset",
-      "over",
-      "buildings"
+      "buildings",
+      "view",
+      "postcard"
    ],
    "🌆":[
       "cityscape",
-      "at",
-      "dusk"
+      "dusk",
+      "sunset",
+      "view",
+      "postcard"
    ],
    "🌅":[
-      "sunrise"
+      "sunrise",
+      "view",
+      "postcard"
    ],
    "🌄":[
       "sunrise",
-      "over",
-      "mountains"
+      "mountains",
+      "view",
+      "postcard"
    ],
    "🌉":[
       "bridge",
-      "at",
-      "night"
+      "night",
+      "view",
+      "postcard"
    ],
    "🏰":[
-      "european",
-      "castle"
+      "castle",
+      "view",
+      "postcard"
    ],
    "📍":[
       "round",
-      "pushpin"
+      "pushpin",
+      "pin"
    ],
    "⛺":[
-      "tent"
+      "tent",
+      "camping"
+      "view",
+      "postcard"
    ],
    "🚍":[
-      "oncoming",
       "bus"
    ],
    "🚎":[
       "trolleybus"
    ],
    "🚋":[
-      "tram",
-      "car"
+      "tram"
    ],
    "🚌":[
       "bus"
@@ -115,7 +129,8 @@
    ],
    "🏩":[
       "love",
-      "hotel"
+      "hotel",
+      "building"
    ],
    "🏠":[
       "house",
@@ -130,14 +145,11 @@
       "building"
    ],
    "🏣":[
-      "japanese",
-      "post",
-      "office"
+      "building"
    ],
    "🏤":[
       "european",
-      "post",
-      "office"
+      "postoffice"
    ],
    "🏥":[
       "hospital"
@@ -147,21 +159,23 @@
    ],
    "🏪":[
       "convenience",
-      "store"
+      "store",
+      "grocery"
    ],
    "🏫":[
       "school"
    ],
    "🏬":[
       "department",
-      "store"
+      "store",
+      "mall"
    ],
    "🏭":[
       "factory"
    ],
    "🏮":[
-      "izakaya",
-      "lantern"
+      "lantern",
+      "japanese"
    ],
    "🏯":[
       "japanese",
@@ -174,7 +188,7 @@
       "metro"
    ],
    "🚄":[
-      "high-speed",
+      "highspeed",
       "train"
    ],
    "⛲":[
@@ -189,7 +203,9 @@
       "car"
    ],
    "🚀":[
-      "rocket"
+      "rocket",
+      "space",
+      "nasa"
    ],
    "🚁":[
       "helicopter"
@@ -203,15 +219,15 @@
    ],
    "🚅":[
       "high-speed",
-      "train",
-      "bullet",
-      "nose"
+      "train"
    ],
    "⛵":[
-      "sailboat"
+      "sailboat",
+      "boat",
+      "sea"
    ],
    "🚏":[
-      "bus",
+      "busstop",
       "stop"
    ],
    "🚕":[
@@ -223,10 +239,11 @@
       "car"
    ],
    "🚗":[
-      "automobile"
+      "automobile",
+      "car",
+      "red"
    ],
    "🚖":[
-      "oncoming",
       "taxi"
    ],
    "🚑":[
@@ -241,26 +258,31 @@
    ],
    "🚒":[
       "fire",
-      "engine"
+      "engine",
+      "firefighter"
    ],
    "🚙":[
-      "recreational",
-      "vehicle"
+      "vehicle",
+      "car"
    ],
    "🚘":[
-      "oncoming",
-      "automobile"
+      "automobile",
+      "car"
    ],
    "⛽":[
       "fuel",
-      "pump"
+      "pump",
+      "oil",
+      "gas"
    ],
    "🚞":[
       "mountain",
-      "railway"
+      "railway",
+      "train"
    ],
    "🚝":[
-      "monorail"
+      "monorail",
+      "train"
    ],
    "🚟":[
       "suspension",
@@ -278,7 +300,9 @@
    ],
    "🚛":[
       "articulated",
-      "lorry"
+      "lorry",
+      "truck",
+      "3-wheels"
    ],
    "♨":[
       "hot",
@@ -286,7 +310,9 @@
    ],
    "🎰":[
       "slot",
-      "machine"
+      "machine",
+      "game",
+      "luck"
    ],
    "🗼":[
       "tokyo",
@@ -294,51 +320,62 @@
    ],
    "🗻":[
       "mount",
-      "fuji"
+      "fuji",
+      "japan"
    ],
    "🗿":[
-      "moyai"
+      "moyai",
+      "stone",
+      "history"
    ],
    "🗾":[
-      "silhouette",
-      "of",
-      "japan"
+      "japan",
+      "island"
    ],
    "🗽":[
       "statue",
-      "of",
-      "liberty"
+      "liberty",
+      "newyork",
+      "postcard"
    ],
    "💺":[
-      "seat"
+      "seat",
+      "plane"
    ],
    "🎠":[
       "carousel",
-      "horse"
+      "horse",
+      "postcard"
    ],
    "🎡":[
       "ferris",
-      "wheel"
+      "wheel",
+      "postcard"
    ],
    "🎢":[
       "roller",
-      "coaster"
+      "coaster",
+      "postcard"
    ],
    "✈":[
-      "airplane"
+      "airplane",
+      "plane"
    ],
    "🔰":[
       "japanese",
-      "for",
-      "beginner"
+      "beginner",
+      "book",
+      "open",
+      "colorful"
    ],
    "🎭":[
       "performing",
-      "arts"
+      "arts",
+      "masks"
    ],
    "💈":[
       "barber",
-      "pole"
+      "sign"
    ],
    "🎪":[
       "circus",
