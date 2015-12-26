@@ -1,33 +1,30 @@
 {
    "✖":[
-      "heavy",
       "multiplication",
       "x"
    ],
    "⬇":[
       "downwards",
-      "black",
       "arrow"
    ],
    "⬆":[
       "upwards",
-      "black",
       "arrow"
    ],
    "⬅":[
       "leftwards",
-      "black",
       "arrow"
    ],
    "⃣":[
-      "hash",
-      "key"
+      "hashtag"
    ],
    "🚺":[
       "womens"
    ],
    "🚻":[
-      "restroom"
+      "restroom",
+      "toilets",
+      "WC"
    ],
    "🚼":[
       "baby"
@@ -45,63 +42,59 @@
    "❎":[
       "negative",
       "squared",
-      "cross",
-      "mark"
+      "cross"
    ],
    "ℹ":[
-      "information",
-      "source"
+      "information"
    ],
    "⤵":[
       "arrow",
-      "pointing",
       "rightwards",
-      "then",
       "curving",
       "downwards"
    ],
    "⤴":[
       "arrow",
-      "pointing",
       "rightwards",
-      "then",
       "curving",
       "upwards"
    ],
    "🕣":[
       "clock",
-      "face",
-      "eight-thirty"
+      "eight-thirty",
+      "time"
    ],
    "♉":[
-      "taurus"
+      "taurus",
+      "zodiac"
    ],
    "♈":[
-      "aries"
+      "aries",
+      "zodiac"
    ],
    "☑":[
-      "ballot",
-      "box",
-      "check"
+      "checkbox"
    ],
    "🚰":[
       "potable",
-      "water"
+      "water",
+      "drink"
    ],
    "🚱":[
       "non-potable",
-      "water"
+      "water",
+      "forbidden"
    ],
    "🚳":[
-      "no",
-      "bicycles"
+      "bicycles",
+      "forbidden"
    ],
    "❇":[
       "sparkle"
    ],
    "🚷":[
-      "no",
-      "pedestrians"
+      "pedestrians",
+      "forbidden"
    ],
    "🚸":[
       "children",
@@ -111,40 +104,31 @@
       "mens"
    ],
    "⚪":[
-      "medium",
       "white",
       "circle"
    ],
    "⚫":[
-      "medium",
       "black",
       "circle"
    ],
    "‼":[
-      "double",
       "exclamation",
-      "mark"
+      "mark",
+      "punctuation"
    ],
    "🚮":[
-      "put",
       "litter",
-      "in",
-      "its",
-      "place"
+      "bin"
    ],
    "🚭":[
-      "no",
-      "smoking"
+      "smoking",
+      "forbidden"
    ],
    "🚯":[
-      "do",
-      "not",
-      "litter"
+      "litter",
+      "forbidden"
    ],
    "🅰":[
-      "negative",
-      "squared",
-      "latin",
       "capital",
       "letter",
       "a"
@@ -152,114 +136,122 @@
    "🚫":[
       "no",
       "entry",
-      "sign"
+      "sign",
+      "forbidden"
    ],
    "❕":[
       "white",
       "exclamation",
       "mark",
-      "ornament"
+      "punctuation"
    ],
    "🔳":[
       "white",
-      "square",
-      "button"
+      "square"
    ],
    "🕡":[
       "clock",
-      "face",
+      "time",
       "six-thirty"
    ],
    "❌":[
       "cross",
-      "mark"
+      "no",
+      "forbidden"
    ],
    "♌":[
-      "leo"
+      "leo",
+      "zodiac"
    ],
    "♋":[
-      "cancer"
+      "cancer",
+      "zodiac"
    ],
    "♊":[
-      "gemini"
+      "gemini",
+      "zodiac"
    ],
    "♏":[
-      "scorpius"
+      "scorpius",
+      "zodiac"
    ],
    "♎":[
-      "libra"
+      "libra",
+      "zodiac"
    ],
    "♍":[
-      "virgo"
+      "virgo",
+      "zodiac"
    ],
    "✴":[
-      "eight",
-      "pointed",
       "black",
       "star"
    ],
    "✳":[
-      "eight",
-      "spoked",
-      "asterisk"
+      "asterisk",
+      "punctuation"
    ],
    "▶":[
-      "black",
-      "right-pointing",
-      "triangle"
+      "rightwards",
+      "triangle",
+      "play"
    ],
    "💟":[
       "heart",
-      "decoration"
+      "pink"
    ],
    "🚾":[
-      "water",
-      "closet"
+      "WC",
+      "toilets",
+      "restroom"
    ],
    "❔":[
-      "white",
       "question",
       "mark",
-      "ornament"
+      "punctuation"
    ],
    "🕢":[
       "clock",
-      "face",
+      "time",
       "seven-thirty"
    ],
    "🛅":[
-      "left",
-      "luggage"
+      "baggage",
+      "luggage",
+      "travel"
    ],
    "🛄":[
       "baggage",
-      "claim"
+      "claim",
+      "airport",
+      "travel"
    ],
    "🛃":[
-      "customs"
+      "customs",
+      "travel"
    ],
    "🛂":[
       "passport",
-      "control"
+      "control",
+      "travel"
    ],
    "❗":[
-      "heavy",
       "exclamation",
-      "mark"
+      "mark",
+      "punctuation"
    ],
    "🕤":[
       "clock",
-      "face",
+      "time",
       "nine-thirty"
    ],
    "➡":[
-      "black",
       "rightwards",
       "arrow"
    ],
    "🕘":[
       "clock",
-      "face",
+      "time",
       "nine",
       "oclock"
    ],
@@ -274,25 +266,22 @@
       "above"
    ],
    "🔞":[
-      "no",
-      "one",
-      "under",
-      "eighteen"
+      "eighteen",
+      "forbidden",
+      "underage",
+      "major"
    ],
    "🔛":[
       "on",
-      "exclamation",
-      "mark",
       "left",
       "right",
-      "arrow",
-      "above"
+      "arrow"
    ],
    "🔜":[
       "soon",
       "rightwards",
       "arrow",
-      "above"
+      "will"
    ],
    "➿":[
       "double",
@@ -302,31 +291,25 @@
    "🔚":[
       "end",
       "leftwards",
-      "arrow",
-      "above"
+      "arrow"
    ],
    "🏧":[
       "automated",
       "teller",
-      "machine"
+      "machine",
+      "cash"
    ],
    "🕧":[
       "clock",
-      "face",
+      "time",
       "twelve-thirty"
    ],
    "🅾":[
-      "negative",
-      "squared",
-      "latin",
       "capital",
       "letter",
       "o"
    ],
    "🅿":[
-      "negative",
-      "squared",
-      "latin",
       "capital",
       "letter",
       "p"
@@ -338,10 +321,7 @@
    ],
    "💠":[
       "diamond",
-      "shape",
-      "a",
-      "dot",
-      "inside"
+      "shape"
    ],
    "◀":[
       "black",
@@ -355,25 +335,24 @@
    ],
    "🕦":[
       "clock",
-      "face",
+      "time",
       "eleven-thirty"
    ],
    "🔗":[
+      "chain",
       "link"
    ],
    "🔘":[
-      "radio",
       "button"
    ],
    "🔙":[
       "back",
       "leftwards",
-      "arrow",
-      "above"
+      "arrow"
    ],
    "🕔":[
       "clock",
-      "face",
+      "time",
       "five",
       "oclock"
    ],
@@ -389,7 +368,6 @@
    ],
    "◼":[
       "black",
-      "medium",
       "square"
    ],
    "💯":[
@@ -402,11 +380,13 @@
    ],
    "📶":[
       "antenna",
+      "service"
       "bars"
    ],
    "↖":[
-      "north",
-      "west",
+      "northwest",
+      "topleft",
+      "diagonal"
       "arrow"
    ],
    "↕":[
@@ -415,73 +395,66 @@
       "arrow"
    ],
    "📵":[
-      "no",
       "mobile",
-      "phones"
+      "phones",
+      "forbidden"
    ],
    "⬜":[
       "white",
-      "large",
       "square"
    ],
    "📳":[
-      "vibration",
-      "mode"
+      "vibration"
    ],
    "🕠":[
       "clock",
-      "face",
+      "time",
       "five-thirty"
    ],
    "↙":[
-      "south",
-      "west",
+      "southwest",
+      "bottomleft",
       "arrow"
    ],
    "↘":[
-      "south",
-      "east",
+      "southeast",
+      "bottomright",
       "arrow"
    ],
    "🔄":[
-      "anticlockwise",
-      "downwards",
-      "upwards",
-      "open",
       "circle",
+      "cycle",
+      "repeat",
+      "again",
       "arrows"
    ],
    "🔁":[
-      "clockwise",
-      "rightwards",
-      "leftwards",
-      "open",
       "circle",
+      "cycle",
+      "repeat",
+      "again",
       "arrows"
    ],
    "🔀":[
       "twisted",
-      "rightwards",
+      "shuffle",
+      "random",
       "arrows"
    ],
    "🔃":[
-      "clockwise",
-      "downwards",
-      "upwards",
-      "open",
       "circle",
+      "cycle",
+      "repeat",
+      "again",
       "arrows"
    ],
    "🔂":[
-      "clockwise",
-      "rightwards",
-      "leftwards",
-      "open",
       "circle",
+      "cycle",
+      "repeat",
+      "again",
       "arrows",
-      "circled",
-      "one",
-      "overlay"
+      "once"
    ],
    "🈯":[
       "squared",
@@ -490,25 +463,23 @@
       "ideograph-6307"
    ],
    "🆎":[
-      "negative",
       "squared",
       "ab"
    ],
    "❓":[
-      "black",
       "question",
       "mark",
-      "ornament"
+      "punctuation"
    ],
    "🆘":[
-      "squared",
+      "distress",
       "sos"
    ],
    "🆙":[
       "squared",
       "up",
       "exclamation",
-      "mark"
+      "order"
    ],
    "🆒":[
       "squared",
@@ -540,24 +511,19 @@
    ],
    "◽":[
       "white",
-      "medium",
-      "small",
       "square"
    ],
    "◾":[
       "black",
-      "medium",
-      "small",
       "square"
    ],
    "◻":[
       "white",
-      "medium",
       "square"
    ],
    "🕥":[
       "clock",
-      "face",
+      "time",
       "ten-thirty"
    ],
    "Ⓜ":[
