@@ -346,7 +346,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     }
 
     func searchSuggestions(contextString: String, shouldAutoReplace: Bool = true) {
-        let lastWord = contextString.componentsSeparatedByString(" ").last
+        let lastWord = contextString.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " \n")).last
         let rangeOfLast = NSMakeRange(contextString.characters.count - lastWord!.characters.count, lastWord!.characters.count)
 
         suggestions = []
@@ -403,7 +403,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     func appendSuggestion(suggestion: String) {
         let context = self.textDocumentProxy.documentContextBeforeInput
         if context != nil {
-            let lastWord = context!.componentsSeparatedByString(" ").last
+            let lastWord = context!.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " \n")).last
             for var i = 0; i < lastWord?.characters.count; i++ {
                 self.textDocumentProxy.deleteBackward()
             }
@@ -414,7 +414,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     func refusedSuggestion() {
         let context = self.textDocumentProxy.documentContextBeforeInput
         if context != nil {
-            let lastWord = context!.componentsSeparatedByString(" ").last
+            let lastWord = context!.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " \n")).last
             if !(lastWord ?? "").isEmpty {
                 UITextChecker.learnWord(lastWord!)
             }
