@@ -170,8 +170,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 self.appendSuggestion(autoreplaceSuggestion)
             }
         }
-
         self.autoreplaceSuggestion = ""
+        
+        self.checkAndResetSelectedText()
 
         if keyOutput == kEscapeCue {
             if escapeMode {
@@ -218,6 +219,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             self.escapeMode = false
             self.displaySearchMode()
         }
+        
+        self.checkAndResetSelectedText()
 
         super.backspaceDown(sender)
     }
@@ -315,6 +318,16 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                     self.textDocumentProxy.deleteBackward()
                 }
             }
+        }
+    }
+
+    func checkAndResetSelectedText() {
+        if self.selectedText != "" {
+            if self.selectedText.rangeOfString(kEscapeCue) != nil {
+                self.escapeMode = false
+                self.displaySearchMode()
+            }
+            self.selectedText = ""
         }
     }
 
