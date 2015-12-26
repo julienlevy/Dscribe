@@ -32,7 +32,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     var suggestions: [String] = [String]()
     var autoreplaceSuggestion: String = ""
 
-    
+    var selectedText: String = ""
+    var fullContextBeforeChange: String = "" //Necessary to communicate between two functions
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         NSUserDefaults.standardUserDefaults().registerDefaults([kCatTypeEnabled: true])
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -99,16 +101,21 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     override func textWillChange(textInput: UITextInput?) {
         super.textWillChange(textInput)
 
-        var fullTextBefore: String = ""
+        self.fullContextBeforeChange = ""
         if self.textDocumentProxy.documentContextBeforeInput != nil {
-            fullTextBefore = self.textDocumentProxy.documentContextBeforeInput!
+            self.fullContextBeforeChange = self.textDocumentProxy.documentContextBeforeInput!
         }
+        self.fullContextBeforeChange = self.fullContextBeforeChange + self.selectedText
         if self.textDocumentProxy.documentContextAfterInput != nil {
-            fullTextBefore = fullTextBefore + self.textDocumentProxy.documentContextAfterInput!
+            self.fullContextBeforeChange = self.fullContextBeforeChange + self.textDocumentProxy.documentContextAfterInput!
         }
     }
     override func textDidChange(textInput: UITextInput?) {
         super.textDidChange(textInput)
+
+        if self.fullContextBeforeChange == "" {
+            return
+        }
 
         var fullTextAfter: String = ""
         if self.textDocumentProxy.documentContextBeforeInput != nil {
@@ -118,7 +125,41 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             fullTextAfter = fullTextAfter + self.textDocumentProxy.documentContextAfterInput!
         }
 
-//        var selectedText:String = "" // equals difference between fullTextAfter and fullTextBefore
+        // TODO case select is in a totally different context
+        var inDifference: Bool = false
+        var firstIndex: Int = 0
+        var lastIndex: Int = 0
+        var j: Int = 0
+
+        for i in 0...self.fullContextBeforeChange.characters.count {
+            if j >= fullTextAfter.characters.count {
+                firstIndex = j
+                lastIndex = self.fullContextBeforeChange.characters.count
+                break
+            }
+            if !inDifference {
+                if self.fullContextBeforeChange[self.fullContextBeforeChange.startIndex.advancedBy(i)] == fullTextAfter[fullTextAfter.startIndex.advancedBy(j)] {
+                    j++
+                }
+                else {
+                    firstIndex = i
+                    inDifference = true
+                }
+            }
+            else {
+                if self.fullContextBeforeChange.substringFromIndex(self.fullContextBeforeChange.startIndex.advancedBy(i)) == fullTextAfter.substringFromIndex(fullTextAfter.startIndex.advancedBy(j)) {
+                    lastIndex = i
+                    inDifference = false
+                    break
+                }
+            }
+        }
+        if firstIndex < lastIndex && lastIndex <= self.fullContextBeforeChange.characters.count {
+            self.selectedText = self.fullContextBeforeChange.substringWithRange(Range(start: self.fullContextBeforeChange.startIndex.advancedBy(firstIndex), end: self.fullContextBeforeChange.startIndex.advancedBy(lastIndex)))
+        } else {
+            self.selectedText = ""
+        }
+        print("Selected is: \"" + self.selectedText + "\"")
     }
 
 
