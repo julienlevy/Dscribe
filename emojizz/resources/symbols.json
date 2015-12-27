@@ -528,15 +528,15 @@
    ],
    "Ⓜ":[
       "circled",
-      "latin",
       "capital",
       "letter",
-      "m"
+      "m",
+      "M"
    ],
    "〽":[
-      "part",
       "alternation",
-      "mark"
+      "chart",
+      "M"
    ],
    "⁉":[
       "exclamation",
@@ -544,7 +544,8 @@
       "mark"
    ],
    "♑":[
-      "capricorn"
+      "capricorn",
+      "zodiac"
    ],
    "⭕":[
       "heavy",
@@ -552,34 +553,36 @@
       "circle"
    ],
    "♠":[
-      "black",
       "spade",
       "suit"
    ],
    "♣":[
-      "black",
       "club",
+      "cards",
+      "game",
       "suit"
    ],
    "♥":[
-      "black",
       "heart",
+      "cards",
+      "game",
       "suit"
    ],
    "♦":[
-      "black",
       "diamond",
+      "cards",
+      "game",
       "suit"
    ],
    "🈚":[
       "squared",
       "cjk",
-      "unified",
       "ideograph-7121"
    ],
    "🆚":[
       "squared",
-      "vs"
+      "vs",
+      "versus"
    ],
    "⛔":[
       "no",
@@ -591,12 +594,14 @@
       "recycling"
    ],
    "♿":[
-      "wheelchair"
+      "wheelchair",
+      "disabled"
    ],
    "➕":[
-      "heavy",
       "plus",
-      "sign"
+      "sign",
+      "+",
+      "addition"
    ],
    "▪":[
       "black",
@@ -608,19 +613,21 @@
       "loop"
    ],
    "♐":[
-      "sagittarius"
+      "sagittarius",
+      "zodiac"
    ],
    "🈵":[
       "squared",
       "cjk",
-      "unified",
       "ideograph-6e80"
    ],
    "♒":[
-      "aquarius"
+      "aquarius",
+      "zodiac"
    ],
    "♓":[
-      "pisces"
+      "pisces",
+      "zodiac"
    ],
    "▫":[
       "white",
@@ -630,7 +637,6 @@
    "🈳":[
       "squared",
       "cjk",
-      "unified",
       "ideograph-7a7a"
    ],
    "🈲":[
@@ -640,110 +646,105 @@
       "ideograph-7981"
    ],
    "➗":[
-      "heavy",
       "division",
-      "sign"
+      "sign",
+      "/",
+      "÷"
    ],
    "➖":[
-      "heavy",
       "minus",
-      "sign"
+      "sign",
+      "-"
    ],
    "🈷":[
       "squared",
       "cjk",
-      "unified",
       "ideograph-6708"
    ],
    "🈶":[
       "squared",
       "cjk",
-      "unified",
       "ideograph-6709"
    ],
    "↩":[
       "leftwards",
       "arrow",
-      "hook"
+      "hook",
+      "turn"
    ],
    "🈴":[
       "squared",
       "cjk",
-      "unified",
       "ideograph-5408"
    ],
    "🕛":[
       "clock",
-      "face",
+      "time",
       "twelve",
-      "oclock"
+      "oclock",
+      "midnight",
+      "midday"
    ],
    "🕜":[
       "clock",
-      "face",
+      "time",
       "one-thirty"
    ],
    "🈹":[
       "squared",
       "cjk",
-      "unified",
       "ideograph-5272"
    ],
    "🈸":[
       "squared",
       "cjk",
-      "unified",
       "ideograph-7533"
    ],
    "🕟":[
       "clock",
-      "face",
+      "time",
       "four-thirty"
    ],
    "🕝":[
       "clock",
-      "face",
+      "time",
       "two-thirty"
    ],
    "🕞":[
       "clock",
-      "face",
+      "time",
       "three-thirty"
    ],
    "↗":[
-      "north",
-      "east",
+      "northeast",
+      "topright",
       "arrow"
    ],
    "🕚":[
       "clock",
-      "face",
+      "time",
       "eleven",
       "oclock"
    ],
    "🅱":[
-      "negative",
-      "squared",
-      "latin",
       "capital",
       "letter",
       "b"
    ],
    "🔯":[
-      "six",
-      "pointed",
+      "sixpointed",
+      "david",
       "star",
-      "middle",
-      "dot"
+      "jewish"
    ],
    "🎦":[
       "cinema"
    ],
    "⏩":[
-      "black",
-      "right-pointing",
-      "double",
-      "triangle"
+      "fastforward",
+      "fast-forward",
+      "forward"
+      "advance"
    ],
    "📴":[
       "mobile",
@@ -751,18 +752,19 @@
       "off"
    ],
    "🔸":[
-      "small",
       "orange",
-      "diamond"
+      "diamond",
+      "losange"
    ],
    "🔹":[
-      "small",
       "blue",
+      "losange",
       "diamond"
    ],
    "↔":[
       "left",
       "right",
+      "double",
       "arrow"
    ],
    "⬛":[
@@ -780,87 +782,82 @@
       "button"
    ],
    "✅":[
-      "white",
-      "heavy",
       "check",
-      "mark"
+      "checkbox",
+      "checked"
    ],
    "🔴":[
-      "large",
       "red",
       "circle"
    ],
    "🔵":[
-      "large",
       "blue",
       "circle"
    ],
    "🔶":[
-      "large",
       "orange",
       "diamond"
    ],
    "🔷":[
-      "large",
       "blue",
       "diamond"
    ],
    "🈺":[
       "squared",
       "cjk",
-      "unified",
       "ideograph-55b6"
    ],
    "🕙":[
       "clock",
-      "face",
+      "time",
       "ten",
       "oclock"
    ],
    "🕒":[
       "clock",
-      "face",
+      "time",
       "three",
       "oclock"
    ],
    "🕓":[
       "clock",
-      "face",
+      "time",
       "four",
       "oclock"
    ],
    "🕐":[
       "clock",
-      "face",
+      "time",
       "one",
       "oclock"
    ],
    "🕑":[
       "clock",
-      "face",
+      "time",
       "two",
       "oclock"
    ],
    "🕖":[
       "clock",
-      "face",
+      "time",
       "seven",
       "oclock"
    ],
    "🕗":[
       "clock",
-      "face",
+      "time",
       "eight",
       "oclock"
    ],
    "↪":[
       "rightwards",
       "arrow",
-      "hook"
+      "hook",
+      "thus"
    ],
    "🕕":[
       "clock",
-      "face",
+      "time",
       "six",
       "oclock"
    ],
@@ -871,100 +868,86 @@
    "™":[
       "trade",
       "mark",
-      "sign"
+      "trademark"
    ],
    "⛎":[
-      "ophiuchus"
+      "ophiuchus",
+      "astrology"
    ],
    "💱":[
       "registered",
+      "currencies",
+      "money",
+      "international"
       "sign"
    ],
    "🔺":[
-      "up-pointing",
       "red",
+      "danger"
       "triangle"
    ],
    "🔻":[
-      "down-pointing",
       "red",
       "triangle"
    ],
    "🔼":[
-      "up-pointing",
-      "small",
-      "red",
       "triangle"
    ],
    "🔽":[
-      "down-pointing",
-      "small",
-      "red",
       "triangle"
    ],
    "💹":[
       "chart",
       "upwards",
-      "trend",
       "yen",
-      "sign"
+      "growth"
    ],
    "⏪":[
-      "black",
-      "left-pointing",
-      "double",
-      "triangle"
+      "fastbackward",
+      "fast-backward",
+      "backward",
+      "return"
    ],
    "⏬":[
-      "black",
-      "down-pointing",
       "double",
       "triangle"
    ],
    "⏫":[
-      "black",
-      "up-pointing",
       "double",
       "triangle"
    ],
    "💲":[
-      "heavy",
       "dollar",
+      "money"
       "sign"
    ],
    "✔":[
-      "heavy",
       "check",
-      "mark"
+      "checked",
+      "done"
    ],
    "🔤":[
-      "input",
-      "for",
-      "latin",
-      "letters"
+      "letters",
+      "alphabet",
+      "abc"
    ],
    "🔣":[
-      "input",
-      "for",
       "symbols"
    ],
    "🔢":[
-      "input",
-      "for",
-      "numbers"
+      "numbers",
+      "digits"
+      "1234"
    ],
    "🔡":[
-      "input",
-      "for",
-      "latin",
-      "small",
-      "letters"
+      "letters",
+      "abcd",
+      "alphabet"
    ],
    "🔠":[
-      "input",
-      "for",
-      "latin",
       "capital",
-      "letters"
+      "letters",
+      "abcd",
+      "alphabet"
    ]
 }
