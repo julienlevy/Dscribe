@@ -50,7 +50,6 @@
       "purple"
    ],
    "👺":[
-      "japanese",
       "goblin",
       "devil",
       "evil",
@@ -63,7 +62,6 @@
    "👐":[
       "open",
       "hands",
-      "sign",
       "massage"
    ],
    "💙":[
@@ -81,6 +79,7 @@
    ],
    "💑":[
       "couple",
+      "relationship",
       "heart"
    ],
    "💗":[
@@ -96,26 +95,33 @@
       "hearts"
    ],
    "☺":[
-      "white",
-      "smiling",
+      "shy",
+      "pleased",
+      "embarassed",
+      "happy",
       "smile",
       "face"
    ],
    "✨":[
-      "sparkles"
+      "sparkles",
+      "shiny",
+      "stars"
    ],
    "👵":[
       "older",
-      "woman"
+      "woman",
+      "grandmother"
    ],
    "👴":[
       "older",
       "man",
-      "bald"
+      "bald",
+      "grandfather"
    ],
    "👷":[
       "construction",
-      "worker"
+      "worker",
+      "ambulance"
    ],
    "👶":[
       "baby",
@@ -129,17 +135,17 @@
    ],
    "👰":[
       "bride",
-      "veil"
+      "veil",
+      "wife",
+      "wedding"
    ],
    "👳":[
       "man",
       "turban"
    ],
    "👲":[
-      "man",
-      "gua",
-      "pi",
       "mao",
+      "army",
       "soldier"
    ],
    "🌟":[
@@ -147,30 +153,34 @@
       "star"
    ],
    "👹":[
-      "japanese",
       "ogre",
       "devil",
       "evil",
       "red"
    ],
    "👸":[
-      "princess"
+      "princess",
+      "crown",
+      "girl"
    ],
    "👯":[
       "woman",
       "bunny",
-      "ears"
+      "ears",
+      "dancing",
+      "friends",
+      "bff"
    ],
    "🌂":[
       "closed",
       "umbrella"
    ],
    "👭":[
-      "two",
       "women",
-      "holding",
-      "hands",
+      "girls"
+      "holdinghands",
       "gay",
+      "couple",
       "lesbian"
    ],
    "👮":[
@@ -180,14 +190,14 @@
    "👫":[
       "man",
       "woman",
-      "holding",
-      "hands"
+      "holdinghands",
+      "couple",
    ],
    "👬":[
       "two",
       "men",
-      "holding",
-      "hands",
+      "holdinghands",
+      "couple",
       "gay"
    ],
    "👪":[
@@ -196,16 +206,20 @@
    "🎀":[
       "ribbon",
       "knot",
-      "surprise"
+      "surprise",
+      "present",
+      "gift"
    ],
    "💋":[
       "kiss",
       "mark",
-      "lips"
+      "lips",
+      "love"
    ],
    "👒":[
       "womans",
-      "hat"
+      "hat",
+      "showoff"
    ],
    "💜":[
       "purple",
@@ -228,7 +242,8 @@
       "hearts"
    ],
    "👝":[
-      "pouch"
+      "pouch",
+      "handbag"
    ],
    "👜":[
       "handbag"
@@ -239,57 +254,60 @@
    "🙇":[
       "person",
       "bowing",
-      "deeply"
+      "deeply",
+      "focused",
+      "thinking",
+      "surprised"
    ],
    "☝":[
-      "white",
-      "up",
       "pointing",
-      "index"
+      "index",
+      "one",
+      "finger"
    ],
    "👊":[
       "fisted",
-      "hand",
-      "sign",
-      "fist",
-      "bump",
+      "fist"
       "punch",
-      "force"
+      "force",
+      "boxing",
+      "beating",
+      "strong"
    ],
    "👋":[
       "waving",
       "hand",
-      "sign",
       "goodbye",
       "greetings"
    ],
    "👌":[
       "ok",
       "hand",
-      "sign",
       "perfect",
       "nice",
-      "delicious"
+      "delicious",
+      "incredible"
    ],
    "👍":[
-      "thumbs",
-      "up",
-      "sign",
+      "thumbsup",
       "hand",
       "good",
-      "approve"
+      "approve",
+      "nice",
+      "cool",
+      "yes"
    ],
    "👎":[
-      "thumbs",
+      "thumbsdown",
       "down",
-      "sign",
       "hand",
-      "bad"
+      "bad",
+      "sad",
+      "disappointed"
    ],
    "👏":[
       "clapping",
       "hands",
-      "sign",
       "applause",
       "congrats"
    ],
@@ -298,35 +316,43 @@
    ],
    "💧":[
       "droplet",
-      "water"
+      "water",
+      "rain"
    ],
    "💦":[
       "splashing",
       "sweat",
       "water",
-      "splashes"
+      "splashes",
+      "wet"
    ],
    "💥":[
       "collision",
-      "boom"
+      "boom",
+      "explosion"
    ],
    "💤":[
-      "sleeping"
+      "sleeping",
+      "zzzz",
+      "asleep"
    ],
    "💩":[
       "poop",
       "smile",
-      "crotte"
+      "crotte",
+      "shit"
    ],
    "💨":[
       "dash",
       "air",
-      "fart"
+      "fart",
+      "smell"
    ],
    "❤":[
-      "heavy",
       "black",
-      "heart"
+      "red",
+      "heart",
+      "love"
    ],
    "🚶":[
       "pedestrian",
@@ -353,26 +379,20 @@
    "👈":[
       "left",
       "finger",
-      "pointing",
-      "backhand",
-      "hand",
-      "white",
       "index"
    ],
    "👉":[
       "right",
       "finger",
-      "pointing",
-      "backhand",
-      "hand",
-      "white",
       "index"
    ],
    "🏃":[
       "runner"
    ],
    "👀":[
-      "eyes"
+      "eyes",
+      "wink",
+      "watching"
    ],
    "👂":[
       "ear"
@@ -389,17 +409,10 @@
    "👆":[
       "up",
       "finger",
-      "pointing",
-      "hand",
-      "white",
       "index"
    ],
    "👇":[
-      "white",
       "down",
-      "pointing",
-      "backhand",
-      "hand",
       "index"
    ],
    "💇":[
@@ -420,10 +433,10 @@
    ],
    "😝":[
       "face",
-      "stuck-out",
       "tongue",
-      "tightly-closed",
-      "eyes"
+      "lol",
+      "bursting",
+      "laughter"
    ],
    "😟":[
       "worried",
@@ -434,104 +447,90 @@
    ],
    "😚":[
       "kissing",
-      "face",
-      "closed",
-      "eyes"
+      "face"
    ],
    "😜":[
       "face",
-      "stuck-out",
       "tongue",
       "happy",
       "winking",
-      "eye",
-      "crazy"
+      "crazy",
+      ":p"
    ],
    "😛":[
       "face",
-      "stuck-out",
       "tongue"
    ],
    "😈":[
-      "smiling",
-      "smile",
-      "face",
       "horns",
       "purple",
       "evil",
-      "devil"
+      "devil",
+      "hehe"
    ],
    "😉":[
       "winking",
-      "face"
+      "face",
+      ";)"
    ],
    "😆":[
       "smiling",
       "laughing",
+      "bursting",
       "face",
-      "open",
       "happy",
-      "mouth",
-      "tightly-closed",
-      "eyes"
+      "xd"
    ],
    "😇":[
       "smiling",
       "smile",
       "face",
       "halo",
-      "angel"
+      "angel",
+      "saint",
+      "happy"
    ],
    "😄":[
       "smiling",
       "smile",
       "face",
-      "happy",
-      "open",
-      "mouth",
-      "smiling",
-      "smile",
-      "eyes"
+      "happy"
    ],
    "😅":[
       "smiling",
       "smile",
-      "face",
-      "open",
-      "mouth",
       "cold",
-      "sweat"
+      "sweat",
+      "haaaa"
    ],
    "😂":[
       "face",
       "tears",
       "joy",
       "laughing",
-      "smile",
-      "smiling"
+      "lol",
+      "bursting",
+      "crying"
    ],
    "😃":[
       "smiling",
-      "smile",
       "face",
-      "happy",
-      "open",
-      "mouth"
+      "happy"
    ],
    "😀":[
       "grinning",
       "happy",
       "face",
-      "smile",
       "smiling"
    ],
    "😁":[
       "grinning",
       "face",
       "happy",
-      "smiling",
       "smile",
-      "eyes"
+      "teeth",
+      "stressed",
+      "tense"
    ],
    "💬":[
       "speech",
@@ -567,7 +566,9 @@
    "😏":[
       "smirking",
       "face",
-      "gotcha"
+      "gotcha",
+      "wink",
+      "gna"
    ],
    "👟":[
       "athletic",
@@ -577,14 +578,11 @@
    "😍":[
       "smiling",
       "smile",
-      "face",
       "love",
       "hearts",
-      "heart-shaped",
-      "eyes"
+      "hearteyes"
    ],
    "😎":[
-      "smiling",
       "smile",
       "face",
       "sunglasses"
@@ -594,11 +592,14 @@
       "savouring",
       "delicious",
       "food",
-      "tongue"
+      "tongue",
+      "miam",
+      "cheeky"
    ],
    "😌":[
       "relieved",
-      "face"
+      "face",
+      "content"
    ],
    "👚":[
       "womans",
@@ -608,20 +609,13 @@
       "smiling",
       "smile",
       "face",
-      "smiling",
-      "smile",
-      "eyes"
+      "blush"
    ],
    "😙":[
       "kissing",
-      "face",
-      "smiling",
-      "smile",
-      "eyes"
+      "face"
    ],
    "😘":[
-      "face",
-      "throwing",
       "kiss",
       "love",
       "kissing",
@@ -630,26 +624,29 @@
    "😕":[
       "confused",
       "face",
-      ":/"
+      ":/",
+      "sorry",
+      "uncomfortable",
+      "embarassed"
    ],
    "😔":[
-      "pensive",
-      "face",
       "sad",
-      "disappointed"
+      "disappointed",
+      "face"
    ],
    "😗":[
       "kissing",
-      "face"
+      "noheart"
    ],
    "😖":[
       "confounded",
-      "face",
       "crying"
    ],
    "😑":[
       "expressionless",
-      "face"
+      "face",
+      "misunderstand",
+      "perplexe"
    ],
    "😐":[
       "neutral",
@@ -659,11 +656,13 @@
       "face",
       "cold",
       "sweat",
-      "uh"
+      "uh",
+      "notfunny"
    ],
    "😒":[
       "unamused",
       "unimpressed",
+      "bored",
       "face"
    ],
    "💀":[
@@ -674,81 +673,72 @@
       "happy",
       "person",
       "raising",
-      "one",
-      "hand",
       "girl",
-      "woman"
+      "woman",
+      "please"
    ],
    "🙌":[
-      "person",
-      "raising",
-      "both",
       "hands",
+      "twohands"
       "celebration",
       "massage",
       "pervert",
-      "touchy"
+      "touching"
    ],
    "🙊":[
       "speak-no-evil",
       "monkey",
       "hihi",
-      "mouth"
+      "mouth",
+      "hide",
+      "shy"
    ],
    "🙏":[
       "person",
-      "folded",
       "hands",
       "pray",
-      "please"
+      "please",
+      "unseparable"
    ],
    "🙍":[
-      "person",
       "frowning",
       "girl"
    ],
    "🙎":[
-      "person",
       "pouting",
-      "face",
       "girl"
    ],
    "💍":[
       "ring",
-      "wedding"
+      "wedding",
+      "union"
    ],
    "😿":[
       "crying",
       "cat",
-      "face"
+      "sad"
    ],
    "😾":[
       "pouting",
-      "cat",
-      "face"
+      "cat"
    ],
    "😽":[
       "kissing",
-      "cat",
-      "face",
-      "closed",
-      "eyes"
+      "cat"
    ],
    "😼":[
       "cat",
       "face",
       "wry",
-      "smile"
+      "angry",
+      "hehe"
    ],
    "😻":[
       "smiling",
-      "smile",
       "cat",
-      "face",
       "heart",
       "love",
-      "heart-shaped",
-      "eyes"
+      "hearteyes"
    ],
    "😺":[
       "smiling",
@@ -768,7 +758,8 @@
    ],
    "💆":[
       "face",
-      "massage"
+      "massage",
+      "head"
    ],
    "😠":[
       "angry",
@@ -777,13 +768,13 @@
    "😡":[
       "pouting",
       "face",
-      "red",
       "angry",
       "pissed"
    ],
    "😢":[
       "crying",
       "tear",
+      "sad"
       "face"
    ],
    "😣":[
@@ -791,27 +782,28 @@
       "face"
    ],
    "😤":[
-      "face",
-      "look",
       "smoking",
       "triumph",
-      "pffff"
+      "pffff",
+      "grumpy"
    ],
    "😥":[
       "disappointed",
-      "but",
-      "relieved",
+      "sad"
       "face"
    ],
    "😦":[
       "frowning",
       "face",
-      "open",
-      "mouth"
+      "openmouth",
+      "surprised"
    ],
    "😧":[
       "anguished",
-      "face"
+      "frowning",
+      "face",
+      "openmouth",
+      "surprised"
    ],
    "😨":[
       "fearful",
@@ -821,7 +813,10 @@
    "😩":[
       "weary",
       "face",
-      "tired"
+      "tired",
+      "noooo",
+      "exhausted",
+      "disappointed"
    ],
    "🎽":[
       "running",
@@ -831,36 +826,40 @@
    "💁":[
       "information",
       "desk",
-      "person"
+      "princess",
+      "arrogant"
    ],
    "🙀":[
       "weary",
       "cat",
-      "face"
+      "shocked",
+      "omg"
    ],
    "🙆":[
-      "face",
       "ok",
-      "gesture"
+      "gesture",
+      "combat"
    ],
    "😱":[
       "face",
       "screaming",
-      "in",
-      "fear"
+      "fear",
+      "shocked",
+      "omg"
    ],
    "🙅":[
       "face",
       "no",
-      "good",
-      "gesture",
-      "cross"
+      "cross",
+      "combat"
    ],
    "🙈":[
       "see-no-evil",
       "eyes",
       "monkey",
-      "oups"
+      "oups",
+      "oops"
+      "hide"
    ],
    "🙉":[
       "hear-no-evil",
@@ -870,15 +869,20 @@
    ],
    "💏":[
       "kiss",
-      "love"
+      "love",
+      "inlove",
+      "relationship",
+      "couple"
    ],
    "💎":[
       "gem",
       "stone",
-      "diamond"
+      "diamond",
+      "rich"
    ],
    "👓":[
-      "eyeglasses"
+      "eyeglasses",
+      "glasses"
    ],
    "🎩":[
       "top",
@@ -886,25 +890,32 @@
    ],
    "😪":[
       "sleepy",
-      "face"
+      "face",
+      "relieved"
    ],
    "😫":[
       "tired",
-      "face"
+      "face",
+      "noooo",
+      "exhausted"
    ],
    "😬":[
       "grimacing",
-      "face"
+      "grinning",
+      "awkward"
    ],
    "😭":[
       "loudly",
       "crying",
+      "sadness",
+      "bursting"
       "face"
    ],
    "😮":[
       "face",
       "open",
-      "mouth"
+      "mouth",
+      "ooh"
    ],
    "😯":[
       "hushed",
@@ -928,7 +939,8 @@
       "victory",
       "hand",
       "yes",
-      "cool"
+      "cool",
+      "great"
    ],
    "✊":[
       "raised",
@@ -938,16 +950,22 @@
    "😷":[
       "face",
       "medical",
-      "mask"
+      "mask",
+      "stinky",
+      "smelly"
    ],
    "😶":[
       "face",
       "without",
-      "mouth"
+      "mouth",
+      "oops",
+      "expressionless"
    ],
    "😵":[
       "dizzy",
-      "face"
+      "face",
+      "xo",
+      "xx"
    ],
    "😴":[
       "sleeping",
@@ -961,7 +979,8 @@
    ],
    "😲":[
       "astonished",
-      "face"
+      "face",
+      "xx"
    ],
    "💂":[
       "guardsman",
@@ -969,28 +988,28 @@
    ],
    "😰":[
       "face",
-      "open",
-      "mouth",
       "cold",
       "sad",
-      "sweat"
+      "sweat",
+      "sick"
    ],
    "🔥":[
-      "fire"
+      "fire",
+      "burning",
+      "hot"
    ],
    "😹":[
       "cat",
-      "face",
       "tears",
-      "of",
-      "joy"
+      "joy",
+      "laughter",
+      "bursting",
+      "lol"
    ],
    "😸":[
       "grinning",
       "cat",
-      "face",
       "smiling",
-      "smile",
-      "eyes"
+      "happy"
    ]
 }
