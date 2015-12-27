@@ -85,6 +85,11 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             self.view.insertSubview(overlayView, atIndex: 0)
         }
     }
+    override func updateAppearances(appearanceIsDark: Bool) {
+        super.updateAppearances(appearanceIsDark)
+        
+        // self.layout?.updateKeyAppearance()
+    }
 
     // For when some text in selected (and deleted), 
     //selection functions not working, never called...
