@@ -743,7 +743,7 @@
    "⏩":[
       "fastforward",
       "fast-forward",
-      "forward"
+      "forward",
       "advance"
    ],
    "📴":[
@@ -878,12 +878,12 @@
       "registered",
       "currencies",
       "money",
-      "international"
+      "international",
       "sign"
    ],
    "🔺":[
       "red",
-      "danger"
+      "danger",
       "triangle"
    ],
    "🔻":[
@@ -918,7 +918,7 @@
    ],
    "💲":[
       "dollar",
-      "money"
+      "money",
       "sign"
    ],
    "✔":[
@@ -936,7 +936,7 @@
    ],
    "🔢":[
       "numbers",
-      "digits"
+      "digits",
       "1234"
    ],
    "🔡":[
