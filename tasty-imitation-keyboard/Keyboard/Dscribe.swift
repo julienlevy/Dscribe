@@ -14,6 +14,8 @@ let kEscapeCue = "|"
 
 
 class Dscribe: KeyboardViewController, DscribeBannerDelegate {
+    
+    class var bannerColors: DscribeColors.Type { get { return DscribeColors.self }}
 
     let takeDebugScreenshot: Bool = false
 
@@ -280,7 +282,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     }
 
     override func createBanner() -> ExtraView? {
-        let dscribeBanner = DscribeBanner(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
+        let dscribeBanner = DscribeBanner(globalColors: self.dynamicType.globalColors, bannerColors: self.dynamicType.bannerColors, darkMode: false, solidColorMode: self.solidColorMode())
         dscribeBanner.delegate = self
         return dscribeBanner
     }

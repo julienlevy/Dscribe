@@ -35,20 +35,27 @@ class DscribeBanner: ExtraView {
     var suggestionBackgroundColor: UIColor?
     var selectedSuggestionBackgroungColor: UIColor?
     
+    var bannerColors: DscribeColors.Type?
+    
     let space: CGFloat = 0.8
 
-
-    required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
+    required init(globalColors: GlobalColors.Type?, bannerColors: DscribeColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
-        
+        self.bannerColors = bannerColors
+
         emojiBackgroundColor = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode)
         suggestionBackgroundColor = self.globalColors?.specialKey(self.darkMode, solidColorMode: self.solidColorMode)
-        selectedSuggestionBackgroungColor = UIColor(red: CGFloat(235)/CGFloat(255), green: CGFloat(237)/CGFloat(255), blue: CGFloat(239)/CGFloat(255), alpha: 1)
+        selectedSuggestionBackgroungColor = self.bannerColors?.highlightedSuggestionBackground(self.darkMode, solidColorMode: self.solidColorMode)
+    }
+ 
+    required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
+        super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 
     override func setNeedsLayout() {
         super.setNeedsLayout()
@@ -83,7 +90,7 @@ class DscribeBanner: ExtraView {
         print("update banner colors")
         emojiBackgroundColor = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode)
         suggestionBackgroundColor = self.globalColors?.specialKey(self.darkMode, solidColorMode: self.solidColorMode)
-        selectedSuggestionBackgroungColor = UIColor(red: CGFloat(235)/CGFloat(255), green: CGFloat(237)/CGFloat(255), blue: CGFloat(239)/CGFloat(255), alpha: 1)
+        selectedSuggestionBackgroungColor = self.bannerColors?.highlightedSuggestionBackground(self.darkMode, solidColorMode: self.solidColorMode)
         
         for subview in self.scrollView.subviews {
             if subview is UIButton {
