@@ -78,9 +78,8 @@ class DscribeBanner: ExtraView {
 
         //Frame defined at the end of displayEmojis function
         self.scrollView.addSubview(self.afterScrollView)
-
-        self.displayEmojis(Array(emojiScore.keys))
         
+        self.displaySuggestions([], originalString: "")
         self.updateBannerColors()
     }
     

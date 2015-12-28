@@ -186,7 +186,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 self.deleteSearchText()
             } else {
                 //TODO replace with most used emoji
-                (self.bannerView as! DscribeBanner).displayEmojis(Array(emojiScore.keys))
+                (self.bannerView as! DscribeBanner).displayEmojis(Array(self.emojiClass.emojiScore.keys))
                 
                 self.textDocumentProxy.insertText(keyOutput)
             }
