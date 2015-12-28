@@ -10,6 +10,7 @@
 		0DE2F8961BEC274B000F9B5F /* Emojis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2F8951BEC274B000F9B5F /* Emojis.swift */; };
 		0DE2F8981BECE232000F9B5F /* DscribeBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2F8971BECE232000F9B5F /* DscribeBanner.swift */; };
 		0DE2F89A1BED3AF0000F9B5F /* Dscribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2F8991BED3AF0000F9B5F /* Dscribe.swift */; };
+		0DF7A3F91C31413E0096395F /* DscribeColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF7A3F81C31413E0096395F /* DscribeColors.swift */; };
 		4E00A6E5197183EE009414F2 /* KeyboardKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E807DC81946209600D875D1 /* KeyboardKey.swift */; };
 		4E3B5A941A0654A8003366F6 /* KeyboardInputTraits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3B5A931A0654A8003366F6 /* KeyboardInputTraits.swift */; };
 		4E52A6D21A06A61F006A08CE /* ImageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E52A6D11A06A61F006A08CE /* ImageKey.swift */; };
@@ -101,6 +102,7 @@
 		0DE2F8951BEC274B000F9B5F /* Emojis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emojis.swift; sourceTree = "<group>"; };
 		0DE2F8971BECE232000F9B5F /* DscribeBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeBanner.swift; sourceTree = "<group>"; };
 		0DE2F8991BED3AF0000F9B5F /* Dscribe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dscribe.swift; sourceTree = "<group>"; };
+		0DF7A3F81C31413E0096395F /* DscribeColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeColors.swift; sourceTree = "<group>"; };
 		4E3B5A931A0654A8003366F6 /* KeyboardInputTraits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardInputTraits.swift; sourceTree = "<group>"; };
 		4E52A6D11A06A61F006A08CE /* ImageKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageKey.swift; sourceTree = "<group>"; };
 		4E52A6D31A06A626006A08CE /* ExtraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraView.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				4EEFD78819E0DC6B004D4974 /* CatboardBanner.swift */,
 				0DE2F8971BECE232000F9B5F /* DscribeBanner.swift */,
 				0DE2F8991BED3AF0000F9B5F /* Dscribe.swift */,
+				0DF7A3F81C31413E0096395F /* DscribeColors.swift */,
 			);
 			name = Demo;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				4E60A13C1979FA8E00854CC8 /* KeyboardConnector.swift in Sources */,
 				4E00A6E5197183EE009414F2 /* KeyboardKey.swift in Sources */,
 				4EEFD78919E0DC6B004D4974 /* CatboardBanner.swift in Sources */,
+				0DF7A3F91C31413E0096395F /* DscribeColors.swift in Sources */,
 				4EE7599B19F75A0D00B4E6ED /* Utilities.swift in Sources */,
 				4EEFD78B19E0DF15004D4974 /* Shapes.swift in Sources */,
 				0DE2F8981BECE232000F9B5F /* DscribeBanner.swift in Sources */,
