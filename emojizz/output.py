@@ -1,6 +1,4 @@
 import json
-import re
-import operator
 
 with open('result.json') as data_file:
     data = json.load(data_file)
@@ -10,7 +8,7 @@ with open('result.json') as data_file:
         for word in value:
             result += "\"" + word.lower() + "\","
         result = result[:-1]
-        result += ']'
+        result += '],'
     result = result[:-1]
     result += ']'
 

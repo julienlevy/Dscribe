@@ -4,8 +4,8 @@ Emoji data taken from https://github.com/iamcal/emoji-data
 
 # Run python script
 ```shell
-cd emojizz
-python parse.py
-# or, to get array from resources json files:
-python improve.py
+# load the tags and save them as json in result.json:
+python emojizz/load_tags.py
+# print the swift array in the terminal:
+python emojizz/output.py
 ```
