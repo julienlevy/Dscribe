@@ -34,6 +34,7 @@ class DscribeBanner: ExtraView {
     var emojiBackgroundColor: UIColor?
     var suggestionBackgroundColor: UIColor?
     var selectedSuggestionBackgroungColor: UIColor?
+    var selectedTextColor: UIColor?
     
     var bannerColors: DscribeColors.Type?
     
@@ -45,7 +46,8 @@ class DscribeBanner: ExtraView {
 
         emojiBackgroundColor = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode)
         suggestionBackgroundColor = self.globalColors?.specialKey(self.darkMode, solidColorMode: self.solidColorMode)
-        selectedSuggestionBackgroungColor = self.bannerColors?.highlightedSuggestionBackground(self.darkMode, solidColorMode: self.solidColorMode)
+        selectedSuggestionBackgroungColor = self.bannerColors?.selectedSuggestionBackground(self.darkMode, solidColorMode: self.solidColorMode)
+        selectedTextColor = self.bannerColors?.selectedTextColor(self.darkMode)
     }
  
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
@@ -90,8 +92,9 @@ class DscribeBanner: ExtraView {
         print("update banner colors")
         emojiBackgroundColor = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode)
         suggestionBackgroundColor = self.globalColors?.specialKey(self.darkMode, solidColorMode: self.solidColorMode)
-        selectedSuggestionBackgroungColor = self.bannerColors?.highlightedSuggestionBackground(self.darkMode, solidColorMode: self.solidColorMode)
-        
+        selectedSuggestionBackgroungColor = self.bannerColors?.selectedSuggestionBackground(self.darkMode, solidColorMode: self.solidColorMode)
+        selectedTextColor = self.bannerColors?.selectedTextColor(self.darkMode)
+
         for subview in self.scrollView.subviews {
             if subview is UIButton {
                 let button = subview as! UIButton
@@ -101,8 +104,8 @@ class DscribeBanner: ExtraView {
                 }
                 else if subview.tag == 2 { //Will Replace suggestion
                     button.backgroundColor = selectedSuggestionBackgroungColor
-                    button.setTitleColor(self.tintColor, forState: [UIControlState.Normal, UIControlState.Highlighted])
-                    button.setTitleColor(self.tintColor, forState: .Normal)
+                    button.setTitleColor(selectedTextColor, forState: [UIControlState.Normal, UIControlState.Highlighted])
+                    button.setTitleColor(selectedTextColor, forState: .Normal)
                 }
                 else if subview.tag == 3 { //Emoji
                     button.backgroundColor = emojiBackgroundColor

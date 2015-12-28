@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -65,6 +66,17 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfK-Co-zoP">
+                                <rect key="frame" x="0.0" y="277" width="219" height="382"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="382" id="wqA-e7-ajW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.93174606561660767" green="0.65843659639358521" blue="0.16330814361572266" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -79,11 +91,14 @@
                             <constraint firstAttribute="centerX" secondItem="xea-iY-wvs" secondAttribute="centerX" id="Tdh-Nc-qEN"/>
                             <constraint firstItem="jEi-oU-7aO" firstAttribute="top" secondItem="JkG-lS-E73" secondAttribute="bottom" constant="8" id="UAi-eO-fVu"/>
                             <constraint firstItem="Sv9-QE-0tf" firstAttribute="top" secondItem="zIN-qD-YPT" secondAttribute="bottom" constant="8" id="WWr-KU-rPx"/>
+                            <constraint firstItem="dfK-Co-zoP" firstAttribute="leading" secondItem="aBi-zl-Xx9" secondAttribute="leading" id="XI9-vX-Oxb"/>
                             <constraint firstItem="jEi-oU-7aO" firstAttribute="trailing" secondItem="aBi-zl-Xx9" secondAttribute="trailingMargin" id="cZg-Zj-bxo"/>
                             <constraint firstItem="Jto-Fw-99T" firstAttribute="trailing" secondItem="aBi-zl-Xx9" secondAttribute="trailingMargin" id="h6R-mk-5xj"/>
                             <constraint firstItem="Sv9-QE-0tf" firstAttribute="leading" secondItem="aBi-zl-Xx9" secondAttribute="leadingMargin" id="hsX-fG-ejf"/>
                             <constraint firstItem="zIN-qD-YPT" firstAttribute="top" secondItem="Jto-Fw-99T" secondAttribute="bottom" constant="8" id="huJ-vL-ZtF"/>
                             <constraint firstAttribute="centerX" secondItem="3bG-47-LNQ" secondAttribute="centerX" constant="-0.5" id="iSm-MK-elT"/>
+                            <constraint firstAttribute="centerXWithinMargins" secondItem="dfK-Co-zoP" secondAttribute="trailing" id="kw7-yz-3kC"/>
+                            <constraint firstItem="dfK-Co-zoP" firstAttribute="top" secondItem="3bG-47-LNQ" secondAttribute="bottom" constant="8" id="qma-P9-FSL"/>
                             <constraint firstItem="JkG-lS-E73" firstAttribute="leading" secondItem="aBi-zl-Xx9" secondAttribute="leadingMargin" id="tu3-o3-Xrq"/>
                             <constraint firstItem="Jto-Fw-99T" firstAttribute="leading" secondItem="aBi-zl-Xx9" secondAttribute="leadingMargin" id="wXH-Yx-oBy"/>
                             <constraint firstItem="zIN-qD-YPT" firstAttribute="trailing" secondItem="aBi-zl-Xx9" secondAttribute="trailingMargin" id="wod-3F-kte"/>

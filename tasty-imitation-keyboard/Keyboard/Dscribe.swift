@@ -90,7 +90,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     override func updateAppearances(appearanceIsDark: Bool) {
         super.updateAppearances(appearanceIsDark)
         
-        // self.layout?.updateKeyAppearance()
+        (self.bannerView as? DscribeBanner)?.updateBannerColors()
     }
 
     // For when some text in selected (and deleted), 
