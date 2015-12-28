@@ -31,13 +31,21 @@ class DscribeBanner: ExtraView {
     var beforeScrollView: UIView = UIView()
     var afterScrollView: UIView = UIView()
 
-    var emojiBackgroundColor: UIColor?
     var suggestionBackgroundColor: UIColor?
     var selectedSuggestionBackgroungColor: UIColor?
     
+    var bannerColors: DscribeColors.Type?
+    
     let space: CGFloat = 0.8
 
+    required init(globalColors: GlobalColors.Type?, bannerColors: DscribeColors.Type?, darkMode: Bool, solidColorMode: Bool) {
+        super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
+        self.bannerColors = bannerColors
 
+        suggestionBackgroundColor = self.globalColors?.specialKey(self.darkMode, solidColorMode: self.solidColorMode)
+        selectedSuggestionBackgroungColor = self.bannerColors?.selectedSuggestionBackground(self.darkMode, solidColorMode: self.solidColorMode)
+    }
+ 
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
     }
@@ -45,6 +53,7 @@ class DscribeBanner: ExtraView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 
     override func setNeedsLayout() {
         super.setNeedsLayout()
@@ -56,10 +65,8 @@ class DscribeBanner: ExtraView {
 
         self.backgroundColor = UIColor.clearColor()
 
-        emojiBackgroundColor = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode)
-        suggestionBackgroundColor = self.globalColors?.specialKey(self.darkMode, solidColorMode: self.solidColorMode)
-        selectedSuggestionBackgroungColor = UIColor(red: CGFloat(235)/CGFloat(255), green: CGFloat(237)/CGFloat(255), blue: CGFloat(239)/CGFloat(255), alpha: 1)
-
+        print("layout subviews")
+        //TODO refacto
         self.scrollView.frame = CGRectMake(0, 0, self.frame.width, self.frame.height)
         self.scrollView.contentSize = CGSizeMake(140, 600)
         self.scrollView.scrollEnabled = true
@@ -67,14 +74,42 @@ class DscribeBanner: ExtraView {
         self.addSubview(self.scrollView)
 
         self.beforeScrollView.frame = CGRectMake( -self.frame.width, space, self.frame.width, self.frame.height)
-        self.beforeScrollView.backgroundColor = emojiBackgroundColor
         self.scrollView.addSubview(self.beforeScrollView)
 
         //Frame defined at the end of displayEmojis function
-        self.afterScrollView.backgroundColor = emojiBackgroundColor
         self.scrollView.addSubview(self.afterScrollView)
 
         self.displayEmojis(Array(emojiScore.keys))
+        
+        self.updateBannerColors()
+    }
+    
+    func updateBannerColors() {
+        print("update banner colors")
+        let emojiBackgroundColor: UIColor? = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode)
+        suggestionBackgroundColor = self.globalColors?.specialKey(self.darkMode, solidColorMode: self.solidColorMode)
+        selectedSuggestionBackgroungColor = self.bannerColors?.selectedSuggestionBackground(self.darkMode, solidColorMode: self.solidColorMode)
+        let selectedTextColor: UIColor? = self.bannerColors?.selectedTextColor(self.darkMode)
+
+        self.beforeScrollView.backgroundColor = emojiBackgroundColor
+        self.afterScrollView.backgroundColor = emojiBackgroundColor
+        for subview in self.scrollView.subviews {
+            if subview is UIButton {
+                let button = subview as! UIButton
+                if button.tag == 1 { //Normal suggestion
+                    button.backgroundColor = suggestionBackgroundColor
+                    button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
+                }
+                else if subview.tag == 2 { //Will Replace suggestion
+                    button.backgroundColor = selectedSuggestionBackgroungColor
+                    button.setTitleColor(selectedTextColor, forState: [UIControlState.Normal, UIControlState.Highlighted])
+                    button.setTitleColor(selectedTextColor, forState: .Normal)
+                }
+                else if subview.tag == 3 { //Emoji
+                    button.backgroundColor = emojiBackgroundColor
+                }
+            }
+        }
     }
     
     func emojiSelected(sender: UIButton!) {
@@ -117,11 +152,11 @@ class DscribeBanner: ExtraView {
                 break
             }
             let button: UIButton = UIButton()
-            button.backgroundColor = emojiBackgroundColor
             button.frame = CGRectMake(xOrigin, space, width, self.frame.height + 1)
             button.setTitle(emoji, forState: UIControlState.Normal)
             button.addTarget(self, action: Selector("emojiSelected:"), forControlEvents: UIControlEvents.TouchUpInside);
             button.titleLabel?.font = button.titleLabel?.font.fontWithSize(22)
+            button.tag = 3
             
             xOrigin += width + 1
             
@@ -133,6 +168,8 @@ class DscribeBanner: ExtraView {
         self.scrollView.contentSize.height = self.frame.height
 
         self.afterScrollView.frame = CGRectMake( self.scrollView.contentSize.width - 1, space, self.frame.width, self.frame.height)
+
+        self.updateBannerColors()
     }
 
     func displaySuggestions(var suggestionList: [String], originalString: String, willReplaceString: String = "") {
@@ -148,14 +185,11 @@ class DscribeBanner: ExtraView {
         let width: CGFloat = ((self.frame.width - CGFloat(2) * space) / CGFloat(3))
         scrollView.scrollEnabled = false
 
-        //OTHER WAY
         for (var index = 0; index < 3; index++) {
             let button: UIButton = UIButton()
-            button.backgroundColor = suggestionBackgroundColor
             button.layer.borderWidth = 0.4
             button.layer.borderColor = UIColor.clearColor().CGColor
             button.frame = CGRectMake(CGFloat(index) * (width + space), 0, width, self.frame.height)
-            button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
             button.tag = 1;
             button.addTarget(self, action: Selector("cancelHighlight:"), forControlEvents: [UIControlEvents.TouchUpInside, UIControlEvents.TouchDragExit, UIControlEvents.TouchUpOutside, UIControlEvents.TouchCancel, UIControlEvents.TouchDragOutside])
             button.addTarget(self, action: Selector("highlightButton:"), forControlEvents: [.TouchDown, .TouchDragInside])
@@ -170,9 +204,6 @@ class DscribeBanner: ExtraView {
                     button.setTitle(suggestion, forState: UIControlState.Normal)
                     button.addTarget(self, action: Selector("suggestionSelected:"), forControlEvents: UIControlEvents.TouchUpInside);
                     if index == 1 && willReplaceString != "" {
-                        button.backgroundColor = selectedSuggestionBackgroungColor
-                        button.setTitleColor(self.tintColor, forState: [UIControlState.Normal, UIControlState.Highlighted])
-                        button.setTitleColor(self.tintColor, forState: .Normal)
                         button.tag = 2
                     }
                 }
@@ -180,6 +211,8 @@ class DscribeBanner: ExtraView {
 
             self.scrollView.addSubview(button)
         }
+
+        self.updateBannerColors()
     }
 
     func removeAllButtonsFromScrollView() {
