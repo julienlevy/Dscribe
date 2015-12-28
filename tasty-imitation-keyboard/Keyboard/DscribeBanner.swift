@@ -31,10 +31,8 @@ class DscribeBanner: ExtraView {
     var beforeScrollView: UIView = UIView()
     var afterScrollView: UIView = UIView()
 
-    var emojiBackgroundColor: UIColor?
     var suggestionBackgroundColor: UIColor?
     var selectedSuggestionBackgroungColor: UIColor?
-    var selectedTextColor: UIColor?
     
     var bannerColors: DscribeColors.Type?
     
@@ -44,10 +42,8 @@ class DscribeBanner: ExtraView {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
         self.bannerColors = bannerColors
 
-        emojiBackgroundColor = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode)
         suggestionBackgroundColor = self.globalColors?.specialKey(self.darkMode, solidColorMode: self.solidColorMode)
         selectedSuggestionBackgroungColor = self.bannerColors?.selectedSuggestionBackground(self.darkMode, solidColorMode: self.solidColorMode)
-        selectedTextColor = self.bannerColors?.selectedTextColor(self.darkMode)
     }
  
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
@@ -69,6 +65,8 @@ class DscribeBanner: ExtraView {
 
         self.backgroundColor = UIColor.clearColor()
 
+        print("layout subviews")
+        //TODO refacto
         self.scrollView.frame = CGRectMake(0, 0, self.frame.width, self.frame.height)
         self.scrollView.contentSize = CGSizeMake(140, 600)
         self.scrollView.scrollEnabled = true
@@ -76,11 +74,9 @@ class DscribeBanner: ExtraView {
         self.addSubview(self.scrollView)
 
         self.beforeScrollView.frame = CGRectMake( -self.frame.width, space, self.frame.width, self.frame.height)
-        self.beforeScrollView.backgroundColor = emojiBackgroundColor
         self.scrollView.addSubview(self.beforeScrollView)
 
         //Frame defined at the end of displayEmojis function
-        self.afterScrollView.backgroundColor = emojiBackgroundColor
         self.scrollView.addSubview(self.afterScrollView)
 
         self.displayEmojis(Array(emojiScore.keys))
@@ -90,11 +86,13 @@ class DscribeBanner: ExtraView {
     
     func updateBannerColors() {
         print("update banner colors")
-        emojiBackgroundColor = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode)
+        let emojiBackgroundColor: UIColor? = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode)
         suggestionBackgroundColor = self.globalColors?.specialKey(self.darkMode, solidColorMode: self.solidColorMode)
         selectedSuggestionBackgroungColor = self.bannerColors?.selectedSuggestionBackground(self.darkMode, solidColorMode: self.solidColorMode)
-        selectedTextColor = self.bannerColors?.selectedTextColor(self.darkMode)
+        let selectedTextColor: UIColor? = self.bannerColors?.selectedTextColor(self.darkMode)
 
+        self.beforeScrollView.backgroundColor = emojiBackgroundColor
+        self.afterScrollView.backgroundColor = emojiBackgroundColor
         for subview in self.scrollView.subviews {
             if subview is UIButton {
                 let button = subview as! UIButton
