@@ -33,7 +33,7 @@ class KeyboardKey: UIControl {
     var text: String {
         didSet {
             self.label.text = text
-            self.label.frame = CGRectMake(self.labelInset, self.labelInset, self.bounds.width - self.labelInset * 2, self.bounds.height - self.labelInset * 2)
+            self.label.frame = CGRectMake(self.labelInset, self.labelInset, self.bounds.width - self.labelInset * 2, self.bounds.height - (self.labelInset + 0.8*(self.label.font.capHeight - self.label.font.xHeight)) * 2)
             self.redrawText()
         }
     }
@@ -56,7 +56,7 @@ class KeyboardKey: UIControl {
     var labelInset: CGFloat = 0 {
         didSet {
             if oldValue != labelInset {
-                self.label.frame = CGRectMake(self.labelInset, self.labelInset, self.bounds.width - self.labelInset * 2, self.bounds.height - self.labelInset * 2)
+                self.label.frame = CGRectMake(self.labelInset, self.labelInset, self.bounds.width - self.labelInset * 2, self.bounds.height - (self.labelInset + 0.8*(self.label.font.capHeight - self.label.font.xHeight)) * 2)
             }
         }
     }
@@ -170,7 +170,10 @@ class KeyboardKey: UIControl {
             
             self.label.textAlignment = NSTextAlignment.Center
             self.label.baselineAdjustment = UIBaselineAdjustment.AlignCenters
-            self.label.font = self.label.font.fontWithSize(22)
+            self.label.font = self.label.font.fontWithSize(25)
+            if #available(iOSApplicationExtension 8.2, *) {
+                self.label.font = UIFont.systemFontOfSize(25, weight: UIFontWeightLight)
+            }
             self.label.adjustsFontSizeToFitWidth = true
             self.label.minimumScaleFactor = CGFloat(0.1)
             self.label.userInteractionEnabled = false
@@ -206,7 +209,7 @@ class KeyboardKey: UIControl {
         CATransaction.setDisableActions(true)
         
         self.background.frame = self.bounds
-        self.label.frame = CGRectMake(self.labelInset, self.labelInset, self.bounds.width - self.labelInset * 2, self.bounds.height - self.labelInset * 2)
+        self.label.frame = CGRectMake(self.labelInset, self.labelInset, self.bounds.width - self.labelInset * 2, self.bounds.height - (self.labelInset + 0.8*(self.label.font.capHeight - self.label.font.xHeight)) * 2)
         
         self.displayView.frame = boundingBox
         self.shadowView.frame = boundingBox
