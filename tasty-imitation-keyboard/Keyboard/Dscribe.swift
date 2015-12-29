@@ -174,7 +174,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         let keyOutput = key.outputForCase(self.shiftState.uppercase())
         if ["-", "/", ":", ";", "(", ")", "$", "&", "@", "\"",".", ",", "?", "!", "'", " ", "\n"].contains(keyOutput) {
             if self.autoreplaceSuggestion != "" {
-                self.appendSuggestion(autoreplaceSuggestion)
+                self.deleteLastWordAndAppendNew(autoreplaceSuggestion)
             }
         }
         self.autoreplaceSuggestion = ""
@@ -187,7 +187,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             } else {
                 //TODO replace with most used emoji
                 (self.bannerView as! DscribeBanner).displayEmojis(Array(self.emojiClass.emojiScore.keys))
-                
+
                 self.textDocumentProxy.insertText(keyOutput)
             }
 
@@ -327,6 +327,17 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             }
         }
     }
+    
+    func deleteLastWordAndAppendNew(word: String) {
+        let context = self.textDocumentProxy.documentContextBeforeInput
+        if context != nil {
+            let lastWord = context!.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " \n")).last
+            for var i = 0; i < lastWord?.characters.count; i++ {
+                self.textDocumentProxy.deleteBackward()
+            }
+        }
+        self.textDocumentProxy.insertText(word)
+    }
 
     func checkAndResetSelectedText() {
         if self.selectedText != "" {
@@ -408,14 +419,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     }
 
     func appendSuggestion(suggestion: String) {
-        let context = self.textDocumentProxy.documentContextBeforeInput
-        if context != nil {
-            let lastWord = context!.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " \n")).last
-            for var i = 0; i < lastWord?.characters.count; i++ {
-                self.textDocumentProxy.deleteBackward()
-            }
-        }
-        self.textDocumentProxy.insertText(suggestion)
+        self.deleteLastWordAndAppendNew(suggestion + " ")
     }
 
     func refusedSuggestion() {
@@ -425,14 +429,11 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             if !(lastWord ?? "").isEmpty {
                 UITextChecker.learnWord(lastWord!)
             }
+            self.autoreplaceSuggestion = ""
+            self.searchSuggestions(context! + " ")
         }
 
         self.textDocumentProxy.insertText(" ")
-
-        self.autoreplaceSuggestion = ""
-        if context != nil {
-            self.searchSuggestions(context! + " ")
-        }
     }
 
     func saveEmojis() {
