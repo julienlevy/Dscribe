@@ -131,6 +131,8 @@ class DscribeBanner: ExtraView {
         }
 
         self.removeAllButtonsFromScrollView()
+        self.beforeScrollView.hidden = false
+        self.afterScrollView.hidden = false
         
         var xOrigin: CGFloat = 0
         var width: CGFloat = 80
@@ -138,7 +140,7 @@ class DscribeBanner: ExtraView {
 
         scrollView.scrollEnabled = true
         
-        if numberEmoji <= 3 {
+        if numberEmoji <= 4 {
             width = (self.frame.width) / CGFloat(numberEmoji)
             scrollView.scrollEnabled = false
         }
@@ -178,6 +180,8 @@ class DscribeBanner: ExtraView {
         suggestionList.insert(originalString, atIndex: 0)
 
         self.removeAllButtonsFromScrollView()
+        self.beforeScrollView.hidden = true
+        self.afterScrollView.hidden = true
 
 //        let numberSuggestion: Int = suggestionList.count
 //        let width: CGFloat = ((self.frame.width - CGFloat(min(3, numberSuggestion) - 1) * space) / CGFloat(min(3, numberSuggestion)))

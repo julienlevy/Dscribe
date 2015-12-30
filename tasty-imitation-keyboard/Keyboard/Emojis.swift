@@ -51,37 +51,12 @@ class Emoji: NSObject, NSCoding {
     
 
     func tagSearch(sentence: String) -> [String] {
-        let tagsArray = sentence.componentsSeparatedByString(" ");
         var result: [String: [Int]] = [String: [Int]](); //key=emoji, value=[Number of occurrences, score]
-        for word in tagsArray {
-            for (key, tagArray) in emojiTag {
-                for tag in tagArray {
-                    if tag.rangeOfString(word) != nil {
-                        if result[key] != nil {
-                            if result[key]?.count > 1 {
-                                result[key]![0]++
-                                if emojiScore[key] != nil {
-                                    result[key]![1] = result[key]![1] + emojiScore[key]!
-                                }
-                            }
-                        } else {
-                            result[key] = [Int]()
-                            result[key]!.append(1)
-                            if emojiScore[key] != nil {
-                                result[key]!.append(emojiScore[key]!)
-                            }
-                            else {
-                                result[key]!.append(0)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        if tagsArray.count == 0 {
-            print("Search with empty array")
-            for (emoji, tagArray) in emojiTag {
+
+        if sentence == "" {
+            for (emoji, tagArray) in self.emojiTag {
                 if emojiScore[emoji] == nil {
+                    print("Emoji not in score array " + emoji)
                     continue
                 }
                 if emojiScore[emoji] > 1 {
@@ -89,6 +64,34 @@ class Emoji: NSObject, NSCoding {
                         result[emoji] = [Int]()
                         result[emoji]!.append(1)
                         result[emoji]!.append(emojiScore[emoji]!)
+                    }
+                }
+            }
+        }
+        else {
+            let tagsArray = sentence.componentsSeparatedByString(" ");
+            for word in tagsArray {
+                for (key, tagArray) in emojiTag {
+                    for tag in tagArray {
+                        if tag.rangeOfString(word) != nil {
+                            if result[key] != nil {
+                                if result[key]?.count > 1 {
+                                    result[key]![0]++
+                                    if emojiScore[key] != nil {
+                                        result[key]![1] = result[key]![1] + emojiScore[key]!
+                                    }
+                                }
+                            } else {
+                                result[key] = [Int]()
+                                result[key]!.append(1)
+                                if emojiScore[key] != nil {
+                                    result[key]!.append(emojiScore[key]!)
+                                }
+                                else {
+                                    result[key]!.append(0)
+                                }
+                            }
+                        }
                     }
                 }
             }

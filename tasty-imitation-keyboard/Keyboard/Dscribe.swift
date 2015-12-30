@@ -38,8 +38,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     var fullContextBeforeChange: String = "" //Necessary to communicate between two functions
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        NSUserDefaults.standardUserDefaults().registerDefaults([kCatTypeEnabled: true])
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        // TODO review
         if let savedEmojis = loadEmojis() {
             emojiClass = savedEmojis
         } else {
@@ -54,11 +54,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
         self.requestSupplementaryLexiconWithCompletion({
             lexicon in
-
             self.appleLexicon = lexicon
-
-            // TODO delete
-            NSLog("Number of lexicon entries : %i", self.appleLexicon.entries.count)
 
             for lexiconEntry in self.appleLexicon.entries {
                 NSLog("%@ -> %@", lexiconEntry.userInput, lexiconEntry.documentText)
@@ -186,7 +182,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 self.deleteSearchText()
             } else {
                 //TODO replace with most used emoji
-                (self.bannerView as! DscribeBanner).displayEmojis(Array(self.emojiClass.emojiScore.keys))
+                self.searchEmojis("")
 
                 self.textDocumentProxy.insertText(keyOutput)
             }
@@ -248,12 +244,14 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         if context == nil {
             return
         }
+        print("Context: " + context!)
 
         if self.escapeMode {
             let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
             if (firstRange != nil) {
                 let lastIndex = context!.endIndex
                 self.stringToSearch = context!.substringWithRange(firstRange!.startIndex.successor()..<lastIndex)
+                print("Search: " + self.stringToSearch)
                 self.searchEmojis(self.stringToSearch)
             }
         } else {
