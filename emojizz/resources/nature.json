@@ -1,10 +1,12 @@
 {
    "🌌":[
       "milky",
-      "way"
+      "way",
+      "postcard"
    ],
    "🌋":[
-      "volcano"
+      "volcano",
+      "postcard"
    ],
    "🌊":[
       "water",
@@ -27,7 +29,7 @@
    ],
    "🐲":[
       "dragon",
-      "face"
+      "animal"
    ],
    "🌘":[
       "waning",
@@ -77,10 +79,13 @@
       "moon"
    ],
    "💐":[
-      "bouquet"
+      "bouquet",
+      "flowers",
+      "love"
    ],
    "❄":[
-      "snowflake"
+      "snowflake",
+      "winter"
    ],
    "🌝":[
       "full",
@@ -113,39 +118,48 @@
       "foggy"
    ],
    "🌀":[
-      "cyclone"
+      "cyclone",
+      "cycle",
+      "hypnosis"
    ],
    "🌈":[
-      "rainbow"
+      "rainbow",
+      "hope"
    ],
    "⚡":[
-      "high",
       "voltage",
-      "sign"
+      "highvoltage",
+      "lightning"
    ],
    "🌼":[
       "blossom",
-      "sunflower",
       "flowers"
    ],
    "🐘":[
-      "elephant"
+      "elephant",
+      "animal",
+      "heavy"
    ],
    "☔":[
       "umbrella",
-      "rain",
-      "drops"
+      "rain"
    ],
    "🐨":[
       "koala",
-      "australia"
+      "australia",
+      "animal",
+      "lazy"
    ],
    "🐩":[
-      "poodle"
+      "poodle",
+      "animal",
+      "pet"
    ],
    "🐢":[
       "turtle",
-      "slow"
+      "slow",
+      "animal",
+      "pet"
    ],
    "🐣":[
       "hatching",
@@ -157,7 +171,8 @@
       "fish"
    ],
    "🐡":[
-      "blowfish"
+      "blowfish",
+      "fish"
    ],
    "🐦":[
       "bird"
@@ -166,33 +181,39 @@
       "penguin"
    ],
    "🐤":[
-      "baby",
-      "chick"
+      "chick",
+      "bird"
    ],
    "🐥":[
       "front-facing",
-      "baby",
-      "chick"
+      "chick",
+      "bird"
    ],
    "🌠":[
       "shooting",
-      "star"
+      "star",
+      "postcard"
    ],
    "🐺":[
       "wolf",
-      "face"
+      "dog",
+      "animal"
    ],
    "🐼":[
       "panda",
-      "face"
+      "animal",
+      "china"
    ],
    "🐻":[
       "bear",
-      "face"
+      "grizzly",
+      "animal",
+      "wild"
    ],
    "🐾":[
       "paw",
-      "prints"
+      "prints",
+      "steps"
    ],
    "🐽":[
       "pig",
@@ -207,89 +228,104 @@
       "rays"
    ],
    "⭐":[
-      "white",
-      "medium",
       "star"
    ],
    "⛄":[
       "snowman",
-      "without",
-      "snow"
+      "snow",
+      "winter"
    ],
    "🐹":[
       "hamster",
-      "face"
+      "pet"
    ],
    "🐸":[
       "frog",
-      "face"
+      "animal",
+      "swamp"
    ],
    "⛅":[
       "sun",
-      "behind",
       "cloud"
    ],
    "🐱":[
       "cat",
-      "face"
+      "animal"
    ],
    "🐰":[
       "rabbit",
-      "face"
+      "animal"
    ],
    "🐳":[
       "spouting",
       "whale"
    ],
    "🍄":[
-      "mushroom"
+      "mushroom",
+      "plant",
+      "forest",
+      "nature"
    ],
    "🍃":[
       "leaf",
-      "fluttering",
-      "in",
-      "wind"
+      "wind",
+      "plant",
+      "forest",
+      "nature"
    ],
    "🐴":[
       "horse",
-      "face"
+      "animal"
    ],
    "🐷":[
       "pig",
-      "face"
+      "animal",
+      "farm"
    ],
    "🍀":[
       "four",
-      "leaf",
-      "clover"
+      "leafs",
+      "clover",
+      "luck",
+      "ireland",
+      "chance"
    ],
    "🍂":[
       "fallen",
       "leaf",
-      "autumn"
+      "autumn",
+      "orange"
    ],
    "🐫":[
-      "bactrian",
-      "camel"
+      "camel",
+      "desert",
+      "animal"
    ],
    "🐬":[
-      "dolphin"
+      "dolphin",
+      "sea",
+      "animal"
    ],
    "🐪":[
       "dromedary",
-      "camel"
+      "camel",
+      "desert",
+      "animal"
    ],
    "🐯":[
       "tiger",
-      "face"
+      "animal"
    ],
    "🐭":[
       "mouse",
-      "face"
+      "animal",
+      "pet"
    ],
    "🐮":[
       "cow",
-      "face"
+      "animal",
+      "farm",
+      "milk"
    ],
    "🌸":[
       "cherry",
@@ -297,125 +333,198 @@
       "japan"
    ],
    "🐈":[
-      "cat"
+      "cat",
+      "animal",
+      "pet"
    ],
    "🐉":[
-      "dragon"
+      "dragon",
+      "animal",
+      "imagination"
    ],
    "🐄":[
-      "cow"
+      "cow",
+      "animal",
+      "farm",
    ],
    "🐅":[
-      "tiger"
+      "tiger",
+      "animal",
+      "wild"
    ],
    "🐆":[
-      "leopard"
+      "leopard",
+      "animal",
+      "wild"
    ],
    "🐇":[
-      "rabbit"
+      "rabbit",
+      "animal",
+      "pet"
    ],
    "🐀":[
-      "rat"
+      "rat",
+      "animal"
    ],
    "🐁":[
-      "mouse"
+      "mouse",
+      "animal",
+      "pet"
    ],
    "🐂":[
-      "ox"
+      "ox",
+      "animal",
+      "farm",
    ],
    "🐃":[
-      "water",
-      "buffalo"
+      "buffalo",
+      "animal"
    ],
    "🐜":[
-      "ant"
+      "ant",
+      "insect"
    ],
    "🐛":[
-      "bug"
+      "bug",
+      "insect"
    ],
    "🐚":[
       "spiral",
-      "shell"
+      "insect"
    ],
    "🌹":[
-      "rose"
+      "rose",
+      "flower",
+      "love",
+      "plant",
+      "nature"
    ],
    "🐟":[
-      "fish"
+      "fish",
+      "sea",
+      "animal"
    ],
    "🐞":[
       "lady",
-      "beetle"
+      "beetle",
+      "insect",
+      "nature"
    ],
    "🐝":[
-      "honeybee"
+      "honeybee",
+      "insect",
+      "nature"
    ],
    "🌲":[
       "evergreen",
-      "tree"
+      "tree",
+      "pine",
+      "christmas",
+      "nature",
+      "forest",
+      "plant"
    ],
    "🌳":[
       "deciduous",
-      "tree"
+      "tree",
+      "nature",
+      "forest",
+      "plant"
    ],
    "🌰":[
-      "chestnut"
+      "chestnut",
+      "nature",
+      "forest",
+      "plant"
    ],
    "🌱":[
-      "seedling"
+      "seedling",
+      "nature",
+      "forest",
+      "plant"
    ],
    "🌷":[
-      "tulip"
+      "tulip",
+      "nature",
+      "flower",
+      "plant"
    ],
    "🌴":[
       "palm",
-      "tree"
+      "tree",
+      "exotic",
+      "plant",
+      "beach",
+      "coconut"
    ],
    "🌵":[
-      "cactus"
+      "cactus",
+      "plant",
+      "desert"
    ],
    "🐓":[
-      "rooster"
+      "rooster",
+      "animal",
+      "farm",
+      "egg"
    ],
    "🐒":[
-      "monkey"
+      "monkey",
+      "animal"
    ],
    "🐑":[
-      "sheep"
+      "sheep",
+      "animal",
+      "farm"
    ],
    "🐐":[
-      "goat"
+      "goat",
+      "animal",
+      "farm"
    ],
    "🐗":[
-      "boar"
+      "boar",
+      "animal",
+      "forest"
    ],
    "🐖":[
-      "pig"
+      "pig",
+      "animal",
+      "farm"
    ],
    "🐕":[
-      "dog"
+      "dog",
+      "animal",
+      "pet"
    ],
    "🐔":[
-      "chicken"
+      "chicken",
+      "animal",
+      "farm"
    ],
    "🌻":[
       "sunflower"
    ],
    "🐵":[
       "monkey",
-      "face"
+      "animal"
    ],
    "🐙":[
-      "octopus"
+      "octopus",
+      "animal",
+      "sea"
    ],
    "🌺":[
-      "hibiscus"
+      "hibiscus",
+      "plant",
+      "flower"
    ],
    "🌿":[
-      "herb"
+      "herb",
+      "plant",
+      "nature"
    ],
    "🌾":[
-      "ear",
       "rice"
    ],
    "🍁":[
@@ -425,27 +534,35 @@
       "syrup"
    ],
    "🐍":[
-      "snake"
+      "snake",
+      "animal"
    ],
    "🐎":[
-      "horse"
+      "horse",
+      "animal"
    ],
    "🐏":[
-      "ram"
+      "ram",
+      "animal"
    ],
    "🐶":[
       "dog",
-      "face"
+      "animal",
+      "pet"
    ],
    "🐊":[
-      "crocodile"
+      "crocodile",
+      "animal",
+      "nile"
    ],
    "🐋":[
       "whale",
-      "big"
+      "big",
+      "sea"
    ],
    "🐌":[
       "snail",
-      "slow"
+      "slow",
+      "insect"
    ]
 }
