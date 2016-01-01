@@ -434,6 +434,25 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         self.textDocumentProxy.insertText(" ")
     }
 
+    func isEmoji(mystring: String) -> Bool {
+        let characterSet: NSCharacterSet = NSCharacterSet(range: NSRange(location: 0xFE00, length: 16))
+        if mystring.rangeOfCharacterFromSet(characterSet) != nil {
+            return true
+        }
+
+        let high: UInt32 = UInt32((mystring as NSString).characterAtIndex(0)) // UInt16
+
+        if (0xD800 <= high && high <= 0xDBFF) {
+            let low: UInt32 = UInt32((mystring as NSString).characterAtIndex(1))
+
+            let codepoint: Int = Int((high - 0xD800) * 0x400 + (low - 0xDC00) + 0x10000)
+
+            return (0x1D000 <= codepoint && codepoint <= 0x1F9FF)
+        }
+
+        return false
+    }
+
     func saveEmojis() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(emojiClass, toFile: Emoji.ArchiveURL.path!)
         if !isSuccessfulSave {
