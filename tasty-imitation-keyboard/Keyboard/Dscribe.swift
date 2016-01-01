@@ -37,6 +37,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     var selectedText: String = ""
     var fullContextBeforeChange: String = "" //Necessary to communicate between two functions
 
+    var shouldDisplaySuggestionOnDelete: Bool = true
+
     // MARK: UIInputViewController methods
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -275,20 +277,36 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     override func backspaceDown(sender: KeyboardKey) {
         self.autoreplaceSuggestion = ""
 
-        if self.textDocumentProxy.documentContextBeforeInput?.characters.last == kEscapeCue.characters.first {
-            self.escapeMode = false
-            self.displaySearchMode()
+        let context: String? = self.textDocumentProxy.documentContextBeforeInput
+        if context != nil {
+            if context!.characters.last == kEscapeCue.characters.first {
+                self.escapeMode = false
+                self.displaySearchMode()
+            }
+            if isEmoji(String(context!.characters.last!)) {
+                self.shouldDisplaySuggestionOnDelete = false
+            } else {
+                self.shouldDisplaySuggestionOnDelete = true
+            }
         }
-        
+
         self.checkAndResetSelectedText()
 
         super.backspaceDown(sender)
     }
 
     override func backspaceRepeatCallback() {
-        if self.textDocumentProxy.documentContextBeforeInput?.characters.last == kEscapeCue.characters.first {
-            self.escapeMode = false
-            self.displaySearchMode()
+        let context: String? = self.textDocumentProxy.documentContextBeforeInput
+        if context != nil {
+            if context!.characters.last == kEscapeCue.characters.first {
+                self.escapeMode = false
+                self.displaySearchMode()
+            }
+            if isEmoji(String(context!.characters.last!)) {
+                self.shouldDisplaySuggestionOnDelete = false
+            } else {
+                self.shouldDisplaySuggestionOnDelete = true
+            }
         }
 
         super.backspaceRepeatCallback()
@@ -301,17 +319,15 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         if context == nil {
             return
         }
-        print("Context: " + context!)
 
         if self.escapeMode {
             let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
             if (firstRange != nil) {
                 let lastIndex = context!.endIndex
                 self.stringToSearch = context!.substringWithRange(firstRange!.startIndex.successor()..<lastIndex)
-                print("Search: " + self.stringToSearch)
                 self.searchEmojis(self.stringToSearch)
             }
-        } else {
+        } else if shouldDisplaySuggestionOnDelete {
             let contextString: String = String(context!.characters.dropLast())
             self.searchSuggestions(contextString, shouldAutoReplace: false)
         }
@@ -445,7 +461,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     }
 
     // MARK: Low-level string processing
+    // TODO: to call and use
     func isEmoji(mystring: String) -> Bool {
+        print("Checking if \"" + mystring + "\" starts with an emoji")
         let characterSet: NSCharacterSet = NSCharacterSet(range: NSRange(location: 0xFE00, length: 16))
         if mystring.rangeOfCharacterFromSet(characterSet) != nil {
             return true
