@@ -37,6 +37,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     var selectedText: String = ""
     var fullContextBeforeChange: String = "" //Necessary to communicate between two functions
 
+    // MARK: UIInputViewController methods
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         // TODO review
@@ -83,12 +84,68 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             self.view.insertSubview(overlayView, atIndex: 0)
         }
     }
+
+    // MARK: Keyboard Setup methods
     override func updateAppearances(appearanceIsDark: Bool) {
         super.updateAppearances(appearanceIsDark)
         
         (self.bannerView as? DscribeBanner)?.updateBannerColors()
     }
 
+    override func setupKeys() {
+        super.setupKeys()
+
+        if takeDebugScreenshot {
+            if self.layout == nil {
+                return
+            }
+            for page in keyboard.pages {
+                for rowKeys in page.rows {
+                    for key in rowKeys {
+                        if let keyView = self.layout!.viewForKey(key) {
+                            keyView.addTarget(self, action: "takeScreenshotDelay", forControlEvents: .TouchDown)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    override func createBanner() -> ExtraView? {
+        let dscribeBanner = DscribeBanner(globalColors: self.dynamicType.globalColors, bannerColors: self.dynamicType.bannerColors, darkMode: false, solidColorMode: self.solidColorMode())
+        dscribeBanner.delegate = self
+        return dscribeBanner
+    }
+
+    // MARK: TODO: define use for those methods
+    func takeScreenshotDelay() {
+        print("Take Screenshot Delay")
+        NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("takeScreenshot"), userInfo: nil, repeats: false)
+    }
+
+    func takeScreenshot() {
+        if !CGRectIsEmpty(self.view.bounds) {
+            print("Taking screenshot")
+            UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
+
+            let oldViewColor = self.view.backgroundColor
+            print(oldViewColor)
+            self.view.backgroundColor = UIColor(hue: (216/360.0), saturation: 0.05, brightness: 0.86, alpha: 1)
+
+            let rect = self.view.bounds
+            UIGraphicsBeginImageContextWithOptions(rect.size, true, 0)
+            self.view.drawViewHierarchyInRect(self.view.bounds, afterScreenUpdates: true)
+            let capturedImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            let name = (self.interfaceOrientation.isPortrait ? "Screenshot-Portrait" : "Screenshot-Landscape")
+            let imagePath = "/Users/archagon/Documents/Programming/OSX/RussianPhoneticKeyboard/External/tasty-imitation-keyboard/\(name).png"
+            UIImagePNGRepresentation(capturedImage)!.writeToFile(imagePath, atomically: true)
+
+            self.view.backgroundColor = oldViewColor
+        }
+    }
+
+    // MARK: Input Delegate to handle selected text
     // For when some text in selected (and deleted), 
     //selection functions not working, never called...
     override func selectionWillChange(textInput: UITextInput?) {
@@ -165,7 +222,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         print("Selected is: \"" + self.selectedText + "\"")
     }
 
-
+    // MARK: Keyboard functions (key pressed, delete, etc..)
     override func keyPressed(key: Key) {
         let keyOutput = key.outputForCase(self.shiftState.uppercase())
         if ["-", "/", ":", ";", "(", ")", "$", "&", "@", "\"",".", ",", "?", "!", "'", " ", "\n"].contains(keyOutput) {
@@ -260,58 +317,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         }
     }
 
-    override func setupKeys() {
-        super.setupKeys()
 
-        if takeDebugScreenshot {
-            if self.layout == nil {
-                return
-            }
-            for page in keyboard.pages {
-                for rowKeys in page.rows {
-                    for key in rowKeys {
-                        if let keyView = self.layout!.viewForKey(key) {
-                            keyView.addTarget(self, action: "takeScreenshotDelay", forControlEvents: .TouchDown)
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    override func createBanner() -> ExtraView? {
-        let dscribeBanner = DscribeBanner(globalColors: self.dynamicType.globalColors, bannerColors: self.dynamicType.bannerColors, darkMode: false, solidColorMode: self.solidColorMode())
-        dscribeBanner.delegate = self
-        return dscribeBanner
-    }
-
-    func takeScreenshotDelay() {
-        print("Take Screenshot Delay")
-        NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("takeScreenshot"), userInfo: nil, repeats: false)
-    }
-
-    func takeScreenshot() {
-        if !CGRectIsEmpty(self.view.bounds) {
-            print("Taking screenshot")
-            UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
-
-            let oldViewColor = self.view.backgroundColor
-            print(oldViewColor)
-            self.view.backgroundColor = UIColor(hue: (216/360.0), saturation: 0.05, brightness: 0.86, alpha: 1)
-
-            let rect = self.view.bounds
-            UIGraphicsBeginImageContextWithOptions(rect.size, true, 0)
-            self.view.drawViewHierarchyInRect(self.view.bounds, afterScreenUpdates: true)
-            let capturedImage = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            let name = (self.interfaceOrientation.isPortrait ? "Screenshot-Portrait" : "Screenshot-Landscape")
-            let imagePath = "/Users/archagon/Documents/Programming/OSX/RussianPhoneticKeyboard/External/tasty-imitation-keyboard/\(name).png"
-            UIImagePNGRepresentation(capturedImage)!.writeToFile(imagePath, atomically: true)
-
-            self.view.backgroundColor = oldViewColor
-        }
-    }
-
+    // MARK: text input processing tools/functions
     func deleteSearchText() {
         let context = self.textDocumentProxy.documentContextBeforeInput
         if context != nil {
@@ -347,6 +354,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         }
     }
 
+    // MARK: UI search mode
     func displaySearchMode() {
         if self.escapeMode {
             overlayView.hidden = false
@@ -355,6 +363,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         }
     }
     
+    // MARK: Calls to banner
     func searchEmojis(string: String) {
         let emojiList: [String] = self.emojiClass.tagSearch(string) as [String]
 
@@ -404,6 +413,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         (self.bannerView as! DscribeBanner).displaySuggestions(suggestions, originalString: lastWord!, willReplaceString: self.autoreplaceSuggestion)
     }
 
+    // MARK: Banner delegate
     func appendEmoji(emoji: String) {
         // Uses the data passed back
         if self.escapeMode {
@@ -434,6 +444,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         self.textDocumentProxy.insertText(" ")
     }
 
+    // MARK: Low-level string processing
     func isEmoji(mystring: String) -> Bool {
         let characterSet: NSCharacterSet = NSCharacterSet(range: NSRange(location: 0xFE00, length: 16))
         if mystring.rangeOfCharacterFromSet(characterSet) != nil {
@@ -453,6 +464,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         return false
     }
 
+    // MARK: Access to memory
     func saveEmojis() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(emojiClass, toFile: Emoji.ArchiveURL.path!)
         if !isSuccessfulSave {
