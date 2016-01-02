@@ -84,7 +84,6 @@ class DscribeBanner: ExtraView {
     }
     
     func updateBannerColors() {
-        print("update banner colors")
         let emojiBackgroundColor: UIColor? = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode)
         suggestionBackgroundColor = self.globalColors?.specialKey(self.darkMode, solidColorMode: self.solidColorMode)
         selectedSuggestionBackgroungColor = self.bannerColors?.selectedSuggestionBackground(self.darkMode, solidColorMode: self.solidColorMode)
@@ -153,7 +152,7 @@ class DscribeBanner: ExtraView {
                 break
             }
             let button: UIButton = UIButton()
-            button.frame = CGRectMake(xOrigin, space, width, self.frame.height + 1)
+            button.frame = CGRectMake(xOrigin, space / 2, width, self.frame.height + 1)
             button.setTitle(emoji, forState: UIControlState.Normal)
             button.addTarget(self, action: Selector("emojiSelected:"), forControlEvents: UIControlEvents.TouchUpInside);
             button.titleLabel?.font = button.titleLabel?.font.fontWithSize(22)
@@ -187,6 +186,7 @@ class DscribeBanner: ExtraView {
 //        let width: CGFloat = ((self.frame.width - CGFloat(min(3, numberSuggestion) - 1) * space) / CGFloat(min(3, numberSuggestion)))
         let width: CGFloat = ((self.frame.width - CGFloat(2) * space) / CGFloat(3))
         scrollView.scrollEnabled = false
+        scrollView.setContentOffset(CGPointZero, animated: false)
 
         for (var index = 0; index < 3; index++) {
             let button: UIButton = UIButton()
