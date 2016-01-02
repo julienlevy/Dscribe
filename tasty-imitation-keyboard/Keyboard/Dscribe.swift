@@ -95,7 +95,63 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     }
 
     override func setupKeys() {
-        super.setupKeys()
+//        super.setupKeys()
+        // COPY PASTE instead of call to super not to loop through keys twice
+
+        if self.layout == nil {
+            return
+        }
+
+        for page in keyboard.pages {
+            for rowKeys in page.rows { // TODO: quick hack
+                for key in rowKeys {
+                    if let keyView = self.layout?.viewForKey(key) {
+                        keyView.removeTarget(nil, action: nil, forControlEvents: UIControlEvents.AllEvents)
+
+                        switch key.type {
+                        case Key.KeyType.KeyboardChange:
+                            keyView.addTarget(self, action: "advanceTapped:", forControlEvents: .TouchUpInside)
+                        case Key.KeyType.Backspace:
+                            let cancelEvents: UIControlEvents = [UIControlEvents.TouchUpInside, UIControlEvents.TouchUpInside, UIControlEvents.TouchDragExit, UIControlEvents.TouchUpOutside, UIControlEvents.TouchCancel, UIControlEvents.TouchDragOutside]
+                            
+                            keyView.addTarget(self, action: "backspaceDown:", forControlEvents: .TouchDown)
+                            keyView.addTarget(self, action: "backspaceUp:", forControlEvents: cancelEvents)
+                        case Key.KeyType.Shift:
+                            keyView.addTarget(self, action: Selector("shiftDown:"), forControlEvents: .TouchDown)
+                            keyView.addTarget(self, action: Selector("shiftUp:"), forControlEvents: .TouchUpInside)
+                            keyView.addTarget(self, action: Selector("shiftDoubleTapped:"), forControlEvents: .TouchDownRepeat)
+                        case Key.KeyType.ModeChange:
+                            keyView.addTarget(self, action: Selector("modeChangeTapped:"), forControlEvents: .TouchDown)
+                        case Key.KeyType.Settings:
+                            keyView.addTarget(self, action: Selector("toggleSettings"), forControlEvents: .TouchUpInside)
+                        case Key.KeyType.SearchEmoji:
+                            keyView.addTarget(self, action: Selector("searchEmojiPressed"), forControlEvents: .TouchUpInside)
+                        default:
+                            break
+                        }
+
+                        if key.isCharacter {
+                            if UIDevice.currentDevice().userInterfaceIdiom != UIUserInterfaceIdiom.Pad {
+                                keyView.addTarget(self, action: Selector("showPopup:"), forControlEvents: [.TouchDown, .TouchDragInside, .TouchDragEnter])
+                                keyView.addTarget(keyView, action: Selector("hidePopup"), forControlEvents: [.TouchDragExit, .TouchCancel])
+                                keyView.addTarget(self, action: Selector("hidePopupDelay:"), forControlEvents: [.TouchUpInside, .TouchUpOutside, .TouchDragOutside])
+                            }
+                        }
+
+                        if key.hasOutput {
+                            keyView.addTarget(self, action: "keyPressedHelper:", forControlEvents: .TouchUpInside)
+                        }
+
+                        if key.type != Key.KeyType.Shift && key.type != Key.KeyType.ModeChange {
+                            keyView.addTarget(self, action: Selector("highlightKey:"), forControlEvents: [.TouchDown, .TouchDragInside, .TouchDragEnter])
+                            keyView.addTarget(self, action: Selector("unHighlightKey:"), forControlEvents: [.TouchUpInside, .TouchUpOutside, .TouchDragOutside, .TouchDragExit, .TouchCancel])
+                        }
+
+                        keyView.addTarget(self, action: Selector("playKeySound"), forControlEvents: .TouchDown)
+                    }
+                }
+            }
+        }
 
         if takeDebugScreenshot {
             if self.layout == nil {
@@ -325,7 +381,20 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             self.numberOfEnteredEmojis--
         }
     }
-
+    
+    func searchEmojiPressed() {
+        if escapeMode {
+            self.deleteSearchText()
+        } else {
+            //TODO replace with most used emoji
+            self.searchEmojis("")
+            
+            self.textDocumentProxy.insertText(kEscapeCue)
+        }
+        
+        escapeMode = !escapeMode
+        self.displaySearchMode()
+    }
 
     // MARK: text input processing tools/functions
     func deleteSearchText() {

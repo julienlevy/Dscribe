@@ -14,13 +14,6 @@ import UIKit
 // SHAPE OBJECTS //
 ///////////////////
 
-class EmojiShape: Shape {
-    override func drawCall(color: UIColor) {
-        //TODO:  set right yellow color
-        drawEmoji(self.bounds, color: UIColor(red: 254.0/255, green: 203.0/255, blue: 73.0/255, alpha: 1.0))
-    }
-}
-
 class BackspaceShape: Shape {
     override func drawCall(color: UIColor) {
         drawBackspace(self.bounds, color: color)
@@ -357,24 +350,6 @@ func drawGlobe(bounds: CGRect, color: UIColor) {
     color.setStroke()
     bezier6Path.lineWidth = 1 * lineWidthScalingFactor
     bezier6Path.stroke()
-    
-    endCenter()
-}
-
-func drawEmoji(bounds: CGRect, color: UIColor) {
-    let factors = getFactors(CGSizeMake(41, 40), toRect: bounds)
-    let xScalingFactor = factors.xScalingFactor
-    let yScalingFactor = factors.yScalingFactor
-    
-    centerShape(CGSizeMake(41 * xScalingFactor, 40 * yScalingFactor), toRect: bounds)
-    
-    
-    //// Color Declarations
-//    let color2 = UIColor.blueColor() // TODO:
-    
-    let ovalPath = UIBezierPath(ovalInRect: CGRectMake(0 * xScalingFactor, 0 * yScalingFactor, 40 * xScalingFactor, 40 * yScalingFactor))
-    color.setFill()
-    ovalPath.fill()
     
     endCenter()
 }
