@@ -31,8 +31,10 @@ class DscribeBanner: ExtraView {
     var beforeScrollView: UIView = UIView()
     var afterScrollView: UIView = UIView()
 
+    var emojiBackgroundColor: UIColor?
     var suggestionBackgroundColor: UIColor?
     var selectedSuggestionBackgroungColor: UIColor?
+    var selectedTextColor: UIColor?
     
     var bannerColors: DscribeColors.Type?
     
@@ -84,11 +86,14 @@ class DscribeBanner: ExtraView {
     }
     
     func updateBannerColors() {
-        let emojiBackgroundColor: UIColor? = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode)
+        emojiBackgroundColor = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode)
         suggestionBackgroundColor = self.globalColors?.specialKey(self.darkMode, solidColorMode: self.solidColorMode)
         selectedSuggestionBackgroungColor = self.bannerColors?.selectedSuggestionBackground(self.darkMode, solidColorMode: self.solidColorMode)
-        let selectedTextColor: UIColor? = self.bannerColors?.selectedTextColor(self.darkMode)
+        selectedTextColor = self.bannerColors?.selectedTextColor(self.darkMode)
 
+        self.setButtonColors()
+    }
+    func setButtonColors() {
         self.beforeScrollView.backgroundColor = emojiBackgroundColor
         self.afterScrollView.backgroundColor = emojiBackgroundColor
         for subview in self.scrollView.subviews {
@@ -169,7 +174,7 @@ class DscribeBanner: ExtraView {
 
         self.afterScrollView.frame = CGRectMake( self.scrollView.contentSize.width - 1, space, self.frame.width, self.frame.height)
 
-        self.updateBannerColors()
+        self.setButtonColors()
     }
 
     func displaySuggestions(var suggestionList: [String], originalString: String, willReplaceString: String = "") {
@@ -215,7 +220,7 @@ class DscribeBanner: ExtraView {
             self.scrollView.addSubview(button)
         }
 
-        self.updateBannerColors()
+        self.setButtonColors()
     }
 
     func removeAllButtonsFromScrollView() {
