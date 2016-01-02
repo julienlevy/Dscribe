@@ -37,6 +37,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     var selectedText: String = ""
     var fullContextBeforeChange: String = "" //Necessary to communicate between two functions
 
+    var numberOfEnteredEmojis: Int = 0
+
     // MARK: UIInputViewController methods
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -231,6 +233,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             }
         }
         self.autoreplaceSuggestion = ""
+        self.numberOfEnteredEmojis = 0
         
         self.checkAndResetSelectedText()
 
@@ -286,9 +289,15 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     }
 
     override func backspaceRepeatCallback() {
-        if self.textDocumentProxy.documentContextBeforeInput?.characters.last == kEscapeCue.characters.first {
-            self.escapeMode = false
-            self.displaySearchMode()
+        let context: String? = self.textDocumentProxy.documentContextBeforeInput
+        if context != nil {
+            if self.textDocumentProxy.documentContextBeforeInput?.characters.last == kEscapeCue.characters.first {
+                self.escapeMode = false
+                self.displaySearchMode()
+            }
+            if self.numberOfEnteredEmojis > 0 {
+                self.numberOfEnteredEmojis--
+            }
         }
 
         super.backspaceRepeatCallback()
@@ -301,19 +310,19 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         if context == nil {
             return
         }
-        print("Context: " + context!)
 
         if self.escapeMode {
             let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
             if (firstRange != nil) {
                 let lastIndex = context!.endIndex
                 self.stringToSearch = context!.substringWithRange(firstRange!.startIndex.successor()..<lastIndex)
-                print("Search: " + self.stringToSearch)
                 self.searchEmojis(self.stringToSearch)
             }
-        } else {
+        } else if numberOfEnteredEmojis == 0 {
             let contextString: String = String(context!.characters.dropLast())
             self.searchSuggestions(contextString, shouldAutoReplace: false)
+        } else {
+            self.numberOfEnteredEmojis--
         }
     }
 
@@ -407,9 +416,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             self.autoreplaceSuggestion = suggestions.removeFirst()
         }
 
-//        print("Suggestions: ")
-//        print(suggestions)
-
         (self.bannerView as! DscribeBanner).displaySuggestions(suggestions, originalString: lastWord!, willReplaceString: self.autoreplaceSuggestion)
     }
 
@@ -424,6 +430,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             self.saveEmojis()
         }
         self.textDocumentProxy.insertText(emoji)
+        self.numberOfEnteredEmojis++
     }
 
     func appendSuggestion(suggestion: String) {
