@@ -43,8 +43,8 @@ func defaultKeyboard() -> Keyboard {
     
     let settings = Key(.Settings)
 //    defaultKeyboard.addKey(settings, row: 3, page: 0)
-    let searchKey = Key(.SpecialCharacter)
-    searchKey.setLetter("|")
+    let searchKey = Key(.SearchEmoji)
+//    searchKey.setLetter("|")
     defaultKeyboard.addKey(searchKey, row: 3, page: 0)
     
     let space = Key(.Space)
