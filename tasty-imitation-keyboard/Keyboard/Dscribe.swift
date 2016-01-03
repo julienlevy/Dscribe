@@ -297,17 +297,18 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         self.checkAndResetSelectedText()
 
         if keyOutput == kEscapeCue {
-            if escapeMode {
-                self.deleteSearchText()
-            } else {
-                //TODO replace with most used emoji
-                self.searchEmojis("")
-
-                self.textDocumentProxy.insertText(keyOutput)
-            }
-
-            escapeMode = !escapeMode
-            self.displaySearchMode()
+//            if escapeMode {
+//                self.deleteSearchText()
+//            } else {
+//                //TODO replace with most used emoji
+//                self.searchEmojis("")
+//
+//                self.textDocumentProxy.insertText(keyOutput)
+//            }
+//
+//            escapeMode = !escapeMode
+//            self.displaySearchMode()
+            self.textDocumentProxy.insertText(keyOutput)
         } else {
             self.textDocumentProxy.insertText(keyOutput)
             let context = self.textDocumentProxy.documentContextBeforeInput
@@ -392,7 +393,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             //TODO replace with most used emoji
             self.searchEmojis("")
             
-            self.textDocumentProxy.insertText(kEscapeCue)
+            self.textDocumentProxy.insertText(kEscapeCue + " ")
         }
         
         escapeMode = !escapeMode

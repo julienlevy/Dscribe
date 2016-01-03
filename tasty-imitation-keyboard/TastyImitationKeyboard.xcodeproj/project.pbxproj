@@ -190,7 +190,6 @@
 				4E5B67A1196E03B700114361 /* KeyboardModel.swift */,
 				4ECBD90119F16DC7004FA2A3 /* DefaultKeyboard.swift */,
 				4E60A13D1979FB2E00854CC8 /* DirectionEnum.swift */,
-				0DE2F8951BEC274B000F9B5F /* Emojis.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -216,6 +215,7 @@
 				0DF7A3F81C31413E0096395F /* DscribeColors.swift */,
 				0DC28DCB1C3841A700F40BA1 /* DscribeShapes.swift */,
 				0DC28DCF1C39336200F40BA1 /* DscribeLayout.swift */,
+				0DE2F8951BEC274B000F9B5F /* Emojis.swift */,
 			);
 			name = Demo;
 			sourceTree = "<group>";
