@@ -9,7 +9,13 @@ def load(file_name):
             result[key] = data[key]
 
 for name in ['faces.json', 'nature.json', 'objects.json', 'places.json', 'symbols.json']:
+    print(name)
     load('resources/' + name)
+
+with open('resources/flags.json') as data_file:
+    data = json.load(data_file)
+    for element in data:
+        result[element['emoji']] = [element['name'].lower()]
 
 with open('resources/github_tags.json') as data_file:
     data = json.load(data_file)
@@ -18,6 +24,7 @@ with open('resources/github_tags.json') as data_file:
             for word in obj['keywords']:
                 if word not in result[obj['char']]:
                     result[obj['char']].append(word)
+
 
 # Write in file
 with open('result.json', 'w') as outfile:
