@@ -15,14 +15,9 @@ class EmojiShape: Shape {
 }
 
 func drawEmoji(bounds: CGRect, color: UIColor) {
-    print("Emoji symbol view bounds:")
-    print(bounds)
-    let factors = getFactors(CGSizeMake(0, 0), toRect: bounds)
+//    let factors = getFactors(CGSizeMake(0, 0), toRect: bounds)
     let xScalingFactor = CGFloat(0.6) //factors.xScalingFactor
     let yScalingFactor = CGFloat(0.6) //factors.yScalingFactor
-    print("SCALING FACTORS :")
-    print(xScalingFactor.description)
-    print(yScalingFactor)
 
     centerShape(CGSizeMake(41 * xScalingFactor, 40 * yScalingFactor), toRect: bounds)
 
