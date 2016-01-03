@@ -95,7 +95,6 @@ class DscribeLayout: KeyboardLayout {
     }
 
     override func layoutSpecialKeysRow(row: [Key], keyWidth: CGFloat, gapWidth: CGFloat, leftSideRatio: CGFloat, rightSideRatio: CGFloat, micButtonRatio: CGFloat, isLandscape: Bool, frame: CGRect) -> [CGRect] {
-        print("IN OVERRIDDEN LAYOUT")
         var frames = [CGRect]()
 
         var keysBeforeSpace = 0
