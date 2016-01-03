@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0DC28DCC1C3841A700F40BA1 /* DscribeShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC28DCB1C3841A700F40BA1 /* DscribeShapes.swift */; };
+		0DC28DD01C39336200F40BA1 /* DscribeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC28DCF1C39336200F40BA1 /* DscribeLayout.swift */; };
 		0DE2F8961BEC274B000F9B5F /* Emojis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2F8951BEC274B000F9B5F /* Emojis.swift */; };
 		0DE2F8981BECE232000F9B5F /* DscribeBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2F8971BECE232000F9B5F /* DscribeBanner.swift */; };
 		0DE2F89A1BED3AF0000F9B5F /* Dscribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2F8991BED3AF0000F9B5F /* Dscribe.swift */; };
@@ -101,6 +102,7 @@
 
 /* Begin PBXFileReference section */
 		0DC28DCB1C3841A700F40BA1 /* DscribeShapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeShapes.swift; sourceTree = "<group>"; };
+		0DC28DCF1C39336200F40BA1 /* DscribeLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeLayout.swift; sourceTree = "<group>"; };
 		0DE2F8951BEC274B000F9B5F /* Emojis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emojis.swift; sourceTree = "<group>"; };
 		0DE2F8971BECE232000F9B5F /* DscribeBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeBanner.swift; sourceTree = "<group>"; };
 		0DE2F8991BED3AF0000F9B5F /* Dscribe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dscribe.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				0DE2F8991BED3AF0000F9B5F /* Dscribe.swift */,
 				0DF7A3F81C31413E0096395F /* DscribeColors.swift */,
 				0DC28DCB1C3841A700F40BA1 /* DscribeShapes.swift */,
+				0DC28DCF1C39336200F40BA1 /* DscribeLayout.swift */,
 			);
 			name = Demo;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0DE2F8961BEC274B000F9B5F /* Emojis.swift in Sources */,
+				0DC28DD01C39336200F40BA1 /* DscribeLayout.swift in Sources */,
 				4E52A6D21A06A61F006A08CE /* ImageKey.swift in Sources */,
 				4E52A6D41A06A626006A08CE /* ExtraView.swift in Sources */,
 				0DE2F89A1BED3AF0000F9B5F /* Dscribe.swift in Sources */,

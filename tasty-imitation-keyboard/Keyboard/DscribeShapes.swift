@@ -15,13 +15,17 @@ class EmojiShape: Shape {
 }
 
 func drawEmoji(bounds: CGRect, color: UIColor) {
-    let factors = getFactors(CGSizeMake(41, 40), toRect: bounds)
-    let xScalingFactor = factors.xScalingFactor
-    let yScalingFactor = factors.yScalingFactor
+    print("Emoji symbol view bounds:")
+    print(bounds)
+    let factors = getFactors(CGSizeMake(0, 0), toRect: bounds)
+    let xScalingFactor = CGFloat(0.6) //factors.xScalingFactor
+    let yScalingFactor = CGFloat(0.6) //factors.yScalingFactor
+    print("SCALING FACTORS :")
+    print(xScalingFactor.description)
+    print(yScalingFactor)
 
     centerShape(CGSizeMake(41 * xScalingFactor, 40 * yScalingFactor), toRect: bounds)
 
-    //// Color Declarations
     let ovalPath = UIBezierPath(ovalInRect: CGRectMake(0 * xScalingFactor, 0 * yScalingFactor, 40 * xScalingFactor, 40 * yScalingFactor))
     color.setFill()
     ovalPath.fill()

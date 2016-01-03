@@ -39,7 +39,10 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     var numberOfEnteredEmojis: Int = 0
 
-    // MARK: UIInputViewController methods
+    // MARK: UIInputViewController methods & classes
+    override class var globalColors: GlobalColors.Type { get { return DscribeColors.self }}
+    override class var layoutClass: KeyboardLayout.Type { get { return DscribeLayout.self }}
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         // TODO review

@@ -461,11 +461,6 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
                     let globeShape = self.getShape(GlobeShape)
                     key.shape = globeShape
                 }
-            case Key.KeyType.SearchEmoji:
-                if key.shape == nil {
-                    let emojiShape = self.getShape(EmojiShape)
-                    key.shape = emojiShape
-                }
             default:
                 break
             }
