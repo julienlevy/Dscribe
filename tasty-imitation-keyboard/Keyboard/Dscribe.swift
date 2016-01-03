@@ -26,7 +26,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     var overlayView: UIView = UIView()
 
-    var emojiClass: Emoji = Emoji()
+    var emojiClass: Emoji?
 
     var appleLexicon: UILexicon = UILexicon()
     var checker: UITextChecker = UITextChecker()
@@ -447,7 +447,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     
     // MARK: Calls to banner
     func searchEmojis(string: String) {
-        let emojiList: [String] = self.emojiClass.tagSearch(string) as [String]
+        let emojiList: [String] = self.emojiClass!.tagSearch(string) as [String]
 
         (self.bannerView as! DscribeBanner).displayEmojis(emojiList)
     }
@@ -499,7 +499,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             self.deleteSearchText()
             self.escapeMode = false
             self.displaySearchMode()
-            self.emojiClass.incrementScore(emoji)
+            self.emojiClass!.incrementScore(emoji)
             self.saveEmojis()
         }
         self.textDocumentProxy.insertText(emoji)
@@ -546,7 +546,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     // MARK: Access to memory
     func saveEmojis() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(emojiClass, toFile: Emoji.ArchiveURL.path!)
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(emojiClass!, toFile: Emoji.ArchiveURL.path!)
         if !isSuccessfulSave {
             print("Failed to save emojis...")
         }
