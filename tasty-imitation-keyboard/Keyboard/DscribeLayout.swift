@@ -20,9 +20,9 @@ class DscribeLayout: KeyboardLayout {
                 key.label.adjustsFontSizeToFitWidth = true
                 key.label.font = key.label.font.fontWithSize(16)
             default:
-                key.label.font = key.label.font.fontWithSize(25)
+                key.label.font = key.label.font.fontWithSize(24)
                 if #available(iOSApplicationExtension 8.2, *) {
-                    key.label.font = UIFont.systemFontOfSize(25, weight: UIFontWeightLight)
+                    key.label.font = UIFont.systemFontOfSize(24, weight: UIFontWeightLight)
                 }
             }
 
@@ -162,5 +162,14 @@ class DscribeLayout: KeyboardLayout {
         }
 
         return frames
+    }
+
+    override func setAppearanceForKey(key: KeyboardKey, model: Key, darkMode: Bool, solidColorMode: Bool) {
+        if model.type == Key.KeyType.SearchEmoji {
+            // TODO:  use this function "setAppearanceForOtherKey" and type Other and type instead of overriding this function
+            key.color = self.self.globalColors.regularKey(darkMode, solidColorMode: solidColorMode)
+            key.downColor = self.globalColors.specialKey(darkMode, solidColorMode: solidColorMode)
+        }
+        super.setAppearanceForKey(key, model: model, darkMode: darkMode, solidColorMode: solidColorMode)
     }
 }
