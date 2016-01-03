@@ -15,7 +15,7 @@ for name in ['faces.json', 'nature.json', 'objects.json', 'places.json', 'symbol
 with open('resources/flags.json') as data_file:
     data = json.load(data_file)
     for element in data:
-        result[element['emoji']] = [element['name'].lower()]
+        result[element['emoji']] = [element['name'].lower(), 'flag', 'country']
 
 with open('resources/github_tags.json') as data_file:
     data = json.load(data_file)
