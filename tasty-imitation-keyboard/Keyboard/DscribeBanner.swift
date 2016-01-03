@@ -84,7 +84,7 @@ class DscribeBanner: ExtraView {
         self.displaySuggestions([], originalString: "")
         self.updateBannerColors()
     }
-    
+
     func updateBannerColors() {
         emojiBackgroundColor = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode)
         suggestionBackgroundColor = self.globalColors?.specialKey(self.darkMode, solidColorMode: self.solidColorMode)

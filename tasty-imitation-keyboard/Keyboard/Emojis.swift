@@ -53,7 +53,7 @@ class Emoji: NSObject, NSCoding {
     func tagSearch(sentence: String) -> [String] {
         var result: [String: [Int]] = [String: [Int]](); //key=emoji, value=[Number of occurrences, score]
 
-        if sentence == "" {
+        if sentence.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).isEmpty {
             for (emoji, tagArray) in self.emojiTag {
                 if emojiScore[emoji] == nil {
                     print("Emoji not in score array " + emoji)
@@ -71,6 +71,9 @@ class Emoji: NSObject, NSCoding {
         else {
             let tagsArray = sentence.componentsSeparatedByString(" ");
             for word in tagsArray {
+                if word.isEmpty {
+                    continue
+                }
                 for (key, tagArray) in emojiTag {
                     for tag in tagArray {
                         if tag.rangeOfString(word) != nil {

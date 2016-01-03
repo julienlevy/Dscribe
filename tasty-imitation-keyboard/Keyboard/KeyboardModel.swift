@@ -76,6 +76,7 @@ class Key: Hashable {
         case Return
         case Settings
         case Other
+        case SearchEmoji
     }
     
     var type: KeyType
