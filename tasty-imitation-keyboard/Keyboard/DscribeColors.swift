@@ -10,7 +10,7 @@ import UIKit
 
 class DscribeColors: GlobalColors {
     override class var lightModeSpecialKey: UIColor { get { return DscribeColors.lightModeSolidColorSpecialKey }}
-    override class var lightModeSolidColorSpecialKey: UIColor { get { return UIColor(red: CGFloat(96)/CGFloat(255), green: CGFloat(96)/CGFloat(255), blue: CGFloat(88)/CGFloat(255), alpha: 0.30) }}
+    override class var lightModeSolidColorSpecialKey: UIColor { get { return UIColor.blackColor().colorWithAlphaComponent(0.16) }}
 
     // TODO actually use
 //    class var lightModeSuggestion: UIColor { get { return UIColor.redColor() }} //(red: CGFloat(38.6)/CGFloat(255), green: CGFloat(18)/CGFloat(255), blue: CGFloat(39.3)/CGFloat(255), alpha: 0.4) }}
