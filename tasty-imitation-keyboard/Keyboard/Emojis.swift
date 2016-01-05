@@ -65,7 +65,6 @@ class Emoji: NSObject, NSCoding {
         if sentence.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).isEmpty {
             for (emoji, tagArray) in self.emojiTag {
                 if emojiScore[emoji] == nil {
-                    print("Emoji not in score array " + emoji)
                     continue
                 }
                 if emojiScore[emoji] > 1 {
@@ -124,12 +123,14 @@ class Emoji: NSObject, NSCoding {
     }
 
     func incrementScore(emoji: String) -> Int {
+        print("incrementing " + emoji)
+        print(self.emojiScore[emoji])
         if self.emojiScore[emoji] != nil {
             self.emojiScore[emoji] = (self.emojiScore[emoji] as Int!) + 1;
             return (self.emojiScore[emoji] as Int!);
         }
-        self.emojiScore[emoji] = 0;
-        return 0
+        self.emojiScore[emoji] = 1;
+        return 1
     }
     
 }

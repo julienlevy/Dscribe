@@ -499,9 +499,11 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             self.deleteSearchText()
             self.escapeMode = false
             self.displaySearchMode()
-            self.emojiClass!.incrementScore(emoji)
-            self.saveEmojis()
         }
+
+        self.emojiClass!.incrementScore(emoji)
+        self.saveEmojis()
+
         self.textDocumentProxy.insertText(emoji)
         self.numberOfEnteredEmojis++
     }
