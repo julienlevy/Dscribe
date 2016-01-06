@@ -14,7 +14,9 @@ let kEscapeCue = "|"
 
 
 class Dscribe: KeyboardViewController, DscribeBannerDelegate {
-    
+
+    private let backgroundSearchQueue = dispatch_queue_create("julien.dscribe.photoQueue", DISPATCH_QUEUE_CONCURRENT)
+
     class var bannerColors: DscribeColors.Type { get { return DscribeColors.self }}
 
     let takeDebugScreenshot: Bool = false
@@ -447,9 +449,12 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     
     // MARK: Calls to banner
     func searchEmojis(string: String) {
-        let emojiList: [String] = self.emojiClass!.tagSearch(string) as [String]
-
-        (self.bannerView as! DscribeBanner).displayEmojis(emojiList)
+        dispatch_async(backgroundSearchQueue) {
+            let emojiList: [String] = self.emojiClass!.tagSearch(string) as [String]
+            dispatch_async(dispatch_get_main_queue()) {
+                (self.bannerView as! DscribeBanner).displayEmojis(emojiList)
+            }
+        }
     }
 
     func searchSuggestions(contextString: String, shouldAutoReplace: Bool = true) {
