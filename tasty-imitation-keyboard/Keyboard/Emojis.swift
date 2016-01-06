@@ -58,49 +58,56 @@ class Emoji: NSObject, NSCoding {
         self.init(emojiScore: emojiScore, emojiTag: emojiTag)
     }
     
-
-    func tagSearch(sentence: String) -> [String] {
-        var result: [String: [Int]] = [String: [Int]](); //key=emoji, value=[Number of occurrences, score]
-
-        if sentence.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).isEmpty {
-            for (emoji, tagArray) in self.emojiTag {
-                if emojiScore[emoji] == nil {
-                    continue
-                }
-                if emojiScore[emoji] > 1 {
-                    if result[emoji] == nil {
-                        result[emoji] = [Int]()
-                        result[emoji]!.append(1)
-                        result[emoji]!.append(emojiScore[emoji]!)
-                    }
+    func getMostUsedEmojis() -> [String] {
+        var result: [String: Int] = [String: Int]()
+        for (emoji, tagArray) in self.emojiTag {
+            if emojiScore[emoji] == nil {
+                continue
+            }
+            if emojiScore[emoji] > 1 {
+                if result[emoji] == nil {
+                    result[emoji] = emojiScore[emoji]!
                 }
             }
         }
-        else {
-            let tagsArray = sentence.componentsSeparatedByString(" ");
-            for word in tagsArray {
-                if word.isEmpty {
-                    continue
-                }
-                for (key, tagArray) in emojiTag {
-                    for tag in tagArray {
-                        if tag.hasPrefix(word) {
-                            if result[key] != nil {
-                                if result[key]?.count > 1 {
-                                    result[key]![0]++
-                                    if emojiScore[key] != nil {
-                                        result[key]![1] = result[key]![1] + emojiScore[key]!
-                                    }
-                                }
+        let sortedKeys = Array(result.keys).sort( {
+            return result[$0]! > result[$1]!
+        })
+        return sortedKeys
+    }
+
+    func tagSearch(sentence: String) -> [String] {
+        var emojiToMatchData: [String: [Int]] = [String: [Int]]() //key=emoji, value=[Number of occurrences, score]
+
+        if sentence.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).isEmpty {
+            return self.getMostUsedEmojis()
+        }
+
+        let wordsArray = sentence.componentsSeparatedByString(" ");
+        for keyword in wordsArray {
+            if keyword.isEmpty {
+                continue
+            }
+            for (emoji, tagsArray) in self.emojiTag {
+                for tag in tagsArray {
+                    if tag.hasPrefix(keyword) {
+                        if emojiToMatchData[emoji] != nil {
+                            emojiToMatchData[emoji]![0]++
+                            // TODO: check to remove, emojiScore key must have been initialized in creattion of result key
+                            if emojiScore[emoji] != nil {
+                                emojiToMatchData[emoji]![1] += emojiScore[emoji]!
                             } else {
-                                result[key] = [Int]()
-                                result[key]!.append(1)
-                                if emojiScore[key] != nil {
-                                    result[key]!.append(emojiScore[key]!)
-                                }
-                                else {
-                                    result[key]!.append(0)
-                                }
+                                emojiScore[emoji] = 0
+                            }
+                        } else {
+                            emojiToMatchData[emoji] = [Int]()
+                            emojiToMatchData[emoji]!.append(1)
+                            if emojiScore[emoji] != nil {
+                                emojiToMatchData[emoji]!.append(emojiScore[emoji]!)
+                            }
+                            else {
+                                emojiScore[emoji] = 0
+                                emojiToMatchData[emoji]!.append(0)
                             }
                         }
                     }
@@ -108,12 +115,12 @@ class Emoji: NSObject, NSCoding {
             }
         }
 
-        let myArr = Array(result.keys)
+        let myArr = Array(emojiToMatchData.keys)
         let sortedKeys = myArr.sort( {
-            let obj1Number = result[$0]![0] as Int
-            let obj2Number = result[$1]![0] as Int
-            let obj1Score = result[$0]![1] as Int
-            let obj2Score = result[$1]![1] as Int
+            let obj1Number = emojiToMatchData[$0]![0] as Int
+            let obj2Number = emojiToMatchData[$1]![0] as Int
+            let obj1Score = emojiToMatchData[$0]![1] as Int
+            let obj2Score = emojiToMatchData[$1]![1] as Int
             if obj1Number == obj2Number {
                 return obj1Score > obj2Score
             }
