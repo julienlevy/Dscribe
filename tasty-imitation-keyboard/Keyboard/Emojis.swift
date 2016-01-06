@@ -84,7 +84,7 @@ class Emoji: NSObject, NSCoding {
                 }
                 for (key, tagArray) in emojiTag {
                     for tag in tagArray {
-                        if tag.rangeOfString(word) != nil {
+                        if tag.hasPrefix(word) {
                             if result[key] != nil {
                                 if result[key]?.count > 1 {
                                     result[key]![0]++
