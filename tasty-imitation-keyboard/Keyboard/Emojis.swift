@@ -27,8 +27,8 @@ class Emoji: NSObject, NSCoding {
         let path: String? = NSBundle.mainBundle().pathForResource("EmojiList", ofType: "plist")
         if path != nil {
             if let dictionary: NSDictionary? = NSDictionary(contentsOfFile: path!) {
-                print("DICTIONARY from memory")
-                print(dictionary)
+//                print("DICTIONARY from memory")
+//                print(dictionary)
                 self.emojiTag = dictionary as! [String: [String]]
             }
         }
@@ -115,8 +115,8 @@ class Emoji: NSObject, NSCoding {
             }
         }
 
-        let myArr = Array(emojiToMatchData.keys)
-        let sortedKeys = myArr.sort( {
+        let emojiArray = Array(emojiToMatchData.keys)
+        let sortedKeys = emojiArray.sort( {
             let obj1Number = emojiToMatchData[$0]![0] as Int
             let obj2Number = emojiToMatchData[$1]![0] as Int
             let obj1Score = emojiToMatchData[$0]![1] as Int

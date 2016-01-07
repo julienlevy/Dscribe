@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D5081DB1C3E659F008A643C /* DscribeCharactersUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5081DA1C3E659F008A643C /* DscribeCharactersUtils.swift */; };
 		0DC28DCC1C3841A700F40BA1 /* DscribeShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC28DCB1C3841A700F40BA1 /* DscribeShapes.swift */; };
 		0DC28DD01C39336200F40BA1 /* DscribeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC28DCF1C39336200F40BA1 /* DscribeLayout.swift */; };
 		0DC28DD21C39811600F40BA1 /* EmojiList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0DC28DD11C39811600F40BA1 /* EmojiList.plist */; };
@@ -102,6 +103,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D5081DA1C3E659F008A643C /* DscribeCharactersUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeCharactersUtils.swift; sourceTree = "<group>"; };
 		0DC28DCB1C3841A700F40BA1 /* DscribeShapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeShapes.swift; sourceTree = "<group>"; };
 		0DC28DCF1C39336200F40BA1 /* DscribeLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeLayout.swift; sourceTree = "<group>"; };
 		0DC28DD11C39811600F40BA1 /* EmojiList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EmojiList.plist; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				0DE2F8991BED3AF0000F9B5F /* Dscribe.swift */,
 				0DF7A3F81C31413E0096395F /* DscribeColors.swift */,
 				0DC28DCB1C3841A700F40BA1 /* DscribeShapes.swift */,
+				0D5081DA1C3E659F008A643C /* DscribeCharactersUtils.swift */,
 				0DC28DCF1C39336200F40BA1 /* DscribeLayout.swift */,
 				0DE2F8951BEC274B000F9B5F /* Emojis.swift */,
 				0DC28DD11C39811600F40BA1 /* EmojiList.plist */,
@@ -501,6 +504,7 @@
 				4E5B67A2196E03B700114361 /* KeyboardModel.swift in Sources */,
 				4E60A13C1979FA8E00854CC8 /* KeyboardConnector.swift in Sources */,
 				4E00A6E5197183EE009414F2 /* KeyboardKey.swift in Sources */,
+				0D5081DB1C3E659F008A643C /* DscribeCharactersUtils.swift in Sources */,
 				4EEFD78919E0DC6B004D4974 /* CatboardBanner.swift in Sources */,
 				0DF7A3F91C31413E0096395F /* DscribeColors.swift in Sources */,
 				4EE7599B19F75A0D00B4E6ED /* Utilities.swift in Sources */,

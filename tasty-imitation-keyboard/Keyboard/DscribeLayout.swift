@@ -10,22 +10,22 @@ import UIKit
 
 class DscribeLayout: KeyboardLayout {
     override func updateKeyCap(key: KeyboardKey, model: Key, fullReset: Bool, uppercase: Bool, characterUppercase: Bool, shiftState: ShiftState) {
-        if fullReset {
-            // font size
-            switch model.type {
-            case
-            Key.KeyType.ModeChange,
-            Key.KeyType.Space,
-            Key.KeyType.Return:
-                key.label.adjustsFontSizeToFitWidth = true
-                key.label.font = key.label.font.fontWithSize(16)
-            default:
-                key.label.font = key.label.font.fontWithSize(24)
-                if #available(iOSApplicationExtension 8.2, *) {
-                    key.label.font = UIFont.systemFontOfSize(24, weight: UIFontWeightLight)
-                }
-            }
 
+        self.updateKeyCapText(key, model: model, uppercase: uppercase, characterUppercase: characterUppercase)
+
+        // font size
+        switch model.type {
+        case
+        Key.KeyType.ModeChange,
+        Key.KeyType.Space,
+        Key.KeyType.Return:
+            key.label.adjustsFontSizeToFitWidth = true
+            key.label.font = key.label.font.fontWithSize(16)
+        default:
+            key.label.font = fontForKeyWithText(key.text, keytype: model.type)
+        }
+
+        if fullReset {
             // label inset
             switch model.type {
             case
@@ -90,8 +90,6 @@ class DscribeLayout: KeyboardLayout {
 
             (key.shape as? ShiftShape)?.withLock = (shiftState == .Locked)
         }
-        
-        self.updateKeyCapText(key, model: model, uppercase: uppercase, characterUppercase: characterUppercase)
     }
 
     override func layoutSpecialKeysRow(row: [Key], keyWidth: CGFloat, gapWidth: CGFloat, leftSideRatio: CGFloat, rightSideRatio: CGFloat, micButtonRatio: CGFloat, isLandscape: Bool, frame: CGRect) -> [CGRect] {
