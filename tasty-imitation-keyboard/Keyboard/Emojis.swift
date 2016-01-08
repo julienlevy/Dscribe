@@ -78,26 +78,26 @@ class Emoji: NSObject, NSCoding {
 
     func tagSearch(sentence: String) -> [String] {
         var emojiToMatchData: [String: [Int]] = [String: [Int]]() //key=emoji, value=[Number of occurrences, score]
-
-        if sentence.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).isEmpty {
-            return self.getMostUsedEmojis()
-        }
-
-        let wordsArray = sentence.componentsSeparatedByString(" ");
+        
+        
+        let wordsArray = sentence.componentsSeparatedByString(" ").sort({
+            return $0.characters.count > $1.characters.count
+        })
         for keyword in wordsArray {
             if keyword.isEmpty {
                 continue
             }
-            for (emoji, tagsArray) in self.emojiTag {
-                if (keyword.characters.count < 3 && emojiToMatchData.keys.count > 10) {
-                    // if the keyword's length is <= 2, we only keep 15 matches
-                    break
-                }
+            for (emoji, tagsArray) in emojiTag {
+                var matched = false
+                //            if (keyword.characters.count < 3 && emojiToMatchData.keys.count > 10) {
+                //                // if the keyword's length is <= 2, we only keep 15 matches
+                //                break
+                //            }
                 for tag in tagsArray {
-                    if tag.hasPrefix(keyword) {
+                    if tag.hasPrefix(keyword) && !matched {
+                        matched = true
                         if emojiToMatchData[emoji] != nil {
                             emojiToMatchData[emoji]![0]++
-                            // TODO: check to remove, emojiScore key must have been initialized in creattion of result key
                             if emojiScore[emoji] != nil {
                                 emojiToMatchData[emoji]![1] += emojiScore[emoji]!
                             } else {
@@ -113,24 +113,22 @@ class Emoji: NSObject, NSCoding {
                                 emojiScore[emoji] = 0
                                 emojiToMatchData[emoji]!.append(0)
                             }
-                            //Adding length to calculate percentage
-                            emojiToMatchData[emoji]!.append(tagsArray.count)
                         }
                     }
                 }
             }
         }
-
+        
         let emojiArray = Array(emojiToMatchData.keys)
         let sortedKeys = emojiArray.sort( {
-            let obj1Percentage = Double(emojiToMatchData[$0]![0]) / Double(emojiToMatchData[$0]![2]) as Double
-            let obj2Percentage = Double(emojiToMatchData[$1]![0]) / Double(emojiToMatchData[$0]![2]) as Double
+            let obj1Percentage = emojiToMatchData[$0]![0] as Int
+            let obj2Percentage = emojiToMatchData[$1]![0] as Int
             let obj1Score = emojiToMatchData[$0]![1] as Int
             let obj2Score = emojiToMatchData[$1]![1] as Int
-            if obj1Score == obj2Score {
-                return obj1Percentage > obj2Percentage
+            if obj1Percentage == obj2Percentage {
+                return obj1Score > obj2Score
             }
-            return obj1Score > obj2Score
+            return obj1Percentage > obj2Percentage
         })
         return sortedKeys
     }
