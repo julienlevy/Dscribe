@@ -9,7 +9,7 @@
 import UIKit
 
 
-let kEscapeTypeEnabled = "kEscapeTypeEnabled"
+let kAutocorrectLanguage = "kAutocorrectLanguage"
 let kEscapeCue = "|"
 
 
@@ -178,6 +178,11 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         let dscribeBanner = DscribeBanner(globalColors: self.dynamicType.globalColors, bannerColors: self.dynamicType.bannerColors, darkMode: false, solidColorMode: self.solidColorMode())
         dscribeBanner.delegate = self
         return dscribeBanner
+    }
+    override func createSettings() -> ExtraView? {
+        let settingsView = DscribeSettings(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
+        settingsView.backButton?.addTarget(self, action: Selector("toggleSettings"), forControlEvents: UIControlEvents.TouchUpInside)
+        return settingsView
     }
 
     // MARK: TODO: define use for those methods
