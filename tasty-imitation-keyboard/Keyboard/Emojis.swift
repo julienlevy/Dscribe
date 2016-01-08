@@ -89,6 +89,10 @@ class Emoji: NSObject, NSCoding {
                 continue
             }
             for (emoji, tagsArray) in self.emojiTag {
+                if (keyword.characters.count < 3 && emojiToMatchData.keys.count > 10) {
+                    // if the keyword's length is <= 2, we only keep 15 matches
+                    break
+                }
                 for tag in tagsArray {
                     if tag.hasPrefix(keyword) {
                         if emojiToMatchData[emoji] != nil {
@@ -109,6 +113,8 @@ class Emoji: NSObject, NSCoding {
                                 emojiScore[emoji] = 0
                                 emojiToMatchData[emoji]!.append(0)
                             }
+                            //Adding length to calculate percentage
+                            emojiToMatchData[emoji]!.append(tagsArray.count)
                         }
                     }
                 }
@@ -117,14 +123,14 @@ class Emoji: NSObject, NSCoding {
 
         let emojiArray = Array(emojiToMatchData.keys)
         let sortedKeys = emojiArray.sort( {
-            let obj1Number = emojiToMatchData[$0]![0] as Int
-            let obj2Number = emojiToMatchData[$1]![0] as Int
+            let obj1Percentage = Double(emojiToMatchData[$0]![0]) / Double(emojiToMatchData[$0]![2]) as Double
+            let obj2Percentage = Double(emojiToMatchData[$1]![0]) / Double(emojiToMatchData[$0]![2]) as Double
             let obj1Score = emojiToMatchData[$0]![1] as Int
             let obj2Score = emojiToMatchData[$1]![1] as Int
-            if obj1Number == obj2Number {
-                return obj1Score > obj2Score
+            if obj1Score == obj2Score {
+                return obj1Percentage > obj2Percentage
             }
-            return obj1Number > obj2Number
+            return obj1Score > obj2Score
         })
         return sortedKeys
     }
