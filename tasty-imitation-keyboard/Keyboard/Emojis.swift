@@ -79,6 +79,10 @@ class Emoji: NSObject, NSCoding {
     func tagSearch(sentence: String) -> [String] {
         var emojiToMatchData: [String: [Int]] = [String: [Int]]() //key=emoji, value=[Number of occurrences, score]
         
+        if sentence.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).isEmpty {
+            return self.getMostUsedEmojis()
+        }
+
         let wordsArray = sentence.componentsSeparatedByString(" ")
         for keyword in wordsArray {
             if keyword.isEmpty {
