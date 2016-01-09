@@ -89,10 +89,9 @@ class Emoji: NSObject, NSCoding {
             }
             for (emoji, tagsArray) in emojiTag {
                 var matched = false
-                //            if (keyword.characters.count < 3 && emojiToMatchData.keys.count > 10) {
-                //                // if the keyword's length is <= 2, we only keep 15 matches
-                //                break
-                //            }
+                if (keyword.characters.count < 3 && emojiToMatchData.keys.count > 10 && emojiToMatchData[emoji] == nil) {
+                    continue
+                }
                 for tag in tagsArray {
                     if tag.hasPrefix(keyword) && !matched {
                         matched = true
