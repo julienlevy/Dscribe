@@ -79,19 +79,13 @@ class Emoji: NSObject, NSCoding {
     func tagSearch(sentence: String) -> [String] {
         var emojiToMatchData: [String: [Int]] = [String: [Int]]() //key=emoji, value=[Number of occurrences, score]
         
-        
-        let wordsArray = sentence.componentsSeparatedByString(" ").sort({
-            return $0.characters.count > $1.characters.count
-        })
+        let wordsArray = sentence.componentsSeparatedByString(" ")
         for keyword in wordsArray {
             if keyword.isEmpty {
                 continue
             }
             for (emoji, tagsArray) in emojiTag {
                 var matched = false
-                if (keyword.characters.count < 3 && emojiToMatchData.keys.count > 10 && emojiToMatchData[emoji] == nil) {
-                    continue
-                }
                 for tag in tagsArray {
                     if tag.hasPrefix(keyword) && !matched {
                         matched = true
