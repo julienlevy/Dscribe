@@ -42,6 +42,29 @@ class DscribeSettings: DefaultSettings {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if indexPath.section == settingsList.count - 1 {
+            if let languageCell = tableView.dequeueReusableCellWithIdentifier("languageCell") as? LanguageSettingCell {
+                let key = self.settingsList[indexPath.section].1[indexPath.row]
+                
+                if languageCell.sw.allTargets().count == 0 {
+                    languageCell.sw.addTarget(self, action: Selector("toggleSetting:"), forControlEvents: UIControlEvents.ValueChanged)
+                }
+                languageCell.label.text = self.settingsNames[key]
+                languageCell.longLabel.text = self.settingsNotes[key]
+                
+                languageCell.backgroundColor = (self.darkMode ? cellBackgroundColorDark : cellBackgroundColorLight)
+                languageCell.label.textColor = (self.darkMode ? cellLabelColorDark : cellLabelColorLight)
+                languageCell.longLabel.textColor = (self.darkMode ? cellLongLabelColorDark : cellLongLabelColorLight)
+                
+                languageCell.changeConstraints()
+                
+                return languageCell
+            }
+            else {
+                assert(false, "this is a bad thing that just happened dscribe")
+                return UITableViewCell()
+            }
+        }
         if let cell = tableView.dequeueReusableCellWithIdentifier("cell") as? DefaultSettingsTableViewCell {
             let key = self.settingsList[indexPath.section].1[indexPath.row]
 
@@ -61,24 +84,6 @@ class DscribeSettings: DefaultSettings {
 
             return cell
         }
-        else if let languageCell = tableView.dequeueReusableCellWithIdentifier("languageCell") as? LanguageSettingCell {
-            let key = self.settingsList[indexPath.section].1[indexPath.row]
-            print(key)
-
-            if languageCell.sw.allTargets().count == 0 {
-                languageCell.sw.addTarget(self, action: Selector("toggleSetting:"), forControlEvents: UIControlEvents.ValueChanged)
-            }
-            languageCell.label.text = self.settingsNames[key]
-            languageCell.longLabel.text = self.settingsNotes[key]
-            
-            languageCell.backgroundColor = (self.darkMode ? cellBackgroundColorDark : cellBackgroundColorLight)
-            languageCell.label.textColor = (self.darkMode ? cellLabelColorDark : cellLabelColorLight)
-            languageCell.longLabel.textColor = (self.darkMode ? cellLongLabelColorDark : cellLongLabelColorLight)
-
-            languageCell.changeConstraints()
-
-            return languageCell
-        }
         else {
             assert(false, "this is a bad thing that just happened")
             return UITableViewCell()
@@ -86,6 +91,85 @@ class DscribeSettings: DefaultSettings {
     }
 }
 
-class LanguageSettingCell: DefaultSettingsTableViewCell {
+class LanguageSettingCell: DefaultSettingsTableViewCell, UIPickerViewDataSource, UIPickerViewDelegate {
+    var languagePicker: UIPickerView?
+    var availableLanguages: [String] = [String]()
 
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        self.getAvailableLanguages()
+
+        self.languagePicker = UIPickerView()
+        print("After init of picker")
+        self.languagePicker!.translatesAutoresizingMaskIntoConstraints = false
+        self.languagePicker!.tag = 4
+        self.languagePicker!.delegate = self
+        self.addSubview(self.languagePicker!)
+
+        self.languagePicker!.addConstraints(self.sw.constraints)
+        let centerPicker = NSLayoutConstraint(item: languagePicker!, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
+        let rightPicker: NSLayoutConstraint = NSLayoutConstraint(item: languagePicker!, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 0)
+        let heigthPicker: NSLayoutConstraint = NSLayoutConstraint(item: languagePicker!, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Height, multiplier: 1, constant: 0)
+        let leftPicker: NSLayoutConstraint = NSLayoutConstraint(item: languagePicker!, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        self.addConstraint(centerPicker)
+        self.addConstraint(rightPicker)
+        self.addConstraint(heigthPicker)
+        self.addConstraint(leftPicker)
+
+        self.sw.hidden = true
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.availableLanguages.count
+    }
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+        var labelView: UILabel? = view as? UILabel
+        if labelView == nil {
+            labelView = UILabel()
+            labelView!.font = UIFont.systemFontOfSize(16.0)
+        }
+        labelView!.text = availableLanguages[row]
+        return labelView!
+    }
+    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 20
+    }
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print(self.availableLanguages[row])
+    }
+
+    func getAvailableLanguages() {
+        let availableLanguagesCodes: [AnyObject] = UITextChecker.availableLanguages()
+
+        for item in availableLanguagesCodes {
+            let language: String? = item as? String
+            if language == nil {
+                continue
+            }
+            let codes: [String] = language!.componentsSeparatedByString("_")
+            var wholeString: String = NSLocale(localeIdentifier: "en").displayNameForKey(NSLocaleLanguageCode, value: codes[0])!
+            if codes.count > 1 {
+                wholeString += " - " + NSLocale(localeIdentifier: codes[0]).displayNameForKey(NSLocaleCountryCode, value: codes[1])!
+            }
+            self.availableLanguages.append(wholeString)
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
