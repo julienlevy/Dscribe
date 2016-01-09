@@ -94,6 +94,7 @@ class DscribeSettings: DefaultSettings {
 class LanguageSettingCell: DefaultSettingsTableViewCell, UIPickerViewDataSource, UIPickerViewDelegate {
     var languagePicker: UIPickerView?
     var availableLanguages: [String] = [String]()
+    var availableLanguagesCodes: [AnyObject] = [AnyObject]()
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
 
@@ -144,10 +145,16 @@ class LanguageSettingCell: DefaultSettingsTableViewCell, UIPickerViewDataSource,
     }
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print(self.availableLanguages[row])
+        print(self.availableLanguagesCodes[row])
+        let code: String? = availableLanguagesCodes[row] as? String
+        if code == nil {
+            return
+        }
+        NSUserDefaults.standardUserDefaults().setObject(code!, forKey: kAutocorrectLanguage)
     }
 
     func getAvailableLanguages() {
-        let availableLanguagesCodes: [AnyObject] = UITextChecker.availableLanguages()
+        availableLanguagesCodes = UITextChecker.availableLanguages()
 
         for item in availableLanguagesCodes {
             let language: String? = item as? String
@@ -159,7 +166,7 @@ class LanguageSettingCell: DefaultSettingsTableViewCell, UIPickerViewDataSource,
             if codes.count > 1 {
                 wholeString += " - " + NSLocale(localeIdentifier: codes[0]).displayNameForKey(NSLocaleCountryCode, value: codes[1])!
             }
-            self.availableLanguages.append(wholeString)
+            availableLanguages.append(wholeString)
         }
     }
 }

@@ -68,10 +68,18 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 NSLog("%@ -> %@", lexiconEntry.userInput, lexiconEntry.documentText)
             }
         })
+
+        NSUserDefaults.standardUserDefaults().registerDefaults([
+            kAutocorrectLanguage: "en_US"
+            ])
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func defaultsChanged(notification: NSNotification) {
+        super.defaultsChanged(notification)
+        //TODO: setup here the code for the new change in language suggestions :)
     }
     
     override func viewDidLayoutSubviews() {
