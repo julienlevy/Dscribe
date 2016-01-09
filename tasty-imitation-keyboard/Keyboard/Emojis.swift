@@ -78,22 +78,26 @@ class Emoji: NSObject, NSCoding {
 
     func tagSearch(sentence: String) -> [String] {
         var emojiToMatchData: [String: [Int]] = [String: [Int]]() //key=emoji, value=[Number of occurrences, score]
-
-        if sentence.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).isEmpty {
-            return self.getMostUsedEmojis()
-        }
-
-        let wordsArray = sentence.componentsSeparatedByString(" ");
+        
+        
+        let wordsArray = sentence.componentsSeparatedByString(" ").sort({
+            return $0.characters.count > $1.characters.count
+        })
         for keyword in wordsArray {
             if keyword.isEmpty {
                 continue
             }
-            for (emoji, tagsArray) in self.emojiTag {
+            for (emoji, tagsArray) in emojiTag {
+                var matched = false
+                //            if (keyword.characters.count < 3 && emojiToMatchData.keys.count > 10) {
+                //                // if the keyword's length is <= 2, we only keep 15 matches
+                //                break
+                //            }
                 for tag in tagsArray {
-                    if tag.hasPrefix(keyword) {
+                    if tag.hasPrefix(keyword) && !matched {
+                        matched = true
                         if emojiToMatchData[emoji] != nil {
                             emojiToMatchData[emoji]![0]++
-                            // TODO: check to remove, emojiScore key must have been initialized in creattion of result key
                             if emojiScore[emoji] != nil {
                                 emojiToMatchData[emoji]![1] += emojiScore[emoji]!
                             } else {
@@ -114,17 +118,17 @@ class Emoji: NSObject, NSCoding {
                 }
             }
         }
-
+        
         let emojiArray = Array(emojiToMatchData.keys)
         let sortedKeys = emojiArray.sort( {
-            let obj1Number = emojiToMatchData[$0]![0] as Int
-            let obj2Number = emojiToMatchData[$1]![0] as Int
+            let obj1Percentage = emojiToMatchData[$0]![0] as Int
+            let obj2Percentage = emojiToMatchData[$1]![0] as Int
             let obj1Score = emojiToMatchData[$0]![1] as Int
             let obj2Score = emojiToMatchData[$1]![1] as Int
-            if obj1Number == obj2Number {
+            if obj1Percentage == obj2Percentage {
                 return obj1Score > obj2Score
             }
-            return obj1Number > obj2Number
+            return obj1Percentage > obj2Percentage
         })
         return sortedKeys
     }
