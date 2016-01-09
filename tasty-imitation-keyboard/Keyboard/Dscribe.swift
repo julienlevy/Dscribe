@@ -96,6 +96,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             return
         }
 
+        self.setupBannerConstraints()
+
         // TODO: call this in a more appropriate place: viewDidLayoutSubviews is called everytime a key is hit
         if overlayView.frame == CGRectZero {
             overlayView.backgroundColor = UIColor.blackColor()
@@ -198,6 +200,29 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         let settingsView = DscribeSettings(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
         settingsView.backButton?.addTarget(self, action: Selector("toggleSettings"), forControlEvents: UIControlEvents.TouchUpInside)
         return settingsView
+    }
+
+    func setupBannerConstraints() {
+        self.bannerView?.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addConstraint(NSLayoutConstraint(
+            item: self.bannerView!, attribute: NSLayoutAttribute.Height,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute,
+            multiplier: 1, constant: metric("topBanner")))
+        self.view.addConstraint(NSLayoutConstraint(
+            item: self.bannerView!, attribute: NSLayoutAttribute.Bottom,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: self.forwardingView, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(
+            item: self.bannerView!, attribute: NSLayoutAttribute.Width,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: self.view, attribute: NSLayoutAttribute.Width,
+            multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(
+            item: self.bannerView!, attribute: NSLayoutAttribute.Left,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: self.view, attribute: NSLayoutAttribute.Left,
+            multiplier: 1, constant: 0))
     }
 
     // MARK: TODO: define use for those methods

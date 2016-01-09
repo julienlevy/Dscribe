@@ -67,13 +67,8 @@ class DscribeBanner: ExtraView {
 
         self.backgroundColor = UIColor.clearColor()
 
-        print("layout subviews")
-        //TODO refacto
-        self.scrollView.frame = CGRectMake(0, 0, self.frame.width, self.frame.height)
-        self.scrollView.contentSize = CGSizeMake(140, 600)
-        self.scrollView.scrollEnabled = true
-        self.scrollView.showsHorizontalScrollIndicator = false
-        self.addSubview(self.scrollView)
+        print("layout banner subviews")
+        self.setupScrollView()
 
         self.beforeScrollView.frame = CGRectMake( -self.frame.width, space, self.frame.width, self.frame.height)
         self.scrollView.addSubview(self.beforeScrollView)
@@ -83,6 +78,33 @@ class DscribeBanner: ExtraView {
         
         self.displaySuggestions([], originalString: "")
         self.updateBannerColors()
+    }
+    func setupScrollView() {
+        self.scrollView.translatesAutoresizingMaskIntoConstraints = false
+        self.scrollView.contentSize = CGSizeMake(self.frame.width, self.frame.height)
+        self.scrollView.scrollEnabled = true
+        self.scrollView.showsHorizontalScrollIndicator = false
+        self.addSubview(self.scrollView)
+
+        self.addConstraint(NSLayoutConstraint(
+                item: scrollView, attribute: NSLayoutAttribute.Height,
+                relatedBy: NSLayoutRelation.Equal,
+                toItem: self, attribute: NSLayoutAttribute.Height,
+                multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint(
+                item: scrollView, attribute: NSLayoutAttribute.CenterY,
+                relatedBy: NSLayoutRelation.Equal,
+                toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint(
+                item: scrollView, attribute: NSLayoutAttribute.Width,
+                relatedBy: NSLayoutRelation.Equal,
+                toItem: self, attribute: NSLayoutAttribute.Width,
+                multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint(
+                item: scrollView, attribute: NSLayoutAttribute.CenterX,
+                relatedBy: NSLayoutRelation.Equal,
+                toItem: self, attribute: NSLayoutAttribute.CenterX,
+                multiplier: 1, constant: 0))
     }
 
     func updateBannerColors() {
