@@ -54,7 +54,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             loadSampleEmojis()
         }
         
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: kSmallLowercase)
         //To change the height of the banner
         metrics = [
         "topBanner": 43
@@ -70,7 +69,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         })
 
         NSUserDefaults.standardUserDefaults().registerDefaults([
-            kAutocorrectLanguage: "en_US"
+            kAutocorrectLanguage: "en_US",
+            kSmallLowercase: true
             ])
     }
     required init?(coder: NSCoder) {
