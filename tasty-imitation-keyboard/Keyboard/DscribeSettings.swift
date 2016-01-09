@@ -109,6 +109,8 @@ class LanguageSettingCell: DefaultSettingsTableViewCell, UIPickerViewDataSource,
         self.languagePicker!.delegate = self
         self.addSubview(self.languagePicker!)
 
+        self.selectCurrentLanguage()
+
         self.languagePicker!.addConstraints(self.sw.constraints)
         let centerPicker = NSLayoutConstraint(item: languagePicker!, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
         let rightPicker: NSLayoutConstraint = NSLayoutConstraint(item: languagePicker!, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 0)
@@ -144,8 +146,6 @@ class LanguageSettingCell: DefaultSettingsTableViewCell, UIPickerViewDataSource,
         return 20
     }
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(self.availableLanguages[row])
-        print(self.availableLanguagesCodes[row])
         let code: String? = availableLanguagesCodes[row] as? String
         if code == nil {
             return
@@ -154,7 +154,7 @@ class LanguageSettingCell: DefaultSettingsTableViewCell, UIPickerViewDataSource,
     }
 
     func getAvailableLanguages() {
-        availableLanguagesCodes = UITextChecker.availableLanguages()
+        availableLanguagesCodes = UITextChecker.availableLanguages().sort({ ($0 as! String) < ($1 as! String) })
 
         for item in availableLanguagesCodes {
             let language: String? = item as? String
@@ -168,6 +168,17 @@ class LanguageSettingCell: DefaultSettingsTableViewCell, UIPickerViewDataSource,
             }
             availableLanguages.append(wholeString)
         }
+    }
+    func selectCurrentLanguage() {
+        let defaultLanguage: String? = NSUserDefaults.standardUserDefaults().objectForKey(kAutocorrectLanguage) as? String
+        if defaultLanguage == nil {
+            return
+        }
+        let index: Int? = availableLanguagesCodes.indexOf({ $0 as! String == defaultLanguage! })
+        if index == nil {
+            return
+        }
+        languagePicker?.selectRow(index!, inComponent: 0, animated: false)
     }
 }
 

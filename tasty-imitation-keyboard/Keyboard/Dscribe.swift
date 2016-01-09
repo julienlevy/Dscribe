@@ -32,7 +32,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     var appleLexicon: UILexicon = UILexicon()
     var checker: UITextChecker = UITextChecker()
-    let language = "en"
+    var language: String = "en_US"
     var suggestions: [String] = [String]()
     var autoreplaceSuggestion: String = ""
 
@@ -69,9 +69,13 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         })
 
         NSUserDefaults.standardUserDefaults().registerDefaults([
-            kAutocorrectLanguage: "en_US",
+            kAutocorrectLanguage: "en_UK",
             kSmallLowercase: true
             ])
+        if let newLanguage: String = NSUserDefaults.standardUserDefaults().objectForKey(kAutocorrectLanguage) as? String {
+            language = newLanguage
+            print("language init to " + language)
+        }
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -79,7 +83,10 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     override func defaultsChanged(notification: NSNotification) {
         super.defaultsChanged(notification)
-        //TODO: setup here the code for the new change in language suggestions :)
+        if let newLanguage: String = NSUserDefaults.standardUserDefaults().objectForKey(kAutocorrectLanguage) as? String {
+            language = newLanguage
+            print("Changed language to " + language)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -489,7 +496,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         }
 
         // Spelling and Autocorrect
-        let misspelledRange = checker.rangeOfMisspelledWordInString(contextString, range: rangeOfLast, startingAt: 0, wrap: false, language: "en")
+        let misspelledRange = checker.rangeOfMisspelledWordInString(contextString, range: rangeOfLast, startingAt: 0, wrap: false, language: language)
         if misspelledRange.location != NSNotFound && shouldAutoReplace {
             autoReplace = true
         }
