@@ -148,13 +148,24 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
     func getAvailableLanguages() {
         availableLanguagesCodes = (UITextChecker.availableLanguages() as! [String]).sort({ $0 < $1 })
 
+        var languageDict: [String: String] = [String: String]()
         for language in availableLanguagesCodes {
             let codes: [String] = language.componentsSeparatedByString("_")
             var wholeString: String = NSLocale(localeIdentifier: "en").displayNameForKey(NSLocaleLanguageCode, value: codes[0])!
             if codes.count > 1 {
                 wholeString += " - " + NSLocale(localeIdentifier: codes[0]).displayNameForKey(NSLocaleCountryCode, value: codes[1])!
             }
-            availableLanguages.append(wholeString)
+            languageDict[language] = wholeString
+//            availableLanguages.append(wholeString)
+        }
+
+        //Proper sort
+        let sorted = languageDict.sort({ $0.1 < $1.1 })
+        availableLanguages = [String]()
+        availableLanguagesCodes = [String]()
+        for tuple in sorted {
+            availableLanguagesCodes.append(tuple.0)
+            availableLanguages.append(tuple.1)
         }
     }
     func indexOfCurrentLanguage() -> Int? {
