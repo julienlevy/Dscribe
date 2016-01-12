@@ -53,6 +53,14 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
     
 
     override func viewDidLoad() {
+        NSUserDefaults(suiteName: "group.dscribekeyboard")!.registerDefaults([
+            kAutoCapitalization: true,
+            kPeriodShortcut: true,
+            kKeyboardClicks: false,
+            kSmallLowercase: true,
+            kAutocorrectLanguage: "en_UK"
+            ])
+        
         self.tableView?.registerClass(DefaultSettingsTableViewCell.self, forCellReuseIdentifier: "cell")
         self.tableView?.registerClass(LanguageSettingCell.self, forCellReuseIdentifier: "languageCell")
         self.tableView?.registerClass(PickerViewCell.self, forCellReuseIdentifier: "languagePicker")
