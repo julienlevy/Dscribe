@@ -62,10 +62,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         self.requestSupplementaryLexiconWithCompletion({
             lexicon in
             self.appleLexicon = lexicon
-
-            for lexiconEntry in self.appleLexicon.entries {
-                NSLog("%@ -> %@", lexiconEntry.userInput, lexiconEntry.documentText)
-            }
         })
 
         NSUserDefaults.standardUserDefaults().registerDefaults([
@@ -76,6 +72,15 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             language = newLanguage
             print("language init to " + language)
         }
+        NSUserDefaults(suiteName: "group.dscribekeyboard")?.registerDefaults(["testshared": "Test was shared"])
+        NSUserDefaults(suiteName: "group.dscribekeyboard")?.setObject("Test's been shared", forKey: "testshared")
+//        
+//        NSUserDefaults(suiteName: "group.dscribekeyboard")?.registerDefaults(["testgroup": "Group worked"])
+//        NSUserDefaults.standardUserDefaults().registerDefaults(["teststandard": "Standart worked"])
+//        print("GROUP DEFAULT: ")
+//        print(NSUserDefaults(suiteName: "group.dscribekeyboard")?.objectForKey("testgroup"))
+//        print("STANDARD DEFAULT: ")
+//        print(NSUserDefaults(suiteName: "group.dscribekeyboard")?.objectForKey("teststandard"))
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
