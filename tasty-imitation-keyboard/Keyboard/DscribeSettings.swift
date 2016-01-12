@@ -56,7 +56,6 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         super.loadNib()
         self.tableView?.registerClass(LanguageSettingCell.self, forCellReuseIdentifier: "languageCell")
         self.tableView?.registerClass(PickerViewCell.self, forCellReuseIdentifier: "languagePicker")
-        self.tableView?.delegate = self
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
