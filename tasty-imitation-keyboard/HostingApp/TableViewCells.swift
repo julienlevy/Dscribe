@@ -21,63 +21,63 @@ class DefaultSettingsTableViewCell: UITableViewCell {
         self.label = UILabel()
         self.longLabel = UITextView()
         self.cellConstraints = []
-        
+
         self.constraintsSetForLongLabel = false
-        
+
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         self.sw.translatesAutoresizingMaskIntoConstraints = false
         self.label.translatesAutoresizingMaskIntoConstraints = false
         self.longLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+
         self.longLabel.text = nil
         self.longLabel.scrollEnabled = false
         self.longLabel.selectable = false
         self.longLabel.backgroundColor = UIColor.clearColor()
-        
+
         self.sw.tag = 1
         self.label.tag = 2
         self.longLabel.tag = 3
-        
+
         self.addSubview(self.sw)
         self.addSubview(self.label)
         self.addSubview(self.longLabel)
-        
+
         self.addConstraints()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func addConstraints() {
         let margin: CGFloat = 8
         let sideMargin = margin * 2
-        
+
         let hasLongText = self.longLabel.text != nil && !self.longLabel.text.isEmpty
         if hasLongText {
             let switchSide = NSLayoutConstraint(item: sw, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -sideMargin)
             let switchTop = NSLayoutConstraint(item: sw, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: margin)
             let labelSide = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: sideMargin)
             let labelCenter = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
-            
+
             self.addConstraint(switchSide)
             self.addConstraint(switchTop)
             self.addConstraint(labelSide)
             self.addConstraint(labelCenter)
-            
+
             let left = NSLayoutConstraint(item: longLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: sideMargin)
             let right = NSLayoutConstraint(item: longLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -sideMargin)
             let top = NSLayoutConstraint(item: longLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: margin)
             let bottom = NSLayoutConstraint(item: longLabel, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -margin)
-            
+
             self.addConstraint(left)
             self.addConstraint(right)
             self.addConstraint(top)
             self.addConstraint(bottom)
-            
+
             self.cellConstraints += [switchSide, switchTop, labelSide, labelCenter, left, right, top, bottom]
-            
+
             self.constraintsSetForLongLabel = true
         }
         else {
@@ -86,19 +86,19 @@ class DefaultSettingsTableViewCell: UITableViewCell {
             let switchBottom = NSLayoutConstraint(item: sw, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -margin)
             let labelSide = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: sideMargin)
             let labelCenter = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
-            
+
             self.addConstraint(switchSide)
             self.addConstraint(switchTop)
             self.addConstraint(switchBottom)
             self.addConstraint(labelSide)
             self.addConstraint(labelCenter)
-            
+
             self.cellConstraints += [switchSide, switchTop, switchBottom, labelSide, labelCenter]
-            
+
             self.constraintsSetForLongLabel = false
         }
     }
-    
+
     // XXX: not in updateConstraints because it doesn't play nice with UITableViewAutomaticDimension for some reason
     func changeConstraints() {
         let hasLongText = self.longLabel.text != nil && !self.longLabel.text.isEmpty
@@ -112,26 +112,26 @@ class DefaultSettingsTableViewCell: UITableViewCell {
 
 class LanguageSettingCell: DefaultSettingsTableViewCell {
     var labelDisplay: UILabel
-    
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         self.labelDisplay = UILabel()
-        
+
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         self.sw.hidden = true
-        
+
         labelDisplay.tag = 4
-        
+
         self.addSubview(labelDisplay)
-        
+
         self.labelDisplay.translatesAutoresizingMaskIntoConstraints = false
-        
+
         self.addConstraints()
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func addConstraints() {
         super.addConstraints()
         if labelDisplay.superview == nil {
@@ -150,22 +150,21 @@ protocol PickerDelegate {
 class PickerViewCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegate {
     var pickerView: UIPickerView
     var data: [String] = [String]()
-    
+
     var key: String = ""
     var indexPath: NSIndexPath?
     var delegate: PickerDelegate?
-    
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         self.pickerView = UIPickerView()
-        
+
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         self.addSubview(self.pickerView)
         self.pickerView.delegate = self
-        
+
         self.pickerView.translatesAutoresizingMaskIntoConstraints = false
         self.addConstraints()
-        
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -173,12 +172,12 @@ class PickerViewCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDeleg
     func addConstraints() {
         let margin: CGFloat = 8
         let sideMargin = margin * 2
-        
+
         let left = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: sideMargin)
         let right = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -sideMargin)
         let top = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: margin)
         let bottom = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -margin)
-        
+
         self.addConstraint(left)
         self.addConstraint(right)
         self.addConstraint(top)

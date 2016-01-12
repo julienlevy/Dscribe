@@ -94,7 +94,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        NSUserDefaults.standardUserDefaults().registerDefaults([
+        NSUserDefaults(suiteName: "group.dscribekeyboard")!.registerDefaults([
             kAutoCapitalization: true,
             kPeriodShortcut: true,
             kKeyboardClicks: false,
@@ -216,7 +216,7 @@ class KeyboardViewController: UIInputViewController {
         }
         else {
             let uppercase = self.shiftState.uppercase()
-            let characterUppercase = (NSUserDefaults.standardUserDefaults().boolForKey(kSmallLowercase) ? uppercase : true)
+            let characterUppercase = (NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(kSmallLowercase) ? uppercase : true)
             
             self.forwardingView.frame = orientationSavvyBounds
             self.layout?.layoutKeys(self.currentMode, uppercase: uppercase, characterUppercase: characterUppercase, shiftState: self.shiftState)
@@ -463,7 +463,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func handleAutoPeriod(key: Key) {
-        if !NSUserDefaults.standardUserDefaults().boolForKey(kPeriodShortcut) {
+        if !NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(kPeriodShortcut) {
             return
         }
         
@@ -617,7 +617,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func updateKeyCaps(uppercase: Bool) {
-        let characterUppercase = (NSUserDefaults.standardUserDefaults().boolForKey(kSmallLowercase) ? uppercase : true)
+        let characterUppercase = (NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(kSmallLowercase) ? uppercase : true)
         self.layout?.updateKeyCaps(false, uppercase: uppercase, characterUppercase: characterUppercase, shiftState: self.shiftState)
     }
     
@@ -633,7 +633,7 @@ class KeyboardViewController: UIInputViewController {
         self.shiftWasMultitapped = false
         
         let uppercase = self.shiftState.uppercase()
-        let characterUppercase = (NSUserDefaults.standardUserDefaults().boolForKey(kSmallLowercase) ? uppercase : true)
+        let characterUppercase = (NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(kSmallLowercase) ? uppercase : true)
         self.layout?.layoutKeys(mode, uppercase: uppercase, characterUppercase: characterUppercase, shiftState: self.shiftState)
         
         self.setupKeys()
@@ -732,7 +732,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func shouldAutoCapitalize() -> Bool {
-        if !NSUserDefaults.standardUserDefaults().boolForKey(kAutoCapitalization) {
+        if !NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(kAutoCapitalization) {
             return false
         }
         let traits = self.textDocumentProxy as UITextInputTraits
@@ -795,7 +795,7 @@ class KeyboardViewController: UIInputViewController {
     
     // this only works if full access is enabled
     func playKeySound() {
-        if !NSUserDefaults.standardUserDefaults().boolForKey(kKeyboardClicks) {
+        if !NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(kKeyboardClicks) {
             return
         }
         

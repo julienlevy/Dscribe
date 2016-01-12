@@ -113,7 +113,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
                 cell.sw.addTarget(self, action: Selector("toggleSetting:"), forControlEvents: UIControlEvents.ValueChanged)
             }
 
-            cell.sw.on = NSUserDefaults.standardUserDefaults().boolForKey(key)
+            cell.sw.on = NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(key)
             cell.label.text = self.settingsNames[key]
             cell.longLabel.text = self.settingsNotes[key]
 
@@ -128,6 +128,14 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         else {
             assert(false, "this is a bad thing that just happened")
             return UITableViewCell()
+        }
+    }
+    override func toggleSetting(sender: UISwitch) {
+        if let cell = sender.superview as? UITableViewCell {
+            if let indexPath = self.tableView?.indexPathForCell(cell) {
+                let key = self.settingsList[indexPath.section].1[indexPath.row]
+                NSUserDefaults(suiteName: "group.dscribekeyboard")!.setBool(sender.on, forKey: key)
+            }
         }
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -168,8 +176,8 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         }
     }
     func indexOfCurrentLanguage() -> Int? {
-        let defaultLanguage: String? = NSUserDefaults.standardUserDefaults().objectForKey(kAutocorrectLanguage) as? String
-        print("Getting index " + String(NSUserDefaults.standardUserDefaults().objectForKey(kAutocorrectLanguage)))
+        let defaultLanguage: String? = NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kAutocorrectLanguage) as? String
+        print("Getting index " + String(NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kAutocorrectLanguage)))
         if defaultLanguage == nil {
             return 0
         }
@@ -187,7 +195,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
                 if index == nil {
                     return
                 }
-                NSUserDefaults.standardUserDefaults().setObject(availableLanguagesCodes[index!], forKey: kAutocorrectLanguage)
+                NSUserDefaults(suiteName: "group.dscribekeyboard")!.setObject(availableLanguagesCodes[index!], forKey: kAutocorrectLanguage)
                 (self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)) as? LanguageSettingCell)?.labelDisplay.setTitle(language, forState: UIControlState.Normal)
             }
         }

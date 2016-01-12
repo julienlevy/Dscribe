@@ -16,7 +16,7 @@ let kEscapeCue = "|"
 class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     private let backgroundSearchQueue = dispatch_queue_create("julien.dscribe.photoQueue", DISPATCH_QUEUE_CONCURRENT)
-
+    
     class var bannerColors: DscribeColors.Type { get { return DscribeColors.self }}
 
     let takeDebugScreenshot: Bool = false
@@ -64,23 +64,14 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             self.appleLexicon = lexicon
         })
 
-        NSUserDefaults.standardUserDefaults().registerDefaults([
+        NSUserDefaults(suiteName: "group.dscribekeyboard")!.registerDefaults([
             kAutocorrectLanguage: "en_UK",
             kSmallLowercase: true
             ])
-        if let newLanguage: String = NSUserDefaults.standardUserDefaults().objectForKey(kAutocorrectLanguage) as? String {
+        if let newLanguage: String = NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kAutocorrectLanguage) as? String {
             language = newLanguage
             print("language init to " + language)
         }
-        NSUserDefaults(suiteName: "group.dscribekeyboard")?.registerDefaults(["testshared": "Test was shared"])
-        NSUserDefaults(suiteName: "group.dscribekeyboard")?.setObject("Test's been shared", forKey: "testshared")
-//        
-//        NSUserDefaults(suiteName: "group.dscribekeyboard")?.registerDefaults(["testgroup": "Group worked"])
-//        NSUserDefaults.standardUserDefaults().registerDefaults(["teststandard": "Standart worked"])
-//        print("GROUP DEFAULT: ")
-//        print(NSUserDefaults(suiteName: "group.dscribekeyboard")?.objectForKey("testgroup"))
-//        print("STANDARD DEFAULT: ")
-//        print(NSUserDefaults(suiteName: "group.dscribekeyboard")?.objectForKey("teststandard"))
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -88,9 +79,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     override func defaultsChanged(notification: NSNotification) {
         super.defaultsChanged(notification)
-        if let newLanguage: String = NSUserDefaults.standardUserDefaults().objectForKey(kAutocorrectLanguage) as? String {
+        if let newLanguage: String = NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kAutocorrectLanguage) as? String {
             language = newLanguage
-            print("Changed language to " + language)
+            print("Default changed, language is " + language)
         }
     }
     
