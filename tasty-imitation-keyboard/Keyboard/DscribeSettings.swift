@@ -19,7 +19,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
     override var settingsList: [(String, [String])] {
         get {
             return super.settingsList + [
-                ("Language Settings", [kAutocorrectLanguage, kLanguagePicker])
+                ("Autocorrect Settings", [kAutoReplace, kAutocorrectLanguage, kLanguagePicker])
             ]
         }
     }
@@ -30,7 +30,8 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
                 kPeriodShortcut:  "“.” Shortcut",
                 kKeyboardClicks: "Keyboard Clicks",
                 kSmallLowercase: "Allow Lowercase Key Caps",
-                kAutocorrectLanguage: "Autocorrect"
+                kAutoReplace: "Replace Automatically",
+                kAutocorrectLanguage: "Language"
             ]
         }
     }
@@ -38,7 +39,8 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         get {
             return [
                 kKeyboardClicks: "Please note that keyboard clicks will work only if “Allow Full Access” is enabled in the keyboard settings. Unfortunately, this is a limitation of the operating system.",
-                kSmallLowercase: "Changes your key caps to lowercase when Shift is off, making it easier to tell what mode you are in."
+                kSmallLowercase: "Changes your key caps to lowercase when Shift is off, making it easier to tell what mode you are in.",
+                kAutoReplace: "The suggested word will be automatically replaced on pressing space if there is a spelling mistake."
             ]
         }
     }

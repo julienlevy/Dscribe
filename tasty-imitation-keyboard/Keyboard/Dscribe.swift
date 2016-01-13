@@ -8,7 +8,7 @@
 
 import UIKit
 
-
+let kAutoReplace = "kAutoReplace"
 let kAutocorrectLanguage = "kAutocorrectLanguage"
 let kEscapeCue = "|"
 
@@ -30,6 +30,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     var emojiClass: Emoji?
 
+    var autoReplaceActive: Bool = true
     var appleLexicon: UILexicon = UILexicon()
     var checker: UITextChecker = UITextChecker()
     var language: String = "en_US"
@@ -66,8 +67,11 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
         NSUserDefaults(suiteName: "group.dscribekeyboard")!.registerDefaults([
             kAutocorrectLanguage: "en_UK",
+            kAutoReplace: true,
             kSmallLowercase: true
             ])
+        autoReplaceActive = NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(kAutoReplace)
+
         if let newLanguage: String = NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kAutocorrectLanguage) as? String {
             language = newLanguage
             print("language init to " + language)
@@ -83,6 +87,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             language = newLanguage
             print("Default changed, language is " + language)
         }
+        autoReplaceActive = NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(kAutoReplace)
     }
     
     override func viewDidLayoutSubviews() {
@@ -518,7 +523,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
         // Spelling and Autocorrect
         let misspelledRange = checker.rangeOfMisspelledWordInString(contextString, range: rangeOfLast, startingAt: 0, wrap: false, language: language)
-        if misspelledRange.location != NSNotFound && shouldAutoReplace {
+        if misspelledRange.location != NSNotFound && shouldAutoReplace && autoReplaceActive {
             autoReplace = true
         }
         guesses = checker.guessesForWordRange(rangeOfLast, inString: contextString, language: language) as! [String]?
