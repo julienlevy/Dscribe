@@ -81,7 +81,7 @@ class Emoji: NSObject, NSCoding {
             return self.getMostUsedEmojis()
         }
 
-        var emojiToMatchData: [String: [Float]] = [String: [Float]]() //IMPORTANT: key=emoji, value=[Number of occurrences of emoji, percentage of matches out of tags]
+        var emojiToMatchData: [String: [Float]] = [String: [Float]]() //IMPORTANT: key=emoji, value=[Number of occurrences of emoji, percentage of matches out of tags, Quality of match (percentage of characters)]
 
         let wordsArray = sentence.lowercaseString.componentsSeparatedByString(" ")
         for keyword in wordsArray {
@@ -96,22 +96,29 @@ class Emoji: NSObject, NSCoding {
                     continue
                 }
                 for tag in tagsArray {
-                    if tag.hasPrefix(keyword) && !matched {
-                        matched = true
+                    if tag.hasPrefix(keyword) {
                         if emojiToMatchData[emoji] == nil {
-                            emojiToMatchData[emoji] = [0, 0]
+                            emojiToMatchData[emoji] = [0, 0, 0]
                         }
-                        emojiToMatchData[emoji]![0]++
-                        if emojiScore[emoji] != nil {
-                            emojiToMatchData[emoji]![1] += 1.0/Float(tagsArray.count)
-                        } else {
+
+                        if !matched {
+                            matched = true
+                            //Nb of matches
+                            emojiToMatchData[emoji]![0]++
+                        }
+                        //Percentage of matches
+                        emojiToMatchData[emoji]![1] += 1.0/Float(tagsArray.count)
+                        //Quality of match
+                        emojiToMatchData[emoji]![2] = max(emojiToMatchData[emoji]![2], Float(keyword.characters.count)/Float(tag.characters.count))
+                        //Necessary for sort function
+                        if emojiScore[emoji] == nil {
                             emojiScore[emoji] = 0
                         }
                     }
                 }
             }
         }
-        
+
         let emojiArray = Array(emojiToMatchData.keys)
         let sortedKeys = emojiArray.sort( {
             let obj1Matches: Int = Int(emojiToMatchData[$0]![0])
@@ -120,10 +127,12 @@ class Emoji: NSObject, NSCoding {
             let obj2Score: Int = self.emojiScore[$1]! // emojiToMatchData[$1]![1] as Int
             let obj1Percentage: Float = emojiToMatchData[$0]![1]
             let obj2Percentage: Float = emojiToMatchData[$1]![1]
+            let obj1Quality: Float = emojiToMatchData[$0]![2]
+            let obj2Quality: Float = emojiToMatchData[$1]![2]
             if obj1Matches == obj2Matches {
                 // TODO: maybe switch the sort order of these two dimensions
                 if obj1Score == obj2Score {
-                    return obj1Percentage > obj2Percentage
+                    return obj1Percentage * obj1Quality > obj2Percentage * obj2Quality
                 }
                 return obj1Score > obj2Score
             }
