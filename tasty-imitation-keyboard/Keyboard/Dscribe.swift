@@ -524,11 +524,11 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         guesses = checker.guessesForWordRange(rangeOfLast, inString: contextString, language: language) as! [String]?
         completion = checker.completionsForPartialWordRange(rangeOfLast, inString: contextString, language: language) as! [String]?
 
-        if completion != nil {
-            suggestions += completion!
-        }
         if guesses != nil {
             suggestions += guesses!
+        }
+        if completion != nil {
+            suggestions += completion!
         }
 
         if autoReplace && suggestions.count > 0 {
