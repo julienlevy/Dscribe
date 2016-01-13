@@ -81,7 +81,7 @@ class Emoji: NSObject, NSCoding {
             return self.getMostUsedEmojis()
         }
 
-        var emojiToMatchData: [String: [Int]] = [String: [Int]]() //key=emoji, value=[Number of occurrences of emoji, sum of scores]
+        var emojiToMatchData: [String: [Float]] = [String: [Float]]() //IMPORTANT: key=emoji, value=[Number of occurrences of emoji, percentage of matches out of tags]
 
         let wordsArray = sentence.lowercaseString.componentsSeparatedByString(" ")
         for keyword in wordsArray {
@@ -90,29 +90,22 @@ class Emoji: NSObject, NSCoding {
             }
             for (emoji, tagsArray) in emojiTag {
                 var matched = false
-                if (keyword.characters.count < 3 && emojiToMatchData.keys.count > 10 && emojiScore[emoji] < 2) {
+                // Added emojiToMatchData[emoji] condition to count minor matches if another tag has already matched: ex "heart gr" should give the green heart
+                // TODO:  improve this condition, especially in case the emoji has few tags
+                if (keyword.characters.count < 3 && emojiToMatchData.keys.count > 20 && emojiScore[emoji] < 2 && emojiToMatchData[emoji] == nil) {
                     continue
                 }
                 for tag in tagsArray {
                     if tag.hasPrefix(keyword) && !matched {
                         matched = true
-                        if emojiToMatchData[emoji] != nil {
-                            emojiToMatchData[emoji]![0]++
-                            if emojiScore[emoji] != nil {
-                                emojiToMatchData[emoji]![1] += emojiScore[emoji]!
-                            } else {
-                                emojiScore[emoji] = 0
-                            }
+                        if emojiToMatchData[emoji] == nil {
+                            emojiToMatchData[emoji] = [0, 0]
+                        }
+                        emojiToMatchData[emoji]![0]++
+                        if emojiScore[emoji] != nil {
+                            emojiToMatchData[emoji]![1] += 1.0/Float(tagsArray.count)
                         } else {
-                            emojiToMatchData[emoji] = [Int]()
-                            emojiToMatchData[emoji]!.append(1)
-                            if emojiScore[emoji] != nil {
-                                emojiToMatchData[emoji]!.append(emojiScore[emoji]!)
-                            }
-                            else {
-                                emojiScore[emoji] = 0
-                                emojiToMatchData[emoji]!.append(0)
-                            }
+                            emojiScore[emoji] = 0
                         }
                     }
                 }
@@ -121,14 +114,20 @@ class Emoji: NSObject, NSCoding {
         
         let emojiArray = Array(emojiToMatchData.keys)
         let sortedKeys = emojiArray.sort( {
-            let obj1Percentage = emojiToMatchData[$0]![0] as Int
-            let obj2Percentage = emojiToMatchData[$1]![0] as Int
-            let obj1Score = emojiToMatchData[$0]![1] as Int
-            let obj2Score = emojiToMatchData[$1]![1] as Int
-            if obj1Percentage == obj2Percentage {
+            let obj1Matches: Int = Int(emojiToMatchData[$0]![0])
+            let obj2Matches: Int = Int(emojiToMatchData[$1]![0])
+            let obj1Score: Int = self.emojiScore[$0]! // emojiToMatchData[$0]![1] as Int
+            let obj2Score: Int = self.emojiScore[$1]! // emojiToMatchData[$1]![1] as Int
+            let obj1Percentage: Float = emojiToMatchData[$0]![1]
+            let obj2Percentage: Float = emojiToMatchData[$1]![1]
+            if obj1Matches == obj2Matches {
+                // TODO: maybe switch the sort order of these two dimensions
+                if obj1Score == obj2Score {
+                    return obj1Percentage > obj2Percentage
+                }
                 return obj1Score > obj2Score
             }
-            return obj1Percentage > obj2Percentage
+            return obj1Matches > obj2Matches
         })
         return sortedKeys
     }
