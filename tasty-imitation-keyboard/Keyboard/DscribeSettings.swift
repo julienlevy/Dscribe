@@ -61,8 +61,12 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !displayLanguagePicker && self.settingsList[section].0 == "Language Settings" {
-            return self.settingsList[section].1.count - 1
+        let rows: Int = self.settingsList[section].1.count
+        for row in 0...(rows-1) {
+            // TODO: make this condition with an array when we might have more than one picker
+            if !displayLanguagePicker && self.settingsList[section].1[row] == kLanguagePicker {
+                return self.settingsList[section].1.count - 1
+            }
         }
         return self.settingsList[section].1.count
     }
@@ -71,20 +75,18 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
 
         if key == kAutocorrectLanguage {
             if let languageCell = tableView.dequeueReusableCellWithIdentifier("languageCell") as? LanguageSettingCell {
-
+                
                 languageCell.label.text = self.settingsNames[key]
                 languageCell.longLabel.text = self.settingsNotes[key]
-                languageCell.labelDisplay.setTitle(self.availableLanguages[self.indexOfCurrentLanguage()!], forState: UIControlState.Normal)
-                languageCell.labelDisplay.setTitleColor((self.darkMode ? cellLabelColorDark : cellLabelColorLight), forState: UIControlState.Normal)
-
-                languageCell.labelDisplay.addTarget(self, action: Selector("toggleLanguagePicker"), forControlEvents: UIControlEvents.TouchUpInside)
-
+                languageCell.labelDisplay.text = self.availableLanguages[self.indexOfCurrentLanguage()!]
+                languageCell.labelDisplay.textColor = UIColor.blackColor()
+                
                 languageCell.backgroundColor = (self.darkMode ? cellBackgroundColorDark : cellBackgroundColorLight)
                 languageCell.label.textColor = (self.darkMode ? cellLabelColorDark : cellLabelColorLight)
                 languageCell.longLabel.textColor = (self.darkMode ? cellLongLabelColorDark : cellLongLabelColorLight)
-
+                
                 languageCell.changeConstraints()
-
+                
                 return languageCell
             }
             else {
@@ -141,18 +143,27 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         }
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("Selected row at index path")
-        print(indexPath)
+        self.tableView?.deselectRowAtIndexPath(indexPath, animated: true)
         if self.settingsList[indexPath.section].1[indexPath.row] == kAutocorrectLanguage {
             displayLanguagePicker = !displayLanguagePicker
-//            self.tableView?.reloadData()
-            self.tableView?.reloadRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)], withRowAnimation: UITableViewRowAnimation.Fade)
+            if !displayLanguagePicker {
+                let cell: LanguageSettingCell? = tableView.cellForRowAtIndexPath(indexPath) as? LanguageSettingCell
+                if cell == nil {
+                    return
+                }
+                let language: String = cell!.labelDisplay.text!
+                let index: Int? = availableLanguages.indexOf({ $0 == language })
+                if index == nil {
+                    return
+                }
+                NSUserDefaults(suiteName: "group.dscribekeyboard")!.setObject(availableLanguagesCodes[index!], forKey: kAutocorrectLanguage)
+            }
+            
+            self.tableView?.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
+            if displayLanguagePicker {
+                self.tableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section), atScrollPosition: UITableViewScrollPosition.None, animated: true)
+            }
         }
-    }
-    func toggleLanguagePicker() {
-        print("Clicked lang button")
-        displayLanguagePicker = !displayLanguagePicker
-        self.tableView?.reloadData()
     }
     func getAvailableLanguages() {
         availableLanguagesCodes = (UITextChecker.availableLanguages() as! [String]).sort({ $0 < $1 })
@@ -189,43 +200,37 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         }
         return index
     }
-    // PICKER DELEGATE
     func updateValue(value: AnyObject, key: String, indexPath: NSIndexPath) {
         if key == kAutocorrectLanguage {
             if let language: String = value as? String {
-                let index: Int? = availableLanguages.indexOf({ $0 == language })
-                if index == nil {
-                    return
-                }
-                NSUserDefaults(suiteName: "group.dscribekeyboard")!.setObject(availableLanguagesCodes[index!], forKey: kAutocorrectLanguage)
-                (self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)) as? LanguageSettingCell)?.labelDisplay.setTitle(language, forState: UIControlState.Normal)
+                (self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)) as? LanguageSettingCell)?.labelDisplay.text = language
             }
         }
     }
 }
 
 class LanguageSettingCell: DefaultSettingsTableViewCell {
-    var labelDisplay: UIButton
-
+    var labelDisplay: UILabel
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        self.labelDisplay = UIButton()
-
+        self.labelDisplay = UILabel()
+        
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+        
         self.sw.hidden = true
-
+        
         labelDisplay.tag = 4
-
+        
         self.addSubview(labelDisplay)
-
+        
         self.labelDisplay.translatesAutoresizingMaskIntoConstraints = false
-
+        
         self.addConstraints()
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func addConstraints() {
         super.addConstraints()
         if labelDisplay.superview == nil {
@@ -244,22 +249,21 @@ protocol PickerDelegate {
 class PickerViewCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegate {
     var pickerView: UIPickerView
     var data: [String] = [String]()
-
+    
     var key: String = ""
     var indexPath: NSIndexPath?
     var delegate: PickerDelegate?
-
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         self.pickerView = UIPickerView()
-
+        
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+        
         self.addSubview(self.pickerView)
         self.pickerView.delegate = self
-
+        
         self.pickerView.translatesAutoresizingMaskIntoConstraints = false
         self.addConstraints()
-
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -268,11 +272,11 @@ class PickerViewCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDeleg
         let margin: CGFloat = 8
         let sideMargin = margin * 2
         
-        let left = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: sideMargin)
-        let right = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -sideMargin)
+        let left = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: 2 * sideMargin)
+        let right = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -2 * sideMargin)
         let top = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: margin)
         let bottom = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -margin)
-
+        
         self.addConstraint(left)
         self.addConstraint(right)
         self.addConstraint(top)

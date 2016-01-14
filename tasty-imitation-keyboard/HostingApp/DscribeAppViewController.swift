@@ -13,6 +13,7 @@ let kAutoCapitalization = "kAutoCapitalization"
 let kPeriodShortcut = "kPeriodShortcut"
 let kKeyboardClicks = "kKeyboardClicks"
 let kSmallLowercase = "kSmallLowercase"
+let kAutoReplace = "kAutoReplace"
 
 let kLanguagePicker: String = "kLanguagePicker"
 
@@ -27,7 +28,7 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
             return [
                 ("General Settings", [kAutoCapitalization, kPeriodShortcut, kKeyboardClicks]),
                 ("Extra Settings", [kSmallLowercase]),
-                ("Language Settings", [kAutocorrectLanguage, kLanguagePicker])
+                ("Autocorrect Settings", [kAutoReplace, kAutocorrectLanguage, kLanguagePicker])
             ]
         }
     }
@@ -38,6 +39,7 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
                 kPeriodShortcut:  "“.” Shortcut",
                 kKeyboardClicks: "Keyboard Clicks",
                 kSmallLowercase: "Allow Lowercase Key Caps",
+                kAutoReplace: "Replace Automatically",
                 kAutocorrectLanguage: "Autocorrect"
             ]
         }
@@ -46,7 +48,8 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
         get {
             return [
                 kKeyboardClicks: "Please note that keyboard clicks will work only if “Allow Full Access” is enabled in the keyboard settings. Unfortunately, this is a limitation of the operating system.",
-                kSmallLowercase: "Changes your key caps to lowercase when Shift is off, making it easier to tell what mode you are in."
+                kSmallLowercase: "Changes your key caps to lowercase when Shift is off, making it easier to tell what mode you are in.",
+                kAutoReplace: "The suggested word will be automatically replaced on pressing space if there is a spelling mistake."
             ]
         }
     }
@@ -63,12 +66,12 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
         
         self.tableView?.registerClass(DefaultSettingsTableViewCell.self, forCellReuseIdentifier: "cell")
         self.tableView?.registerClass(LanguageSettingCell.self, forCellReuseIdentifier: "languageCell")
-        self.tableView?.registerClass(PickerViewCell.self, forCellReuseIdentifier: "languagePicker")
+        self.tableView?.registerClass(PickerViewCell.self, forCellReuseIdentifier: "picker")
         self.tableView?.estimatedRowHeight = 44;
         self.tableView?.rowHeight = UITableViewAutomaticDimension;
 
         self.tableView?.backgroundColor = UIColor.groupTableViewBackgroundColor()
-        
+
         getAvailableLanguages()
         
     }
@@ -78,8 +81,12 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !displayLanguagePicker && self.settingsList[section].0 == "Language Settings" {
-            return self.settingsList[section].1.count - 1
+        let rows: Int = self.settingsList[section].1.count
+        for row in 0...(rows-1) {
+            // TODO: make this condition with an array when we might have more than one picker
+            if !displayLanguagePicker && self.settingsList[section].1[row] == kLanguagePicker {
+                return self.settingsList[section].1.count - 1
+            }
         }
         return self.settingsList[section].1.count
     }
@@ -129,7 +136,7 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
             }
         }
         if key == kLanguagePicker {
-            if let pickerCell = tableView.dequeueReusableCellWithIdentifier("languagePicker") as? PickerViewCell {
+            if let pickerCell = tableView.dequeueReusableCellWithIdentifier("picker") as? PickerViewCell {
                 pickerCell.data = availableLanguages
                 pickerCell.pickerView.reloadAllComponents()
                 pickerCell.pickerView.selectRow(self.indexOfCurrentLanguage()!, inComponent: 0, animated: false)
@@ -180,6 +187,19 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if self.settingsList[indexPath.section].1[indexPath.row] == kAutocorrectLanguage {
             displayLanguagePicker = !displayLanguagePicker
+            if !displayLanguagePicker {
+                let cell: LanguageSettingCell? = tableView.cellForRowAtIndexPath(indexPath) as? LanguageSettingCell
+                if cell == nil {
+                    return
+                }
+                let language: String = cell!.labelDisplay.text!
+                let index: Int? = availableLanguages.indexOf({ $0 == language })
+                if index == nil {
+                    return
+                }
+                NSUserDefaults(suiteName: "group.dscribekeyboard")!.setObject(availableLanguagesCodes[index!], forKey: kAutocorrectLanguage)
+            }
+            
             self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
             if displayLanguagePicker {
                 self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section), atScrollPosition: UITableViewScrollPosition.None, animated: true)
@@ -225,11 +245,6 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
     func updateValue(value: AnyObject, key: String, indexPath: NSIndexPath) {
         if key == kAutocorrectLanguage {
             if let language: String = value as? String {
-                let index: Int? = availableLanguages.indexOf({ $0 == language })
-                if index == nil {
-                    return
-                }
-                NSUserDefaults(suiteName: "group.dscribekeyboard")!.setObject(availableLanguagesCodes[index!], forKey: kAutocorrectLanguage)
                 (self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)) as? LanguageSettingCell)?.labelDisplay.text = language
             }
         }
