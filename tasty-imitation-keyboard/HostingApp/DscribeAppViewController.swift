@@ -63,7 +63,7 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
             kSmallLowercase: true,
             kAutocorrectLanguage: "en_UK"
             ])
-        
+
         self.tableView?.registerClass(DefaultSettingsTableViewCell.self, forCellReuseIdentifier: "cell")
         self.tableView?.registerClass(LanguageSettingCell.self, forCellReuseIdentifier: "languageCell")
         self.tableView?.registerClass(PickerViewCell.self, forCellReuseIdentifier: "picker")
@@ -72,8 +72,9 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
 
         self.tableView?.backgroundColor = UIColor.groupTableViewBackgroundColor()
 
+        self.navigationItem.titleView = NavigationTitle(frame: self.view.bounds, leftText: "Dscribe", rightText: "Keyboard")
+
         getAvailableLanguages()
-        
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

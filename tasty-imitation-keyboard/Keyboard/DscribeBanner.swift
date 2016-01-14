@@ -70,7 +70,7 @@ class DscribeBanner: ExtraView {
         print("layout banner subviews")
         self.setupScrollView()
 
-        self.beforeScrollView.frame = CGRectMake( -self.frame.width, space, self.frame.width, self.frame.height)
+        self.beforeScrollView.frame = CGRectMake( -self.frame.width, space / 2, self.frame.width, self.frame.height)
         self.scrollView.addSubview(self.beforeScrollView)
 
         //Frame defined at the end of displayEmojis function
@@ -194,7 +194,7 @@ class DscribeBanner: ExtraView {
         self.scrollView.contentSize.width = lastButton.frame.origin.x + lastButton.frame.width
         self.scrollView.contentSize.height = self.frame.height
 
-        self.afterScrollView.frame = CGRectMake( self.scrollView.contentSize.width - 1, space, self.frame.width, self.frame.height)
+        self.afterScrollView.frame = CGRectMake( self.scrollView.contentSize.width - 1, space / 2, self.frame.width, self.frame.height)
 
         self.setButtonColors()
     }
@@ -209,8 +209,6 @@ class DscribeBanner: ExtraView {
         self.beforeScrollView.hidden = true
         self.afterScrollView.hidden = true
 
-//        let numberSuggestion: Int = suggestionList.count
-//        let width: CGFloat = ((self.frame.width - CGFloat(min(3, numberSuggestion) - 1) * space) / CGFloat(min(3, numberSuggestion)))
         let width: CGFloat = ((self.frame.width - CGFloat(2) * space) / CGFloat(3))
         scrollView.scrollEnabled = false
         scrollView.setContentOffset(CGPointZero, animated: false)
