@@ -85,6 +85,9 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 35 + (self.navigationController?.navigationBar.frame.height)!
+        }
         return 35
     }
     
