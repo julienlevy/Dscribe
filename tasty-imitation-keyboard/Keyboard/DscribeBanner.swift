@@ -64,19 +64,27 @@ class DscribeBanner: ExtraView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
+        print("layout banner subviews")
 
         self.backgroundColor = UIColor.clearColor()
 
-        print("layout banner subviews")
         self.setupScrollView()
 
         self.beforeScrollView.frame = CGRectMake( -self.frame.width, space / 2, self.frame.width, self.frame.height)
-        self.scrollView.addSubview(self.beforeScrollView)
 
         //Frame defined at the end of displayEmojis function
         self.scrollView.addSubview(self.afterScrollView)
-        
-        self.displaySuggestions([], originalString: "")
+        self.scrollView.addSubview(self.beforeScrollView)
+
+        var count: Int = 0
+        for subview in self.scrollView.subviews {
+            if subview is UIButton {
+                count++
+            }
+        }
+        if count == 0 {
+            self.displaySuggestions([], originalString: "")
+        }
         self.updateBannerColors()
     }
     func setupScrollView() {
@@ -228,7 +236,7 @@ class DscribeBanner: ExtraView {
                 var suggestion: String = ""
                 suggestion = suggestionList[index]
                 if index == 0 {
-                    button.setTitle("\"" + suggestion + "\"", forState: UIControlState.Normal)
+                    button.setTitle((suggestion != "" ? "\"" + suggestion + "\"" : ""), forState: UIControlState.Normal)
                     button.addTarget(self, action: Selector("alreadyTypedWord:"), forControlEvents: UIControlEvents.TouchUpInside);
                 } else {
                     button.setTitle(suggestion, forState: UIControlState.Normal)
