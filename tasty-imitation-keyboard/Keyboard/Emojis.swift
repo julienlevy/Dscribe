@@ -90,13 +90,14 @@ class Emoji: NSObject, NSCoding {
             }
             for (emoji, tagsArray) in emojiTag {
                 var matched = false
-                // Added emojiToMatchData[emoji] condition to count minor matches if another tag has already matched: ex "heart gr" should give the green heart
-                // TODO:  improve this condition, especially in case the emoji has few tags
-                if (keyword.characters.count < 3 && emojiToMatchData.keys.count > 20 && emojiScore[emoji] < 2 && emojiToMatchData[emoji] == nil) {
-                    continue
-                }
                 for tag in tagsArray {
                     if tag.hasPrefix(keyword) {
+                        // Added emojiToMatchData[emoji] condition to count minor matches if another tag has already matched: ex "heart gr" should give the green heart
+                        // TODO:  improve this condition, especially in case the emoji has few tags
+                        if (keyword.characters.count < 3 && emojiToMatchData.keys.count > 20 && emojiScore[emoji] < 2 && emojiToMatchData[emoji] == nil && keyword.characters.count != tag.characters.count) {
+                            continue
+                        }
+
                         if emojiToMatchData[emoji] == nil {
                             emojiToMatchData[emoji] = [0, 0, 0]
                         }
