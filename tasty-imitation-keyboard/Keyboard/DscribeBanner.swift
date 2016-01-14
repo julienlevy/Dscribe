@@ -165,6 +165,8 @@ class DscribeBanner: ExtraView {
         var lastButton:UIButton = UIButton()
 
         scrollView.scrollEnabled = true
+        // To scroll back to the first page of emojis:
+        self.scrollView.contentSize.width = scrollView.bounds.width
         
         if numberEmoji <= 4 {
             width = (self.frame.width) / CGFloat(numberEmoji)
