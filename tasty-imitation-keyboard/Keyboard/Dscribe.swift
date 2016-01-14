@@ -107,7 +107,12 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             overlayView.userInteractionEnabled = false
             overlayView.hidden = true
             self.view.insertSubview(overlayView, atIndex: 0)
+            self.setupOverlayConstraints()
         }
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
     }
 
     // MARK: Keyboard Setup methods
@@ -221,6 +226,28 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             multiplier: 1, constant: 0))
         self.view.addConstraint(NSLayoutConstraint(
             item: self.bannerView!, attribute: NSLayoutAttribute.Left,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: self.view, attribute: NSLayoutAttribute.Left,
+            multiplier: 1, constant: 0))
+    }
+    func setupOverlayConstraints() {
+        self.overlayView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addConstraint(NSLayoutConstraint(
+            item: self.overlayView, attribute: NSLayoutAttribute.Height,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: self.forwardingView, attribute: NSLayoutAttribute.Height,
+            multiplier: 1, constant: metric("topBanner")))
+        self.view.addConstraint(NSLayoutConstraint(
+            item: self.overlayView, attribute: NSLayoutAttribute.Top,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: self.forwardingView, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: -metric("topBanner")))
+        self.view.addConstraint(NSLayoutConstraint(
+            item: self.overlayView, attribute: NSLayoutAttribute.Width,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: self.view, attribute: NSLayoutAttribute.Width,
+            multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(
+            item: self.overlayView, attribute: NSLayoutAttribute.Left,
             relatedBy: NSLayoutRelation.Equal,
             toItem: self.view, attribute: NSLayoutAttribute.Left,
             multiplier: 1, constant: 0))
