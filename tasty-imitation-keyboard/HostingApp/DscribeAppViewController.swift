@@ -61,7 +61,7 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
             kPeriodShortcut: true,
             kKeyboardClicks: false,
             kSmallLowercase: true,
-            kAutocorrectLanguage: "en_UK"
+            kAutocorrectLanguage: "en_US"
             ])
 
         self.tableView?.registerClass(DefaultSettingsTableViewCell.self, forCellReuseIdentifier: "cell")
@@ -75,8 +75,15 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
         self.navigationItem.titleView = NavigationTitle(frame: self.view.bounds, leftText: "Dscribe", rightText: "Keyboard")
 
         getAvailableLanguages()
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("becameActive:"), name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
-    
+
+    func becameActive(notification: NSNotification) {
+        print("Became active")
+        self.tableView.reloadData()
+    }
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.settingsList.count
     }
@@ -158,17 +165,17 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
             if cell.sw.allTargets().count == 0 {
                 cell.sw.addTarget(self, action: Selector("toggleSetting:"), forControlEvents: UIControlEvents.ValueChanged)
             }
-            
+
             cell.sw.on = NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(key)
             cell.label.text = self.settingsNames[key]
             cell.longLabel.text = self.settingsNotes[key]
-            
+
             cell.backgroundColor = UIColor.whiteColor()
             cell.label.textColor = UIColor.blackColor()
             cell.longLabel.textColor =  UIColor.grayColor()
             
             cell.changeConstraints()
-            
+
             return cell
         }
         else {
@@ -234,7 +241,7 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
     }
     func indexOfCurrentLanguage() -> Int? {
         let defaultLanguage: String? = NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kAutocorrectLanguage) as? String
-        print("Getting index " + String(NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kAutocorrectLanguage)))
+        print("Getting Language index " + String(defaultLanguage))
         if defaultLanguage == nil {
             return 0
         }

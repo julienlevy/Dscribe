@@ -66,7 +66,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         })
 
         NSUserDefaults(suiteName: "group.dscribekeyboard")!.registerDefaults([
-            kAutocorrectLanguage: "en_UK",
+            kAutocorrectLanguage: "en_US",
             kAutoReplace: true,
             kSmallLowercase: true
             ])
