@@ -30,6 +30,8 @@ class DscribeBanner: ExtraView {
 
     var beforeScrollView: UIView = UIView()
     var afterScrollView: UIView = UIView()
+    var containerView: UIView = UIView()
+    var containerWidth: NSLayoutConstraint = NSLayoutConstraint()
 
     var emojiBackgroundColor: UIColor?
     var suggestionBackgroundColor: UIColor?
@@ -46,6 +48,8 @@ class DscribeBanner: ExtraView {
 
         suggestionBackgroundColor = self.globalColors?.specialKey(self.darkMode, solidColorMode: self.solidColorMode)
         selectedSuggestionBackgroungColor = self.bannerColors?.selectedSuggestionBackground(self.darkMode, solidColorMode: self.solidColorMode)
+
+        self.setupScrollView()
     }
  
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
@@ -68,21 +72,16 @@ class DscribeBanner: ExtraView {
 
         self.backgroundColor = UIColor.clearColor()
 
-        self.setupScrollView()
-
-        self.beforeScrollView.frame = CGRectMake( -self.frame.width, space / 2, self.frame.width, self.frame.height)
-
-        //Frame defined at the end of displayEmojis function
-        self.scrollView.addSubview(self.afterScrollView)
-        self.scrollView.addSubview(self.beforeScrollView)
-
-        var count: Int = 0
-        for subview in self.scrollView.subviews {
-            if subview is UIButton {
-                count++
-            }
-        }
-        if count == 0 {
+//        var count: Int = 0
+//        for subview in self.scrollView.subviews {
+//            if subview is UIButton {
+//                count++
+//            }
+//        }
+//        if count == 0 {
+//            self.displaySuggestions([], originalString: "")
+//        }
+        if self.containerView.subviews.count == 0 {
             self.displaySuggestions([], originalString: "")
         }
         self.updateBannerColors()
@@ -93,6 +92,11 @@ class DscribeBanner: ExtraView {
         self.scrollView.scrollEnabled = true
         self.scrollView.showsHorizontalScrollIndicator = false
         self.addSubview(self.scrollView)
+        
+        //Frame defined at the end of displayEmojis function
+        self.scrollView.addSubview(self.afterScrollView)
+        self.scrollView.addSubview(self.beforeScrollView)
+        self.scrollView.addSubview(self.containerView)
 
         self.addConstraint(NSLayoutConstraint(
                 item: scrollView, attribute: NSLayoutAttribute.Height,
@@ -113,10 +117,37 @@ class DscribeBanner: ExtraView {
                 relatedBy: NSLayoutRelation.Equal,
                 toItem: self, attribute: NSLayoutAttribute.CenterX,
                 multiplier: 1, constant: 0))
+
+        self.setSideConstraint()
+    }
+    func setSideConstraint() {
+        self.containerView.translatesAutoresizingMaskIntoConstraints = false
+        self.beforeScrollView.translatesAutoresizingMaskIntoConstraints = false
+        self.afterScrollView.translatesAutoresizingMaskIntoConstraints = false
+
+        let containerTop: NSLayoutConstraint = NSLayoutConstraint(item: self.containerView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.containerView, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0)
+        let containerBottom: NSLayoutConstraint = NSLayoutConstraint(item: self.containerView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self.scrollView, attribute: NSLayoutAttribute.Height, multiplier: 1, constant: 0)
+        let containerLeft: NSLayoutConstraint = NSLayoutConstraint(item: self.containerView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self.scrollView, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: 0)
+        let containerMin: NSLayoutConstraint = NSLayoutConstraint(item: self.containerView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.GreaterThanOrEqual, toItem: self.scrollView, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: 0)
+        containerWidth = NSLayoutConstraint(item: self.containerView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 30)
+        containerWidth.priority = 998
+
+        // Make constraints to a button container view inside the scrollView
+        let beforeRight: NSLayoutConstraint = NSLayoutConstraint(item: self.beforeScrollView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self.containerView, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: 0)
+        let beforeHeight: NSLayoutConstraint = NSLayoutConstraint(item: self.beforeScrollView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self.scrollView, attribute: NSLayoutAttribute.Height, multiplier: 1, constant: 0)
+        let beforeCenter: NSLayoutConstraint = NSLayoutConstraint(item: self.beforeScrollView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.scrollView, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
+        let beforeWidth: NSLayoutConstraint = NSLayoutConstraint(item: self.beforeScrollView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 150)
+
+        let afterRight: NSLayoutConstraint = NSLayoutConstraint(item: self.afterScrollView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self.containerView, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 0)
+        let afterHeight: NSLayoutConstraint = NSLayoutConstraint(item: self.afterScrollView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self.scrollView, attribute: NSLayoutAttribute.Height, multiplier: 1, constant: 0)
+        let afterCenter: NSLayoutConstraint = NSLayoutConstraint(item: self.afterScrollView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.scrollView, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
+        let afterWidth: NSLayoutConstraint = NSLayoutConstraint(item: self.afterScrollView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 150)
+
+        self.scrollView.addConstraints([containerTop, containerBottom, containerLeft, containerMin, containerWidth, beforeRight, beforeHeight, beforeCenter, beforeWidth, afterRight, afterHeight, afterCenter, afterWidth])
     }
 
     func updateBannerColors() {
-        emojiBackgroundColor = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode)
+        emojiBackgroundColor = self.globalColors?.regularKey(self.darkMode, solidColorMode: self.solidColorMode).colorWithAlphaComponent(0.4)
         suggestionBackgroundColor = self.globalColors?.specialKey(self.darkMode, solidColorMode: self.solidColorMode)
         selectedSuggestionBackgroungColor = self.bannerColors?.selectedSuggestionBackground(self.darkMode, solidColorMode: self.solidColorMode)
         selectedTextColor = self.bannerColors?.selectedTextColor(self.darkMode)
@@ -144,7 +175,7 @@ class DscribeBanner: ExtraView {
             }
         }
     }
-    
+
     func emojiSelected(sender: UIButton!) {
         delegate?.appendEmoji((sender.titleLabel?.text)!)
     }
@@ -152,7 +183,7 @@ class DscribeBanner: ExtraView {
     func suggestionSelected(sender: UIButton!) {
         delegate?.appendSuggestion((sender.titleLabel?.text)!)
     }
-    
+
     func alreadyTypedWord(sender: UIButton!) {
         delegate?.refusedSuggestion()
     }
@@ -167,7 +198,7 @@ class DscribeBanner: ExtraView {
         self.removeAllButtonsFromScrollView()
         self.beforeScrollView.hidden = false
         self.afterScrollView.hidden = false
-        
+
         var xOrigin: CGFloat = 0
         var width: CGFloat = 80
         var lastButton:UIButton = UIButton()
@@ -175,13 +206,13 @@ class DscribeBanner: ExtraView {
         scrollView.scrollEnabled = true
         // To scroll back to the first page of emojis:
         self.scrollView.contentSize.width = scrollView.bounds.width
-        
+
         if numberEmoji <= 4 {
             width = (self.frame.width) / CGFloat(numberEmoji)
             scrollView.scrollEnabled = false
         }
-        
-        
+
+
         var count: Int = 0
         for emoji in emojiList {
             count++
@@ -194,17 +225,19 @@ class DscribeBanner: ExtraView {
             button.addTarget(self, action: Selector("emojiSelected:"), forControlEvents: UIControlEvents.TouchUpInside);
             button.titleLabel?.font = button.titleLabel?.font.fontWithSize(22)
             button.tag = 3
-            
+
             xOrigin += width + 1
-            
-            self.scrollView.addSubview(button)
-            
+
+//            self.scrollView.addSubview(button)
+            self.containerView.addSubview(button)
+
             lastButton = button
         }
         self.scrollView.contentSize.width = lastButton.frame.origin.x + lastButton.frame.width
         self.scrollView.contentSize.height = self.frame.height
 
-        self.afterScrollView.frame = CGRectMake( self.scrollView.contentSize.width - 1, space / 2, self.frame.width, self.frame.height)
+        self.containerWidth.constant = self.scrollView.contentSize.width - 1
+        self.scrollView.layoutIfNeeded()
 
         self.setButtonColors()
     }
@@ -247,6 +280,7 @@ class DscribeBanner: ExtraView {
                 }
             }
 
+//            self.scrollView.addSubview(button)
             self.scrollView.addSubview(button)
         }
 
