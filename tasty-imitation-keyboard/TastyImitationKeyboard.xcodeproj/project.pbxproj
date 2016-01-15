@@ -11,6 +11,7 @@
 		0D1F165A1C44381C00E0EB43 /* DscribeAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1F16591C44381C00E0EB43 /* DscribeAppViewController.swift */; };
 		0D1F165E1C45164C00E0EB43 /* TableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1F165D1C45164C00E0EB43 /* TableViewCells.swift */; };
 		0D1F16601C477EFC00E0EB43 /* NavigationTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1F165F1C477EFC00E0EB43 /* NavigationTitle.swift */; };
+		0D1F16641C49081200E0EB43 /* DscribeImageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1F16631C49081200E0EB43 /* DscribeImageKey.swift */; };
 		0D5081DB1C3E659F008A643C /* DscribeCharactersUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5081DA1C3E659F008A643C /* DscribeCharactersUtils.swift */; };
 		0D5081DD1C3FC17E008A643C /* DscribeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5081DC1C3FC17E008A643C /* DscribeSettings.swift */; };
 		0DC28DCC1C3841A700F40BA1 /* DscribeShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC28DCB1C3841A700F40BA1 /* DscribeShapes.swift */; };
@@ -114,6 +115,7 @@
 		0D1F165C1C44F9DC00E0EB43 /* HostingApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = HostingApp.entitlements; sourceTree = "<group>"; };
 		0D1F165D1C45164C00E0EB43 /* TableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCells.swift; sourceTree = "<group>"; };
 		0D1F165F1C477EFC00E0EB43 /* NavigationTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationTitle.swift; sourceTree = "<group>"; };
+		0D1F16631C49081200E0EB43 /* DscribeImageKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeImageKey.swift; sourceTree = "<group>"; };
 		0D5081DA1C3E659F008A643C /* DscribeCharactersUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeCharactersUtils.swift; sourceTree = "<group>"; };
 		0D5081DC1C3FC17E008A643C /* DscribeSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeSettings.swift; sourceTree = "<group>"; };
 		0DC28DCB1C3841A700F40BA1 /* DscribeShapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeShapes.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				0DC28DCB1C3841A700F40BA1 /* DscribeShapes.swift */,
 				0D5081DA1C3E659F008A643C /* DscribeCharactersUtils.swift */,
 				0DC28DCF1C39336200F40BA1 /* DscribeLayout.swift */,
+				0D1F16631C49081200E0EB43 /* DscribeImageKey.swift */,
 				0D5081DC1C3FC17E008A643C /* DscribeSettings.swift */,
 				0DE2F8951BEC274B000F9B5F /* Emojis.swift */,
 				0DC28DD11C39811600F40BA1 /* EmojiList.plist */,
@@ -537,6 +540,7 @@
 				4E60A13A1979FA5C00854CC8 /* KeyboardKeyBackground.swift in Sources */,
 				4E5B67A2196E03B700114361 /* KeyboardModel.swift in Sources */,
 				4E60A13C1979FA8E00854CC8 /* KeyboardConnector.swift in Sources */,
+				0D1F16641C49081200E0EB43 /* DscribeImageKey.swift in Sources */,
 				4E00A6E5197183EE009414F2 /* KeyboardKey.swift in Sources */,
 				0D5081DB1C3E659F008A643C /* DscribeCharactersUtils.swift in Sources */,
 				4EEFD78919E0DC6B004D4974 /* CatboardBanner.swift in Sources */,

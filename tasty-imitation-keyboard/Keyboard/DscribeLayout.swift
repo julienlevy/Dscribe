@@ -52,11 +52,11 @@ class DscribeLayout: KeyboardLayout {
                     let globeShape = self.getShape(GlobeShape)
                     key.shape = globeShape
                 }
-            case Key.KeyType.SearchEmoji:
-                if key.shape == nil {
-                    let emojiShape = self.getShape(EmojiShape)
-                    key.shape = emojiShape
-                }
+//            case Key.KeyType.SearchEmoji:
+//                if key.shape == nil {
+//                    let emojiShape = self.getShape(EmojiShape)
+//                    key.shape = emojiShape
+//                }
             default:
                 break
             }
@@ -68,6 +68,16 @@ class DscribeLayout: KeyboardLayout {
                         let gearImage = UIImage(named: "gear")
                         let settingsImageView = UIImageView(image: gearImage)
                         imageKey.image = settingsImageView
+                    }
+                }
+            }
+            if model.type == Key.KeyType.SearchEmoji {
+                if let imageKey = key as? DscribeImageKey {
+                    if imageKey.image == nil {
+                        imageKey.bigImage = true
+                        let keyIcon = UIImage(named: "Icon")
+                        let emojiImageView = UIImageView(image: keyIcon)
+                        imageKey.image = emojiImageView
                     }
                 }
             }
@@ -168,5 +178,9 @@ class DscribeLayout: KeyboardLayout {
             key.downColor = self.globalColors.specialKey(darkMode, solidColorMode: solidColorMode)
         }
         super.setAppearanceForKey(key, model: model, darkMode: darkMode, solidColorMode: solidColorMode)
+    }
+
+    override func createNewKey() -> KeyboardKey {
+        return DscribeImageKey(vibrancy: nil)
     }
 }
