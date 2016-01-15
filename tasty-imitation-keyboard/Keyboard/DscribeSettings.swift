@@ -13,6 +13,7 @@ let kLanguagePicker: String = "kLanguagePicker"
 class DscribeSettings: DefaultSettings, PickerDelegate {
     var availableLanguages: [String] = [String]()
     var availableLanguagesCodes: [String] = [String]()
+    var currentPickerLanguage: String = ""
 
     var displayLanguagePicker: Bool = false
 
@@ -78,7 +79,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
                 
                 languageCell.label.text = self.settingsNames[key]
                 languageCell.longLabel.text = self.settingsNotes[key]
-                languageCell.labelDisplay.text = self.availableLanguages[self.indexOfCurrentLanguage()!]
+                languageCell.labelDisplay.text = (currentPickerLanguage != "" ? currentPickerLanguage : self.availableLanguages[self.indexOfCurrentLanguage()!])
                 languageCell.labelDisplay.textColor = UIColor.blackColor()
                 
                 languageCell.backgroundColor = (self.darkMode ? cellBackgroundColorDark : cellBackgroundColorLight)
@@ -147,11 +148,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         if self.settingsList[indexPath.section].1[indexPath.row] == kAutocorrectLanguage {
             displayLanguagePicker = !displayLanguagePicker
             if !displayLanguagePicker {
-                let cell: LanguageSettingCell? = tableView.cellForRowAtIndexPath(indexPath) as? LanguageSettingCell
-                if cell == nil {
-                    return
-                }
-                let language: String = cell!.labelDisplay.text!
+                let language: String = currentPickerLanguage
                 let index: Int? = availableLanguages.indexOf({ $0 == language })
                 if index == nil {
                     return
@@ -205,7 +202,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
     func updateValue(value: AnyObject, key: String, indexPath: NSIndexPath) {
         if key == kAutocorrectLanguage {
             if let language: String = value as? String {
-                (self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)) as? LanguageSettingCell)?.labelDisplay.text = language
+                currentPickerLanguage = language
             }
         }
     }
