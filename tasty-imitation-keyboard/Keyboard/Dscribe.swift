@@ -205,6 +205,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     override func createSettings() -> ExtraView? {
         let settingsView = DscribeSettings(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
         settingsView.backButton?.addTarget(self, action: Selector("toggleSettings"), forControlEvents: UIControlEvents.TouchUpInside)
+        settingsView.backButton?.addTarget(self, action: Selector("backFromSettings"), forControlEvents: UIControlEvents.TouchUpInside)
         return settingsView
     }
 
@@ -570,6 +571,16 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         (self.bannerView as! DscribeBanner).displaySuggestions(suggestions, originalString: lastWord!, willReplaceString: self.autoreplaceSuggestion)
     }
 
+    // MARK: Back from settings, in addition to IBAction toggleSetttings
+    func backFromSettings() {
+        if let settings = self.settingsView as? DscribeSettings {
+            // Can't use hidden because two events fired at the same time
+            let language: String = settings.currentPickerLanguage
+            if language != "" {
+                settings.saveLanguage(language)
+            }
+        }
+    }
     // MARK: Banner delegate
     func appendEmoji(emoji: String) {
         // Uses the data passed back

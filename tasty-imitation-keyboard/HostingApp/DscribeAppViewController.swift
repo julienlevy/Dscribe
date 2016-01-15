@@ -78,6 +78,11 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("becameActive:"), name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
+    override func viewWillDisappear(animated: Bool) {
+        if currentPickerLanguage != "" {
+            saveLanguage(currentPickerLanguage)
+        }
+    }
 
     func becameActive(notification: NSNotification) {
         print("Became active")
@@ -196,14 +201,8 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
         if self.settingsList[indexPath.section].1[indexPath.row] == kAutocorrectLanguage {
             displayLanguagePicker = !displayLanguagePicker
             if !displayLanguagePicker {
-                let language: String = currentPickerLanguage
-                let index: Int? = availableLanguages.indexOf({ $0 == language })
-                if index == nil {
-                    return
-                }
-                NSUserDefaults(suiteName: "group.dscribekeyboard")!.setObject(availableLanguagesCodes[index!], forKey: kAutocorrectLanguage)
+                saveLanguage(currentPickerLanguage)
             }
-
             self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
             if displayLanguagePicker {
                 self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section), atScrollPosition: UITableViewScrollPosition.None, animated: true)
@@ -225,7 +224,7 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
             languageDict[language] = wholeString
             //            availableLanguages.append(wholeString)
         }
-        
+
         //Proper sort
         let sorted = languageDict.sort({ $0.1 < $1.1 })
         availableLanguages = [String]()
@@ -246,6 +245,13 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
             return 0
         }
         return index
+    }
+    func saveLanguage(language: String) {
+        let index: Int? = availableLanguages.indexOf({ $0 == language })
+        if index == nil {
+            return
+        }
+        NSUserDefaults(suiteName: "group.dscribekeyboard")!.setObject(availableLanguagesCodes[index!], forKey: kAutocorrectLanguage)
     }
     // PICKER DELEGATE
     func updateValue(value: AnyObject, key: String, indexPath: NSIndexPath) {

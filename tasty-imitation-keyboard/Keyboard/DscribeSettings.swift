@@ -148,14 +148,8 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         if self.settingsList[indexPath.section].1[indexPath.row] == kAutocorrectLanguage {
             displayLanguagePicker = !displayLanguagePicker
             if !displayLanguagePicker {
-                let language: String = currentPickerLanguage
-                let index: Int? = availableLanguages.indexOf({ $0 == language })
-                if index == nil {
-                    return
-                }
-                NSUserDefaults(suiteName: "group.dscribekeyboard")!.setObject(availableLanguagesCodes[index!], forKey: kAutocorrectLanguage)
+                saveLanguage(currentPickerLanguage)
             }
-            
             self.tableView?.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
             if displayLanguagePicker {
                 self.tableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section), atScrollPosition: UITableViewScrollPosition.None, animated: true)
@@ -198,6 +192,13 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
             return 0
         }
         return index
+    }
+    func saveLanguage(language: String) {
+        let index: Int? = availableLanguages.indexOf({ $0 == language })
+        if index == nil {
+            return
+        }
+        NSUserDefaults(suiteName: "group.dscribekeyboard")!.setObject(availableLanguagesCodes[index!], forKey: kAutocorrectLanguage)
     }
     func updateValue(value: AnyObject, key: String, indexPath: NSIndexPath) {
         if key == kAutocorrectLanguage {
