@@ -71,7 +71,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         })
 
         NSUserDefaults(suiteName: "group.dscribekeyboard")!.registerDefaults([
-            kAutocorrectLanguage: "en_US",
+            kAutocorrectLanguage: language,
             kAutoReplace: true,
             kSmallLowercase: true,
             kKeyboardType: kQWERTY
@@ -646,6 +646,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     func appendSuggestion(suggestion: String) {
         self.deleteLastWordAndAppendNew(suggestion + " ")
+        self.autoreplaceSuggestion = ""
     }
 
     func refusedSuggestion() {
