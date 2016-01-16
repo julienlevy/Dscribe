@@ -11,6 +11,10 @@ import UIKit
 let kAutoReplace = "kAutoReplace"
 let kAutocorrectLanguage = "kAutocorrectLanguage"
 let kEscapeCue = "|"
+let kKeyboardType = "kKeyboardType"
+
+let kAZERTY = "AZERTY"
+let kQWERTY = "QWERTY"
 
 
 class Dscribe: KeyboardViewController, DscribeBannerDelegate {
@@ -18,6 +22,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     private let backgroundSearchQueue = dispatch_queue_create("julien.dscribe.photoQueue", DISPATCH_QUEUE_CONCURRENT)
     
     class var bannerColors: DscribeColors.Type { get { return DscribeColors.self }}
+
+    var keyboardType: String = kQWERTY
 
     let takeDebugScreenshot: Bool = false
 
@@ -32,9 +38,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     var autoReplaceActive: Bool = true
     var appleLexicon: UILexicon = UILexicon()
-    var checker: UITextChecker = UITextChecker()
+    var checker: UITextChecker = UITextChecker() //Removed from here
     var language: String = "en_US"
-    var suggestions: [String] = [String]()
+    var suggestions: [String] = [String]() //Remove from here: used only in searchSuggestions
     var autoreplaceSuggestion: String = ""
 
     var selectedText: String = ""
@@ -60,6 +66,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         "topBanner": 43
         ]
 
+        // TODO: move to search
         self.requestSupplementaryLexiconWithCompletion({
             lexicon in
             self.appleLexicon = lexicon
@@ -68,7 +75,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         NSUserDefaults(suiteName: "group.dscribekeyboard")!.registerDefaults([
             kAutocorrectLanguage: "en_US",
             kAutoReplace: true,
-            kSmallLowercase: true
+            kSmallLowercase: true,
+            kKeyboardType: kQWERTY
             ])
         autoReplaceActive = NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(kAutoReplace)
 
@@ -252,6 +260,32 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             relatedBy: NSLayoutRelation.Equal,
             toItem: self.view, attribute: NSLayoutAttribute.Left,
             multiplier: 1, constant: 0))
+    }
+
+    func switchKeyboard() {
+        print("Changing keyboard")
+        self.keyboard = azertyKeyboard()
+        self.keyboardType = kAZERTY
+
+        print("Forwarding view COUNT : " + String(forwardingView.subviews.count))
+        //WORKING, just have to remove the old ones
+        for subview in forwardingView.subviews {
+            subview.removeFromSuperview()
+        }
+        self.constraintsAdded = false
+        self.setupLayout()
+
+        self.forwardingView.resetTrackedViews()
+        self.shiftStartingState = nil
+        self.shiftWasMultitapped = false
+
+        let uppercase = self.shiftState.uppercase()
+        let characterUppercase = (NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(kSmallLowercase) ? uppercase : true)
+        self.layout?.layoutKeys(0, uppercase: uppercase, characterUppercase: characterUppercase, shiftState: self.shiftState)
+        print("has layed out keys")
+        self.setupKeys()
+
+        print("Forwarding view COUNT AFTER: " + String(forwardingView.subviews.count))
     }
 
     // MARK: TODO: define use for those methods
