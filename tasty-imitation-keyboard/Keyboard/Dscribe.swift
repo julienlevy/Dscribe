@@ -38,9 +38,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     var autoReplaceActive: Bool = true
     var appleLexicon: UILexicon = UILexicon()
-    var checker: UITextChecker = UITextChecker() //Removed from here
     var language: String = "en_US"
-    var suggestions: [String] = [String]() //Remove from here: used only in searchSuggestions
     var autoreplaceSuggestion: String = ""
 
     var selectedText: String = ""
@@ -579,7 +577,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         let lastWord = contextString.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " \n")).last
         let rangeOfLast = NSMakeRange(contextString.characters.count - lastWord!.characters.count, lastWord!.characters.count)
 
-        suggestions = []
+        let checker: UITextChecker = UITextChecker()
+        var suggestions: [String] = [String]()
         var guesses: [String]? = []
         var completion: [String]? = []
         var autoReplace: Bool = false
