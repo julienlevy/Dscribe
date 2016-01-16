@@ -91,11 +91,17 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     override func defaultsChanged(notification: NSNotification) {
         super.defaultsChanged(notification)
-        if let newLanguage: String = NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kAutocorrectLanguage) as? String {
+        if let newLanguage = NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kAutocorrectLanguage) as? String {
             language = newLanguage
             print("Default changed, language is " + language)
         }
         autoReplaceActive = NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(kAutoReplace)
+        if let typeSetting = NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kKeyboardType) as? String {
+            if typeSetting != "" && typeSetting != keyboardType {
+                self.keyboardType = typeSetting
+                self.switchKeyboard()
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -264,11 +270,16 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     func switchKeyboard() {
         print("Changing keyboard")
-        self.keyboard = azertyKeyboard()
-        self.keyboardType = kAZERTY
+        if keyboardType == kAZERTY {
+            self.keyboard = azertyKeyboard()
+        }
+        else if keyboardType == kQWERTY {
+            self.keyboard = defaultKeyboard()
+        }
+        else {
+            return
+        }
 
-        print("Forwarding view COUNT : " + String(forwardingView.subviews.count))
-        //WORKING, just have to remove the old ones
         for subview in forwardingView.subviews {
             subview.removeFromSuperview()
         }
@@ -282,10 +293,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         let uppercase = self.shiftState.uppercase()
         let characterUppercase = (NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(kSmallLowercase) ? uppercase : true)
         self.layout?.layoutKeys(0, uppercase: uppercase, characterUppercase: characterUppercase, shiftState: self.shiftState)
-        print("has layed out keys")
         self.setupKeys()
 
-        print("Forwarding view COUNT AFTER: " + String(forwardingView.subviews.count))
+        self.currentMode = 0 //Otherwise change mode button won't work because keyboard would still be considered on mode 1
     }
 
     // MARK: TODO: define use for those methods
@@ -612,6 +622,10 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             let language: String = settings.currentPickerLanguage
             if language != "" {
                 settings.saveLanguage(language)
+            }
+            let typeSetting: String = settings.currentPickerType
+            if typeSetting != "" {
+                settings.saveKeyboardType(typeSetting)
             }
         }
     }
