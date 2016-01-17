@@ -94,12 +94,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             print("Default changed, language is " + language)
         }
         autoReplaceActive = NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(kAutoReplace)
-        if let typeSetting = NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kKeyboardType) as? String {
-            if typeSetting != "" && typeSetting != keyboardType {
-                self.keyboardType = typeSetting
-                self.switchKeyboard()
-            }
-        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -294,6 +288,14 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         self.setupKeys()
 
         self.currentMode = 0 //Otherwise change mode button won't work because keyboard would still be considered on mode 1
+    }
+    func checkKeyboardType() {
+        if let typeSetting = NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kKeyboardType) as? String {
+            if typeSetting != "" && typeSetting != keyboardType {
+                self.keyboardType = typeSetting
+                self.switchKeyboard()
+            }
+        }
     }
 
     // MARK: TODO: define use for those methods
@@ -625,6 +627,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             let typeSetting: String = settings.currentPickerType
             if typeSetting != "" {
                 settings.saveKeyboardType(typeSetting)
+                self.checkKeyboardType()
             }
         }
     }
