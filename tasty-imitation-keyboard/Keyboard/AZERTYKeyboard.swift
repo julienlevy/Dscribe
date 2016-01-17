@@ -30,6 +30,9 @@ func azertyKeyboard() -> Keyboard {
         keyModel.setLetter(key)
         defaultKeyboard.addKey(keyModel, row: 2, page: 0)
     }
+//    let accentModel = Key(.SpecialCharacter)
+//    accentModel.setLetter("'")
+//    defaultKeyboard.addKey(accentModel, row: 2, page: 0)
     
     let backspace = Key(.Backspace)
     defaultKeyboard.addKey(backspace, row: 2, page: 0)
