@@ -177,7 +177,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
                 self.tableView?.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.None, animated: true)
             }
         }
-        if self.settingsList[indexPath.section].1[indexPath.row] == kKeyboardType {
+        else if self.settingsList[indexPath.section].1[indexPath.row] == kKeyboardType {
             displayTypePicker = !displayTypePicker
             if !displayTypePicker {
                 if currentPickerType != "" {

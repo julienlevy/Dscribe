@@ -110,7 +110,7 @@ class DefaultSettingsTableViewCell: UITableViewCell {
     }
 }
 
-class LanguageSettingCell: DefaultSettingsTableViewCell {
+class StaticSettingCell: DefaultSettingsTableViewCell {
     var labelDisplay: UILabel
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
