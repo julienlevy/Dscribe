@@ -239,11 +239,13 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
     func updateValue(value: AnyObject, key: String, indexPath: NSIndexPath) {
         if key == kAutocorrectLanguage {
             if let language: String = value as? String {
+                (self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)) as? StaticSettingCell)?.labelDisplay.text = language
                 currentPickerLanguage = language
             }
         }
         if key == kKeyboardType {
             if let type: String = value as? String {
+                (self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)) as? StaticSettingCell)?.labelDisplay.text = type
                 currentPickerType = type
             }
         }
