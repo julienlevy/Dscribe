@@ -70,10 +70,9 @@ class DscribeLayout: KeyboardLayout {
             }
             if model.type == Key.KeyType.SearchEmoji {
                 if let imageKey = key as? DscribeImageKey {
-                    if imageKey.image == nil {
-                        print("In search mode setAppearance: " + String(self.inSearchMode))
+                    if true { //imageKey.image == nil {
                         imageKey.bigImage = true
-                        let keyIcon = UIImage(named: "Icon")
+                        let keyIcon = UIImage(named: (self.inSearchMode ? "IconWhite" : "Icon"))
                         let emojiImageView = UIImageView(image: keyIcon)
                         imageKey.image = emojiImageView
                     }
@@ -324,8 +323,7 @@ class DscribeLayout: KeyboardLayout {
     override func setAppearanceForKey(key: KeyboardKey, model: Key, darkMode: Bool, solidColorMode: Bool) {
         if model.type == Key.KeyType.SearchEmoji {
             // TODO:  use this function "setAppearanceForOtherKey" and type Other and type instead of overriding this function
-            print("In search mode setAppearance: " + String(self.inSearchMode))
-            key.color = self.self.globalColors.regularKey(darkMode, solidColorMode: solidColorMode)
+            key.color = (self.inSearchMode ? UIColor(red: 250.0/255, green: 193.0/255, blue: 62.0/255, alpha: 1.0) : self.globalColors.regularKey(darkMode, solidColorMode: solidColorMode))
             key.downColor = self.globalColors.specialKey(darkMode, solidColorMode: solidColorMode)
         }
         super.setAppearanceForKey(key, model: model, darkMode: darkMode, solidColorMode: solidColorMode)

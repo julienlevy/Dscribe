@@ -28,6 +28,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     let takeDebugScreenshot: Bool = false
 
     var escapeMode: Bool = false
+    var searchEmojiKey: KeyboardKey?
 
     // TODO delete
     var stringToSearch: String = ""
@@ -108,7 +109,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         // TODO: call this in a more appropriate place: viewDidLayoutSubviews is called everytime a key is hit
         if overlayView.frame == CGRectZero {
             overlayView.backgroundColor = UIColor.blackColor()//(red: 250.0/255, green: 193.0/255, blue: 62.0/255, alpha: 1.0)
-            overlayView.alpha = 0.3
+            overlayView.alpha = 0.2
             overlayView.frame = self.view.frame
             overlayView.userInteractionEnabled = false
             overlayView.hidden = true
@@ -159,7 +160,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                         case Key.KeyType.Settings:
                             keyView.addTarget(self, action: Selector("toggleSettings"), forControlEvents: .TouchUpInside)
                         case Key.KeyType.SearchEmoji:
-                            keyView.addTarget(self, action: Selector("searchEmojiPressed"), forControlEvents: .TouchUpInside)
+                            keyView.addTarget(self, action: Selector("searchEmojiPressed:"), forControlEvents: .TouchUpInside)
                         default:
                             break
                         }
@@ -507,7 +508,10 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         }
     }
     
-    func searchEmojiPressed() {
+    func searchEmojiPressed(sender: KeyboardKey) {
+        if searchEmojiKey == nil {
+            self.searchEmojiKey = sender
+        }
         if escapeMode {
             self.deleteSearchText()
         } else {
@@ -523,6 +527,13 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         escapeMode = !escapeMode
         self.displaySearchMode()
         (self.layout as? DscribeLayout)?.inSearchMode = escapeMode
+        
+        if self.searchEmojiKey != nil {
+            if let keyModel = self.layout?.viewToModel[self.searchEmojiKey!] {
+                self.layout?.updateKeyCap(self.searchEmojiKey!, model: keyModel, fullReset: true, uppercase: false, characterUppercase: false, shiftState: self.shiftState)
+                self.layout?.setAppearanceForKey(self.searchEmojiKey!, model: keyModel, darkMode: self.darkMode(), solidColorMode: self.solidColorMode())
+            }
+        }
     }
 
     // MARK: text input processing tools/functions
