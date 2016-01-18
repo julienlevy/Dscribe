@@ -16,6 +16,8 @@ let kSmallLowercase = "kSmallLowercase"
 let kAutoReplace = "kAutoReplace"
 let kKeyboardType = "kKeyboardType"
 
+let kUseInformation: String = "kUseInformation"
+let kSettingsInformation: String = "kSettingsInformation"
 let kLanguagePicker: String = "kLanguagePicker"
 let kKeyboardPicker: String = "kKeyboardPicker"
 
@@ -36,6 +38,7 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
     var settingsList: [(String, [String])] {
         get {
             return [
+                ("About", [kUseInformation]),
                 ("General Settings", [kAutoCapitalization, kPeriodShortcut, kKeyboardClicks]),
                 ("Extra Settings", [kSmallLowercase]),
                 ("Autocorrect Settings", [kAutoReplace, kAutocorrectLanguage, kLanguagePicker]),
@@ -52,7 +55,9 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
                 kSmallLowercase: "Allow Lowercase Key Caps",
                 kAutoReplace: "Replace Automatically",
                 kAutocorrectLanguage: "Language",
-                kKeyboardType: "Keyboard Type"
+                kKeyboardType: "Keyboard Type",
+                kUseInformation: "Information",
+                kSettingsInformation: "Settings"
             ]
         }
     }
@@ -61,7 +66,9 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
             return [
                 kKeyboardClicks: "Please note that keyboard clicks will work only if “Allow Full Access” is enabled in the keyboard settings. Unfortunately, this is a limitation of the operating system.",
                 kSmallLowercase: "Changes your key caps to lowercase when Shift is off, making it easier to tell what mode you are in.",
-                kAutoReplace: "The suggested word will be automatically replaced on pressing space if there is a spelling mistake."
+                kAutoReplace: "The suggested word will be automatically replaced on pressing space if there is a spelling mistake.",
+                kUseInformation: "Dscribe allows you to type and search for Emojis, just press the Dscribe icon and type your search after the | symbol.",
+                kSettingsInformation: "There is a settings page inside the keyboard, unfortunately it will work properly only if “Allow Full Access“ is enabled in the keyboard settings, this is an iOS limitation."
             ]
         }
     }
@@ -79,6 +86,7 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
         self.tableView?.registerClass(DefaultSettingsTableViewCell.self, forCellReuseIdentifier: "cell")
         self.tableView?.registerClass(StaticSettingCell.self, forCellReuseIdentifier: "staticCell")
         self.tableView?.registerClass(PickerViewCell.self, forCellReuseIdentifier: "picker")
+        self.tableView?.registerClass(InformationCell.self, forCellReuseIdentifier: "informationCell")
         self.tableView?.estimatedRowHeight = 44;
         self.tableView?.rowHeight = UITableViewAutomaticDimension;
 
@@ -97,7 +105,6 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
     }
 
     func becameActive(notification: NSNotification) {
-        print("Became active")
         self.tableView.reloadData()
     }
 
@@ -182,6 +189,25 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
                 pickerCell.delegate = self
                 
                 return pickerCell
+            }
+            else {
+                assert(false, "this is a bad thing that just happened dscribe")
+                return UITableViewCell()
+            }
+        }
+        if key == kUseInformation || key == kSettingsInformation {
+            if let informationCell = tableView.dequeueReusableCellWithIdentifier("informationCell") as? InformationCell {
+
+                informationCell.label.text = self.settingsNames[key]
+                informationCell.longLabel.text = self.settingsNotes[key]
+                
+                informationCell.backgroundColor = UIColor.whiteColor()
+                informationCell.label.textColor = UIColor.blackColor()
+                informationCell.longLabel.textColor =  UIColor.blackColor()
+                
+                informationCell.changeConstraints()
+                
+                return informationCell
             }
             else {
                 assert(false, "this is a bad thing that just happened dscribe")

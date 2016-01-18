@@ -107,8 +107,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
         // TODO: call this in a more appropriate place: viewDidLayoutSubviews is called everytime a key is hit
         if overlayView.frame == CGRectZero {
-            overlayView.backgroundColor = UIColor.blackColor()
-            overlayView.alpha = 0.2
+            overlayView.backgroundColor = UIColor.blackColor()//(red: 250.0/255, green: 193.0/255, blue: 62.0/255, alpha: 1.0)
+            overlayView.alpha = 0.3
             overlayView.frame = self.view.frame
             overlayView.userInteractionEnabled = false
             overlayView.hidden = true

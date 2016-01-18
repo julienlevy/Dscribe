@@ -110,6 +110,46 @@ class DefaultSettingsTableViewCell: UITableViewCell {
     }
 }
 
+class InformationCell: DefaultSettingsTableViewCell {
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        self.sw.hidden = true
+        self.longLabel.font = UIFont.systemFontOfSize(12.0)
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func addConstraints() {
+        let margin: CGFloat = 8
+        let sideMargin = margin * 2
+
+        let switchSide = NSLayoutConstraint(item: sw, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -sideMargin)
+        let switchTop = NSLayoutConstraint(item: sw, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: margin)
+        let labelSide = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: sideMargin)
+        let labelCenter = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
+        
+        self.addConstraint(switchSide)
+        self.addConstraint(switchTop)
+        self.addConstraint(labelSide)
+        self.addConstraint(labelCenter)
+        
+        let left = NSLayoutConstraint(item: longLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: sideMargin)
+        let right = NSLayoutConstraint(item: longLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -sideMargin)
+        let top = NSLayoutConstraint(item: longLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: label, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: margin)
+        let bottom = NSLayoutConstraint(item: longLabel, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -margin)
+        
+        self.addConstraint(left)
+        self.addConstraint(right)
+        self.addConstraint(top)
+        self.addConstraint(bottom)
+        
+        self.cellConstraints += [switchSide, switchTop, labelSide, labelCenter, left, right, top, bottom]
+        
+        self.constraintsSetForLongLabel = true
+    }
+}
 class StaticSettingCell: DefaultSettingsTableViewCell {
     var labelDisplay: UILabel
 

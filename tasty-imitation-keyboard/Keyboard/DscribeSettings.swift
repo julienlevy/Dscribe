@@ -24,10 +24,13 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
 
     override var settingsList: [(String, [String])] {
         get {
-            return super.settingsList + [
-                ("Autocorrect Settings", [kAutoReplace, kAutocorrectLanguage, kLanguagePicker]),
-                ("Keyboard Settings", [kKeyboardType, kKeyboardPicker])
-            ]
+            return
+                [("Information", ["kInformation"])]
+                + super.settingsList
+                + [
+                    ("Autocorrect Settings", [kAutoReplace, kAutocorrectLanguage, kLanguagePicker]),
+                    ("Keyboard Settings", [kKeyboardType, kKeyboardPicker])
+                ]
         }
     }
     override var settingsNames: [String:String] {
