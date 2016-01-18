@@ -434,8 +434,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             let context = self.textDocumentProxy.documentContextBeforeInput
             if escapeMode {
                 if keyOutput == "\n" {
-                    escapeMode = false
-                    self.displaySearchMode()
+                    self.toggleSearchMode()
                     return
                 }
                 let firstRange = context?.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
@@ -459,8 +458,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         self.autoreplaceSuggestion = ""
 
         if self.textDocumentProxy.documentContextBeforeInput?.characters.last == kEscapeCue.characters.first {
-            self.escapeMode = false
-            self.displaySearchMode()
+            if self.escapeMode {
+                self.toggleSearchMode()
+            }
         }
         
         self.checkAndResetSelectedText()
@@ -472,8 +472,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         let context: String? = self.textDocumentProxy.documentContextBeforeInput
         if context != nil {
             if self.textDocumentProxy.documentContextBeforeInput?.characters.last == kEscapeCue.characters.first {
-                self.escapeMode = false
-                self.displaySearchMode()
+                if self.escapeMode {
+                    self.toggleSearchMode()
+                }
             }
             if self.numberOfEnteredEmojis > 0 {
                 self.numberOfEnteredEmojis--
@@ -515,9 +516,13 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             
             self.textDocumentProxy.insertText(kEscapeCue + " ")
         }
-        
+        self.toggleSearchMode()
+    }
+
+    func toggleSearchMode() {
         escapeMode = !escapeMode
         self.displaySearchMode()
+        (self.layout as? DscribeLayout)?.inSearchMode = escapeMode
     }
 
     // MARK: text input processing tools/functions
@@ -549,8 +554,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     func checkAndResetSelectedText() {
         if self.selectedText != "" {
             if self.selectedText.rangeOfString(kEscapeCue) != nil {
-                self.escapeMode = false
-                self.displaySearchMode()
+                if self.escapeMode {
+                    self.toggleSearchMode()
+                }
             }
             self.selectedText = ""
         }
@@ -636,8 +642,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         // Uses the data passed back
         if self.escapeMode {
             self.deleteSearchText()
-            self.escapeMode = false
-            self.displaySearchMode()
+            self.toggleSearchMode()
         }
 
         self.emojiClass!.incrementScore(emoji)

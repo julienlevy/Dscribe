@@ -9,6 +9,7 @@
 import UIKit
 
 class DscribeLayout: KeyboardLayout {
+    var inSearchMode: Bool = false
 
     override func updateKeyCap(key: KeyboardKey, model: Key, fullReset: Bool, uppercase: Bool, characterUppercase: Bool, shiftState: ShiftState) {
 
@@ -70,6 +71,7 @@ class DscribeLayout: KeyboardLayout {
             if model.type == Key.KeyType.SearchEmoji {
                 if let imageKey = key as? DscribeImageKey {
                     if imageKey.image == nil {
+                        print("In search mode setAppearance: " + String(self.inSearchMode))
                         imageKey.bigImage = true
                         let keyIcon = UIImage(named: "Icon")
                         let emojiImageView = UIImageView(image: keyIcon)
@@ -322,6 +324,7 @@ class DscribeLayout: KeyboardLayout {
     override func setAppearanceForKey(key: KeyboardKey, model: Key, darkMode: Bool, solidColorMode: Bool) {
         if model.type == Key.KeyType.SearchEmoji {
             // TODO:  use this function "setAppearanceForOtherKey" and type Other and type instead of overriding this function
+            print("In search mode setAppearance: " + String(self.inSearchMode))
             key.color = self.self.globalColors.regularKey(darkMode, solidColorMode: solidColorMode)
             key.downColor = self.globalColors.specialKey(darkMode, solidColorMode: solidColorMode)
         }
