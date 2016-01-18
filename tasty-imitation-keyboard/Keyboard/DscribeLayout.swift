@@ -9,6 +9,7 @@
 import UIKit
 
 class DscribeLayout: KeyboardLayout {
+
     override func updateKeyCap(key: KeyboardKey, model: Key, fullReset: Bool, uppercase: Bool, characterUppercase: Bool, shiftState: ShiftState) {
 
         self.updateKeyCapText(key, model: model, uppercase: uppercase, characterUppercase: characterUppercase)
@@ -198,52 +199,33 @@ class DscribeLayout: KeyboardLayout {
 
     func layoutCharacterWithSidesRowNonFlexibleKeys(row: [Key], frame: CGRect, isLandscape: Bool, keyWidth: CGFloat, keyGap: CGFloat) -> [CGRect] {
         var frames = [CGRect]()
-        
+
         let standardFullKeyCount = Int(self.layoutConstants.keyCompressedThreshhold) - 1
-        print("standardFullKeyCount : " + String(standardFullKeyCount))
         let standardGap = (isLandscape ? self.layoutConstants.keyGapLandscape : self.layoutConstants.keyGapPortrait)(frame.width, rowCharacterCount: standardFullKeyCount)
-        print("standardGap : " + String(standardGap))
         let sideEdges = (isLandscape ? self.layoutConstants.sideEdgesLandscape : self.layoutConstants.sideEdgesPortrait(frame.width))
-        print("sideEdges : " + String(sideEdges))
         var standardKeyWidth = (frame.width - sideEdges - (standardGap * CGFloat(standardFullKeyCount - 1)) - sideEdges)
-        print("standardKeyWidth : " + String(standardKeyWidth))
         standardKeyWidth /= CGFloat(standardFullKeyCount)
-        print("standardKeyWidth : " + String(standardKeyWidth))
         let standardKeyCount = self.layoutConstants.flexibleEndRowMinimumStandardCharacterWidth
-        print("standardKeyCount : " + String(standardKeyCount))
-        
+
         let standardWidth = CGFloat(standardKeyWidth * standardKeyCount + standardGap * (standardKeyCount - 1))
-        print("standardWidth : " + String(standardWidth))
         let currentWidth = CGFloat(row.count - 2) * keyWidth + CGFloat(row.count - 3) * keyGap
-        print("currentWidth : " + String(currentWidth))
-        
+
         let isStandardWidth = (currentWidth < standardWidth)
-        print("isStandardWidth : " + String(isStandardWidth))
         let actualWidth = currentWidth // (isStandardWidth ? standardWidth : currentWidth)
-        print("actualWidth : " + String(actualWidth))
         let actualGap = (isStandardWidth ? standardGap : keyGap)
-        print("actualGap : " + String(actualGap))
         let actualKeyWidth = (actualWidth - CGFloat(row.count - 3) * actualGap) / CGFloat(row.count - 2)
-        print("actualKeyWidth : " + String(actualKeyWidth))
-        
+
         let sideSpace = (frame.width - actualWidth) / CGFloat(2)
-        print("sideSpace : " + String(sideSpace))
-        
+
         let m = (isLandscape ? self.layoutConstants.flexibleEndRowTotalWidthToKeyWidthMLandscape : self.layoutConstants.flexibleEndRowTotalWidthToKeyWidthMPortrait)
-        print("m : " + String(m))
         let c = (isLandscape ? self.layoutConstants.flexibleEndRowTotalWidthToKeyWidthCLandscape : self.layoutConstants.flexibleEndRowTotalWidthToKeyWidthCPortrait)
-        print("c : " + String(c))
-        
+
         var specialCharacterWidth = sideSpace * m + c
         specialCharacterWidth = ((frame.width - standardWidth) / CGFloat(2)) * m + c
-        print("specialCharacterWidth : " + String(specialCharacterWidth))
         specialCharacterWidth = max(specialCharacterWidth, keyWidth)
-        print("specialCharacterWidth : " + String(specialCharacterWidth))
         specialCharacterWidth = rounded(specialCharacterWidth)
-        print("specialCharacterWidth : " + String(specialCharacterWidth))
         let specialCharacterGap = sideSpace - specialCharacterWidth
-        print("specialCharacterGap : " + String(specialCharacterGap))
-        
+
         var currentOrigin = frame.origin.x
         for (k, key) in row.enumerate() {
             if k == 0 {
@@ -265,7 +247,7 @@ class DscribeLayout: KeyboardLayout {
                 }
             }
         }
-        
+
         return frames
     }
     override func layoutSpecialKeysRow(row: [Key], keyWidth: CGFloat, gapWidth: CGFloat, leftSideRatio: CGFloat, rightSideRatio: CGFloat, micButtonRatio: CGFloat, isLandscape: Bool, frame: CGRect) -> [CGRect] {
