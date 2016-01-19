@@ -60,8 +60,9 @@ class DscribeLayout: KeyboardLayout {
 
             // images
             if model.type == Key.KeyType.Settings {
-                if let imageKey = key as? ImageKey {
+                if let imageKey = key as? DscribeImageKey {
                     if imageKey.image == nil {
+                        imageKey.bigImage = false
                         let gearImage = UIImage(named: "gear")
                         let settingsImageView = UIImageView(image: gearImage)
                         imageKey.image = settingsImageView
