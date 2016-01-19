@@ -666,6 +666,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     func appendSuggestion(suggestion: String) {
         self.deleteLastWordAndAppendNew(suggestion + " ")
         self.autoreplaceSuggestion = ""
+        (self.bannerView as! DscribeBanner).removeSpecialSuggestionColor()
     }
 
     func refusedSuggestion() {

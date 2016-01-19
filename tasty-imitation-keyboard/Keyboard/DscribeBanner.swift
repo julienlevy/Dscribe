@@ -144,6 +144,19 @@ class DscribeBanner: ExtraView {
             }
         }
     }
+    func removeSpecialSuggestionColor() {
+        for subview in self.scrollView.subviews {
+            if subview is UIButton {
+                let button = subview as! UIButton
+                if subview.tag == 2 { //Will Replace suggestion
+                    subview.tag = 1 //Normal suggestion
+                    button.backgroundColor = suggestionBackgroundColor
+                    button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
+                    button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+                }
+            }
+        }
+    }
     
     func emojiSelected(sender: UIButton!) {
         delegate?.appendEmoji((sender.titleLabel?.text)!)
