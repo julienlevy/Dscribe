@@ -299,6 +299,34 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         }
     }
 
+    func openApp() {
+        let myAppUrl = NSURL(string: "dscribe://")!
+        print(extensionContext)
+        extensionContext?.openURL(myAppUrl, completionHandler: { (success) in
+            print("Here is the success " + String(success))
+            if (!success) {
+                // let the user know it failed
+            }
+        })
+        let myExtContext: NSExtensionContext = NSExtensionContext()
+        myExtContext.openURL(myAppUrl, completionHandler: { (success) in
+            print("Here is the success of the second" + String(success))
+            if (!success) {
+                // let the user know it failed
+            }
+        })
+        //This one is working:
+        var myResponder: UIResponder? = self
+        while myResponder != nil {
+            if myResponder!.respondsToSelector(Selector("openURL:")) {
+                print("responder responding to selector")
+                print(myResponder)
+                myResponder!.performSelector("openURL:", withObject: myAppUrl)
+            }
+            myResponder = myResponder?.nextResponder()
+        }
+    }
+
     // MARK: TODO: define use for those methods
     func takeScreenshotDelay() {
         print("Take Screenshot Delay")

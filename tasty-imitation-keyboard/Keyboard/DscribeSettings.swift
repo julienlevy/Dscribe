@@ -12,6 +12,12 @@ let kLanguagePicker: String = "kLanguagePicker"
 let kKeyboardPicker: String = "kKeyboardPicker"
 
 class DscribeSettings: DefaultSettings, PickerDelegate {
+    var hasFullAccess: Bool {
+        get {
+            return UIPasteboard.generalPasteboard().isKindOfClass(UIPasteboard)
+        }
+    }
+
     var availableLanguages: [String] = [String]()
     var availableLanguagesCodes: [String] = [String]()
     var currentPickerLanguage: String = ""
@@ -25,7 +31,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
     override var settingsList: [(String, [String])] {
         get {
             return
-                [("Information", ["kInformation"])]
+                (hasFullAccess ? [] : [("Information", ["kInformation"])])
                 + super.settingsList
                 + [
                     ("Autocorrect Settings", [kAutoReplace, kAutocorrectLanguage, kLanguagePicker]),
@@ -165,6 +171,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         }
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("Keyboard is allowed full Access: " + String(self.hasFullAccess))
         self.tableView?.deselectRowAtIndexPath(indexPath, animated: true)
         if self.settingsList[indexPath.section].1[indexPath.row] == kAutocorrectLanguage {
             displayLanguagePicker = !displayLanguagePicker
@@ -252,6 +259,33 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
                 currentPickerType = type
             }
         }
+    }
+}
+
+class InformationWithButtonCell: DefaultSettingsTableViewCell {
+    var button: UIButton
+
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        button = UIButton()
+
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        sw.hidden = true
+        self.addSubview(button)
+
+        self.addButtonConstraints()
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func addButtonConstraints() {
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let top: NSLayoutConstraint = NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0)
+        let right: NSLayoutConstraint = NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 0)
+        let bottom: NSLayoutConstraint = NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0)
+
+        self.addConstraints([top, right, bottom])
     }
 }
 

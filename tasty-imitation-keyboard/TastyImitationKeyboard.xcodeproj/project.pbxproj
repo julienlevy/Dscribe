@@ -15,6 +15,7 @@
 		0D1F16661C4935D900E0EB43 /* AZERTYKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1F16651C4935D900E0EB43 /* AZERTYKeyboard.swift */; };
 		0D5081DB1C3E659F008A643C /* DscribeCharactersUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5081DA1C3E659F008A643C /* DscribeCharactersUtils.swift */; };
 		0D5081DD1C3FC17E008A643C /* DscribeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5081DC1C3FC17E008A643C /* DscribeSettings.swift */; };
+		0D8843291C4D4FAF00200C69 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D8843281C4D4FAF00200C69 /* iTunesArtwork@2x.png */; };
 		0DC28DD01C39336200F40BA1 /* DscribeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC28DCF1C39336200F40BA1 /* DscribeLayout.swift */; };
 		0DC28DD21C39811600F40BA1 /* EmojiList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0DC28DD11C39811600F40BA1 /* EmojiList.plist */; };
 		0DE2F8961BEC274B000F9B5F /* Emojis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2F8951BEC274B000F9B5F /* Emojis.swift */; };
@@ -43,7 +44,6 @@
 		4ECBD90219F16DC7004FA2A3 /* DefaultKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECBD90119F16DC7004FA2A3 /* DefaultKeyboard.swift */; };
 		4EE7599B19F75A0D00B4E6ED /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE7599A19F75A0D00B4E6ED /* Utilities.swift */; };
 		4EEFD78B19E0DF15004D4974 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEFD78A19E0DF15004D4974 /* Shapes.swift */; };
-		4EF16F9119D254E00076AFCB /* Background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4EF16F9019D254E00076AFCB /* Background.jpg */; };
 		4EF16F9619D255030076AFCB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EF16F9319D255030076AFCB /* Images.xcassets */; };
 		4EF16F9819D255030076AFCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF16F9519D255030076AFCB /* ViewController.swift */; };
 		4EF16F9B19D2550D0076AFCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF16F9A19D2550D0076AFCB /* AppDelegate.swift */; };
@@ -117,6 +117,7 @@
 		0D1F16651C4935D900E0EB43 /* AZERTYKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AZERTYKeyboard.swift; sourceTree = "<group>"; };
 		0D5081DA1C3E659F008A643C /* DscribeCharactersUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeCharactersUtils.swift; sourceTree = "<group>"; };
 		0D5081DC1C3FC17E008A643C /* DscribeSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeSettings.swift; sourceTree = "<group>"; };
+		0D8843281C4D4FAF00200C69 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		0DC28DCF1C39336200F40BA1 /* DscribeLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeLayout.swift; sourceTree = "<group>"; };
 		0DC28DD11C39811600F40BA1 /* EmojiList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EmojiList.plist; sourceTree = "<group>"; };
 		0DE2F8951BEC274B000F9B5F /* Emojis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emojis.swift; sourceTree = "<group>"; };
@@ -148,7 +149,6 @@
 		4ECBD90119F16DC7004FA2A3 /* DefaultKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultKeyboard.swift; sourceTree = "<group>"; };
 		4EE7599A19F75A0D00B4E6ED /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		4EEFD78A19E0DF15004D4974 /* Shapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
-		4EF16F9019D254E00076AFCB /* Background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Background.jpg; sourceTree = "<group>"; };
 		4EF16F9219D254EA0076AFCB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EF16F9319D255030076AFCB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4EF16F9519D255030076AFCB /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -294,7 +294,7 @@
 		4E807D9619461D9000D875D1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4EF16F9019D254E00076AFCB /* Background.jpg */,
+				0D8843281C4D4FAF00200C69 /* iTunesArtwork@2x.png */,
 				4EF16F9219D254EA0076AFCB /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -480,9 +480,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EF16F9619D255030076AFCB /* Images.xcassets in Resources */,
+				0D8843291C4D4FAF00200C69 /* iTunesArtwork@2x.png in Resources */,
 				0D1F16581C43A05E00E0EB43 /* Dscribe.storyboard in Resources */,
 				4EF16F9F19D2552E0076AFCB /* Main.storyboard in Resources */,
-				4EF16F9119D254E00076AFCB /* Background.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
