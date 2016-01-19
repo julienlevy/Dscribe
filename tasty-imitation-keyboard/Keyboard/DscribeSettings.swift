@@ -8,15 +8,12 @@
 
 import UIKit
 
+let kInformation: String = "kInformation"
 let kLanguagePicker: String = "kLanguagePicker"
 let kKeyboardPicker: String = "kKeyboardPicker"
 
 class DscribeSettings: DefaultSettings, PickerDelegate {
-    var hasFullAccess: Bool {
-        get {
-            return UIPasteboard.generalPasteboard().isKindOfClass(UIPasteboard)
-        }
-    }
+    var hasFullAccess: Bool
 
     var availableLanguages: [String] = [String]()
     var availableLanguagesCodes: [String] = [String]()
@@ -31,7 +28,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
     override var settingsList: [(String, [String])] {
         get {
             return
-                (hasFullAccess ? [] : [("Information", ["kInformation"])])
+                (hasFullAccess ? [] : [("Information", [kInformation])])
                 + super.settingsList
                 + [
                     ("Autocorrect Settings", [kAutoReplace, kAutocorrectLanguage, kLanguagePicker]),
@@ -48,7 +45,8 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
                 kSmallLowercase: "Allow Lowercase Key Caps",
                 kAutoReplace: "Replace Automatically",
                 kAutocorrectLanguage: "Language",
-                kKeyboardType: "Keyboard Type"
+                kKeyboardType: "Keyboard Type",
+                kInformation: "Saving Settings"
             ]
         }
     }
@@ -57,15 +55,19 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
             return [
                 kKeyboardClicks: "Please note that keyboard clicks will work only if “Allow Full Access” is enabled in the keyboard settings. Unfortunately, this is a limitation of the operating system.",
                 kSmallLowercase: "Changes your key caps to lowercase when Shift is off, making it easier to tell what mode you are in.",
-                kAutoReplace: "The suggested word will be automatically replaced on pressing space if there is a spelling mistake."
+                kAutoReplace: "The suggested word will be automatically replaced on pressing space if there is a spelling mistake.",
+                kInformation: "Unfortunately settings won't be saved properly unless “Allow Full Access is enabled“.\nYou may do so in Settings > General > Dscribe, or you may use the Dscribe app for the keyboard settings."
             ]
         }
     }
 
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
+        self.hasFullAccess = false
+
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
 
         getAvailableLanguages()
+        self.hasFullAccess = UIPasteboard.generalPasteboard().isKindOfClass(UIPasteboard)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -75,6 +77,9 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         super.loadNib()
         self.tableView?.registerClass(StaticSettingCell.self, forCellReuseIdentifier: "staticCell")
         self.tableView?.registerClass(PickerViewCell.self, forCellReuseIdentifier: "pickerCell")
+        self.tableView?.registerClass(InformationWithButtonCell.self, forCellReuseIdentifier: "informationCell")
+
+        self.hasFullAccess = UIPasteboard.generalPasteboard().isKindOfClass(UIPasteboard)
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -133,6 +138,29 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
                 pickerCell.delegate = self
 
                 return pickerCell
+            }
+            else {
+                assert(false, "this is a bad thing that just happened dscribe")
+                return UITableViewCell()
+            }
+        }
+        if key == kInformation {
+            if let informationCell = tableView.dequeueReusableCellWithIdentifier("informationCell") as? InformationWithButtonCell {
+
+                informationCell.label.text = self.settingsNames[key]
+                informationCell.longLabel.text = self.settingsNotes[key]
+                informationCell.button.setTitle("Open App", forState: .Normal)
+
+                informationCell.backgroundColor = (self.darkMode ? cellBackgroundColorDark : cellBackgroundColorLight)
+                informationCell.label.textColor = (self.darkMode ? cellLabelColorDark : cellLabelColorLight)
+                informationCell.longLabel.textColor = (self.darkMode ? cellLabelColorDark : cellLabelColorLight)
+                informationCell.button.setTitleColor(self.tintColor, forState: .Normal)
+
+                informationCell.button.addTarget(self, action: Selector("openApp"), forControlEvents: UIControlEvents.TouchUpInside)
+
+                informationCell.changeConstraints()
+
+                return informationCell
             }
             else {
                 assert(false, "this is a bad thing that just happened dscribe")
@@ -258,6 +286,18 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
                 (self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)) as? StaticSettingCell)?.labelDisplay.text = type
                 currentPickerType = type
             }
+        }
+    }
+    func openApp() {
+        let myAppUrl = NSURL(string: "dscribe://")!
+        var myResponder: UIResponder? = self
+        while myResponder != nil {
+            if myResponder!.respondsToSelector(Selector("openURL:")) {
+                print("responder responding to selector")
+                print(myResponder)
+                myResponder!.performSelector("openURL:", withObject: myAppUrl)
+            }
+            myResponder = myResponder?.nextResponder()
         }
     }
 }
