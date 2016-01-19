@@ -29,10 +29,10 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         get {
             return
                 (hasFullAccess ? [] : [("Information", [kInformation])])
-                + super.settingsList
                 + [
-                    ("Autocorrect Settings", [kAutoReplace, kAutocorrectLanguage, kLanguagePicker]),
-                    ("Keyboard Settings", [kKeyboardType, kKeyboardPicker])
+                    ("General Settings", [kAutoCapitalization, kPeriodShortcut, kKeyboardClicks]),
+                    ("Display Settings", [kSmallLowercase, kKeyboardType, kKeyboardPicker]),
+                    ("Autocorrect Settings", [kAutoReplace, kAutocorrectLanguage, kLanguagePicker])
                 ]
         }
     }

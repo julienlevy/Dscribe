@@ -40,9 +40,8 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
             return [
                 ("About", [kUseInformation]),
                 ("General Settings", [kAutoCapitalization, kPeriodShortcut, kKeyboardClicks]),
-                ("Extra Settings", [kSmallLowercase]),
-                ("Autocorrect Settings", [kAutoReplace, kAutocorrectLanguage, kLanguagePicker]),
-                ("Keyboard Settings", [kKeyboardType, kKeyboardPicker])
+                ("Display Settings", [kSmallLowercase, kKeyboardType, kKeyboardPicker]),
+                ("Autocorrect Settings", [kAutoReplace, kAutocorrectLanguage, kLanguagePicker])
             ]
         }
     }
@@ -125,7 +124,7 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 35 + (self.navigationController?.navigationBar.frame.height)!
+            return 35 + 20
         }
         return 35
     }
