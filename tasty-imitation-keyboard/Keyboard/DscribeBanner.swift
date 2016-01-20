@@ -157,7 +157,7 @@ class DscribeBanner: ExtraView {
             }
         }
     }
-    
+
     func emojiSelected(sender: UIButton!) {
         delegate?.appendEmoji((sender.titleLabel?.text)!)
     }
@@ -165,7 +165,7 @@ class DscribeBanner: ExtraView {
     func suggestionSelected(sender: UIButton!) {
         delegate?.appendSuggestion((sender.titleLabel?.text)!)
     }
-    
+
     func alreadyTypedWord(sender: UIButton!) {
         delegate?.refusedSuggestion()
     }
@@ -180,7 +180,7 @@ class DscribeBanner: ExtraView {
         self.removeAllButtonsFromScrollView()
         self.beforeScrollView.hidden = false
         self.afterScrollView.hidden = false
-        
+
         var xOrigin: CGFloat = 0
         var width: CGFloat = 80
         var lastButton:UIButton = UIButton()
@@ -188,13 +188,12 @@ class DscribeBanner: ExtraView {
         scrollView.scrollEnabled = true
         // To scroll back to the first page of emojis:
         self.scrollView.contentSize.width = scrollView.bounds.width
-        
+
         if numberEmoji <= 4 {
             width = (self.frame.width) / CGFloat(numberEmoji)
             scrollView.scrollEnabled = false
         }
-        
-        
+
         var count: Int = 0
         for emoji in emojiList {
             count++

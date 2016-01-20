@@ -78,10 +78,11 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             kKeyboardType: kQWERTY
             ])
         autoReplaceActive = NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(kAutoReplace)
-
+        if let newType: String = NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kKeyboardType) as? String {
+            keyboardType = newType
+        }
         if let newLanguage: String = NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kAutocorrectLanguage) as? String {
             language = newLanguage
-            print("language init to " + language)
         }
     }
     required init?(coder: NSCoder) {
