@@ -20,7 +20,7 @@ let kQWERTY = "QWERTY"
 class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     private let backgroundSearchQueue = dispatch_queue_create("julien.dscribe.photoQueue", DISPATCH_QUEUE_CONCURRENT)
-    
+
     class var bannerColors: DscribeColors.Type { get { return DscribeColors.self }}
 
     var keyboardType: String = kQWERTY
@@ -59,7 +59,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         } else {
             loadSampleEmojis()
         }
-        
+
         //To change the height of the banner
         metrics = [
         "topBanner": 43
@@ -97,10 +97,10 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         }
         autoReplaceActive = NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(kAutoReplace)
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+
         if view.bounds == CGRectZero {
             return
         }
@@ -126,7 +126,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     // MARK: Keyboard Setup methods
     override func updateAppearances(appearanceIsDark: Bool) {
         super.updateAppearances(appearanceIsDark)
-        
+
         (self.bannerView as? DscribeBanner)?.updateBannerColors()
     }
 
@@ -149,7 +149,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                             keyView.addTarget(self, action: "advanceTapped:", forControlEvents: .TouchUpInside)
                         case Key.KeyType.Backspace:
                             let cancelEvents: UIControlEvents = [UIControlEvents.TouchUpInside, UIControlEvents.TouchUpInside, UIControlEvents.TouchDragExit, UIControlEvents.TouchUpOutside, UIControlEvents.TouchCancel, UIControlEvents.TouchDragOutside]
-                            
+
                             keyView.addTarget(self, action: "backspaceDown:", forControlEvents: .TouchDown)
                             keyView.addTarget(self, action: "backspaceUp:", forControlEvents: cancelEvents)
                         case Key.KeyType.Shift:
@@ -266,11 +266,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         print("Changing keyboard")
         if keyboardType == kAZERTY {
             self.keyboard = azertyKeyboard()
-        }
-        else if keyboardType == kQWERTY {
+        } else if keyboardType == kQWERTY {
             self.keyboard = defaultKeyboard()
-        }
-        else {
+        } else {
             return
         }
 
@@ -383,13 +381,11 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             if !inDifference {
                 if self.fullContextBeforeChange[self.fullContextBeforeChange.startIndex.advancedBy(i)] == fullTextAfter[fullTextAfter.startIndex.advancedBy(j)] {
                     j++
-                }
-                else {
+                } else {
                     firstIndex = i
                     inDifference = true
                 }
-            }
-            else {
+            } else {
                 if self.fullContextBeforeChange.substringFromIndex(self.fullContextBeforeChange.startIndex.advancedBy(i)) == fullTextAfter.substringFromIndex(fullTextAfter.startIndex.advancedBy(j)) {
                     lastIndex = i
                     inDifference = false
@@ -415,7 +411,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         }
         self.autoreplaceSuggestion = ""
         self.numberOfEnteredEmojis = 0
-        
+
         self.checkAndResetSelectedText()
 
         if keyOutput == kEscapeCue {
@@ -440,7 +436,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                     return
                 }
                 let firstRange = context?.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
-                if (firstRange != nil) {
+                if firstRange != nil {
                     let lastIndex = context!.endIndex
                     self.stringToSearch = context!.substringWithRange(firstRange!.startIndex.successor()..<lastIndex)
                     self.searchEmojis(self.stringToSearch)
@@ -464,7 +460,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 self.toggleSearchMode()
             }
         }
-        
+
         self.checkAndResetSelectedText()
 
         super.backspaceDown(sender)
@@ -496,7 +492,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
         if self.escapeMode {
             let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
-            if (firstRange != nil) {
+            if firstRange != nil {
                 let lastIndex = context!.endIndex
                 self.stringToSearch = context!.substringWithRange(firstRange!.startIndex.successor()..<lastIndex)
                 self.searchEmojis(self.stringToSearch)
@@ -508,7 +504,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             self.numberOfEnteredEmojis--
         }
     }
-    
+
     func searchEmojiPressed(sender: KeyboardKey) {
         if searchEmojiKey == nil {
             self.searchEmojiKey = sender
@@ -516,9 +512,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         if escapeMode {
             self.deleteSearchText()
         } else {
-            //TODO replace with most used emoji
             self.searchEmojis("")
-            
+
             self.textDocumentProxy.insertText(kEscapeCue + " ")
         }
         self.toggleSearchMode()
@@ -528,7 +523,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         escapeMode = !escapeMode
         self.displaySearchMode()
         (self.layout as? DscribeLayout)?.inSearchMode = escapeMode
-        
+
         if self.searchEmojiKey != nil {
             if let keyModel = self.layout?.viewToModel[self.searchEmojiKey!] {
                 self.layout?.updateKeyCap(self.searchEmojiKey!, model: keyModel, fullReset: true, uppercase: false, characterUppercase: false, shiftState: self.shiftState)
@@ -542,7 +537,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         let context = self.textDocumentProxy.documentContextBeforeInput
         if context != nil {
             let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
-            if (firstRange != nil) {
+            if firstRange != nil {
                 let lastIndex = context!.endIndex
                 let count = (firstRange!.startIndex..<lastIndex).count
                 for var i = 0; i < count; i++ {
@@ -551,7 +546,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             }
         }
     }
-    
+
     func deleteLastWordAndAppendNew(word: String) {
         let context = self.textDocumentProxy.documentContextBeforeInput
         if context != nil {
@@ -582,7 +577,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             overlayView.hidden = true
         }
     }
-    
+
     // MARK: Calls to banner
     func searchEmojis(string: String) {
         dispatch_async(backgroundSearchQueue) {
@@ -605,7 +600,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
         //Contacts and stuff
         for lexiconEntry in self.appleLexicon.entries {
-            if (lexiconEntry.userInput == lastWord) {
+            if lexiconEntry.userInput == lastWord {
                 print("Found a Lexicon Entry")
                 print(lexiconEntry.documentText)
                 suggestions.append(lexiconEntry.documentText)
@@ -693,7 +688,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
         let high: UInt32 = UInt32((mystring as NSString).characterAtIndex(0)) // UInt16
 
-        if (0xD800 <= high && high <= 0xDBFF) {
+        if 0xD800 <= high && high <= 0xDBFF {
             let low: UInt32 = UInt32((mystring as NSString).characterAtIndex(1))
 
             let codepoint: Int = Int((high - 0xD800) * 0x400 + (low - 0xDC00) + 0x10000)
@@ -720,5 +715,3 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         self.emojiClass = Emoji()
     }
 }
-
-

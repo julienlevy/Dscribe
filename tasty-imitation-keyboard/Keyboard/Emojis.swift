@@ -14,12 +14,12 @@ class Emoji: NSObject, NSCoding {
     
     static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("emojis")
-    
+
     struct PropertyKey {
         static let emojiScoreKey = "emojiScore"
         static let emojiTagKey = "emojiTag"
     }
-    
+
     override init() {
         self.emojiScore = ["😂": 3, "😍": 3, "😭": 3, "😊": 3, "❤": 3, "💕": 3, "✨": 2, "😘": 3, "👏": 3, "🔥": 2, "👍": 3, "👌": 3, "😎": 3, "😒": 2, "🙈": 3, "😏": 2]
         self.emojiTag = [String: [String]]()
@@ -39,28 +39,28 @@ class Emoji: NSObject, NSCoding {
     init?(emojiScore: [String: Int], emojiTag: [String: [String]]) {
         self.emojiScore = emojiScore
         self.emojiTag = emojiTag
-        
+
         super.init()
         if emojiScore.isEmpty || emojiTag.isEmpty {
             return nil
         }
     }
-    
+
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(emojiScore, forKey: PropertyKey.emojiScoreKey)
         aCoder.encodeObject(emojiTag, forKey: PropertyKey.emojiTagKey)
     }
-    
+
     required convenience init?(coder aDecoder: NSCoder) {
         let emojiScore = aDecoder.decodeObjectForKey(PropertyKey.emojiScoreKey) as! [String: Int]
         let emojiTag = aDecoder.decodeObjectForKey(PropertyKey.emojiTagKey) as! [String: [String]]
-        
+
         self.init(emojiScore: emojiScore, emojiTag: emojiTag)
     }
-    
+
     func getMostUsedEmojis() -> [String] {
         var result: [String: Int] = [String: Int]()
-        for (emoji, tagArray) in self.emojiTag {
+        for (emoji, _) in self.emojiTag {
             if emojiScore[emoji] == nil {
                 continue
             }
@@ -94,7 +94,7 @@ class Emoji: NSObject, NSCoding {
                     if tag.hasPrefix(keyword) {
                         // Added emojiToMatchData[emoji] condition to count minor matches if another tag has already matched: ex "heart gr" should give the green heart
                         // TODO:  improve this condition, especially in case the emoji has few tags
-                        if (keyword.characters.count < 3 && emojiToMatchData.keys.count > 20 && emojiScore[emoji] < 2 && emojiToMatchData[emoji] == nil && keyword.characters.count != tag.characters.count) {
+                        if keyword.characters.count < 3 && emojiToMatchData.keys.count > 20 && emojiScore[emoji] < 2 && emojiToMatchData[emoji] == nil && keyword.characters.count != tag.characters.count {
                             continue
                         }
 
@@ -146,11 +146,10 @@ class Emoji: NSObject, NSCoding {
         print("incrementing " + emoji)
         print(self.emojiScore[emoji])
         if self.emojiScore[emoji] != nil {
-            self.emojiScore[emoji] = (self.emojiScore[emoji] as Int!) + 1;
-            return (self.emojiScore[emoji] as Int!);
+            self.emojiScore[emoji] = (self.emojiScore[emoji] as Int!) + 1
+            return (self.emojiScore[emoji] as Int!)
         }
-        self.emojiScore[emoji] = 1;
+        self.emojiScore[emoji] = 1
         return 1
     }
-    
 }

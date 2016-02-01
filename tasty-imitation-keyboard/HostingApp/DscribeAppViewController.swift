@@ -86,8 +86,8 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
         self.tableView?.registerClass(StaticSettingCell.self, forCellReuseIdentifier: "staticCell")
         self.tableView?.registerClass(PickerViewCell.self, forCellReuseIdentifier: "picker")
         self.tableView?.registerClass(InformationCell.self, forCellReuseIdentifier: "informationCell")
-        self.tableView?.estimatedRowHeight = 44;
-        self.tableView?.rowHeight = UITableViewAutomaticDimension;
+        self.tableView?.estimatedRowHeight = 44
+        self.tableView?.rowHeight = UITableViewAutomaticDimension
 
         self.tableView?.backgroundColor = UIColor.groupTableViewBackgroundColor()
 
@@ -96,6 +96,8 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
         getAvailableLanguages()
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("becameActive:"), name: UIApplicationDidBecomeActiveNotification, object: nil)
+
+        self.keyboardWasActivated()
     }
     override func viewWillDisappear(animated: Bool) {
         if currentPickerLanguage != "" {
@@ -110,7 +112,7 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.settingsList.count
     }
-    
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let rows: Int = self.settingsList[section].1.count
         for row in 0...(rows-1) {
@@ -121,39 +123,37 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
         }
         return self.settingsList[section].1.count
     }
-    
+
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 35 + 20
         }
         return 35
     }
-    
+
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == self.settingsList.count - 1 {
             return 50
-        }
-        else {
+        } else {
             return 0
         }
     }
-    
+
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.settingsList[section].0
     }
-    
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let key = self.settingsList[indexPath.section].1[indexPath.row]
-        
+
         if key == kAutocorrectLanguage || key == kKeyboardType {
             if let languageCell = tableView.dequeueReusableCellWithIdentifier("staticCell") as? StaticSettingCell {
-                
+
                 languageCell.label.text = self.settingsNames[key]
                 languageCell.longLabel.text = self.settingsNotes[key]
                 if key == kAutocorrectLanguage {
                     languageCell.labelDisplay.text = (currentPickerLanguage != "" ? currentPickerLanguage : self.availableLanguages[self.indexOfCurrentLanguage()!])
-                }
-                else {
+                } else {
                     languageCell.labelDisplay.text = (currentPickerType != "" ? currentPickerType : NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kKeyboardType) as? String)
                 }
                 languageCell.labelDisplay.textColor = UIColor.blackColor()
@@ -161,12 +161,11 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
                 languageCell.backgroundColor = UIColor.whiteColor()
                 languageCell.label.textColor = UIColor.blackColor()
                 languageCell.longLabel.textColor =  UIColor.grayColor()
-                
+
                 languageCell.changeConstraints()
-                
+
                 return languageCell
-            }
-            else {
+            } else {
                 assert(false, "this is a bad thing that just happened dscribe")
                 return UITableViewCell()
             }
@@ -182,14 +181,13 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
                             NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kKeyboardType) as! String
                         )!)
                 pickerCell.pickerView.selectRow(indexToSelect, inComponent: 0, animated: false)
-                
+
                 pickerCell.key = (key == kLanguagePicker ? kAutocorrectLanguage : kKeyboardType)
                 pickerCell.indexPath = indexPath
                 pickerCell.delegate = self
-                
+
                 return pickerCell
-            }
-            else {
+            } else {
                 assert(false, "this is a bad thing that just happened dscribe")
                 return UITableViewCell()
             }
@@ -199,39 +197,37 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
 
                 informationCell.label.text = self.settingsNames[key]
                 informationCell.longLabel.text = self.settingsNotes[key]
-                
+
                 informationCell.backgroundColor = UIColor.whiteColor()
                 informationCell.label.textColor = UIColor.blackColor()
                 informationCell.longLabel.textColor =  UIColor.blackColor()
-                
+
                 informationCell.changeConstraints()
-                
+
                 return informationCell
-            }
-            else {
+            } else {
                 assert(false, "this is a bad thing that just happened dscribe")
                 return UITableViewCell()
             }
         }
         if let cell = tableView.dequeueReusableCellWithIdentifier("cell") as? DefaultSettingsTableViewCell {
-            
-            if cell.sw.allTargets().count == 0 {
-                cell.sw.addTarget(self, action: Selector("toggleSetting:"), forControlEvents: UIControlEvents.ValueChanged)
+
+            if cell.switchItem.allTargets().count == 0 {
+                cell.switchItem.addTarget(self, action: Selector("toggleSetting:"), forControlEvents: UIControlEvents.ValueChanged)
             }
 
-            cell.sw.on = NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(key)
+            cell.switchItem.on = NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(key)
             cell.label.text = self.settingsNames[key]
             cell.longLabel.text = self.settingsNotes[key]
 
             cell.backgroundColor = UIColor.whiteColor()
             cell.label.textColor = UIColor.blackColor()
             cell.longLabel.textColor =  UIColor.grayColor()
-            
+
             cell.changeConstraints()
 
             return cell
-        }
-        else {
+        } else {
             assert(false, "this is a bad thing that just happened")
             return UITableViewCell()
         }
@@ -259,8 +255,7 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
             } else {
                 self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.None, animated: true)
             }
-        }
-        else if self.settingsList[indexPath.section].1[indexPath.row] == kKeyboardType {
+        } else if self.settingsList[indexPath.section].1[indexPath.row] == kKeyboardType {
             displayTypePicker = !displayTypePicker
             if !displayTypePicker {
                 if currentPickerType != "" {
@@ -277,7 +272,7 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
     }
     func getAvailableLanguages() {
         availableLanguagesCodes = (UITextChecker.availableLanguages() as! [String]).sort({ $0 < $1 })
-        
+
         var languageDict: [String: String] = [String: String]()
         for language in availableLanguagesCodes {
             let codes: [String] = language.componentsSeparatedByString("_")
@@ -333,5 +328,19 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
                 currentPickerType = type
             }
         }
+    }
+
+    func keyboardWasActivated() -> Bool {
+        if let appBundleID = NSBundle.mainBundle().bundleIdentifier {
+            if let keyboards = NSUserDefaults.standardUserDefaults().objectForKey("AppleKeyboards") as? [String] {
+                if keyboards.contains(appBundleID + ".Keyboard") {
+                    print("Yes")
+                    return true
+                    print(appBundleID)
+                    print(keyboards)
+                }
+            }
+        }
+        return false
     }
 }

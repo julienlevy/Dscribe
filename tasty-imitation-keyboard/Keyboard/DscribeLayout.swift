@@ -100,102 +100,96 @@ class DscribeLayout: KeyboardLayout {
         }
     }
 
-    override     func generateKeyFrames(model: Keyboard, bounds: CGRect, page pageToLayout: Int) -> [Key:CGRect]? {
+    override func generateKeyFrames(model: Keyboard, bounds: CGRect, page pageToLayout: Int) -> [Key:CGRect]? {
         if bounds.height == 0 || bounds.width == 0 {
             return nil
         }
-        
+
         var keyMap = [Key:CGRect]()
-        
+
         let isLandscape: Bool = {
             let boundsRatio = bounds.width / bounds.height
             return (boundsRatio >= self.layoutConstants.landscapeRatio)
         }()
-        
+
         var sideEdges = (isLandscape ? self.layoutConstants.sideEdgesLandscape : self.layoutConstants.sideEdgesPortrait(bounds.width))
         let bottomEdge = sideEdges
-        
+
         let normalKeyboardSize = bounds.width - CGFloat(2) * sideEdges
         let shrunkKeyboardSize = self.layoutConstants.keyboardShrunkSize(normalKeyboardSize)
-        
+
         sideEdges += ((normalKeyboardSize - shrunkKeyboardSize) / CGFloat(2))
-        
+
         let topEdge: CGFloat = (isLandscape ? self.layoutConstants.topEdgeLandscape : self.layoutConstants.topEdgePortrait(bounds.width))
-        
+
         let rowGap: CGFloat = (isLandscape ? self.layoutConstants.rowGapLandscape : self.layoutConstants.rowGapPortrait(bounds.width))
         let lastRowGap: CGFloat = (isLandscape ? rowGap : self.layoutConstants.rowGapPortraitLastRow(bounds.width))
-        
+
         let flexibleEndRowM = (isLandscape ? self.layoutConstants.flexibleEndRowTotalWidthToKeyWidthMLandscape : self.layoutConstants.flexibleEndRowTotalWidthToKeyWidthMPortrait)
         let flexibleEndRowC = (isLandscape ? self.layoutConstants.flexibleEndRowTotalWidthToKeyWidthCLandscape : self.layoutConstants.flexibleEndRowTotalWidthToKeyWidthCPortrait)
-        
+
         let lastRowLeftSideRatio = (isLandscape ? self.layoutConstants.lastRowLandscapeFirstTwoButtonAreaWidthToKeyboardAreaWidth : self.layoutConstants.lastRowPortraitFirstTwoButtonAreaWidthToKeyboardAreaWidth)
         let lastRowRightSideRatio = (isLandscape ? self.layoutConstants.lastRowLandscapeLastButtonAreaWidthToKeyboardAreaWidth : self.layoutConstants.lastRowPortraitLastButtonAreaWidthToKeyboardAreaWidth)
         let lastRowKeyGap = (isLandscape ? self.layoutConstants.lastRowKeyGapLandscape(bounds.width) : self.layoutConstants.lastRowKeyGapPortrait)
-        
+
         for (p, page) in model.pages.enumerate() {
             if p != pageToLayout {
                 continue
             }
-            
+
             let numRows = page.rows.count
-            
+
             let mostKeysInRow: Int = {
                 var currentMax: Int = 0
-                for (i, row) in page.rows.enumerate() {
+                for (_, row) in page.rows.enumerate() {
                     currentMax = max(currentMax, row.count)
                 }
                 return currentMax
             }()
-            
+
             let rowGapTotal = CGFloat(numRows - 1 - 1) * rowGap + lastRowGap
-            
+
             let keyGap: CGFloat = (isLandscape ? self.layoutConstants.keyGapLandscape(bounds.width, rowCharacterCount: mostKeysInRow) : self.layoutConstants.keyGapPortrait(bounds.width, rowCharacterCount: mostKeysInRow))
-            
+
             let keyHeight: CGFloat = {
                 let totalGaps = bottomEdge + topEdge + rowGapTotal
                 let returnHeight = (bounds.height - totalGaps) / CGFloat(numRows)
                 return self.rounded(returnHeight)
             }()
-            
+
             let letterKeyWidth: CGFloat = {
                 let totalGaps = (sideEdges * CGFloat(2)) + (keyGap * CGFloat(mostKeysInRow - 1))
                 let returnWidth = (bounds.width - totalGaps) / CGFloat(mostKeysInRow)
                 return self.rounded(returnWidth)
             }()
-            
+
             let processRow = { (row: [Key], frames: [CGRect], inout map: [Key:CGRect]) -> Void in
                 assert(row.count == frames.count, "row and frames don't match")
                 for (k, key) in row.enumerate() {
                     map[key] = frames[k]
                 }
             }
-            
+
             for (r, row) in page.rows.enumerate() {
                 let rowGapCurrentTotal = (r == page.rows.count - 1 ? rowGapTotal : CGFloat(r) * rowGap)
                 let frame = CGRectMake(rounded(sideEdges), rounded(topEdge + (CGFloat(r) * keyHeight) + rowGapCurrentTotal), rounded(bounds.width - CGFloat(2) * sideEdges), rounded(keyHeight))
-                
+
                 var frames: [CGRect]!
-                
+
                 // basic character row: only typable characters
                 if self.characterRowHeuristic(row) {
                     frames = self.layoutCharacterRow(row, keyWidth: letterKeyWidth, gapWidth: keyGap, frame: frame)
-                }
-                    
-                    // character row with side buttons: shift, backspace, etc.
-                else if self.doubleSidedRowHeuristic(row) {
+                } else if self.doubleSidedRowHeuristic(row) { // character row with side buttons: shift, backspace, etc.
                     //DIFFERENCE with superclass method
                     frames = (p == 0 ? self.layoutCharacterWithSidesRowNonFlexibleKeys : self.layoutCharacterWithSidesRow)(row, frame: frame, isLandscape: isLandscape, keyWidth: letterKeyWidth, keyGap: keyGap)
-                }
-                    
-                    // bottom row with things like space, return, etc.
-                else {
+                } else { // bottom row with things like space, return, etc.
                     frames = self.layoutSpecialKeysRow(row, keyWidth: letterKeyWidth, gapWidth: lastRowKeyGap, leftSideRatio: lastRowLeftSideRatio, rightSideRatio: lastRowRightSideRatio, micButtonRatio: self.layoutConstants.micButtonPortraitWidthRatioToOtherSpecialButtons, isLandscape: isLandscape, frame: frame)
                 }
-                
+
                 processRow(row, frames, &keyMap)
             }
         }
-        
+
         return keyMap
     }
 
@@ -229,22 +223,19 @@ class DscribeLayout: KeyboardLayout {
         let specialCharacterGap = sideSpace - specialCharacterWidth
 
         var currentOrigin = frame.origin.x
-        for (k, key) in row.enumerate() {
+        for (k, _) in row.enumerate() {
             if k == 0 {
                 frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, specialCharacterWidth, frame.height))
                 currentOrigin += (specialCharacterWidth + specialCharacterGap)
-            }
-            else if k == row.count - 1 {
+            } else if k == row.count - 1 {
                 currentOrigin += specialCharacterGap
                 frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, specialCharacterWidth, frame.height))
                 currentOrigin += specialCharacterWidth
-            }
-            else {
+            } else {
                 frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, actualKeyWidth, frame.height))
                 if k == row.count - 2 {
                     currentOrigin += (actualKeyWidth)
-                }
-                else {
+                } else {
                     currentOrigin += (actualKeyWidth + keyGap)
                 }
             }
@@ -258,15 +249,13 @@ class DscribeLayout: KeyboardLayout {
         var keysBeforeSpace = 0
         var keysAfterSpace = 0
         var reachedSpace = false
-        for (k, key) in row.enumerate() {
+        for (_, key) in row.enumerate() {
             if key.type == Key.KeyType.Space {
                 reachedSpace = true
-            }
-            else {
+            } else {
                 if !reachedSpace {
                     keysBeforeSpace += 1
-                }
-                else {
+                } else {
                     keysAfterSpace += 1
                 }
             }
@@ -301,18 +290,15 @@ class DscribeLayout: KeyboardLayout {
                 frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, spaceWidth, frame.height))
                 currentOrigin += (spaceWidth + gapWidth)
                 beforeSpace = false
-            }
-            else if beforeSpace {
+            } else if beforeSpace {
                 if hasButtonInMicButtonPosition && k == 2 { //mic button position
                     frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, micButtonWidth, frame.height))
                     currentOrigin += (micButtonWidth + gapWidth)
-                }
-                else {
+                } else {
                     frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, leftButtonWidth, frame.height))
                     currentOrigin += (leftButtonWidth + gapWidth)
                 }
-            }
-            else {
+            } else {
                 frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, rightButtonWidth, frame.height))
                 currentOrigin += (rightButtonWidth + gapWidth)
             }

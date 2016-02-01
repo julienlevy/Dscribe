@@ -13,7 +13,7 @@ class NavigationTitle: UIView {
     var rightLabel: UILabel = UILabel()
     var icon: UIImageView = UIImageView()
     var color: UIColor = UIColor(red: 250.0/255, green: 193.0/255, blue: 62.0/255, alpha: 1.0)
-    
+
     init(frame: CGRect, leftText: String, rightText: String) {
         super.init(frame: frame)
 

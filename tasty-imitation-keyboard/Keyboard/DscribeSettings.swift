@@ -97,26 +97,24 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
 
         if key == kAutocorrectLanguage || key == kKeyboardType {
             if let languageCell = tableView.dequeueReusableCellWithIdentifier("staticCell") as? StaticSettingCell {
-                
+
                 languageCell.label.text = self.settingsNames[key]
                 languageCell.longLabel.text = self.settingsNotes[key]
                 if key == kAutocorrectLanguage {
                     languageCell.labelDisplay.text = (currentPickerLanguage != "" ? currentPickerLanguage : self.availableLanguages[self.indexOfCurrentLanguage()!])
-                }
-                else {
+                } else {
                     languageCell.labelDisplay.text = (currentPickerType != "" ? currentPickerType : NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kKeyboardType) as? String)
                 }
                 languageCell.labelDisplay.textColor = UIColor.blackColor()
-                
+
                 languageCell.backgroundColor = (self.darkMode ? cellBackgroundColorDark : cellBackgroundColorLight)
                 languageCell.label.textColor = (self.darkMode ? cellLabelColorDark : cellLabelColorLight)
                 languageCell.longLabel.textColor = (self.darkMode ? cellLongLabelColorDark : cellLongLabelColorLight)
-                
+
                 languageCell.changeConstraints()
-                
+
                 return languageCell
-            }
-            else {
+            } else {
                 assert(false, "this is a bad thing that just happened dscribe")
                 return UITableViewCell()
             }
@@ -138,8 +136,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
                 pickerCell.delegate = self
 
                 return pickerCell
-            }
-            else {
+            } else {
                 assert(false, "this is a bad thing that just happened dscribe")
                 return UITableViewCell()
             }
@@ -161,8 +158,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
                 informationCell.changeConstraints()
 
                 return informationCell
-            }
-            else {
+            } else {
                 assert(false, "this is a bad thing that just happened dscribe")
                 return UITableViewCell()
             }
@@ -184,8 +180,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
             cell.changeConstraints()
 
             return cell
-        }
-        else {
+        } else {
             assert(false, "this is a bad thing that just happened")
             return UITableViewCell()
         }
@@ -214,8 +209,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
             } else {
                 self.tableView?.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.None, animated: true)
             }
-        }
-        else if self.settingsList[indexPath.section].1[indexPath.row] == kKeyboardType {
+        } else if self.settingsList[indexPath.section].1[indexPath.row] == kKeyboardType {
             displayTypePicker = !displayTypePicker
             if !displayTypePicker {
                 if currentPickerType != "" {
@@ -331,26 +325,26 @@ class InformationWithButtonCell: DefaultSettingsTableViewCell {
 
 class StaticSettingCell: DefaultSettingsTableViewCell {
     var labelDisplay: UILabel
-    
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         self.labelDisplay = UILabel()
-        
+
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         self.sw.hidden = true
-        
+
         labelDisplay.tag = 4
-        
+
         self.addSubview(labelDisplay)
-        
+
         self.labelDisplay.translatesAutoresizingMaskIntoConstraints = false
-        
+
         self.addConstraints()
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func addConstraints() {
         super.addConstraints()
         if labelDisplay.superview == nil {
@@ -369,19 +363,19 @@ protocol PickerDelegate {
 class PickerViewCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegate {
     var pickerView: UIPickerView
     var data: [String] = [String]()
-    
+
     var key: String = ""
     var indexPath: NSIndexPath?
     var delegate: PickerDelegate?
-    
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         self.pickerView = UIPickerView()
-        
+
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         self.addSubview(self.pickerView)
         self.pickerView.delegate = self
-        
+
         self.pickerView.translatesAutoresizingMaskIntoConstraints = false
         self.addConstraints()
     }
@@ -391,12 +385,12 @@ class PickerViewCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDeleg
     func addConstraints() {
         let margin: CGFloat = 8
         let sideMargin = margin * 2
-        
+
         let left = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: 2 * sideMargin)
         let right = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -2 * sideMargin)
         let top = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: margin)
         let bottom = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -margin)
-        
+
         self.addConstraint(left)
         self.addConstraint(right)
         self.addConstraint(top)

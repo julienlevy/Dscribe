@@ -9,15 +9,14 @@
 import UIKit
 
 class DefaultSettingsTableViewCell: UITableViewCell {
-    
-    var sw: UISwitch
+    var switchItem: UISwitch
     var label: UILabel
     var longLabel: UITextView
     var constraintsSetForLongLabel: Bool
     var cellConstraints: [NSLayoutConstraint]
-    
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        self.sw = UISwitch()
+        self.switchItem = UISwitch()
         self.label = UILabel()
         self.longLabel = UITextView()
         self.cellConstraints = []
@@ -26,7 +25,7 @@ class DefaultSettingsTableViewCell: UITableViewCell {
 
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        self.sw.translatesAutoresizingMaskIntoConstraints = false
+        self.switchItem.translatesAutoresizingMaskIntoConstraints = false
         self.label.translatesAutoresizingMaskIntoConstraints = false
         self.longLabel.translatesAutoresizingMaskIntoConstraints = false
 
@@ -35,11 +34,11 @@ class DefaultSettingsTableViewCell: UITableViewCell {
         self.longLabel.selectable = false
         self.longLabel.backgroundColor = UIColor.clearColor()
 
-        self.sw.tag = 1
+        self.switchItem.tag = 1
         self.label.tag = 2
         self.longLabel.tag = 3
 
-        self.addSubview(self.sw)
+        self.addSubview(self.switchItem)
         self.addSubview(self.label)
         self.addSubview(self.longLabel)
 
@@ -56,10 +55,10 @@ class DefaultSettingsTableViewCell: UITableViewCell {
 
         let hasLongText = self.longLabel.text != nil && !self.longLabel.text.isEmpty
         if hasLongText {
-            let switchSide = NSLayoutConstraint(item: sw, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -sideMargin)
-            let switchTop = NSLayoutConstraint(item: sw, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: margin)
+            let switchSide = NSLayoutConstraint(item: switchItem, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -sideMargin)
+            let switchTop = NSLayoutConstraint(item: switchItem, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: margin)
             let labelSide = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: sideMargin)
-            let labelCenter = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
+            let labelCenter = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: switchItem, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
 
             self.addConstraint(switchSide)
             self.addConstraint(switchTop)
@@ -68,7 +67,7 @@ class DefaultSettingsTableViewCell: UITableViewCell {
 
             let left = NSLayoutConstraint(item: longLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: sideMargin)
             let right = NSLayoutConstraint(item: longLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -sideMargin)
-            let top = NSLayoutConstraint(item: longLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: margin)
+            let top = NSLayoutConstraint(item: longLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: switchItem, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: margin)
             let bottom = NSLayoutConstraint(item: longLabel, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -margin)
 
             self.addConstraint(left)
@@ -79,13 +78,12 @@ class DefaultSettingsTableViewCell: UITableViewCell {
             self.cellConstraints += [switchSide, switchTop, labelSide, labelCenter, left, right, top, bottom]
 
             self.constraintsSetForLongLabel = true
-        }
-        else {
-            let switchSide = NSLayoutConstraint(item: sw, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -sideMargin)
-            let switchTop = NSLayoutConstraint(item: sw, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: margin)
-            let switchBottom = NSLayoutConstraint(item: sw, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -margin)
+        } else {
+            let switchSide = NSLayoutConstraint(item: switchItem, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -sideMargin)
+            let switchTop = NSLayoutConstraint(item: switchItem, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: margin)
+            let switchBottom = NSLayoutConstraint(item: switchItem, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -margin)
             let labelSide = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: sideMargin)
-            let labelCenter = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
+            let labelCenter = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: switchItem, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
 
             self.addConstraint(switchSide)
             self.addConstraint(switchTop)
@@ -114,7 +112,7 @@ class InformationCell: DefaultSettingsTableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        self.sw.hidden = true
+        self.switchItem.hidden = true
         self.longLabel.font = UIFont.systemFontOfSize(12.0)
     }
     required init?(coder aDecoder: NSCoder) {
@@ -125,28 +123,28 @@ class InformationCell: DefaultSettingsTableViewCell {
         let margin: CGFloat = 8
         let sideMargin = margin * 2
 
-        let switchSide = NSLayoutConstraint(item: sw, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -sideMargin)
-        let switchTop = NSLayoutConstraint(item: sw, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: margin)
+        let switchSide = NSLayoutConstraint(item: switchItem, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -sideMargin)
+        let switchTop = NSLayoutConstraint(item: switchItem, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: margin)
         let labelSide = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: sideMargin)
-        let labelCenter = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
-        
+        let labelCenter = NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: switchItem, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
+
         self.addConstraint(switchSide)
         self.addConstraint(switchTop)
         self.addConstraint(labelSide)
         self.addConstraint(labelCenter)
-        
+
         let left = NSLayoutConstraint(item: longLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: sideMargin)
         let right = NSLayoutConstraint(item: longLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -sideMargin)
         let top = NSLayoutConstraint(item: longLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: label, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: margin)
         let bottom = NSLayoutConstraint(item: longLabel, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -margin)
-        
+
         self.addConstraint(left)
         self.addConstraint(right)
         self.addConstraint(top)
         self.addConstraint(bottom)
-        
+
         self.cellConstraints += [switchSide, switchTop, labelSide, labelCenter, left, right, top, bottom]
-        
+
         self.constraintsSetForLongLabel = true
     }
 }
@@ -158,7 +156,7 @@ class StaticSettingCell: DefaultSettingsTableViewCell {
 
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        self.sw.hidden = true
+        self.switchItem.hidden = true
 
         labelDisplay.tag = 4
 
@@ -177,9 +175,9 @@ class StaticSettingCell: DefaultSettingsTableViewCell {
         if labelDisplay.superview == nil {
             return
         }
-        let topLabel: NSLayoutConstraint = NSLayoutConstraint(item: labelDisplay, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0)
-        let rightLabel: NSLayoutConstraint = NSLayoutConstraint(item: labelDisplay, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 0)
-        let bottomLabel: NSLayoutConstraint = NSLayoutConstraint(item: labelDisplay, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0)
+        let topLabel: NSLayoutConstraint = NSLayoutConstraint(item: labelDisplay, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: switchItem, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0)
+        let rightLabel: NSLayoutConstraint = NSLayoutConstraint(item: labelDisplay, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: switchItem, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 0)
+        let bottomLabel: NSLayoutConstraint = NSLayoutConstraint(item: labelDisplay, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: switchItem, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0)
         self.addConstraints([topLabel, rightLabel, bottomLabel])
     }
 }
