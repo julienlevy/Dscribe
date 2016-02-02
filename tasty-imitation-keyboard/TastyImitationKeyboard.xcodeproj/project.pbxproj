@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D19B56A1C60B3FF00AB8511 /* InstallKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D19B5691C60B3FF00AB8511 /* InstallKeyboardViewController.swift */; };
+		0D19B56E1C60B70A00AB8511 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D19B56D1C60B70A00AB8511 /* Utilities.swift */; };
 		0D1F16581C43A05E00E0EB43 /* Dscribe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D1F16571C43A05E00E0EB43 /* Dscribe.storyboard */; };
 		0D1F165A1C44381C00E0EB43 /* DscribeAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1F16591C44381C00E0EB43 /* DscribeAppViewController.swift */; };
 		0D1F165E1C45164C00E0EB43 /* TableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1F165D1C45164C00E0EB43 /* TableViewCells.swift */; };
@@ -107,6 +109,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D19B5691C60B3FF00AB8511 /* InstallKeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstallKeyboardViewController.swift; sourceTree = "<group>"; };
+		0D19B56D1C60B70A00AB8511 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		0D1F16571C43A05E00E0EB43 /* Dscribe.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Dscribe.storyboard; sourceTree = "<group>"; };
 		0D1F16591C44381C00E0EB43 /* DscribeAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeAppViewController.swift; sourceTree = "<group>"; };
 		0D1F165B1C44F94B00E0EB43 /* Keyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Keyboard.entitlements; sourceTree = "<group>"; };
@@ -183,6 +187,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D19B56B1C60B42800AB8511 /* Keyboard Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0D1F16591C44381C00E0EB43 /* DscribeAppViewController.swift */,
+				0D1F165D1C45164C00E0EB43 /* TableViewCells.swift */,
+				0D1F165F1C477EFC00E0EB43 /* NavigationTitle.swift */,
+			);
+			name = "Keyboard Settings";
+			sourceTree = "<group>";
+		};
+		0D19B56C1C60B43400AB8511 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				0D19B5691C60B3FF00AB8511 /* InstallKeyboardViewController.swift */,
+			);
+			name = Onboarding;
+			sourceTree = "<group>";
+		};
 		4E6AEE4F19D2484B00931E8F /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,9 +302,9 @@
 				0D1F165C1C44F9DC00E0EB43 /* HostingApp.entitlements */,
 				4EF16F9A19D2550D0076AFCB /* AppDelegate.swift */,
 				4EF16F9519D255030076AFCB /* ViewController.swift */,
-				0D1F16591C44381C00E0EB43 /* DscribeAppViewController.swift */,
-				0D1F165D1C45164C00E0EB43 /* TableViewCells.swift */,
-				0D1F165F1C477EFC00E0EB43 /* NavigationTitle.swift */,
+				0D19B56D1C60B70A00AB8511 /* Utilities.swift */,
+				0D19B56B1C60B42800AB8511 /* Keyboard Settings */,
+				0D19B56C1C60B43400AB8511 /* Onboarding */,
 				0D1F16571C43A05E00E0EB43 /* Dscribe.storyboard */,
 				4EF16F9D19D2552E0076AFCB /* Main.storyboard */,
 				4EF16F9319D255030076AFCB /* Images.xcassets */,
@@ -529,7 +551,9 @@
 			files = (
 				4EF16F9B19D2550D0076AFCB /* AppDelegate.swift in Sources */,
 				0D1F16601C477EFC00E0EB43 /* NavigationTitle.swift in Sources */,
+				0D19B56E1C60B70A00AB8511 /* Utilities.swift in Sources */,
 				0D1F165E1C45164C00E0EB43 /* TableViewCells.swift in Sources */,
+				0D19B56A1C60B3FF00AB8511 /* InstallKeyboardViewController.swift in Sources */,
 				4EF16F9819D255030076AFCB /* ViewController.swift in Sources */,
 				0D1F165A1C44381C00E0EB43 /* DscribeAppViewController.swift in Sources */,
 			);

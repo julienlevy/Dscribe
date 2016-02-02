@@ -97,9 +97,6 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("becameActive:"), name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
-    override func viewDidAppear(animated: Bool) {
-        self.keyboardWasActivated()
-    }
     override func viewWillDisappear(animated: Bool) {
         if currentPickerLanguage != "" {
             saveLanguage(currentPickerLanguage)
@@ -329,25 +326,5 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
                 currentPickerType = type
             }
         }
-    }
-
-    func keyboardWasActivated() -> Bool {
-        if let appBundleID = NSBundle.mainBundle().bundleIdentifier {
-            if let keyboards = NSUserDefaults.standardUserDefaults().objectForKey("AppleKeyboards") as? [String] {
-                if keyboards.contains(appBundleID + ".Keyboard") {
-                    print("Yes")
-                    return true
-                }
-                else {
-                    print("doesnt contain")
-                    print(appBundleID)
-                    print(keyboards)
-
-                    UIApplication.sharedApplication().openURL(NSURL(string: "prefs:root=General&path=Keyboard/KEYBOARDS")!)
-                }
-            }
-            print("no cast second")
-        }
-        return false
     }
 }
