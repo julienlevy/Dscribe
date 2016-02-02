@@ -23,13 +23,15 @@ class InstallKeyboardViewController: UIViewController {
             self.moviePlayer = MPMoviePlayerController(contentURL: videoURL)
             if let player = self.moviePlayer {
                 player.view.frame = self.videoFrameView.frame
-                player.scalingMode = MPMovieScalingMode.AspectFit
+                player.scalingMode = MPMovieScalingMode.AspectFill
                 player.fullscreen = true
                 player.controlStyle = MPMovieControlStyle.None
                 player.movieSourceType = MPMovieSourceType.File
                 player.repeatMode = MPMovieRepeatMode.One
                 player.play()
                 self.view.addSubview(player.view)
+
+                self.setPlayerConstraints()
             }
         }
     }
@@ -37,6 +39,15 @@ class InstallKeyboardViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         print("viewWillAppear")
         
+    }
+    
+    func setPlayerConstraints() {
+        let centerY: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.videoFrameView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0)
+        let centerX: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.videoFrameView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0)
+        let width: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self.videoFrameView, attribute: NSLayoutAttribute.Width, multiplier: 1.0, constant: 0)
+        let height: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self.videoFrameView, attribute: NSLayoutAttribute.Height, multiplier: 1.0, constant: 0)
+
+        self.view.addConstraints([centerX, centerY, width, height])
     }
 
     @IBAction func installKeyboardPressed(sender: AnyObject) {
