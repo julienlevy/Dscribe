@@ -6,7 +6,7 @@
 //  Copyright © 2016 Apple. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 func keyboardWasActivated() -> Bool {
     if let appBundleID = NSBundle.mainBundle().bundleIdentifier {
@@ -19,4 +19,12 @@ func keyboardWasActivated() -> Bool {
         print("no utils")
     }
     return false
+}
+
+func backgroungLayerWithFrame(frame: CGRect) -> CAGradientLayer {
+    let gradientLayer = CAGradientLayer()
+    gradientLayer.frame = frame
+    gradientLayer.colors = [UIColor.dscribeDarkOrange().CGColor, UIColor.dscribeLightOrange().CGColor]
+
+    return gradientLayer
 }

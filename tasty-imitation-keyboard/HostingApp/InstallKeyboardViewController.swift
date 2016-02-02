@@ -34,13 +34,19 @@ class InstallKeyboardViewController: UIViewController {
                 self.setPlayerConstraints()
             }
         }
-    }
 
+        self.view.layer.insertSublayer(backgroungLayerWithFrame(self.view.bounds), atIndex: 0)
+
+        self.installButton.setTitleColor(UIColor.dscribeOrangeText(), forState: .Normal)
+    }
     override func viewWillAppear(animated: Bool) {
         print("viewWillAppear")
         
     }
-    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+
     func setPlayerConstraints() {
         let centerY: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.videoFrameView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0)
         let centerX: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.videoFrameView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0)
