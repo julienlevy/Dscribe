@@ -283,7 +283,8 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         }
     }
     func openApp() {
-        let myAppUrl = NSURL(string: "dscribe://")!
+//        let myAppUrl = NSURL(string: "dscribe://")!
+        let myAppUrl = NSURL(string: "prefs:root=General&path=Keyboard/KEYBOARDS")!
         var myResponder: UIResponder? = self
         while myResponder != nil {
             if myResponder!.respondsToSelector(Selector("openURL:")) {

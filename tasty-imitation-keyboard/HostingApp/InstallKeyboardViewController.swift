@@ -7,8 +7,32 @@
 //
 
 import UIKit
+import MediaPlayer
 
 class InstallKeyboardViewController: UIViewController {
+    @IBOutlet var videoFrameView: UIView!
+
+    @IBOutlet var installButton: UIButton!
+    var moviePlayer : MPMoviePlayerController!
+
+    override func viewDidLoad() {
+        self.installButton.layer.cornerRadius = self.installButton.bounds.height / 2
+        
+        if let videoPath = NSBundle.mainBundle().pathForResource("InstallKeyboard", ofType: "mov") {
+            let videoURL = NSURL.fileURLWithPath(videoPath)
+            self.moviePlayer = MPMoviePlayerController(contentURL: videoURL)
+            if let player = self.moviePlayer {
+                player.view.frame = self.videoFrameView.frame
+                player.scalingMode = MPMovieScalingMode.AspectFit
+                player.fullscreen = true
+                player.controlStyle = MPMovieControlStyle.None
+                player.movieSourceType = MPMovieSourceType.File
+                player.repeatMode = MPMovieRepeatMode.One
+                player.play()
+                self.view.addSubview(player.view)
+            }
+        }
+    }
 
     override func viewWillAppear(animated: Bool) {
         print("viewWillAppear")

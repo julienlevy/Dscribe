@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Dscribe Keyboard-->
@@ -63,27 +65,116 @@
                         <viewControllerLayoutGuide type="bottom" id="9mt-lh-cao"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9s7-a8-Syd">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZF-ZB-C37">
-                                <rect key="frame" x="245" y="285" width="110" height="30"/>
-                                <state key="normal" title="Install Keyboard"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZF-ZB-C37">
+                                <rect key="frame" x="73" y="577" width="229" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Qbc-qb-I14"/>
+                                </constraints>
+                                <state key="normal" title="Install Keyboard">
+                                    <color key="titleColor" red="0.93174606561660767" green="0.65843659639358521" blue="0.16330814361572266" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="installKeyboardPressed:" destination="I6M-gT-Hdg" eventType="touchUpInside" id="ojm-wh-xvV"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="748" image="iphone6" translatesAutoresizingMaskIntoConstraints="NO" id="ppB-NH-Fsj">
+                                <rect key="frame" x="68" y="20" width="239" height="483"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ppB-NH-Fsj" secondAttribute="height" multiplier="440:891" id="4T2-K9-tES"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="It's better with &quot;Allow Full Access&quot;. But it's up to you!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="gYZ-vu-bqS">
+                                <rect key="frame" x="114" y="523" width="187.5" height="33.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="xFt-DN-yCC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="xFt-DN-yCC"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="iossettingsicon" translatesAutoresizingMaskIntoConstraints="NO" id="ZCm-lO-vBh">
+                                <rect key="frame" x="72" y="523" width="31.5" height="31.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31.5" id="TKF-ZL-T7E"/>
+                                    <constraint firstAttribute="width" secondItem="ZCm-lO-vBh" secondAttribute="height" multiplier="1:1" id="vuw-yv-XNF"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GmS-yP-Sax">
+                                <rect key="frame" x="82" y="78" width="209.5" height="367"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.99607843139999996" green="0.79607843140000001" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="VZF-ZB-C37" firstAttribute="centerY" secondItem="9s7-a8-Syd" secondAttribute="centerY" id="0zS-JK-RI3"/>
+                            <constraint firstItem="VZF-ZB-C37" firstAttribute="centerY" secondItem="9s7-a8-Syd" secondAttribute="centerY" constant="150" id="0zS-JK-RI3"/>
+                            <constraint firstItem="ZCm-lO-vBh" firstAttribute="leading" secondItem="ppB-NH-Fsj" secondAttribute="leading" id="1Aq-0l-o0g"/>
+                            <constraint firstItem="ZCm-lO-vBh" firstAttribute="top" secondItem="gYZ-vu-bqS" secondAttribute="top" id="5dv-6K-ldx"/>
+                            <constraint firstItem="GmS-yP-Sax" firstAttribute="centerY" secondItem="ppB-NH-Fsj" secondAttribute="centerY" id="5pf-IS-X1U"/>
+                            <constraint firstItem="gYZ-vu-bqS" firstAttribute="leading" secondItem="ZCm-lO-vBh" secondAttribute="trailing" constant="10" id="9jy-3r-c9G"/>
+                            <constraint firstItem="VZF-ZB-C37" firstAttribute="width" secondItem="ppB-NH-Fsj" secondAttribute="width" id="BGo-Y6-kBi"/>
                             <constraint firstItem="VZF-ZB-C37" firstAttribute="centerX" secondItem="9s7-a8-Syd" secondAttribute="centerX" id="DNr-1h-ohV"/>
+                            <constraint firstItem="GmS-yP-Sax" firstAttribute="centerX" secondItem="ppB-NH-Fsj" secondAttribute="centerX" id="ECm-a5-ZgU"/>
+                            <constraint firstItem="gYZ-vu-bqS" firstAttribute="trailing" secondItem="ppB-NH-Fsj" secondAttribute="trailing" id="MEn-dE-i3c"/>
+                            <constraint firstItem="ppB-NH-Fsj" firstAttribute="centerX" secondItem="9s7-a8-Syd" secondAttribute="centerX" id="O1N-3D-iDX"/>
+                            <constraint firstItem="GmS-yP-Sax" firstAttribute="height" secondItem="ppB-NH-Fsj" secondAttribute="height" multiplier="673:885" id="QZq-PI-Dxa"/>
+                            <constraint firstItem="GmS-yP-Sax" firstAttribute="width" secondItem="ppB-NH-Fsj" secondAttribute="width" multiplier="377:430" id="Qvp-ga-xX3"/>
+                            <constraint firstItem="ppB-NH-Fsj" firstAttribute="top" secondItem="jD8-op-zZx" secondAttribute="bottom" constant="20" id="Yq8-P8-x10"/>
+                            <constraint firstItem="ZCm-lO-vBh" firstAttribute="height" secondItem="gYZ-vu-bqS" secondAttribute="height" id="gHA-pN-vdC"/>
+                            <constraint firstItem="VZF-ZB-C37" firstAttribute="top" secondItem="ppB-NH-Fsj" secondAttribute="bottom" constant="50" id="k3Y-UZ-HuS"/>
+                            <constraint firstItem="VZF-ZB-C37" firstAttribute="top" secondItem="gYZ-vu-bqS" secondAttribute="bottom" constant="20" id="kX2-Fe-T3b"/>
+                            <constraint firstItem="9mt-lh-cao" firstAttribute="top" secondItem="VZF-ZB-C37" secondAttribute="bottom" constant="50" id="l49-Wq-SRw"/>
+                            <constraint firstItem="gYZ-vu-bqS" firstAttribute="top" secondItem="ppB-NH-Fsj" secondAttribute="bottom" constant="20" id="tEs-4F-Fcv"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="gHA-pN-vdC"/>
+                                <exclude reference="0zS-JK-RI3"/>
+                                <exclude reference="k3Y-UZ-HuS"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
+                    <connections>
+                        <outlet property="installButton" destination="VZF-ZB-C37" id="dzv-rB-xUb"/>
+                        <outlet property="videoFrameView" destination="GmS-yP-Sax" id="MUX-8s-KoE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DzI-IZ-ERa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-400" y="291"/>
+            <point key="canvasLocation" x="-400.5" y="290.5"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="w6n-Oa-RDT">
+            <objects>
+                <viewController id="GUq-9W-Fs7" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5FH-r3-Yzf"/>
+                        <viewControllerLayoutGuide type="bottom" id="Yh3-K8-ons"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3ze-9J-91U">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bS1-Wk-khZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-400" y="1003"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="iossettingsicon" width="76" height="76"/>
+        <image name="iphone6" width="440" height="891"/>
+    </resources>
 </document>

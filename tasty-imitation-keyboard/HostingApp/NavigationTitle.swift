@@ -34,10 +34,6 @@ class NavigationTitle: UIView {
         icon.translatesAutoresizingMaskIntoConstraints = false
 
         self.setConstraints()
-        print("Should have added the custom view")
-        print(leftLabel.frame)
-        print(rightLabel.frame)
-        print(icon.frame)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
