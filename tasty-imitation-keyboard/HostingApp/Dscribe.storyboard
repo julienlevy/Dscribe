@@ -166,12 +166,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Try it." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9cP-Xh-ND3">
-                                <rect key="frame" x="62" y="530" width="250" height="24"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iphone6NoTop" translatesAutoresizingMaskIntoConstraints="NO" id="tI8-YK-R1y">
                                 <rect key="frame" x="62" y="0.0" width="250" height="445.5"/>
                                 <constraints>
@@ -189,8 +183,8 @@
                                 <rect key="frame" x="79" y="0.0" width="216" height="383"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qVs-iS-Cea">
-                                <rect key="frame" x="-0.5" y="627" width="375" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qVs-iS-Cea">
+                                <rect key="frame" x="-1" y="627" width="375" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Ss0-Dc-nqT"/>
@@ -202,6 +196,12 @@
                                     <action selector="doneClicked:" destination="bTB-So-tdt" eventType="touchUpInside" id="Nt7-dc-BFe"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Try it." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9cP-Xh-ND3">
+                                <rect key="frame" x="62" y="530" width="250" height="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.99607843139999996" green="0.79607843140000001" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -221,11 +221,13 @@
                             <constraint firstItem="NXd-Us-dXC" firstAttribute="top" secondItem="9cP-Xh-ND3" secondAttribute="bottom" constant="5" id="hht-Ot-1dW"/>
                             <constraint firstItem="qVs-iS-Cea" firstAttribute="top" relation="greaterThanOrEqual" secondItem="9cP-Xh-ND3" secondAttribute="bottom" constant="20" id="n4c-3M-ZeG"/>
                             <constraint firstItem="tI8-YK-R1y" firstAttribute="width" secondItem="gk3-hw-ykT" secondAttribute="width" multiplier="2:3" priority="900" id="pUp-F3-wLG"/>
+                            <constraint firstItem="9cP-Xh-ND3" firstAttribute="width" secondItem="gk3-hw-ykT" secondAttribute="width" multiplier="2:3" id="uS3-hw-Noo"/>
                             <constraint firstItem="tI8-YK-R1y" firstAttribute="centerX" secondItem="gk3-hw-ykT" secondAttribute="centerX" id="v5e-bu-4qz"/>
                             <constraint firstItem="Q6O-sF-f22" firstAttribute="width" secondItem="tI8-YK-R1y" secondAttribute="width" multiplier="216:250" id="y73-gw-SDM"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="Tqq-qF-P3g"/>
                                 <exclude reference="6KN-DF-wck"/>
                             </mask>
                         </variation>

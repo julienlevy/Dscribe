@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MediaPlayer
 
 class OnboardingViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var iphoneImageTopConstraint: NSLayoutConstraint!
@@ -22,11 +23,32 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate {
 
     let defaultText: String = "Try it."
 
+    var moviePlayer : MPMoviePlayerController!
+
     override func viewDidLoad() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
         
         self.trialTextField.delegate = self
+
+        if let videoPath = NSBundle.mainBundle().pathForResource("OpenKeyboard", ofType: "mov") {
+            let videoURL = NSURL.fileURLWithPath(videoPath)
+            self.moviePlayer = MPMoviePlayerController(contentURL: videoURL)
+            if let player = self.moviePlayer {
+                player.view.frame = self.videoContainerView.frame
+                player.scalingMode = MPMovieScalingMode.AspectFill
+                player.fullscreen = true
+                player.controlStyle = MPMovieControlStyle.None
+                player.movieSourceType = MPMovieSourceType.File
+                player.repeatMode = MPMovieRepeatMode.One
+                player.play()
+                self.view.addSubview(player.view)
+
+                self.setPlayerConstraints()
+            }
+        }
+
+        self.view.layer.insertSublayer(backgroungLayerWithFrame(self.view.bounds), atIndex: 0)
     }
     override func prefersStatusBarHidden() -> Bool {
         return true
@@ -35,6 +57,15 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate {
         print("touches began")
         print(event)
         self.view.endEditing(true)
+    }
+    func setPlayerConstraints() {
+        self.moviePlayer.view.translatesAutoresizingMaskIntoConstraints = false
+        let centerY: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.videoContainerView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0)
+        let centerX: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.videoContainerView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0)
+        let width: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self.videoContainerView, attribute: NSLayoutAttribute.Width, multiplier: 1.0, constant: 0)
+        let height: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self.videoContainerView, attribute: NSLayoutAttribute.Height, multiplier: 1.0, constant: 0)
+
+        self.view.addConstraints([centerX, centerY, width, height])
     }
 
     @IBAction func doneClicked(sender: AnyObject) {
