@@ -11,6 +11,7 @@
 		0D19B56E1C60B70A00AB8511 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D19B56D1C60B70A00AB8511 /* Utilities.swift */; };
 		0D19B5701C61110D00AB8511 /* InstallKeyboard.mov in Resources */ = {isa = PBXBuildFile; fileRef = 0D19B56F1C61110D00AB8511 /* InstallKeyboard.mov */; };
 		0D19B5741C6121A900AB8511 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D19B5731C6121A900AB8511 /* Constants.swift */; };
+		0D19B5761C6183F300AB8511 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D19B5751C6183F300AB8511 /* OnboardingViewController.swift */; };
 		0D1F16581C43A05E00E0EB43 /* Dscribe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D1F16571C43A05E00E0EB43 /* Dscribe.storyboard */; };
 		0D1F165A1C44381C00E0EB43 /* DscribeAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1F16591C44381C00E0EB43 /* DscribeAppViewController.swift */; };
 		0D1F165E1C45164C00E0EB43 /* TableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1F165D1C45164C00E0EB43 /* TableViewCells.swift */; };
@@ -22,6 +23,7 @@
 		0D8843291C4D4FAF00200C69 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D8843281C4D4FAF00200C69 /* iTunesArtwork@2x.png */; };
 		0DC28DD01C39336200F40BA1 /* DscribeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC28DCF1C39336200F40BA1 /* DscribeLayout.swift */; };
 		0DC28DD21C39811600F40BA1 /* EmojiList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0DC28DD11C39811600F40BA1 /* EmojiList.plist */; };
+		0DD5A7DF1C62099700DF4996 /* OpenKeyboard.mov in Resources */ = {isa = PBXBuildFile; fileRef = 0DD5A7DE1C62099700DF4996 /* OpenKeyboard.mov */; };
 		0DE2F8961BEC274B000F9B5F /* Emojis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2F8951BEC274B000F9B5F /* Emojis.swift */; };
 		0DE2F8981BECE232000F9B5F /* DscribeBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2F8971BECE232000F9B5F /* DscribeBanner.swift */; };
 		0DE2F89A1BED3AF0000F9B5F /* Dscribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2F8991BED3AF0000F9B5F /* Dscribe.swift */; };
@@ -115,6 +117,7 @@
 		0D19B56D1C60B70A00AB8511 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		0D19B56F1C61110D00AB8511 /* InstallKeyboard.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = InstallKeyboard.mov; sourceTree = SOURCE_ROOT; };
 		0D19B5731C6121A900AB8511 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0D19B5751C6183F300AB8511 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		0D1F16571C43A05E00E0EB43 /* Dscribe.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Dscribe.storyboard; sourceTree = "<group>"; };
 		0D1F16591C44381C00E0EB43 /* DscribeAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeAppViewController.swift; sourceTree = "<group>"; };
 		0D1F165B1C44F94B00E0EB43 /* Keyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Keyboard.entitlements; sourceTree = "<group>"; };
@@ -128,6 +131,7 @@
 		0D8843281C4D4FAF00200C69 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		0DC28DCF1C39336200F40BA1 /* DscribeLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeLayout.swift; sourceTree = "<group>"; };
 		0DC28DD11C39811600F40BA1 /* EmojiList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EmojiList.plist; sourceTree = "<group>"; };
+		0DD5A7DE1C62099700DF4996 /* OpenKeyboard.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = OpenKeyboard.mov; sourceTree = SOURCE_ROOT; };
 		0DE2F8951BEC274B000F9B5F /* Emojis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emojis.swift; sourceTree = "<group>"; };
 		0DE2F8971BECE232000F9B5F /* DscribeBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeBanner.swift; sourceTree = "<group>"; };
 		0DE2F8991BED3AF0000F9B5F /* Dscribe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dscribe.swift; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				0D19B5691C60B3FF00AB8511 /* InstallKeyboardViewController.swift */,
+				0D19B5751C6183F300AB8511 /* OnboardingViewController.swift */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 			isa = PBXGroup;
 			children = (
 				0D19B56F1C61110D00AB8511 /* InstallKeyboard.mov */,
+				0DD5A7DE1C62099700DF4996 /* OpenKeyboard.mov */,
 				0D8843281C4D4FAF00200C69 /* iTunesArtwork@2x.png */,
 				4EF16F9219D254EA0076AFCB /* Info.plist */,
 			);
@@ -511,6 +517,7 @@
 				4EF16F9619D255030076AFCB /* Images.xcassets in Resources */,
 				0D8843291C4D4FAF00200C69 /* iTunesArtwork@2x.png in Resources */,
 				0D19B5701C61110D00AB8511 /* InstallKeyboard.mov in Resources */,
+				0DD5A7DF1C62099700DF4996 /* OpenKeyboard.mov in Resources */,
 				0D1F16581C43A05E00E0EB43 /* Dscribe.storyboard in Resources */,
 				4EF16F9F19D2552E0076AFCB /* Main.storyboard in Resources */,
 			);
@@ -563,6 +570,7 @@
 				0D19B56A1C60B3FF00AB8511 /* InstallKeyboardViewController.swift in Sources */,
 				4EF16F9819D255030076AFCB /* ViewController.swift in Sources */,
 				0D1F165A1C44381C00E0EB43 /* DscribeAppViewController.swift in Sources */,
+				0D19B5761C6183F300AB8511 /* OnboardingViewController.swift in Sources */,
 				0D19B5741C6121A900AB8511 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,7 +17,7 @@ class InstallKeyboardViewController: UIViewController {
 
     override func viewDidLoad() {
         self.installButton.layer.cornerRadius = self.installButton.bounds.height / 2
-        
+
         if let videoPath = NSBundle.mainBundle().pathForResource("InstallKeyboard", ofType: "mov") {
             let videoURL = NSURL.fileURLWithPath(videoPath)
             self.moviePlayer = MPMoviePlayerController(contentURL: videoURL)
@@ -43,11 +43,15 @@ class InstallKeyboardViewController: UIViewController {
         print("viewWillAppear")
         
     }
+    override func viewDidAppear(animated: Bool) {
+        print("viewDidAppear")
+    }
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
 
     func setPlayerConstraints() {
+        self.moviePlayer.view.translatesAutoresizingMaskIntoConstraints = false
         let centerY: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.videoFrameView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0)
         let centerX: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.videoFrameView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0)
         let width: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self.videoFrameView, attribute: NSLayoutAttribute.Width, multiplier: 1.0, constant: 0)

@@ -21,6 +21,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let storyboard = UIStoryboard(name: "Dscribe", bundle: nil)
             let installViewController = storyboard.instantiateViewControllerWithIdentifier("InstallKeyboardViewController")
             self.window?.rootViewController = installViewController
+        } else {
+            let storyboard = UIStoryboard(name: "Dscribe", bundle: nil)
+            if NSUserDefaults.standardUserDefaults().boolForKey("hasSeenOnboarding") {
+                print("Appears and keyboard activated an has seeeen onboarding")
+                let settingsViewController = storyboard.instantiateViewControllerWithIdentifier("SettingsNavigationController")
+                self.window?.rootViewController = settingsViewController
+            } else {
+                let onboardingViewController = storyboard.instantiateViewControllerWithIdentifier("OnboardingViewController")
+                self.window?.rootViewController = onboardingViewController
+            }
         }
 
         return true
@@ -41,10 +51,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(application: UIApplication) {
         print("Will Enter foreground")
         if keyboardWasActivated() {
-            print("Appears and keyboard activated")
             let storyboard = UIStoryboard(name: "Dscribe", bundle: nil)
-            let settingsViewController = storyboard.instantiateViewControllerWithIdentifier("SettingsNavigationController")
-            self.window?.rootViewController = settingsViewController
+            if NSUserDefaults.standardUserDefaults().boolForKey("hasSeenOnboarding") {
+                print("Appears and keyboard activated an has seeeen onboarding")
+                let settingsViewController = storyboard.instantiateViewControllerWithIdentifier("SettingsNavigationController")
+                self.window?.rootViewController = settingsViewController
+            } else {
+                let onboardingViewController = storyboard.instantiateViewControllerWithIdentifier("OnboardingViewController")
+                self.window?.rootViewController = onboardingViewController
+            }
         }
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
