@@ -24,6 +24,7 @@
 		0DC28DD01C39336200F40BA1 /* DscribeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC28DCF1C39336200F40BA1 /* DscribeLayout.swift */; };
 		0DC28DD21C39811600F40BA1 /* EmojiList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0DC28DD11C39811600F40BA1 /* EmojiList.plist */; };
 		0DD5A7DF1C62099700DF4996 /* OpenKeyboard.mov in Resources */ = {isa = PBXBuildFile; fileRef = 0DD5A7DE1C62099700DF4996 /* OpenKeyboard.mov */; };
+		0DD5A7E11C62430700DF4996 /* OpenKeyboardTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD5A7E01C62430700DF4996 /* OpenKeyboardTutorialView.swift */; };
 		0DE2F8961BEC274B000F9B5F /* Emojis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2F8951BEC274B000F9B5F /* Emojis.swift */; };
 		0DE2F8981BECE232000F9B5F /* DscribeBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2F8971BECE232000F9B5F /* DscribeBanner.swift */; };
 		0DE2F89A1BED3AF0000F9B5F /* Dscribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2F8991BED3AF0000F9B5F /* Dscribe.swift */; };
@@ -132,6 +133,7 @@
 		0DC28DCF1C39336200F40BA1 /* DscribeLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeLayout.swift; sourceTree = "<group>"; };
 		0DC28DD11C39811600F40BA1 /* EmojiList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EmojiList.plist; sourceTree = "<group>"; };
 		0DD5A7DE1C62099700DF4996 /* OpenKeyboard.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = OpenKeyboard.mov; sourceTree = SOURCE_ROOT; };
+		0DD5A7E01C62430700DF4996 /* OpenKeyboardTutorialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenKeyboardTutorialView.swift; sourceTree = "<group>"; };
 		0DE2F8951BEC274B000F9B5F /* Emojis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emojis.swift; sourceTree = "<group>"; };
 		0DE2F8971BECE232000F9B5F /* DscribeBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeBanner.swift; sourceTree = "<group>"; };
 		0DE2F8991BED3AF0000F9B5F /* Dscribe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dscribe.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			children = (
 				0D19B5691C60B3FF00AB8511 /* InstallKeyboardViewController.swift */,
 				0D19B5751C6183F300AB8511 /* OnboardingViewController.swift */,
+				0DD5A7E01C62430700DF4996 /* OpenKeyboardTutorialView.swift */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 				0D19B56A1C60B3FF00AB8511 /* InstallKeyboardViewController.swift in Sources */,
 				4EF16F9819D255030076AFCB /* ViewController.swift in Sources */,
 				0D1F165A1C44381C00E0EB43 /* DscribeAppViewController.swift in Sources */,
+				0DD5A7E11C62430700DF4996 /* OpenKeyboardTutorialView.swift in Sources */,
 				0D19B5761C6183F300AB8511 /* OnboardingViewController.swift in Sources */,
 				0D19B5741C6121A900AB8511 /* Constants.swift in Sources */,
 			);

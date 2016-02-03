@@ -166,6 +166,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Try it." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9cP-Xh-ND3">
+                                <rect key="frame" x="62" y="575" width="250" height="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iphone6NoTop" translatesAutoresizingMaskIntoConstraints="NO" id="tI8-YK-R1y">
                                 <rect key="frame" x="62" y="0.0" width="250" height="445.5"/>
                                 <constraints>
@@ -173,7 +179,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NXd-Us-dXC">
-                                <rect key="frame" x="62" y="559" width="250" height="1"/>
+                                <rect key="frame" x="62" y="604" width="250" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Qxe-Dx-WOC"/>
@@ -196,12 +202,12 @@
                                     <action selector="doneClicked:" destination="bTB-So-tdt" eventType="touchUpInside" id="Nt7-dc-BFe"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Try it." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9cP-Xh-ND3">
-                                <rect key="frame" x="62" y="530" width="250" height="24"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HmA-z8-eD0">
+                                <rect key="frame" x="0.0" y="465" width="375" height="80"/>
+                            </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="l3p-dw-oWT">
+                                <rect key="frame" x="136" y="545.5" width="103" height="37"/>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" red="0.99607843139999996" green="0.79607843140000001" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -212,18 +218,24 @@
                             <constraint firstItem="tI8-YK-R1y" firstAttribute="top" secondItem="Q6O-sF-f22" secondAttribute="top" id="KOd-A6-i3I"/>
                             <constraint firstItem="Q6O-sF-f22" firstAttribute="height" secondItem="tI8-YK-R1y" secondAttribute="height" multiplier="383:445" id="MH7-J1-btv"/>
                             <constraint firstItem="9cP-Xh-ND3" firstAttribute="width" secondItem="tI8-YK-R1y" secondAttribute="width" id="Tqq-qF-P3g"/>
+                            <constraint firstItem="HmA-z8-eD0" firstAttribute="top" secondItem="tI8-YK-R1y" secondAttribute="bottom" constant="20" id="UC5-48-wvi"/>
                             <constraint firstItem="NXd-Us-dXC" firstAttribute="centerX" secondItem="9cP-Xh-ND3" secondAttribute="centerX" id="Y0g-9X-UMk"/>
                             <constraint firstItem="qVs-iS-Cea" firstAttribute="width" secondItem="gk3-hw-ykT" secondAttribute="width" id="YEJ-gf-S7c"/>
                             <constraint firstItem="NXd-Us-dXC" firstAttribute="width" secondItem="9cP-Xh-ND3" secondAttribute="width" id="YSx-G7-zvn"/>
-                            <constraint firstItem="9cP-Xh-ND3" firstAttribute="top" secondItem="tI8-YK-R1y" secondAttribute="bottom" constant="84.5" id="bMi-n1-dwW"/>
+                            <constraint firstItem="9cP-Xh-ND3" firstAttribute="top" secondItem="tI8-YK-R1y" secondAttribute="bottom" constant="130" id="bMi-n1-dwW"/>
                             <constraint firstItem="bRf-rc-WjV" firstAttribute="top" secondItem="qVs-iS-Cea" secondAttribute="bottom" id="cR5-ff-HCe"/>
+                            <constraint firstItem="HmA-z8-eD0" firstAttribute="centerX" secondItem="gk3-hw-ykT" secondAttribute="centerX" id="cdW-KJ-owj"/>
                             <constraint firstItem="Q6O-sF-f22" firstAttribute="centerX" secondItem="tI8-YK-R1y" secondAttribute="centerX" id="eqX-Mx-fht"/>
                             <constraint firstItem="NXd-Us-dXC" firstAttribute="top" secondItem="9cP-Xh-ND3" secondAttribute="bottom" constant="5" id="hht-Ot-1dW"/>
+                            <constraint firstItem="l3p-dw-oWT" firstAttribute="centerX" secondItem="gk3-hw-ykT" secondAttribute="centerX" id="lnZ-WE-buD"/>
                             <constraint firstItem="qVs-iS-Cea" firstAttribute="top" relation="greaterThanOrEqual" secondItem="9cP-Xh-ND3" secondAttribute="bottom" constant="20" id="n4c-3M-ZeG"/>
                             <constraint firstItem="tI8-YK-R1y" firstAttribute="width" secondItem="gk3-hw-ykT" secondAttribute="width" multiplier="2:3" priority="900" id="pUp-F3-wLG"/>
+                            <constraint firstItem="9cP-Xh-ND3" firstAttribute="top" secondItem="HmA-z8-eD0" secondAttribute="bottom" constant="30" id="s4W-Ql-iSD"/>
                             <constraint firstItem="9cP-Xh-ND3" firstAttribute="width" secondItem="gk3-hw-ykT" secondAttribute="width" multiplier="2:3" id="uS3-hw-Noo"/>
+                            <constraint firstItem="HmA-z8-eD0" firstAttribute="width" secondItem="gk3-hw-ykT" secondAttribute="width" id="uUl-cc-CiD"/>
                             <constraint firstItem="tI8-YK-R1y" firstAttribute="centerX" secondItem="gk3-hw-ykT" secondAttribute="centerX" id="v5e-bu-4qz"/>
                             <constraint firstItem="Q6O-sF-f22" firstAttribute="width" secondItem="tI8-YK-R1y" secondAttribute="width" multiplier="216:250" id="y73-gw-SDM"/>
+                            <constraint firstItem="l3p-dw-oWT" firstAttribute="top" secondItem="HmA-z8-eD0" secondAttribute="bottom" id="yUG-K0-C0O"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -239,6 +251,8 @@
                         <outlet property="doneButton" destination="qVs-iS-Cea" id="v4h-c9-tp3"/>
                         <outlet property="doneButtonBottomConstraint" destination="cR5-ff-HCe" id="kOr-Uh-zmC"/>
                         <outlet property="iphoneImageTopConstraint" destination="Ij5-TN-OH7" id="LMg-Cz-MSM"/>
+                        <outlet property="pageControl" destination="l3p-dw-oWT" id="5YF-d6-E9a"/>
+                        <outlet property="scrollView" destination="HmA-z8-eD0" id="HPk-fP-1YV"/>
                         <outlet property="trialTextField" destination="9cP-Xh-ND3" id="gv4-dY-30o"/>
                         <outlet property="videoContainerView" destination="Q6O-sF-f22" id="ZRg-ip-yws"/>
                     </connections>
