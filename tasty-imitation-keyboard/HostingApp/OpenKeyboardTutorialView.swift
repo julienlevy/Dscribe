@@ -25,6 +25,9 @@ class OpenKeyboardTutorialView: UIView {
         self.beforeIconLabel.textColor = UIColor.whiteColor()
         self.secondLineLabel.textColor = UIColor.whiteColor()
 
+        self.beforeIconLabel.font = UIFont.systemFontOfSize(18.0)
+        self.secondLineLabel.font = UIFont.systemFontOfSize(18.0)
+
         self.secondLineLabel.numberOfLines = 0
 
         self.keyboardIcon.contentMode = .ScaleAspectFit

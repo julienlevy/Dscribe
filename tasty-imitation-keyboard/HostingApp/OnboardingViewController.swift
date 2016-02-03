@@ -65,8 +65,6 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
         return true
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print("touches began")
-        print(event)
         self.view.endEditing(true)
     }
     func setPlayerConstraints() {
@@ -90,12 +88,11 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
 
         self.scrollView.addSubview(openKeyboardView)
 
-        let openKeyboardViewSecond = OpenKeyboardTutorialView()
-        openKeyboardViewSecond.frame = CGRect(x: inset + width, y: 0, width: width - 2 * inset, height: height)
+        let useKeyboardView = UseKeyboardTutorialView()
+        useKeyboardView.frame = CGRect(x: inset + width, y: yOrigin, width: width - 2 * inset, height: height)
         
-        self.scrollView.addSubview(openKeyboardViewSecond)
+        self.scrollView.addSubview(useKeyboardView)
 
-        print(self.scrollView.contentSize)
         self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width * 2, height: self.scrollView.frame.height)
     }
 
