@@ -166,6 +166,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HmA-z8-eD0">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </scrollView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Try it." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9cP-Xh-ND3">
                                 <rect key="frame" x="62" y="575" width="250" height="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -202,11 +205,8 @@
                                     <action selector="doneClicked:" destination="bTB-So-tdt" eventType="touchUpInside" id="Nt7-dc-BFe"/>
                                 </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HmA-z8-eD0">
-                                <rect key="frame" x="0.0" y="465" width="375" height="80"/>
-                            </scrollView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="l3p-dw-oWT">
-                                <rect key="frame" x="136" y="545.5" width="103" height="37"/>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="l3p-dw-oWT">
+                                <rect key="frame" x="176" y="445" width="23" height="37"/>
                             </pageControl>
                         </subviews>
                         <color key="backgroundColor" red="0.99607843139999996" green="0.79607843140000001" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -217,8 +217,9 @@
                             <constraint firstItem="tI8-YK-R1y" firstAttribute="top" secondItem="WHB-nY-RwN" secondAttribute="bottom" id="Ij5-TN-OH7"/>
                             <constraint firstItem="tI8-YK-R1y" firstAttribute="top" secondItem="Q6O-sF-f22" secondAttribute="top" id="KOd-A6-i3I"/>
                             <constraint firstItem="Q6O-sF-f22" firstAttribute="height" secondItem="tI8-YK-R1y" secondAttribute="height" multiplier="383:445" id="MH7-J1-btv"/>
+                            <constraint firstItem="l3p-dw-oWT" firstAttribute="top" secondItem="tI8-YK-R1y" secondAttribute="bottom" id="O36-W4-57L"/>
                             <constraint firstItem="9cP-Xh-ND3" firstAttribute="width" secondItem="tI8-YK-R1y" secondAttribute="width" id="Tqq-qF-P3g"/>
-                            <constraint firstItem="HmA-z8-eD0" firstAttribute="top" secondItem="tI8-YK-R1y" secondAttribute="bottom" constant="20" id="UC5-48-wvi"/>
+                            <constraint firstItem="HmA-z8-eD0" firstAttribute="top" secondItem="tI8-YK-R1y" secondAttribute="top" id="UC5-48-wvi"/>
                             <constraint firstItem="NXd-Us-dXC" firstAttribute="centerX" secondItem="9cP-Xh-ND3" secondAttribute="centerX" id="Y0g-9X-UMk"/>
                             <constraint firstItem="qVs-iS-Cea" firstAttribute="width" secondItem="gk3-hw-ykT" secondAttribute="width" id="YEJ-gf-S7c"/>
                             <constraint firstItem="NXd-Us-dXC" firstAttribute="width" secondItem="9cP-Xh-ND3" secondAttribute="width" id="YSx-G7-zvn"/>
@@ -227,6 +228,7 @@
                             <constraint firstItem="HmA-z8-eD0" firstAttribute="centerX" secondItem="gk3-hw-ykT" secondAttribute="centerX" id="cdW-KJ-owj"/>
                             <constraint firstItem="Q6O-sF-f22" firstAttribute="centerX" secondItem="tI8-YK-R1y" secondAttribute="centerX" id="eqX-Mx-fht"/>
                             <constraint firstItem="NXd-Us-dXC" firstAttribute="top" secondItem="9cP-Xh-ND3" secondAttribute="bottom" constant="5" id="hht-Ot-1dW"/>
+                            <constraint firstItem="HmA-z8-eD0" firstAttribute="height" secondItem="gk3-hw-ykT" secondAttribute="height" id="jes-dc-6fC"/>
                             <constraint firstItem="l3p-dw-oWT" firstAttribute="centerX" secondItem="gk3-hw-ykT" secondAttribute="centerX" id="lnZ-WE-buD"/>
                             <constraint firstItem="qVs-iS-Cea" firstAttribute="top" relation="greaterThanOrEqual" secondItem="9cP-Xh-ND3" secondAttribute="bottom" constant="20" id="n4c-3M-ZeG"/>
                             <constraint firstItem="tI8-YK-R1y" firstAttribute="width" secondItem="gk3-hw-ykT" secondAttribute="width" multiplier="2:3" priority="900" id="pUp-F3-wLG"/>
@@ -239,7 +241,9 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="yUG-K0-C0O"/>
                                 <exclude reference="Tqq-qF-P3g"/>
+                                <exclude reference="s4W-Ql-iSD"/>
                                 <exclude reference="6KN-DF-wck"/>
                             </mask>
                         </variation>
@@ -250,6 +254,7 @@
                     <connections>
                         <outlet property="doneButton" destination="qVs-iS-Cea" id="v4h-c9-tp3"/>
                         <outlet property="doneButtonBottomConstraint" destination="cR5-ff-HCe" id="kOr-Uh-zmC"/>
+                        <outlet property="iphoneImage" destination="tI8-YK-R1y" id="w1e-Nw-gej"/>
                         <outlet property="iphoneImageTopConstraint" destination="Ij5-TN-OH7" id="LMg-Cz-MSM"/>
                         <outlet property="pageControl" destination="l3p-dw-oWT" id="5YF-d6-E9a"/>
                         <outlet property="scrollView" destination="HmA-z8-eD0" id="HPk-fP-1YV"/>

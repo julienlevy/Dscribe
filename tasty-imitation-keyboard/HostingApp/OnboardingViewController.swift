@@ -12,6 +12,7 @@ import MediaPlayer
 class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
     @IBOutlet var iphoneImageTopConstraint: NSLayoutConstraint!
     
+    @IBOutlet var iphoneImage: UIImageView!
     @IBOutlet var videoContainerView: UIView!
 
     @IBOutlet var trialTextField: UITextField!
@@ -32,10 +33,7 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
         
-        self.trialTextField.delegate = self
-        self.scrollView.delegate = self
-
-        if let videoPath = NSBundle.mainBundle().pathForResource("OpenKeyboard", ofType: "mov") {
+            if let videoPath = NSBundle.mainBundle().pathForResource("OpenKeyboard", ofType: "mov") {
             let videoURL = NSURL.fileURLWithPath(videoPath)
             self.moviePlayer = MPMoviePlayerController(contentURL: videoURL)
             if let player = self.moviePlayer {
@@ -51,6 +49,13 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
                 self.setPlayerConstraints()
             }
         }
+
+        self.trialTextField.delegate = self
+        self.scrollView.delegate = self
+
+        let swipe: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("dismissKeyboard"))
+        swipe.direction = .Down
+        self.scrollView.addGestureRecognizer(swipe)
 
         self.view.layer.insertSublayer(backgroungLayerWithFrame(self.view.bounds), atIndex: 0)
 
@@ -75,11 +80,13 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
     }
     func setScrollViewContent() {
         let width: CGFloat = self.scrollView.bounds.width
-        let height: CGFloat = self.scrollView.bounds.height
-        let inset: CGFloat = self.trialTextField.frame.origin.x
+        let inset: CGFloat = self.iphoneImage.frame.origin.x
+
+        let yOrigin: CGFloat = self.pageControl.frame.origin.y + self.pageControl.frame.height
+        let height: CGFloat = self.trialTextField.frame.origin.y - yOrigin - 10
 
         let openKeyboardView = OpenKeyboardTutorialView()
-        openKeyboardView.frame = CGRect(x: inset, y: 0, width: width - 2 * inset, height: height)
+        openKeyboardView.frame = CGRect(x: inset, y: yOrigin, width: width - 2 * inset, height: height)
 
         self.scrollView.addSubview(openKeyboardView)
 
@@ -99,6 +106,9 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
         self.showViewController(settingsViewController, sender: nil)
     }
 
+    func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         self.pageControl.currentPage = Int(self.scrollView.contentOffset.x / self.scrollView.frame.width)
     }

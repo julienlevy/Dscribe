@@ -55,6 +55,7 @@ class OpenKeyboardTutorialView: UIView {
         let topSecond: NSLayoutConstraint = NSLayoutConstraint(item: self.secondLineLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.beforeIconLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 2)
         let leftSecond: NSLayoutConstraint = NSLayoutConstraint(item: self.secondLineLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self.beforeIconLabel, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0)
         let rightSecond: NSLayoutConstraint = NSLayoutConstraint(item: self.secondLineLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0)
+        
 
         self.addConstraints([topFirst, leftFirst, leftIcon, bottomIcon, heightIcon, widthIcon, topSecond, leftSecond, rightSecond])
     }
