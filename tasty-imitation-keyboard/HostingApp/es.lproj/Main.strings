@@ -1,0 +1,21 @@
+
+/* Class = "UILabel"; text = "(Waiting for keyboard...)"; ObjectID = "3bG-47-LNQ"; */
+"3bG-47-LNQ.text" = "(Waiting for keyboard...)";
+
+/* Class = "UITextField"; placeholder = "Sentence Caps"; ObjectID = "JkG-lS-E73"; */
+"JkG-lS-E73.placeholder" = "Sentence Caps";
+
+/* Class = "UITextField"; placeholder = "Normal"; ObjectID = "Jto-Fw-99T"; */
+"Jto-Fw-99T.placeholder" = "Normal";
+
+/* Class = "UITextField"; placeholder = "Word Caps"; ObjectID = "Sv9-QE-0tf"; */
+"Sv9-QE-0tf.placeholder" = "Word Caps";
+
+/* Class = "UITextField"; placeholder = "All Caps"; ObjectID = "jEi-oU-7aO"; */
+"jEi-oU-7aO.placeholder" = "All Caps";
+
+/* Class = "UIButton"; normalTitle = "Dismiss Keyboard"; ObjectID = "xea-iY-wvs"; */
+"xea-iY-wvs.normalTitle" = "Dismiss Keyboard";
+
+/* Class = "UITextField"; placeholder = "Dark Mode"; ObjectID = "zIN-qD-YPT"; */
+"zIN-qD-YPT.placeholder" = "Dark Mode";

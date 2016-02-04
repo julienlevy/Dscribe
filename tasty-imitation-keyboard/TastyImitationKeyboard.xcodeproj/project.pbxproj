@@ -27,6 +27,7 @@
 		0DD5A7E11C62430700DF4996 /* OpenKeyboardTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD5A7E01C62430700DF4996 /* OpenKeyboardTutorialView.swift */; };
 		0DD5A7E31C62786400DF4996 /* UseKeyboardTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD5A7E21C62786400DF4996 /* UseKeyboardTutorialView.swift */; };
 		0DD5A7E51C62882C00DF4996 /* UseKeyboard.mov in Resources */ = {isa = PBXBuildFile; fileRef = 0DD5A7E41C62882C00DF4996 /* UseKeyboard.mov */; };
+		0DD5A7F01C639E5200DF4996 /* LanguageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD5A7EF1C639E5200DF4996 /* LanguageUtils.swift */; };
 		0DE2F8961BEC274B000F9B5F /* Emojis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2F8951BEC274B000F9B5F /* Emojis.swift */; };
 		0DE2F8981BECE232000F9B5F /* DscribeBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2F8971BECE232000F9B5F /* DscribeBanner.swift */; };
 		0DE2F89A1BED3AF0000F9B5F /* Dscribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2F8991BED3AF0000F9B5F /* Dscribe.swift */; };
@@ -138,6 +139,7 @@
 		0DD5A7E01C62430700DF4996 /* OpenKeyboardTutorialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenKeyboardTutorialView.swift; sourceTree = "<group>"; };
 		0DD5A7E21C62786400DF4996 /* UseKeyboardTutorialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseKeyboardTutorialView.swift; sourceTree = "<group>"; };
 		0DD5A7E41C62882C00DF4996 /* UseKeyboard.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = UseKeyboard.mov; sourceTree = SOURCE_ROOT; };
+		0DD5A7EF1C639E5200DF4996 /* LanguageUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageUtils.swift; sourceTree = "<group>"; };
 		0DE2F8951BEC274B000F9B5F /* Emojis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emojis.swift; sourceTree = "<group>"; };
 		0DE2F8971BECE232000F9B5F /* DscribeBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeBanner.swift; sourceTree = "<group>"; };
 		0DE2F8991BED3AF0000F9B5F /* Dscribe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dscribe.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				0DC28DCF1C39336200F40BA1 /* DscribeLayout.swift */,
 				0D1F16631C49081200E0EB43 /* DscribeImageKey.swift */,
 				0D5081DC1C3FC17E008A643C /* DscribeSettings.swift */,
+				0DD5A7EF1C639E5200DF4996 /* LanguageUtils.swift */,
 				0DE2F8951BEC274B000F9B5F /* Emojis.swift */,
 				0D1F16651C4935D900E0EB43 /* AZERTYKeyboard.swift */,
 				0DC28DD11C39811600F40BA1 /* EmojiList.plist */,
@@ -601,6 +604,7 @@
 				4EC2A46E19DF811E00F789E1 /* KeyboardLayout.swift in Sources */,
 				4E60A13A1979FA5C00854CC8 /* KeyboardKeyBackground.swift in Sources */,
 				4E5B67A2196E03B700114361 /* KeyboardModel.swift in Sources */,
+				0DD5A7F01C639E5200DF4996 /* LanguageUtils.swift in Sources */,
 				4E60A13C1979FA8E00854CC8 /* KeyboardConnector.swift in Sources */,
 				0D1F16641C49081200E0EB43 /* DscribeImageKey.swift in Sources */,
 				4E00A6E5197183EE009414F2 /* KeyboardKey.swift in Sources */,

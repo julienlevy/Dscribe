@@ -30,9 +30,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     var escapeMode: Bool = false
     var searchEmojiKey: KeyboardKey?
 
-    var spaceKey: Key?
-    var returnKey: Key?
-
     // TODO delete
     var stringToSearch: String = ""
 
@@ -95,7 +92,11 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     override func defaultsChanged(notification: NSNotification) {
         super.defaultsChanged(notification)
         if let newLanguage = NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kAutocorrectLanguage) as? String {
-            language = newLanguage
+            self.language = newLanguage
+
+            if let languageCode = language.componentsSeparatedByString("_").first {
+                self.changeKeyLanguages("space".translation(languageCode), returnText: "return".translation(languageCode))
+            }
             print("Default changed, language is " + language)
         }
         autoReplaceActive = NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(kAutoReplace)
@@ -187,13 +188,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                         }
 
                         keyView.addTarget(self, action: Selector("playKeySound"), forControlEvents: .TouchDown)
-
-                        // Addition to track space and return keys to update their text according to language
-                        if key.type == Key.KeyType.Space {
-                            self.spaceKey = key
-                        } else if key.type == Key.KeyType.Return {
-                            self.returnKey = key
-                        }
                     }
                 }
             }
@@ -304,6 +298,20 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             if typeSetting != "" && typeSetting != keyboardType {
                 self.keyboardType = typeSetting
                 self.switchKeyboard()
+            }
+        }
+    }
+
+    func changeKeyLanguages(spaceText: String, returnText: String) {
+        for page in keyboard.pages {
+            for rowKeys in page.rows {
+                for key in rowKeys {
+                    if key.type == Key.KeyType.Space {
+                        key.uppercaseKeyCap = spaceText
+                    } else if key.type == Key.KeyType.Return {
+                        key.uppercaseKeyCap = returnText
+                    }
+                }
             }
         }
     }
