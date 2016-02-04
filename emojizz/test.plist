@@ -2,17 +2,157 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>#️⃣</key>
+	<array>
+		<string>symbol</string>
+		<string>blue-square</string>
+		<string>twitter</string>
+	</array>
+	<key>*⃣</key>
+	<array>
+		<string>asterisk</string>
+	</array>
+	<key>0️⃣</key>
+	<array>
+		<string>0</string>
+		<string>numbers</string>
+		<string>blue-square</string>
+		<string>null</string>
+	</array>
+	<key>1️⃣</key>
+	<array>
+		<string>blue-square</string>
+		<string>numbers</string>
+		<string>1</string>
+	</array>
+	<key>2️⃣</key>
+	<array>
+		<string>numbers</string>
+		<string>2</string>
+		<string>prime</string>
+		<string>blue-square</string>
+	</array>
+	<key>3️⃣</key>
+	<array>
+		<string>3</string>
+		<string>numbers</string>
+		<string>prime</string>
+		<string>blue-square</string>
+	</array>
+	<key>4️⃣</key>
+	<array>
+		<string>4</string>
+		<string>numbers</string>
+		<string>blue-square</string>
+	</array>
+	<key>5️⃣</key>
+	<array>
+		<string>5</string>
+		<string>numbers</string>
+		<string>blue-square</string>
+		<string>prime</string>
+	</array>
+	<key>6️⃣</key>
+	<array>
+		<string>6</string>
+		<string>numbers</string>
+		<string>blue-square</string>
+	</array>
+	<key>7️⃣</key>
+	<array>
+		<string>7</string>
+		<string>numbers</string>
+		<string>blue-square</string>
+		<string>prime</string>
+	</array>
+	<key>8️⃣</key>
+	<array>
+		<string>8</string>
+		<string>blue-square</string>
+		<string>numbers</string>
+	</array>
+	<key>9️⃣</key>
+	<array>
+		<string>blue-square</string>
+		<string>numbers</string>
+		<string>9</string>
+	</array>
+	<key>null</key>
+	<array>
+		<string>face</string>
+		<string>formal</string>
+		<string>fashion</string>
+		<string>suit</string>
+		<string>classy</string>
+		<string>magic</string>
+		<string>circus</string>
+		<string>animal</string>
+		<string>octopus</string>
+		<string>github</string>
+		<string>custom_</string>
+		<string>fingers</string>
+		<string>rocknroll</string>
+		<string>concert</string>
+		<string>band</string>
+		<string>internet</string>
+		<string>meme</string>
+		<string>doom</string>
+		<string>oldschool</string>
+		<string>fuck</string>
+		<string>finger</string>
+		<string>dislike</string>
+		<string>thumbsdown</string>
+		<string>disapprove</string>
+		<string>no</string>
+		<string>mad</string>
+		<string>angry</string>
+		<string>hate</string>
+		<string>despise</string>
+		<string>injured</string>
+		<string>squirrel</string>
+		<string>detective</string>
+		<string>sherlock</string>
+		<string>inspector</string>
+		<string>nerdy</string>
+		<string>rage</string>
+		<string>bloody</string>
+		<string>hurt</string>
+	</array>
+	<key>©️</key>
+	<array>
+		<string>ip</string>
+		<string>license</string>
+		<string>circle</string>
+		<string>law</string>
+		<string>legal</string>
+	</array>
+	<key>®️</key>
+	<array>
+		<string>alphabet</string>
+		<string>circle</string>
+	</array>
 	<key>‼</key>
 	<array>
 		<string>exclamation</string>
 		<string>mark</string>
 		<string>punctuation</string>
 	</array>
+	<key>‼️</key>
+	<array>
+		<string>exclamation</string>
+		<string>surprise</string>
+	</array>
 	<key>⁉</key>
 	<array>
 		<string>exclamation</string>
 		<string>question</string>
 		<string>mark</string>
+	</array>
+	<key>⁉️</key>
+	<array>
+		<string>wat</string>
+		<string>punctuation</string>
+		<string>surprise</string>
 	</array>
 	<key>⃣</key>
 	<array>
@@ -24,9 +164,22 @@
 		<string>mark</string>
 		<string>trademark</string>
 	</array>
+	<key>™️</key>
+	<array>
+		<string>trademark</string>
+		<string>brand</string>
+		<string>law</string>
+		<string>legal</string>
+	</array>
 	<key>ℹ</key>
 	<array>
 		<string>information</string>
+	</array>
+	<key>ℹ️</key>
+	<array>
+		<string>blue-square</string>
+		<string>alphabet</string>
+		<string>letter</string>
 	</array>
 	<key>↔</key>
 	<array>
@@ -35,11 +188,25 @@
 		<string>double</string>
 		<string>arrow</string>
 	</array>
+	<key>↔️</key>
+	<array>
+		<string>shape</string>
+		<string>direction</string>
+		<string>horizontal</string>
+		<string>sideways</string>
+	</array>
 	<key>↕</key>
 	<array>
 		<string>up</string>
 		<string>down</string>
 		<string>arrow</string>
+	</array>
+	<key>↕️</key>
+	<array>
+		<string>blue-square</string>
+		<string>direction</string>
+		<string>way</string>
+		<string>vertical</string>
 	</array>
 	<key>↖</key>
 	<array>
@@ -48,11 +215,27 @@
 		<string>diagonal</string>
 		<string>arrow</string>
 	</array>
+	<key>↖️</key>
+	<array>
+		<string>blue-square</string>
+		<string>point</string>
+		<string>direction</string>
+		<string>diagonal</string>
+		<string>northwest</string>
+	</array>
 	<key>↗</key>
 	<array>
 		<string>northeast</string>
 		<string>topright</string>
 		<string>arrow</string>
+	</array>
+	<key>↗️</key>
+	<array>
+		<string>blue-square</string>
+		<string>point</string>
+		<string>direction</string>
+		<string>diagonal</string>
+		<string>northeast</string>
 	</array>
 	<key>↘</key>
 	<array>
@@ -60,11 +243,25 @@
 		<string>bottomright</string>
 		<string>arrow</string>
 	</array>
+	<key>↘️</key>
+	<array>
+		<string>blue-square</string>
+		<string>direction</string>
+		<string>diagonal</string>
+		<string>southeast</string>
+	</array>
 	<key>↙</key>
 	<array>
 		<string>southwest</string>
 		<string>bottomleft</string>
 		<string>arrow</string>
+	</array>
+	<key>↙️</key>
+	<array>
+		<string>blue-square</string>
+		<string>direction</string>
+		<string>diagonal</string>
+		<string>southwest</string>
 	</array>
 	<key>↩</key>
 	<array>
@@ -73,12 +270,27 @@
 		<string>hook</string>
 		<string>turn</string>
 	</array>
+	<key>↩️</key>
+	<array>
+		<string>back</string>
+		<string>return</string>
+		<string>blue-square</string>
+		<string>undo</string>
+		<string>enter</string>
+	</array>
 	<key>↪</key>
 	<array>
 		<string>rightwards</string>
 		<string>arrow</string>
 		<string>hook</string>
 		<string>thus</string>
+	</array>
+	<key>↪️</key>
+	<array>
+		<string>blue-square</string>
+		<string>return</string>
+		<string>rotade</string>
+		<string>direction</string>
 	</array>
 	<key>⌚</key>
 	<array>
@@ -97,6 +309,14 @@
 		<string>exam</string>
 		<string>quiz</string>
 		<string>test</string>
+	</array>
+	<key>⌨</key>
+	<array>
+		<string>technology</string>
+		<string>computer</string>
+		<string>type</string>
+		<string>input</string>
+		<string>text</string>
 	</array>
 	<key>⏩</key>
 	<array>
@@ -134,6 +354,22 @@
 		<string>direction</string>
 		<string>bottom</string>
 	</array>
+	<key>⏭</key>
+	<array>
+		<string>forward</string>
+		<string>next</string>
+		<string>blue-square</string>
+	</array>
+	<key>⏮</key>
+	<array>
+		<string>backward</string>
+	</array>
+	<key>⏯</key>
+	<array>
+		<string>blue-square</string>
+		<string>play</string>
+		<string>pause</string>
+	</array>
 	<key>⏰</key>
 	<array>
 		<string>alarm</string>
@@ -141,6 +377,15 @@
 		<string>morning</string>
 		<string>time</string>
 		<string>wake</string>
+	</array>
+	<key>⏱</key>
+	<array>
+		<string>time</string>
+		<string>deadline</string>
+	</array>
+	<key>⏲</key>
+	<array>
+		<string>alarm</string>
 	</array>
 	<key>⏳</key>
 	<array>
@@ -151,6 +396,19 @@
 		<string>time</string>
 		<string>countdown</string>
 	</array>
+	<key>⏸</key>
+	<array>
+		<string>pause</string>
+		<string>blue-square</string>
+	</array>
+	<key>⏹</key>
+	<array>
+		<string>blue-square</string>
+	</array>
+	<key>⏺</key>
+	<array>
+		<string>blue-square</string>
+	</array>
 	<key>Ⓜ</key>
 	<array>
 		<string>circled</string>
@@ -159,11 +417,22 @@
 		<string>m</string>
 		<string>M</string>
 	</array>
+	<key>Ⓜ️</key>
+	<array>
+		<string>alphabet</string>
+		<string>blue-circle</string>
+		<string>letter</string>
+	</array>
 	<key>▪</key>
 	<array>
 		<string>black</string>
 		<string>small</string>
 		<string>square</string>
+	</array>
+	<key>▪️</key>
+	<array>
+		<string>shape</string>
+		<string>icon</string>
 	</array>
 	<key>▫</key>
 	<array>
@@ -171,10 +440,22 @@
 		<string>small</string>
 		<string>square</string>
 	</array>
+	<key>▫️</key>
+	<array>
+		<string>shape</string>
+		<string>icon</string>
+	</array>
 	<key>▶</key>
 	<array>
 		<string>rightwards</string>
 		<string>triangle</string>
+		<string>play</string>
+	</array>
+	<key>▶️</key>
+	<array>
+		<string>blue-square</string>
+		<string>right</string>
+		<string>direction</string>
 		<string>play</string>
 	</array>
 	<key>◀</key>
@@ -183,15 +464,33 @@
 		<string>left-pointing</string>
 		<string>triangle</string>
 	</array>
+	<key>◀️</key>
+	<array>
+		<string>blue-square</string>
+		<string>left</string>
+		<string>direction</string>
+	</array>
 	<key>◻</key>
 	<array>
 		<string>white</string>
 		<string>square</string>
 	</array>
+	<key>◻️</key>
+	<array>
+		<string>shape</string>
+		<string>stone</string>
+		<string>icon</string>
+	</array>
 	<key>◼</key>
 	<array>
 		<string>black</string>
 		<string>square</string>
+	</array>
+	<key>◼️</key>
+	<array>
+		<string>shape</string>
+		<string>button</string>
+		<string>icon</string>
 	</array>
 	<key>◽</key>
 	<array>
@@ -216,9 +515,42 @@
 		<string>sun</string>
 		<string>rays</string>
 	</array>
+	<key>☀️</key>
+	<array>
+		<string>weather</string>
+		<string>nature</string>
+		<string>brightness</string>
+		<string>summer</string>
+		<string>beach</string>
+		<string>spring</string>
+	</array>
 	<key>☁</key>
 	<array>
 		<string>cloud</string>
+	</array>
+	<key>☁️</key>
+	<array>
+		<string>weather</string>
+		<string>sky</string>
+	</array>
+	<key>☂</key>
+	<array>
+		<string>weather</string>
+		<string>spring</string>
+	</array>
+	<key>☃</key>
+	<array>
+		<string>winter</string>
+		<string>season</string>
+		<string>cold</string>
+		<string>weather</string>
+		<string>christmas</string>
+		<string>xmas</string>
+		<string>frozen</string>
+	</array>
+	<key>☄</key>
+	<array>
+		<string>space</string>
 	</array>
 	<key>☎</key>
 	<array>
@@ -226,9 +558,26 @@
 		<string>pink</string>
 		<string>telephone</string>
 	</array>
+	<key>☎️</key>
+	<array>
+		<string>technology</string>
+		<string>communication</string>
+		<string>dial</string>
+		<string>telephone</string>
+	</array>
 	<key>☑</key>
 	<array>
 		<string>checkbox</string>
+	</array>
+	<key>☑️</key>
+	<array>
+		<string>ok</string>
+		<string>agree</string>
+		<string>confirm</string>
+		<string>black-square</string>
+		<string>vote</string>
+		<string>election</string>
+		<string>yes</string>
 	</array>
 	<key>☔</key>
 	<array>
@@ -246,6 +595,15 @@
 		<string>tea</string>
 		<string>cafe</string>
 		<string>espresso</string>
+		<string>caffeine</string>
+		<string>latte</string>
+	</array>
+	<key>☘</key>
+	<array>
+		<string>vegetable</string>
+		<string>plant</string>
+		<string>nature</string>
+		<string>irish</string>
 	</array>
 	<key>☝</key>
 	<array>
@@ -253,6 +611,57 @@
 		<string>index</string>
 		<string>one</string>
 		<string>finger</string>
+	</array>
+	<key>☝️</key>
+	<array>
+		<string>hand</string>
+		<string>fingers</string>
+		<string>direction</string>
+	</array>
+	<key>☠</key>
+	<array>
+		<string>poison</string>
+		<string>danger</string>
+		<string>deadly</string>
+		<string>scary</string>
+	</array>
+	<key>☢</key>
+	<array>
+		<string>nuclear</string>
+		<string>danger</string>
+	</array>
+	<key>☣</key>
+	<array>
+		<string>danger</string>
+	</array>
+	<key>☦</key>
+	<array>
+		<string>suppedaneum</string>
+		<string>religion</string>
+	</array>
+	<key>☪</key>
+	<array>
+		<string>islam</string>
+	</array>
+	<key>☮</key>
+	<array>
+		<string>hippie</string>
+	</array>
+	<key>☯</key>
+	<array>
+		<string>balance</string>
+	</array>
+	<key>☸</key>
+	<array>
+		<string>hinduism</string>
+		<string>buddhism</string>
+		<string>sikhism</string>
+		<string>jainism</string>
+	</array>
+	<key>☹</key>
+	<array>
+		<string>face</string>
+		<string>sad</string>
 	</array>
 	<key>☺</key>
 	<array>
@@ -262,6 +671,13 @@
 		<string>happy</string>
 		<string>smile</string>
 		<string>face</string>
+	</array>
+	<key>☺️</key>
+	<array>
+		<string>face</string>
+		<string>blush</string>
+		<string>massage</string>
+		<string>happiness</string>
 	</array>
 	<key>♈</key>
 	<array>
@@ -365,12 +781,26 @@
 		<string>spade</string>
 		<string>suit</string>
 	</array>
+	<key>♠️</key>
+	<array>
+		<string>poker</string>
+		<string>cards</string>
+		<string>suits</string>
+		<string>magic</string>
+	</array>
 	<key>♣</key>
 	<array>
 		<string>club</string>
 		<string>cards</string>
 		<string>game</string>
 		<string>suit</string>
+	</array>
+	<key>♣️</key>
+	<array>
+		<string>poker</string>
+		<string>cards</string>
+		<string>magic</string>
+		<string>suits</string>
 	</array>
 	<key>♥</key>
 	<array>
@@ -379,6 +809,13 @@
 		<string>game</string>
 		<string>suit</string>
 	</array>
+	<key>♥️</key>
+	<array>
+		<string>poker</string>
+		<string>cards</string>
+		<string>magic</string>
+		<string>suits</string>
+	</array>
 	<key>♦</key>
 	<array>
 		<string>diamond</string>
@@ -386,16 +823,36 @@
 		<string>game</string>
 		<string>suit</string>
 	</array>
+	<key>♦️</key>
+	<array>
+		<string>poker</string>
+		<string>cards</string>
+		<string>magic</string>
+		<string>suits</string>
+	</array>
 	<key>♨</key>
 	<array>
 		<string>hot</string>
 		<string>springs</string>
+	</array>
+	<key>♨️</key>
+	<array>
+		<string>bath</string>
+		<string>warm</string>
+		<string>relax</string>
 	</array>
 	<key>♻</key>
 	<array>
 		<string>black</string>
 		<string>universal</string>
 		<string>recycling</string>
+	</array>
+	<key>♻️</key>
+	<array>
+		<string>arrow</string>
+		<string>environment</string>
+		<string>garbage</string>
+		<string>trash</string>
 	</array>
 	<key>♿</key>
 	<array>
@@ -405,6 +862,12 @@
 		<string>a11y</string>
 		<string>accessibility</string>
 	</array>
+	<key>⚒</key>
+	<array>
+		<string>tools</string>
+		<string>build</string>
+		<string>create</string>
+	</array>
 	<key>⚓</key>
 	<array>
 		<string>anchor</string>
@@ -413,10 +876,48 @@
 		<string>sea</string>
 		<string>boat</string>
 	</array>
+	<key>⚔</key>
+	<array>
+		<string>weapon</string>
+	</array>
+	<key>⚖</key>
+	<array>
+		<string>law</string>
+		<string>fairness</string>
+		<string>weight</string>
+	</array>
+	<key>⚗</key>
+	<array>
+		<string>distilling</string>
+		<string>science</string>
+		<string>experiment</string>
+	</array>
+	<key>⚙</key>
+	<array>
+		<string>cog</string>
+	</array>
+	<key>⚛</key>
+	<array>
+		<string>science</string>
+	</array>
+	<key>⚜</key>
+	<array>
+		<string>decorative</string>
+		<string>scout</string>
+	</array>
 	<key>⚠</key>
 	<array>
 		<string>warning</string>
 		<string>sign</string>
+	</array>
+	<key>⚠️</key>
+	<array>
+		<string>exclamation</string>
+		<string>wip</string>
+		<string>alert</string>
+		<string>error</string>
+		<string>problem</string>
+		<string>issue</string>
 	</array>
 	<key>⚡</key>
 	<array>
@@ -443,6 +944,22 @@
 		<string>button</string>
 		<string>round</string>
 	</array>
+	<key>⚰</key>
+	<array>
+		<string>vampire</string>
+		<string>dead</string>
+		<string>die</string>
+		<string>death</string>
+		<string>rip</string>
+	</array>
+	<key>⚱</key>
+	<array>
+		<string>dead</string>
+		<string>die</string>
+		<string>death</string>
+		<string>rip</string>
+		<string>ashes</string>
+	</array>
 	<key>⚽</key>
 	<array>
 		<string>soccer</string>
@@ -457,6 +974,8 @@
 	<array>
 		<string>baseball</string>
 		<string>sport</string>
+		<string>sports</string>
+		<string>balls</string>
 	</array>
 	<key>⛄</key>
 	<array>
@@ -469,6 +988,7 @@
 		<string>christmas</string>
 		<string>xmas</string>
 		<string>frozen</string>
+		<string>without_snow</string>
 	</array>
 	<key>⛅</key>
 	<array>
@@ -481,6 +1001,11 @@
 		<string>fall</string>
 		<string>spring</string>
 	</array>
+	<key>⛈</key>
+	<array>
+		<string>weather</string>
+		<string>lightning</string>
+	</array>
 	<key>⛎</key>
 	<array>
 		<string>ophiuchus</string>
@@ -488,6 +1013,21 @@
 		<string>sign</string>
 		<string>purple-square</string>
 		<string>constellation</string>
+	</array>
+	<key>⛏</key>
+	<array>
+		<string>tools</string>
+		<string>dig</string>
+	</array>
+	<key>⛑</key>
+	<array>
+		<string>construction</string>
+		<string>build</string>
+	</array>
+	<key>⛓</key>
+	<array>
+		<string>lock</string>
+		<string>arrest</string>
 	</array>
 	<key>⛔</key>
 	<array>
@@ -501,12 +1041,29 @@
 		<string>stop</string>
 		<string>circle</string>
 	</array>
+	<key>⛩</key>
+	<array>
+		<string>temple</string>
+		<string>japan</string>
+		<string>kyoto</string>
+	</array>
 	<key>⛪</key>
 	<array>
 		<string>church</string>
 		<string>building</string>
 		<string>religion</string>
 		<string>christ</string>
+	</array>
+	<key>⛰</key>
+	<array>
+		<string>photo</string>
+		<string>nature</string>
+		<string>environment</string>
+	</array>
+	<key>⛱</key>
+	<array>
+		<string>weather</string>
+		<string>summer</string>
 	</array>
 	<key>⛲</key>
 	<array>
@@ -524,6 +1081,13 @@
 		<string>sports</string>
 		<string>business</string>
 		<string>summer</string>
+		<string>golf</string>
+	</array>
+	<key>⛴</key>
+	<array>
+		<string>boat</string>
+		<string>ship</string>
+		<string>yacht</string>
 	</array>
 	<key>⛵</key>
 	<array>
@@ -535,6 +1099,21 @@
 		<string>transportation</string>
 		<string>water</string>
 		<string>sailing</string>
+	</array>
+	<key>⛷</key>
+	<array>
+		<string>sports</string>
+		<string>winter</string>
+		<string>snow</string>
+	</array>
+	<key>⛸</key>
+	<array>
+		<string>sports</string>
+	</array>
+	<key>⛹</key>
+	<array>
+		<string>sports</string>
+		<string>human</string>
 	</array>
 	<key>⛺</key>
 	<array>
@@ -559,6 +1138,11 @@
 	<array>
 		<string>scissors</string>
 	</array>
+	<key>✂️</key>
+	<array>
+		<string>stationery</string>
+		<string>cut</string>
+	</array>
 	<key>✅</key>
 	<array>
 		<string>check</string>
@@ -569,15 +1153,30 @@
 		<string>agree</string>
 		<string>vote</string>
 		<string>election</string>
+		<string>answer</string>
 	</array>
 	<key>✈</key>
 	<array>
 		<string>airplane</string>
 		<string>plane</string>
 	</array>
+	<key>✈️</key>
+	<array>
+		<string>vehicle</string>
+		<string>transportation</string>
+		<string>flight</string>
+		<string>fly</string>
+	</array>
 	<key>✉</key>
 	<array>
 		<string>envelope</string>
+	</array>
+	<key>✉️</key>
+	<array>
+		<string>letter</string>
+		<string>postal</string>
+		<string>inbox</string>
+		<string>communication</string>
 	</array>
 	<key>✊</key>
 	<array>
@@ -608,14 +1207,44 @@
 		<string>cool</string>
 		<string>great</string>
 	</array>
+	<key>✌️</key>
+	<array>
+		<string>fingers</string>
+		<string>ohyeah</string>
+		<string>hand</string>
+		<string>peace</string>
+		<string>victory</string>
+		<string>two</string>
+	</array>
+	<key>✍</key>
+	<array>
+		<string>pen</string>
+		<string>stationery</string>
+	</array>
 	<key>✏</key>
 	<array>
 		<string>pencil</string>
+	</array>
+	<key>✏️</key>
+	<array>
+		<string>stationery</string>
+		<string>write</string>
+		<string>paper</string>
+		<string>writing</string>
+		<string>school</string>
+		<string>study</string>
 	</array>
 	<key>✒</key>
 	<array>
 		<string>black</string>
 		<string>nib</string>
+	</array>
+	<key>✒️</key>
+	<array>
+		<string>pen</string>
+		<string>stationery</string>
+		<string>writing</string>
+		<string>write</string>
 	</array>
 	<key>✔</key>
 	<array>
@@ -623,10 +1252,31 @@
 		<string>checked</string>
 		<string>done</string>
 	</array>
+	<key>✔️</key>
+	<array>
+		<string>ok</string>
+		<string>nike</string>
+		<string>answer</string>
+		<string>yes</string>
+		<string>tick</string>
+	</array>
 	<key>✖</key>
 	<array>
 		<string>multiplication</string>
 		<string>x</string>
+	</array>
+	<key>✖️</key>
+	<array>
+		<string>math</string>
+		<string>calculation</string>
+	</array>
+	<key>✝</key>
+	<array>
+		<string>christianity</string>
+	</array>
+	<key>✡</key>
+	<array>
+		<string>judaism</string>
 	</array>
 	<key>✨</key>
 	<array>
@@ -644,19 +1294,48 @@
 		<string>asterisk</string>
 		<string>punctuation</string>
 	</array>
+	<key>✳️</key>
+	<array>
+		<string>star</string>
+		<string>sparkle</string>
+		<string>green-square</string>
+	</array>
 	<key>✴</key>
 	<array>
 		<string>black</string>
 		<string>star</string>
+	</array>
+	<key>✴️</key>
+	<array>
+		<string>orange-square</string>
+		<string>shape</string>
+		<string>polygon</string>
 	</array>
 	<key>❄</key>
 	<array>
 		<string>snowflake</string>
 		<string>winter</string>
 	</array>
+	<key>❄️</key>
+	<array>
+		<string>winter</string>
+		<string>season</string>
+		<string>cold</string>
+		<string>weather</string>
+		<string>christmas</string>
+		<string>xmas</string>
+	</array>
 	<key>❇</key>
 	<array>
 		<string>sparkle</string>
+	</array>
+	<key>❇️</key>
+	<array>
+		<string>stars</string>
+		<string>green-square</string>
+		<string>awesome</string>
+		<string>good</string>
+		<string>fireworks</string>
 	</array>
 	<key>❌</key>
 	<array>
@@ -665,6 +1344,7 @@
 		<string>forbidden</string>
 		<string>delete</string>
 		<string>remove</string>
+		<string>cancel</string>
 	</array>
 	<key>❎</key>
 	<array>
@@ -692,6 +1372,7 @@
 		<string>doubts</string>
 		<string>gray</string>
 		<string>huh</string>
+		<string>confused</string>
 	</array>
 	<key>❕</key>
 	<array>
@@ -715,12 +1396,23 @@
 		<string>wow</string>
 		<string>warning</string>
 	</array>
+	<key>❣</key>
+	<array>
+		<string>decoration</string>
+		<string>love</string>
+	</array>
 	<key>❤</key>
 	<array>
 		<string>black</string>
 		<string>red</string>
 		<string>heart</string>
 		<string>love</string>
+	</array>
+	<key>❤️</key>
+	<array>
+		<string>love</string>
+		<string>like</string>
+		<string>valentines</string>
 	</array>
 	<key>➕</key>
 	<array>
@@ -758,6 +1450,11 @@
 		<string>rightwards</string>
 		<string>arrow</string>
 	</array>
+	<key>➡️</key>
+	<array>
+		<string>blue-square</string>
+		<string>next</string>
+	</array>
 	<key>➰</key>
 	<array>
 		<string>curly</string>
@@ -782,6 +1479,12 @@
 		<string>curving</string>
 		<string>upwards</string>
 	</array>
+	<key>⤴️</key>
+	<array>
+		<string>blue-square</string>
+		<string>direction</string>
+		<string>top</string>
+	</array>
 	<key>⤵</key>
 	<array>
 		<string>arrow</string>
@@ -789,20 +1492,45 @@
 		<string>curving</string>
 		<string>downwards</string>
 	</array>
+	<key>⤵️</key>
+	<array>
+		<string>blue-square</string>
+		<string>direction</string>
+		<string>bottom</string>
+	</array>
 	<key>⬅</key>
 	<array>
 		<string>leftwards</string>
 		<string>arrow</string>
+	</array>
+	<key>⬅️</key>
+	<array>
+		<string>blue-square</string>
+		<string>previous</string>
+		<string>back</string>
 	</array>
 	<key>⬆</key>
 	<array>
 		<string>upwards</string>
 		<string>arrow</string>
 	</array>
+	<key>⬆️</key>
+	<array>
+		<string>blue-square</string>
+		<string>continue</string>
+		<string>top</string>
+		<string>direction</string>
+	</array>
 	<key>⬇</key>
 	<array>
 		<string>downwards</string>
 		<string>arrow</string>
+	</array>
+	<key>⬇️</key>
+	<array>
+		<string>blue-square</string>
+		<string>direction</string>
+		<string>bottom</string>
 	</array>
 	<key>⬛</key>
 	<array>
@@ -840,11 +1568,29 @@
 		<string>wavy</string>
 		<string>dash</string>
 	</array>
+	<key>〰️</key>
+	<array>
+		<string>draw</string>
+		<string>line</string>
+		<string>moustache</string>
+		<string>mustache</string>
+		<string>squiggle</string>
+		<string>scribble</string>
+	</array>
 	<key>〽</key>
 	<array>
 		<string>alternation</string>
 		<string>chart</string>
 		<string>M</string>
+	</array>
+	<key>〽️</key>
+	<array>
+		<string>graph</string>
+		<string>presentation</string>
+		<string>stats</string>
+		<string>business</string>
+		<string>economics</string>
+		<string>bad</string>
 	</array>
 	<key>㊗</key>
 	<array>
@@ -852,11 +1598,26 @@
 		<string>ideograph</string>
 		<string>congratulation</string>
 	</array>
+	<key>㊗️</key>
+	<array>
+		<string>chinese</string>
+		<string>kanji</string>
+		<string>japanese</string>
+		<string>red-circle</string>
+	</array>
 	<key>㊙</key>
 	<array>
 		<string>circled</string>
 		<string>ideograph</string>
 		<string>secret</string>
+	</array>
+	<key>㊙️</key>
+	<array>
+		<string>privacy</string>
+		<string>chinese</string>
+		<string>sshh</string>
+		<string>kanji</string>
+		<string>red-circle</string>
 	</array>
 	<key>🀄</key>
 	<array>
@@ -885,11 +1646,23 @@
 		<string>letter</string>
 		<string>a</string>
 	</array>
+	<key>🅰️</key>
+	<array>
+		<string>red-square</string>
+		<string>alphabet</string>
+		<string>letter</string>
+	</array>
 	<key>🅱</key>
 	<array>
 		<string>capital</string>
 		<string>letter</string>
 		<string>b</string>
+	</array>
+	<key>🅱️</key>
+	<array>
+		<string>red-square</string>
+		<string>alphabet</string>
+		<string>letter</string>
 	</array>
 	<key>🅾</key>
 	<array>
@@ -897,11 +1670,24 @@
 		<string>letter</string>
 		<string>o</string>
 	</array>
+	<key>🅾️</key>
+	<array>
+		<string>alphabet</string>
+		<string>red-square</string>
+		<string>letter</string>
+	</array>
 	<key>🅿</key>
 	<array>
 		<string>capital</string>
 		<string>letter</string>
 		<string>p</string>
+	</array>
+	<key>🅿️</key>
+	<array>
+		<string>cars</string>
+		<string>blue-square</string>
+		<string>alphabet</string>
+		<string>letter</string>
 	</array>
 	<key>🆎</key>
 	<array>
@@ -998,198 +1784,282 @@
 		<string>andorra</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇦🇪</key>
 	<array>
 		<string>united arab emirates</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>united</string>
+		<string>arab</string>
+		<string>emirates</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇦🇫</key>
 	<array>
 		<string>afghanistan</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇦🇬</key>
 	<array>
 		<string>antigua and barbuda</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>antigua</string>
+		<string>barbuda</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇦🇮</key>
 	<array>
 		<string>anguilla</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇦🇱</key>
 	<array>
 		<string>albania</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇦🇲</key>
 	<array>
 		<string>armenia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇦🇴</key>
 	<array>
 		<string>angola</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇦🇶</key>
 	<array>
 		<string>antarctica</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇦🇷</key>
 	<array>
 		<string>argentina</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇦🇸</key>
 	<array>
 		<string>american samoa</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>american</string>
+		<string>samoa</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇦🇹</key>
 	<array>
 		<string>austria</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇦🇺</key>
 	<array>
 		<string>australia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇦🇼</key>
 	<array>
 		<string>aruba</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇦🇽</key>
 	<array>
 		<string>åland islands</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>Åland</string>
+		<string>islands</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇦🇿</key>
 	<array>
 		<string>azerbaijan</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇧🇦</key>
 	<array>
 		<string>bosnia and herzegovina</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>bosnia</string>
+		<string>herzegovina</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇧🇧</key>
 	<array>
 		<string>barbados</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇧🇩</key>
 	<array>
 		<string>bangladesh</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇧🇪</key>
 	<array>
 		<string>belgium</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇧🇫</key>
 	<array>
 		<string>burkina faso</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>burkina</string>
+		<string>faso</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇧🇬</key>
 	<array>
 		<string>bulgaria</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇧🇭</key>
 	<array>
 		<string>bahrain</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇧🇮</key>
 	<array>
 		<string>burundi</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇧🇯</key>
 	<array>
 		<string>benin</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇧🇱</key>
 	<array>
 		<string>saint barthélemy</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>saint</string>
+		<string>barthélemy</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇧🇲</key>
 	<array>
 		<string>bermuda</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇧🇳</key>
 	<array>
 		<string>brunei darussalam</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>brunei</string>
+		<string>darussalam</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇧🇴</key>
 	<array>
 		<string>bolivia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇧🇶</key>
 	<array>
 		<string>bonaire, sint eustatius and saba</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>bonaire</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇧🇷</key>
 	<array>
 		<string>brazil</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇧🇸</key>
 	<array>
 		<string>bahamas</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇧🇹</key>
 	<array>
 		<string>bhutan</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇧🇻</key>
 	<array>
@@ -1202,78 +2072,116 @@
 		<string>botswana</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇧🇾</key>
 	<array>
 		<string>belarus</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇧🇿</key>
 	<array>
 		<string>belize</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇨🇦</key>
 	<array>
 		<string>canada</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇨🇨</key>
 	<array>
 		<string>cocos (keeling) islands</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>cocos</string>
+		<string>keeling</string>
+		<string>islands</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇨🇩</key>
 	<array>
 		<string>congo</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>democratic</string>
+		<string>republic</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇨🇫</key>
 	<array>
 		<string>central african republic</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>central</string>
+		<string>african</string>
+		<string>republic</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇨🇬</key>
 	<array>
 		<string>congo</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇨🇭</key>
 	<array>
 		<string>switzerland</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇨🇮</key>
 	<array>
 		<string>côte d'ivoire</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>ivory</string>
+		<string>coast</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇨🇰</key>
 	<array>
 		<string>cook islands</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>cook</string>
+		<string>islands</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇨🇱</key>
 	<array>
 		<string>chile</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇨🇲</key>
 	<array>
 		<string>cameroon</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇨🇳</key>
 	<array>
@@ -1290,48 +2198,71 @@
 		<string>colombia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇨🇷</key>
 	<array>
 		<string>costa rica</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>costa</string>
+		<string>rica</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇨🇺</key>
 	<array>
 		<string>cuba</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇨🇻</key>
 	<array>
 		<string>cape verde</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>cabo</string>
+		<string>verde</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇨🇼</key>
 	<array>
 		<string>curaçao</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇨🇽</key>
 	<array>
 		<string>christmas island</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>christmas</string>
+		<string>island</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇨🇾</key>
 	<array>
 		<string>cyprus</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇨🇿</key>
 	<array>
 		<string>czech republic</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>czech_republic</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇩🇪</key>
 	<array>
@@ -1347,60 +2278,84 @@
 		<string>djibouti</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇩🇰</key>
 	<array>
 		<string>denmark</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇩🇲</key>
 	<array>
 		<string>dominica</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇩🇴</key>
 	<array>
 		<string>dominican republic</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>dominican</string>
+		<string>republic</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇩🇿</key>
 	<array>
 		<string>algeria</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇪🇨</key>
 	<array>
 		<string>ecuador</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇪🇪</key>
 	<array>
 		<string>estonia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇪🇬</key>
 	<array>
 		<string>egypt</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇪🇭</key>
 	<array>
 		<string>western sahara</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>western</string>
+		<string>sahara</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇪🇷</key>
 	<array>
 		<string>eritrea</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇪🇸</key>
 	<array>
@@ -1415,36 +2370,63 @@
 		<string>ethiopia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
+	</array>
+	<key>🇪🇺</key>
+	<array>
+		<string>european</string>
+		<string>union</string>
+		<string>flag</string>
+		<string>banner</string>
 	</array>
 	<key>🇫🇮</key>
 	<array>
 		<string>finland</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇫🇯</key>
 	<array>
 		<string>fiji</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇫🇰</key>
 	<array>
 		<string>falkland islands (malvinas)</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>falkland</string>
+		<string>islands</string>
+		<string>malvinas</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇫🇲</key>
 	<array>
 		<string>micronesia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>micronesia,</string>
+		<string>federated</string>
+		<string>states</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇫🇴</key>
 	<array>
 		<string>faroe islands</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>faroe</string>
+		<string>islands</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇫🇷</key>
 	<array>
@@ -1460,6 +2442,8 @@
 		<string>gabon</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇬🇧</key>
 	<array>
@@ -1473,114 +2457,168 @@
 		<string>english</string>
 		<string>england</string>
 		<string>union jack</string>
+		<string>united</string>
+		<string>kingdom</string>
+		<string>great</string>
+		<string>britain</string>
+		<string>northern</string>
+		<string>ireland</string>
 	</array>
 	<key>🇬🇩</key>
 	<array>
 		<string>grenada</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇬🇪</key>
 	<array>
 		<string>georgia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇬🇫</key>
 	<array>
 		<string>french guiana</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>french</string>
+		<string>guiana</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇬🇬</key>
 	<array>
 		<string>guernsey</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇬🇭</key>
 	<array>
 		<string>ghana</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇬🇮</key>
 	<array>
 		<string>gibraltar</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇬🇱</key>
 	<array>
 		<string>greenland</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇬🇲</key>
 	<array>
 		<string>gambia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇬🇳</key>
 	<array>
 		<string>guinea</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇬🇵</key>
 	<array>
 		<string>guadeloupe</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇬🇶</key>
 	<array>
 		<string>equatorial guinea</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>equatorial</string>
+		<string>guinea</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇬🇷</key>
 	<array>
 		<string>greece</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇬🇸</key>
 	<array>
 		<string>south georgia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>south</string>
+		<string>georgia</string>
+		<string>sandwich</string>
+		<string>islands</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇬🇹</key>
 	<array>
 		<string>guatemala</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇬🇺</key>
 	<array>
 		<string>guam</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇬🇼</key>
 	<array>
 		<string>guinea-bissau</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>guinea</string>
+		<string>bissau</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇬🇾</key>
 	<array>
 		<string>guyana</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇭🇰</key>
 	<array>
 		<string>hong kong</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>hong</string>
+		<string>kong</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇭🇲</key>
 	<array>
@@ -1593,78 +2631,122 @@
 		<string>honduras</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇭🇷</key>
 	<array>
 		<string>croatia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇭🇹</key>
 	<array>
 		<string>haiti</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇭🇺</key>
 	<array>
 		<string>hungary</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
+	</array>
+	<key>🇮🇨</key>
+	<array>
+		<string>canary</string>
+		<string>islands</string>
+		<string>flag</string>
+		<string>nation</string>
+		<string>country</string>
+		<string>banner</string>
 	</array>
 	<key>🇮🇩</key>
 	<array>
 		<string>indonesia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇮🇪</key>
 	<array>
 		<string>ireland</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇮🇱</key>
 	<array>
 		<string>israel</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇮🇲</key>
 	<array>
 		<string>isle of man</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>isle</string>
+		<string>man</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇮🇳</key>
 	<array>
 		<string>india</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇮🇴</key>
 	<array>
 		<string>british indian ocean territory</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>british</string>
+		<string>indian</string>
+		<string>ocean</string>
+		<string>territory</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇮🇶</key>
 	<array>
 		<string>iraq</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇮🇷</key>
 	<array>
 		<string>iran</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>iran,</string>
+		<string>islamic</string>
+		<string>republic</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇮🇸</key>
 	<array>
 		<string>iceland</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇮🇹</key>
 	<array>
@@ -1679,18 +2761,24 @@
 		<string>jersey</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇯🇲</key>
 	<array>
 		<string>jamaica</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇯🇴</key>
 	<array>
 		<string>jordan</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇯🇵</key>
 	<array>
@@ -1706,42 +2794,61 @@
 		<string>kenya</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇰🇬</key>
 	<array>
 		<string>kyrgyzstan</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇰🇭</key>
 	<array>
 		<string>cambodia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇰🇮</key>
 	<array>
 		<string>kiribati</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇰🇲</key>
 	<array>
 		<string>comoros</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇰🇳</key>
 	<array>
 		<string>saint kitts and nevis</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>saint</string>
+		<string>kitts</string>
+		<string>nevis</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇰🇵</key>
 	<array>
 		<string>north korea</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>north</string>
+		<string>korea</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇰🇷</key>
 	<array>
@@ -1751,114 +2858,162 @@
 		<string>korea</string>
 		<string>nation</string>
 		<string>banner</string>
+		<string>south</string>
 	</array>
 	<key>🇰🇼</key>
 	<array>
 		<string>kuwait</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇰🇾</key>
 	<array>
 		<string>cayman islands</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>cayman</string>
+		<string>islands</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇰🇿</key>
 	<array>
 		<string>kazakhstan</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇱🇦</key>
 	<array>
 		<string>lao people's democratic republic</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>lao</string>
+		<string>democratic</string>
+		<string>republic</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇱🇧</key>
 	<array>
 		<string>lebanon</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇱🇨</key>
 	<array>
 		<string>saint lucia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>saint</string>
+		<string>lucia</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇱🇮</key>
 	<array>
 		<string>liechtenstein</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇱🇰</key>
 	<array>
 		<string>sri lanka</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>sri</string>
+		<string>lanka</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇱🇷</key>
 	<array>
 		<string>liberia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇱🇸</key>
 	<array>
 		<string>lesotho</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇱🇹</key>
 	<array>
 		<string>lithuania</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇱🇺</key>
 	<array>
 		<string>luxembourg</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇱🇻</key>
 	<array>
 		<string>latvia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇱🇾</key>
 	<array>
 		<string>libya</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇦</key>
 	<array>
 		<string>morocco</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇨</key>
 	<array>
 		<string>monaco</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇩</key>
 	<array>
 		<string>moldova</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>moldova,</string>
+		<string>republic</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇪</key>
 	<array>
 		<string>montenegro</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇫</key>
 	<array>
@@ -1871,294 +3026,417 @@
 		<string>madagascar</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇭</key>
 	<array>
 		<string>marshall islands</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>marshall</string>
+		<string>islands</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇰</key>
 	<array>
 		<string>macedonia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>macedonia,</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇱</key>
 	<array>
 		<string>mali</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇲</key>
 	<array>
 		<string>myanmar</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇳</key>
 	<array>
 		<string>mongolia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇴</key>
 	<array>
 		<string>macao</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇵</key>
 	<array>
 		<string>northern mariana islands</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>northern</string>
+		<string>mariana</string>
+		<string>islands</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇶</key>
 	<array>
 		<string>martinique</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇷</key>
 	<array>
 		<string>mauritania</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇸</key>
 	<array>
 		<string>montserrat</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇹</key>
 	<array>
 		<string>malta</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇺</key>
 	<array>
 		<string>mauritius</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇻</key>
 	<array>
 		<string>maldives</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇼</key>
 	<array>
 		<string>malawi</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇽</key>
 	<array>
 		<string>mexico</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇾</key>
 	<array>
 		<string>malaysia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇲🇿</key>
 	<array>
 		<string>mozambique</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇳🇦</key>
 	<array>
 		<string>namibia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇳🇨</key>
 	<array>
 		<string>new caledonia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>new</string>
+		<string>caledonia</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇳🇪</key>
 	<array>
 		<string>niger</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇳🇫</key>
 	<array>
 		<string>norfolk island</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>norfolk</string>
+		<string>island</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇳🇬</key>
 	<array>
 		<string>nigeria</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇳🇮</key>
 	<array>
 		<string>nicaragua</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇳🇱</key>
 	<array>
 		<string>netherlands</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇳🇴</key>
 	<array>
 		<string>norway</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇳🇵</key>
 	<array>
 		<string>nepal</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇳🇷</key>
 	<array>
 		<string>nauru</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇳🇺</key>
 	<array>
 		<string>niue</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇳🇿</key>
 	<array>
 		<string>new zealand</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>new</string>
+		<string>zealand</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇴🇲</key>
 	<array>
 		<string>oman</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇵🇦</key>
 	<array>
 		<string>panama</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇵🇪</key>
 	<array>
 		<string>peru</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇵🇫</key>
 	<array>
 		<string>french polynesia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>french</string>
+		<string>polynesia</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇵🇬</key>
 	<array>
 		<string>papua new guinea</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>papua</string>
+		<string>new</string>
+		<string>guinea</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇵🇭</key>
 	<array>
 		<string>philippines</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇵🇰</key>
 	<array>
 		<string>pakistan</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇵🇱</key>
 	<array>
 		<string>poland</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇵🇲</key>
 	<array>
 		<string>saint pierre and miquelon</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>saint</string>
+		<string>pierre</string>
+		<string>miquelon</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇵🇳</key>
 	<array>
 		<string>pitcairn</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇵🇷</key>
 	<array>
 		<string>puerto rico</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>puerto</string>
+		<string>rico</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇵🇸</key>
 	<array>
 		<string>palestinian territory</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>palestine</string>
+		<string>palestinian</string>
+		<string>territories</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇵🇹</key>
 	<array>
 		<string>portugal</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇵🇼</key>
 	<array>
 		<string>palau</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇵🇾</key>
 	<array>
 		<string>paraguay</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇶🇦</key>
 	<array>
 		<string>qatar</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇷🇪</key>
 	<array>
 		<string>réunion</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇷🇴</key>
 	<array>
 		<string>romania</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇷🇸</key>
 	<array>
 		<string>serbia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇷🇺</key>
 	<array>
@@ -2168,60 +3446,86 @@
 		<string>russian</string>
 		<string>nation</string>
 		<string>banner</string>
+		<string>federation</string>
 	</array>
 	<key>🇷🇼</key>
 	<array>
 		<string>rwanda</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇸🇦</key>
 	<array>
 		<string>saudi arabia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇸🇧</key>
 	<array>
 		<string>solomon islands</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>solomon</string>
+		<string>islands</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇸🇨</key>
 	<array>
 		<string>seychelles</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇸🇩</key>
 	<array>
 		<string>sudan</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇸🇪</key>
 	<array>
 		<string>sweden</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇸🇬</key>
 	<array>
 		<string>singapore</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇸🇭</key>
 	<array>
 		<string>saint helena, ascension and tristan da cunha</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>saint</string>
+		<string>helena</string>
+		<string>ascension</string>
+		<string>tristan</string>
+		<string>cunha</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇸🇮</key>
 	<array>
 		<string>slovenia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇸🇯</key>
 	<array>
@@ -2234,180 +3538,270 @@
 		<string>slovakia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇸🇱</key>
 	<array>
 		<string>sierra leone</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>sierra</string>
+		<string>leone</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇸🇲</key>
 	<array>
 		<string>san marino</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>san</string>
+		<string>marino</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇸🇳</key>
 	<array>
 		<string>senegal</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇸🇴</key>
 	<array>
 		<string>somalia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇸🇷</key>
 	<array>
 		<string>suriname</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇸🇸</key>
 	<array>
 		<string>south sudan</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>south</string>
+		<string>sudan</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇸🇹</key>
 	<array>
 		<string>sao tome and principe</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>sao</string>
+		<string>tome</string>
+		<string>principe</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇸🇻</key>
 	<array>
 		<string>el salvador</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>el</string>
+		<string>salvador</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇸🇽</key>
 	<array>
 		<string>sint maarten (dutch part)</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>sint</string>
+		<string>maarten</string>
+		<string>dutch</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇸🇾</key>
 	<array>
 		<string>syrian arab republic</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>syrian</string>
+		<string>arab</string>
+		<string>republic</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇸🇿</key>
 	<array>
 		<string>swaziland</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇹🇨</key>
 	<array>
 		<string>turks and caicos islands</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>turks</string>
+		<string>caicos</string>
+		<string>islands</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇹🇩</key>
 	<array>
 		<string>chad</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇹🇫</key>
 	<array>
 		<string>french southern territories</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>french</string>
+		<string>southern</string>
+		<string>territories</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇹🇬</key>
 	<array>
 		<string>togo</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇹🇭</key>
 	<array>
 		<string>thailand</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇹🇯</key>
 	<array>
 		<string>tajikistan</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇹🇰</key>
 	<array>
 		<string>tokelau</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇹🇱</key>
 	<array>
 		<string>timor-leste</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>timor</string>
+		<string>leste</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇹🇲</key>
 	<array>
 		<string>turkmenistan</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇹🇳</key>
 	<array>
 		<string>tunisia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇹🇴</key>
 	<array>
 		<string>tonga</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇹🇷</key>
 	<array>
 		<string>turkey</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇹🇹</key>
 	<array>
 		<string>trinidad and tobago</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>trinidad</string>
+		<string>tobago</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇹🇻</key>
 	<array>
 		<string>tuvalu</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇹🇼</key>
 	<array>
 		<string>taiwan</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇹🇿</key>
 	<array>
 		<string>tanzania</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>tanzania,</string>
+		<string>united</string>
+		<string>republic</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇺🇦</key>
 	<array>
 		<string>ukraine</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇺🇬</key>
 	<array>
 		<string>uganda</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇺🇲</key>
 	<array>
@@ -2423,102 +3817,165 @@
 		<string>nation</string>
 		<string>american</string>
 		<string>banner</string>
+		<string>united</string>
+		<string>states</string>
+		<string>america</string>
 	</array>
 	<key>🇺🇾</key>
 	<array>
 		<string>uruguay</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇺🇿</key>
 	<array>
 		<string>uzbekistan</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇻🇦</key>
 	<array>
 		<string>vatican city</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>vatican</string>
+		<string>city</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇻🇨</key>
 	<array>
 		<string>saint vincent and the grenadines</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>saint</string>
+		<string>vincent</string>
+		<string>grenadines</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇻🇪</key>
 	<array>
 		<string>venezuela</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>bolivarian</string>
+		<string>republic</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇻🇬</key>
 	<array>
 		<string>virgin islands, british</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>british</string>
+		<string>virgin</string>
+		<string>islands</string>
+		<string>bvi</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇻🇮</key>
 	<array>
 		<string>virgin islands, u.s.</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>virgin</string>
+		<string>islands</string>
+		<string>us</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇻🇳</key>
 	<array>
 		<string>viet nam</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>viet</string>
+		<string>nam</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇻🇺</key>
 	<array>
 		<string>vanuatu</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇼🇫</key>
 	<array>
 		<string>wallis and futuna</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>wallis</string>
+		<string>futuna</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇼🇸</key>
 	<array>
 		<string>samoa</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
+	</array>
+	<key>🇽🇰</key>
+	<array>
+		<string>kosovo</string>
+		<string>flag</string>
+		<string>nation</string>
+		<string>country</string>
+		<string>banner</string>
 	</array>
 	<key>🇾🇪</key>
 	<array>
 		<string>yemen</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇾🇹</key>
 	<array>
 		<string>mayotte</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇿🇦</key>
 	<array>
 		<string>south africa</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>south</string>
+		<string>africa</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇿🇲</key>
 	<array>
 		<string>zambia</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🇿🇼</key>
 	<array>
 		<string>zimbabwe</string>
 		<string>flag</string>
 		<string>country</string>
+		<string>nation</string>
+		<string>banner</string>
 	</array>
 	<key>🈁</key>
 	<array>
@@ -2535,6 +3992,12 @@
 		<string>squared</string>
 		<string>katakana</string>
 		<string>sa</string>
+	</array>
+	<key>🈂️</key>
+	<array>
+		<string>japanese</string>
+		<string>blue-square</string>
+		<string>katakana</string>
 	</array>
 	<key>🈚</key>
 	<array>
@@ -2621,6 +4084,15 @@
 		<string>squared</string>
 		<string>cjk</string>
 		<string>ideograph-6708</string>
+	</array>
+	<key>🈷️</key>
+	<array>
+		<string>chinese</string>
+		<string>month</string>
+		<string>moon</string>
+		<string>japanese</string>
+		<string>orange-square</string>
+		<string>kanji</string>
 	</array>
 	<key>🈸</key>
 	<array>
@@ -3031,6 +4503,69 @@
 		<string>night</string>
 		<string>photo</string>
 	</array>
+	<key>🌡</key>
+	<array>
+		<string>weather</string>
+		<string>temperature</string>
+		<string>hot</string>
+		<string>cold</string>
+	</array>
+	<key>🌤</key>
+	<array>
+		<string>weather</string>
+	</array>
+	<key>🌥</key>
+	<array>
+		<string>weather</string>
+	</array>
+	<key>🌦</key>
+	<array>
+		<string>weather</string>
+	</array>
+	<key>🌧</key>
+	<array>
+		<string>weather</string>
+	</array>
+	<key>🌨</key>
+	<array>
+		<string>weather</string>
+	</array>
+	<key>🌩</key>
+	<array>
+		<string>weather</string>
+		<string>thunder</string>
+	</array>
+	<key>🌪</key>
+	<array>
+		<string>weather</string>
+		<string>cyclone</string>
+		<string>twister</string>
+	</array>
+	<key>🌫</key>
+	<array>
+		<string>weather</string>
+	</array>
+	<key>🌬</key>
+	<array>
+		<string>gust</string>
+		<string>air</string>
+	</array>
+	<key>🌭</key>
+	<array>
+		<string>food</string>
+		<string>frankfurter</string>
+		<string>hotdog</string>
+	</array>
+	<key>🌮</key>
+	<array>
+		<string>food</string>
+		<string>mexican</string>
+	</array>
+	<key>🌯</key>
+	<array>
+		<string>food</string>
+		<string>mexican</string>
+	</array>
 	<key>🌰</key>
 	<array>
 		<string>chestnut</string>
@@ -3087,6 +4622,11 @@
 		<string>desert</string>
 		<string>vegetable</string>
 		<string>nature</string>
+	</array>
+	<key>🌶</key>
+	<array>
+		<string>food</string>
+		<string>spicy</string>
 	</array>
 	<key>🌷</key>
 	<array>
@@ -3179,6 +4719,7 @@
 		<string>plant</string>
 		<string>nature</string>
 		<string>lucky</string>
+		<string>irish</string>
 	</array>
 	<key>🍁</key>
 	<array>
@@ -3714,6 +5255,28 @@
 		<string>container</string>
 		<string>milk</string>
 	</array>
+	<key>🍽</key>
+	<array>
+		<string>food</string>
+		<string>eat</string>
+		<string>meal</string>
+		<string>lunch</string>
+		<string>dinner</string>
+		<string>restaurant</string>
+	</array>
+	<key>🍾</key>
+	<array>
+		<string>food</string>
+		<string>wine</string>
+		<string>champagne</string>
+	</array>
+	<key>🍿</key>
+	<array>
+		<string>food</string>
+		<string>movie theater</string>
+		<string>films</string>
+		<string>snack</string>
+	</array>
 	<key>🎀</key>
 	<array>
 		<string>ribbon</string>
@@ -3741,6 +5304,8 @@
 		<string>cake</string>
 		<string>party</string>
 		<string>celebration</string>
+		<string>food</string>
+		<string>dessert</string>
 	</array>
 	<key>🎃</key>
 	<array>
@@ -3839,6 +5404,7 @@
 		<string>nature</string>
 		<string>vegetable</string>
 		<string>panda</string>
+		<string>pine_decoration</string>
 	</array>
 	<key>🎎</key>
 	<array>
@@ -3895,6 +5461,43 @@
 		<string>legal</string>
 		<string>learn</string>
 		<string>education</string>
+	</array>
+	<key>🎖</key>
+	<array>
+		<string>award</string>
+		<string>winning</string>
+		<string>army</string>
+	</array>
+	<key>🎗</key>
+	<array>
+		<string>sports</string>
+		<string>cause</string>
+		<string>supprt</string>
+		<string>awareness</string>
+	</array>
+	<key>🎙</key>
+	<array>
+		<string>singer</string>
+		<string>recording</string>
+		<string>artist</string>
+	</array>
+	<key>🎚</key>
+	<array>
+		<string>scale</string>
+	</array>
+	<key>🎛</key>
+	<array>
+		<string>dial</string>
+	</array>
+	<key>🎞</key>
+	<array>
+		<string>movie</string>
+	</array>
+	<key>🎟</key>
+	<array>
+		<string>sports</string>
+		<string>concert</string>
+		<string>entrance</string>
 	</array>
 	<key>🎠</key>
 	<array>
@@ -3954,6 +5557,9 @@
 		<string>record</string>
 		<string>film</string>
 		<string>movie</string>
+		<string>curtain</string>
+		<string>stage</string>
+		<string>theater</string>
 	</array>
 	<key>🎧</key>
 	<array>
@@ -4214,6 +5820,11 @@
 		<string>ocean</string>
 		<string>beach</string>
 	</array>
+	<key>🏅</key>
+	<array>
+		<string>award</string>
+		<string>winning</string>
+	</array>
 	<key>🏆</key>
 	<array>
 		<string>trophy</string>
@@ -4263,6 +5874,130 @@
 		<string>athlete</string>
 		<string>water</string>
 		<string>summer</string>
+	</array>
+	<key>🏋</key>
+	<array>
+		<string>sports</string>
+		<string>training</string>
+		<string>exercise</string>
+	</array>
+	<key>🏌</key>
+	<array>
+		<string>sports</string>
+		<string>golf</string>
+		<string>business</string>
+	</array>
+	<key>🏍</key>
+	<array>
+		<string>race</string>
+		<string>sports</string>
+		<string>fast</string>
+	</array>
+	<key>🏎</key>
+	<array>
+		<string>sports</string>
+		<string>race</string>
+		<string>fast</string>
+		<string>formula</string>
+		<string>f1</string>
+	</array>
+	<key>🏏</key>
+	<array>
+		<string>sports</string>
+	</array>
+	<key>🏐</key>
+	<array>
+		<string>sports</string>
+		<string>balls</string>
+	</array>
+	<key>🏑</key>
+	<array>
+		<string>sports</string>
+	</array>
+	<key>🏒</key>
+	<array>
+		<string>sports</string>
+	</array>
+	<key>🏓</key>
+	<array>
+		<string>sports</string>
+		<string>pingpong</string>
+	</array>
+	<key>🏔</key>
+	<array>
+		<string>photo</string>
+		<string>nature</string>
+		<string>environment</string>
+		<string>winter</string>
+		<string>cold</string>
+	</array>
+	<key>🏕</key>
+	<array>
+		<string>photo</string>
+		<string>outdoors</string>
+		<string>tent</string>
+	</array>
+	<key>🏖</key>
+	<array>
+		<string>weather</string>
+		<string>summer</string>
+		<string>sunny</string>
+		<string>sand</string>
+	</array>
+	<key>🏗</key>
+	<array>
+		<string>wip</string>
+		<string>working</string>
+		<string>progress</string>
+	</array>
+	<key>🏘</key>
+	<array>
+		<string>houses</string>
+		<string>photo</string>
+	</array>
+	<key>🏙</key>
+	<array>
+		<string>photo</string>
+		<string>night life</string>
+		<string>urban</string>
+	</array>
+	<key>🏚</key>
+	<array>
+		<string>abandon</string>
+		<string>evict</string>
+		<string>broken</string>
+		<string>building</string>
+	</array>
+	<key>🏛</key>
+	<array>
+		<string>art</string>
+		<string>culture</string>
+		<string>history</string>
+	</array>
+	<key>🏜</key>
+	<array>
+		<string>photo</string>
+		<string>warm</string>
+		<string>saharah</string>
+	</array>
+	<key>🏝</key>
+	<array>
+		<string>photo</string>
+		<string>tropical</string>
+	</array>
+	<key>🏞</key>
+	<array>
+		<string>photo</string>
+		<string>environment</string>
+		<string>nature</string>
+	</array>
+	<key>🏟</key>
+	<array>
+		<string>photo</string>
+		<string>place</string>
+		<string>sports</string>
+		<string>concert</string>
+		<string>venue</string>
 	</array>
 	<key>🏠</key>
 	<array>
@@ -4404,6 +6139,45 @@
 		<string>royalty</string>
 		<string>history</string>
 	</array>
+	<key>🏳</key>
+	<array>
+		<string>losing</string>
+		<string>loser</string>
+		<string>lost</string>
+		<string>surrender</string>
+		<string>give up</string>
+		<string>fail</string>
+	</array>
+	<key>🏴</key>
+	<array>
+		<string>pirate</string>
+	</array>
+	<key>🏵</key>
+	<array>
+		<string>flower</string>
+		<string>decoration</string>
+		<string>military</string>
+	</array>
+	<key>🏷</key>
+	<array>
+		<string>sale</string>
+		<string>tag</string>
+	</array>
+	<key>🏸</key>
+	<array>
+		<string>sports</string>
+		<string>badminton</string>
+		<string>racket</string>
+	</array>
+	<key>🏹</key>
+	<array>
+		<string>sports</string>
+	</array>
+	<key>🏺</key>
+	<array>
+		<string>vase</string>
+		<string>jar</string>
+	</array>
 	<key>🐀</key>
 	<array>
 		<string>rat</string>
@@ -4520,6 +6294,7 @@
 		<string>evil</string>
 		<string>nature</string>
 		<string>hiss</string>
+		<string>python</string>
 	</array>
 	<key>🐎</key>
 	<array>
@@ -4653,6 +6428,7 @@
 		<string>animal</string>
 		<string>bug</string>
 		<string>spring</string>
+		<string>honey</string>
 	</array>
 	<key>🐞</key>
 	<array>
@@ -4662,6 +6438,7 @@
 		<string>nature</string>
 		<string>animal</string>
 		<string>bug</string>
+		<string>ladybug</string>
 	</array>
 	<key>🐟</key>
 	<array>
@@ -4796,6 +6573,7 @@
 		<string>pet</string>
 		<string>nature</string>
 		<string>cheese</string>
+		<string>rodent</string>
 	</array>
 	<key>🐮</key>
 	<array>
@@ -4894,6 +6672,7 @@
 		<string>swamp</string>
 		<string>nature</string>
 		<string>croak</string>
+		<string>toad</string>
 	</array>
 	<key>🐹</key>
 	<array>
@@ -4945,6 +6724,12 @@
 		<string>pet</string>
 		<string>paw_prints</string>
 	</array>
+	<key>🐿</key>
+	<array>
+		<string>animal</string>
+		<string>nature</string>
+		<string>rodent</string>
+	</array>
 	<key>👀</key>
 	<array>
 		<string>eyes</string>
@@ -4955,6 +6740,14 @@
 		<string>stalk</string>
 		<string>peek</string>
 		<string>see</string>
+	</array>
+	<key>👁</key>
+	<array>
+		<string>face</string>
+		<string>look</string>
+		<string>see</string>
+		<string>watch</string>
+		<string>stare</string>
 	</array>
 	<key>👂</key>
 	<array>
@@ -5128,6 +6921,7 @@
 		<string>nerd</string>
 		<string>dork</string>
 		<string>geek</string>
+		<string>nerdy</string>
 	</array>
 	<key>👔</key>
 	<array>
@@ -5316,12 +7110,164 @@
 		<string>sir</string>
 		<string>moustache</string>
 	</array>
+	<key>👨‍❤️‍👨</key>
+	<array>
+		<string>pair</string>
+		<string>love</string>
+		<string>like</string>
+		<string>affection</string>
+		<string>human</string>
+		<string>dating</string>
+		<string>valentines</string>
+		<string>marriage</string>
+	</array>
+	<key>👨‍❤️‍💋‍👨</key>
+	<array>
+		<string>pair</string>
+		<string>valentines</string>
+		<string>love</string>
+		<string>like</string>
+		<string>dating</string>
+		<string>marriage</string>
+	</array>
+	<key>👨‍👨‍👦</key>
+	<array>
+		<string>home</string>
+		<string>parents</string>
+		<string>people</string>
+		<string>human</string>
+		<string>children</string>
+	</array>
+	<key>👨‍👨‍👦‍👦</key>
+	<array>
+		<string>home</string>
+		<string>parents</string>
+		<string>people</string>
+		<string>human</string>
+		<string>children</string>
+	</array>
+	<key>👨‍👨‍👧</key>
+	<array>
+		<string>home</string>
+		<string>parents</string>
+		<string>people</string>
+		<string>human</string>
+		<string>children</string>
+	</array>
+	<key>👨‍👨‍👧‍👦</key>
+	<array>
+		<string>home</string>
+		<string>parents</string>
+		<string>people</string>
+		<string>human</string>
+		<string>children</string>
+	</array>
+	<key>👨‍👨‍👧‍👧</key>
+	<array>
+		<string>home</string>
+		<string>parents</string>
+		<string>people</string>
+		<string>human</string>
+		<string>children</string>
+	</array>
+	<key>👨‍👩‍👦‍👦</key>
+	<array>
+		<string>home</string>
+		<string>parents</string>
+		<string>people</string>
+		<string>human</string>
+		<string>children</string>
+	</array>
+	<key>👨‍👩‍👧</key>
+	<array>
+		<string>home</string>
+		<string>parents</string>
+		<string>people</string>
+		<string>human</string>
+		<string>child</string>
+	</array>
+	<key>👨‍👩‍👧‍👦</key>
+	<array>
+		<string>home</string>
+		<string>parents</string>
+		<string>people</string>
+		<string>human</string>
+		<string>children</string>
+	</array>
+	<key>👨‍👩‍👧‍👧</key>
+	<array>
+		<string>home</string>
+		<string>parents</string>
+		<string>people</string>
+		<string>human</string>
+		<string>children</string>
+	</array>
 	<key>👩</key>
 	<array>
 		<string>woman</string>
 		<string>female</string>
 		<string>girls</string>
 		<string>lady</string>
+	</array>
+	<key>👩‍❤️‍👩</key>
+	<array>
+		<string>pair</string>
+		<string>love</string>
+		<string>like</string>
+		<string>affection</string>
+		<string>human</string>
+		<string>dating</string>
+		<string>valentines</string>
+		<string>marriage</string>
+	</array>
+	<key>👩‍❤️‍💋‍👩</key>
+	<array>
+		<string>pair</string>
+		<string>valentines</string>
+		<string>love</string>
+		<string>like</string>
+		<string>dating</string>
+		<string>marriage</string>
+	</array>
+	<key>👩‍👩‍👦</key>
+	<array>
+		<string>home</string>
+		<string>parents</string>
+		<string>people</string>
+		<string>human</string>
+		<string>children</string>
+	</array>
+	<key>👩‍👩‍👦‍👦</key>
+	<array>
+		<string>home</string>
+		<string>parents</string>
+		<string>people</string>
+		<string>human</string>
+		<string>children</string>
+	</array>
+	<key>👩‍👩‍👧</key>
+	<array>
+		<string>home</string>
+		<string>parents</string>
+		<string>people</string>
+		<string>human</string>
+		<string>children</string>
+	</array>
+	<key>👩‍👩‍👧‍👦</key>
+	<array>
+		<string>home</string>
+		<string>parents</string>
+		<string>people</string>
+		<string>human</string>
+		<string>children</string>
+	</array>
+	<key>👩‍👩‍👧‍👧</key>
+	<array>
+		<string>home</string>
+		<string>parents</string>
+		<string>people</string>
+		<string>human</string>
+		<string>children</string>
 	</array>
 	<key>👪</key>
 	<array>
@@ -6049,6 +7995,7 @@
 		<string>sales</string>
 		<string>payment</string>
 		<string>currency</string>
+		<string>buck</string>
 	</array>
 	<key>💳</key>
 	<array>
@@ -6153,6 +8100,7 @@
 		<string>screen</string>
 		<string>display</string>
 		<string>monitor</string>
+		<string>technology</string>
 	</array>
 	<key>💼</key>
 	<array>
@@ -6683,6 +8631,12 @@
 		<string>camera</string>
 		<string>photo</string>
 		<string>gadgets</string>
+		<string>photography</string>
+	</array>
+	<key>📸</key>
+	<array>
+		<string>photography</string>
+		<string>gadgets</string>
 	</array>
 	<key>📹</key>
 	<array>
@@ -6715,6 +8669,18 @@
 		<string>oldschool</string>
 		<string>90s</string>
 		<string>80s</string>
+	</array>
+	<key>📽</key>
+	<array>
+		<string>video</string>
+		<string>tape</string>
+		<string>record</string>
+		<string>movie</string>
+	</array>
+	<key>📿</key>
+	<array>
+		<string>dhikr</string>
+		<string>religious</string>
 	</array>
 	<key>🔀</key>
 	<array>
@@ -7070,6 +9036,8 @@
 		<string>legal</string>
 		<string>ruling</string>
 		<string>gavel</string>
+		<string>build</string>
+		<string>create</string>
 	</array>
 	<key>🔩</key>
 	<array>
@@ -7255,6 +9223,43 @@
 		<string>blue-square</string>
 		<string>direction</string>
 		<string>bottom</string>
+	</array>
+	<key>🕉</key>
+	<array>
+		<string>hinduism</string>
+		<string>buddhism</string>
+		<string>sikhism</string>
+		<string>jainism</string>
+	</array>
+	<key>🕊</key>
+	<array>
+		<string>animal</string>
+		<string>bird</string>
+	</array>
+	<key>🕋</key>
+	<array>
+		<string>mecca</string>
+		<string>mosque</string>
+		<string>islam</string>
+	</array>
+	<key>🕌</key>
+	<array>
+		<string>islam</string>
+		<string>worship</string>
+		<string>minaret</string>
+	</array>
+	<key>🕍</key>
+	<array>
+		<string>judaism</string>
+		<string>worship</string>
+		<string>temple</string>
+		<string>jewish</string>
+	</array>
+	<key>🕎</key>
+	<array>
+		<string>hanukkah</string>
+		<string>candles</string>
+		<string>jewish</string>
 	</array>
 	<key>🕐</key>
 	<array>
@@ -7489,6 +9494,209 @@
 		<string>early</string>
 		<string>schedule</string>
 	</array>
+	<key>🕯</key>
+	<array>
+		<string>fire</string>
+		<string>wax</string>
+	</array>
+	<key>🕰</key>
+	<array>
+		<string>time</string>
+	</array>
+	<key>🕳</key>
+	<array>
+		<string>embarrassing</string>
+	</array>
+	<key>🕴</key>
+	<array>
+		<string>suit</string>
+		<string>business</string>
+		<string>levitate</string>
+		<string>hover</string>
+		<string>jump</string>
+	</array>
+	<key>🕵</key>
+	<array>
+		<string>human</string>
+		<string>spy</string>
+		<string>detective</string>
+	</array>
+	<key>🕶</key>
+	<array>
+		<string>face</string>
+		<string>cool</string>
+		<string>accessories</string>
+	</array>
+	<key>🕷</key>
+	<array>
+		<string>animal</string>
+		<string>arachnid</string>
+	</array>
+	<key>🕸</key>
+	<array>
+		<string>animal</string>
+		<string>insect</string>
+		<string>arachnid</string>
+		<string>silk</string>
+	</array>
+	<key>🕹</key>
+	<array>
+		<string>game</string>
+		<string>play</string>
+	</array>
+	<key>🖇</key>
+	<array>
+		<string>documents</string>
+		<string>stationery</string>
+	</array>
+	<key>🖊</key>
+	<array>
+		<string>stationery</string>
+		<string>writing</string>
+		<string>write</string>
+	</array>
+	<key>🖋</key>
+	<array>
+		<string>stationery</string>
+		<string>writing</string>
+		<string>write</string>
+	</array>
+	<key>🖌</key>
+	<array>
+		<string>drawing</string>
+		<string>creativity</string>
+		<string>art</string>
+	</array>
+	<key>🖍</key>
+	<array>
+		<string>drawing</string>
+		<string>creativity</string>
+	</array>
+	<key>🖐</key>
+	<array>
+		<string>raised_hand</string>
+	</array>
+	<key>🖕</key>
+	<array>
+		<string>hand</string>
+		<string>fingers</string>
+		<string>rude</string>
+	</array>
+	<key>🖖</key>
+	<array>
+		<string>hand</string>
+		<string>fingers</string>
+		<string>spock</string>
+		<string>star trek</string>
+	</array>
+	<key>🖥</key>
+	<array>
+		<string>technology</string>
+		<string>computing</string>
+		<string>screen</string>
+	</array>
+	<key>🖨</key>
+	<array>
+		<string>paper</string>
+		<string>ink</string>
+	</array>
+	<key>🖱</key>
+	<array>
+		<string>click</string>
+	</array>
+	<key>🖲</key>
+	<array>
+		<string>technology</string>
+		<string>trackpad</string>
+	</array>
+	<key>🖼</key>
+	<array>
+		<string>photography</string>
+	</array>
+	<key>🗂</key>
+	<array>
+		<string>organizing</string>
+		<string>business</string>
+		<string>stationery</string>
+	</array>
+	<key>🗃</key>
+	<array>
+		<string>business</string>
+		<string>stationery</string>
+	</array>
+	<key>🗄</key>
+	<array>
+		<string>filing</string>
+		<string>organizing</string>
+	</array>
+	<key>🗑</key>
+	<array>
+		<string>bin</string>
+		<string>trash</string>
+		<string>rubbish</string>
+		<string>garbage</string>
+		<string>toss</string>
+	</array>
+	<key>🗒</key>
+	<array>
+		<string>memo</string>
+		<string>stationery</string>
+	</array>
+	<key>🗓</key>
+	<array>
+		<string>date</string>
+		<string>schedule</string>
+		<string>planning</string>
+	</array>
+	<key>🗜</key>
+	<array>
+		<string>tool</string>
+	</array>
+	<key>🗝</key>
+	<array>
+		<string>lock</string>
+		<string>door</string>
+		<string>password</string>
+	</array>
+	<key>🗞</key>
+	<array>
+		<string>press</string>
+		<string>headline</string>
+	</array>
+	<key>🗡</key>
+	<array>
+		<string>weapon</string>
+	</array>
+	<key>🗣</key>
+	<array>
+		<string>user</string>
+		<string>person</string>
+		<string>human</string>
+	</array>
+	<key>🗨</key>
+	<array>
+		<string>words</string>
+		<string>message</string>
+		<string>talk</string>
+		<string>chatting</string>
+	</array>
+	<key>🗯</key>
+	<array>
+		<string>caption</string>
+		<string>speech</string>
+		<string>thinking</string>
+		<string>mad</string>
+	</array>
+	<key>🗳</key>
+	<array>
+		<string>election</string>
+		<string>vote</string>
+	</array>
+	<key>🗺</key>
+	<array>
+		<string>location</string>
+		<string>direction</string>
+	</array>
 	<key>🗻</key>
 	<array>
 		<string>mount</string>
@@ -7531,6 +9739,8 @@
 		<string>easter island</string>
 		<string>beach</string>
 		<string>statue</string>
+		<string>rock</string>
+		<string>moai</string>
 	</array>
 	<key>😀</key>
 	<array>
@@ -7540,6 +9750,7 @@
 		<string>smiling</string>
 		<string>smile</string>
 		<string>joy</string>
+		<string>:D</string>
 	</array>
 	<key>😁</key>
 	<array>
@@ -7573,6 +9784,7 @@
 		<string>happy</string>
 		<string>joy</string>
 		<string>haha</string>
+		<string>:D</string>
 	</array>
 	<key>😄</key>
 	<array>
@@ -7585,6 +9797,7 @@
 		<string>haha</string>
 		<string>laugh</string>
 		<string>like</string>
+		<string>:D</string>
 	</array>
 	<key>😅</key>
 	<array>
@@ -7611,6 +9824,7 @@
 		<string>satisfied</string>
 		<string>haha</string>
 		<string>glad</string>
+		<string>XD</string>
 	</array>
 	<key>😇</key>
 	<array>
@@ -7720,6 +9934,7 @@
 		<string>face</string>
 		<string>indifference</string>
 		<string>meh</string>
+		<string>:|</string>
 	</array>
 	<key>😑</key>
 	<array>
@@ -7869,6 +10084,7 @@
 		<string>face</string>
 		<string>upset</string>
 		<string>depressed</string>
+		<string>:(</string>
 	</array>
 	<key>😟</key>
 	<array>
@@ -7879,6 +10095,7 @@
 		<string>disappointed</string>
 		<string>concern</string>
 		<string>nervous</string>
+		<string>:(</string>
 	</array>
 	<key>😠</key>
 	<array>
@@ -7907,6 +10124,7 @@
 		<string>tears</string>
 		<string>depressed</string>
 		<string>upset</string>
+		<string>:'(</string>
 	</array>
 	<key>😣</key>
 	<array>
@@ -8210,6 +10428,30 @@
 		<string>cats</string>
 		<string>munch</string>
 		<string>scared</string>
+	</array>
+	<key>🙁</key>
+	<array>
+		<string>face</string>
+		<string>frowning</string>
+		<string>disappointed</string>
+	</array>
+	<key>🙂</key>
+	<array>
+		<string>face</string>
+		<string>smile</string>
+	</array>
+	<key>🙃</key>
+	<array>
+		<string>face</string>
+		<string>flipped</string>
+		<string>silly</string>
+		<string>smile</string>
+	</array>
+	<key>🙄</key>
+	<array>
+		<string>face</string>
+		<string>eyeroll</string>
+		<string>frustrated</string>
 	</array>
 	<key>🙅</key>
 	<array>
@@ -8919,6 +11161,186 @@
 		<string>luggage</string>
 		<string>travel</string>
 		<string>blue-square</string>
+	</array>
+	<key>🛋</key>
+	<array>
+		<string>read</string>
+		<string>chill</string>
+	</array>
+	<key>🛌</key>
+	<array>
+		<string>bed</string>
+		<string>rest</string>
+	</array>
+	<key>🛍</key>
+	<array>
+		<string>mall</string>
+		<string>buy</string>
+		<string>purchase</string>
+	</array>
+	<key>🛎</key>
+	<array>
+		<string>service</string>
+	</array>
+	<key>🛏</key>
+	<array>
+		<string>sleep</string>
+		<string>rest</string>
+	</array>
+	<key>🛐</key>
+	<array>
+		<string>religion</string>
+		<string>church</string>
+		<string>temple</string>
+		<string>prayer</string>
+	</array>
+	<key>🛠</key>
+	<array>
+		<string>tools</string>
+		<string>build</string>
+		<string>create</string>
+	</array>
+	<key>🛡</key>
+	<array>
+		<string>protection</string>
+		<string>security</string>
+	</array>
+	<key>🛢</key>
+	<array>
+		<string>barrell</string>
+	</array>
+	<key>🛣</key>
+	<array>
+		<string>road</string>
+		<string>cupertino</string>
+		<string>interstate</string>
+		<string>highway</string>
+	</array>
+	<key>🛤</key>
+	<array>
+		<string>train</string>
+		<string>transportation</string>
+	</array>
+	<key>🛥</key>
+	<array>
+		<string>ship</string>
+	</array>
+	<key>🛩</key>
+	<array>
+		<string>flight</string>
+		<string>transportation</string>
+		<string>fly</string>
+		<string>vehicle</string>
+	</array>
+	<key>🛫</key>
+	<array>
+		<string>airport</string>
+		<string>flight</string>
+		<string>landing</string>
+	</array>
+	<key>🛬</key>
+	<array>
+		<string>airport</string>
+		<string>flight</string>
+		<string>boarding</string>
+	</array>
+	<key>🛰</key>
+	<array>
+		<string>communication</string>
+		<string>gps</string>
+		<string>orbit</string>
+		<string>spaceflight</string>
+		<string>NASA</string>
+		<string>ISS</string>
+	</array>
+	<key>🛳</key>
+	<array>
+		<string>yacht</string>
+		<string>cruise</string>
+		<string>ferry</string>
+	</array>
+	<key>🤐</key>
+	<array>
+		<string>face</string>
+		<string>sealed</string>
+	</array>
+	<key>🤑</key>
+	<array>
+		<string>face</string>
+		<string>rich</string>
+		<string>dollar</string>
+	</array>
+	<key>🤒</key>
+	<array>
+		<string>sick</string>
+		<string>temperature</string>
+	</array>
+	<key>🤓</key>
+	<array>
+		<string>face</string>
+		<string>nerdy</string>
+		<string>geek</string>
+		<string>dork</string>
+	</array>
+	<key>🤔</key>
+	<array>
+		<string>face</string>
+	</array>
+	<key>🤕</key>
+	<array>
+		<string>injured</string>
+		<string>clumsy</string>
+	</array>
+	<key>🤖</key>
+	<array>
+		<string>computer</string>
+		<string>machine</string>
+	</array>
+	<key>🤗</key>
+	<array>
+		<string>face</string>
+		<string>smile</string>
+	</array>
+	<key>🤘</key>
+	<array>
+		<string>hand</string>
+		<string>fingers</string>
+		<string>evil_eye</string>
+		<string>metal</string>
+		<string>rock_on</string>
+	</array>
+	<key>🦀</key>
+	<array>
+		<string>animal</string>
+		<string>crustacean</string>
+	</array>
+	<key>🦁</key>
+	<array>
+		<string>animal</string>
+		<string>nature</string>
+	</array>
+	<key>🦂</key>
+	<array>
+		<string>animal</string>
+		<string>arachnid</string>
+	</array>
+	<key>🦃</key>
+	<array>
+		<string>animal</string>
+		<string>bird</string>
+	</array>
+	<key>🦄</key>
+	<array>
+		<string>animal</string>
+		<string>nature</string>
+		<string>mystical</string>
+		<string>unicore</string>
+		<string>rare</string>
+	</array>
+	<key>🧀</key>
+	<array>
+		<string>food</string>
+		<string>chadder</string>
 	</array>
 </dict>
 </plist>

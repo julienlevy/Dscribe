@@ -25,6 +25,15 @@ with open('resources/github_tags.json') as data_file:
                 if word not in result[obj['char']]:
                     result[obj['char']].append(word)
 
+with open('resources/github_tags_ios9_modified.json') as data_file:
+    data = json.load(data_file)
+    for key, obj in data.iteritems():
+        if obj['char'] in result.keys():
+            for word in obj['keywords']:
+                if word not in result[obj['char']]:
+                    result[obj['char']].append(word)
+        else:
+            result[obj['char']] = obj['keywords']
 
 # Write in file
 with open('result.json', 'w') as outfile:
