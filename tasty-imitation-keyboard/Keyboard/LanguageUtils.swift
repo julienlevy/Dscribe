@@ -13,9 +13,9 @@ extension String {
         switch language {
         case "es":
             if self == "space" {
-                return "spazio"
+                return "espacio"
             } else if self == "return" {
-                return "retorno"
+                return "intro"
             }
         case "fr":
             if self == "space" {
@@ -25,7 +25,19 @@ extension String {
             }
         case "ge":
             if self == "space" {
-                return "espace"
+                return "Leerzeichen"
+            } else if self == "return" {
+                return "Return"
+            }
+        case "it":
+            if self == "space" {
+                return "spazio"
+            } else if self == "return" {
+                return "invio"
+            }
+        case "pt":
+            if self == "space" {
+                return "espaço"
             } else if self == "return" {
                 return "retorno"
             }
