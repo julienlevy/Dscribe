@@ -30,6 +30,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     var escapeMode: Bool = false
     var searchEmojiKey: KeyboardKey?
 
+    var spaceKey: Key?
+    var returnKey: Key?
+
     // TODO delete
     var stringToSearch: String = ""
 
@@ -184,6 +187,13 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                         }
 
                         keyView.addTarget(self, action: Selector("playKeySound"), forControlEvents: .TouchDown)
+
+                        // Addition to track space and return keys to update their text according to language
+                        if key.type == Key.KeyType.Space {
+                            self.spaceKey = key
+                        } else if key.type == Key.KeyType.Return {
+                            self.returnKey = key
+                        }
                     }
                 }
             }
