@@ -45,10 +45,6 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
                 player.scalingMode = MPMovieScalingMode.AspectFill
                 player.fullscreen = true
                 player.controlStyle = MPMovieControlStyle.None
-                player.shouldAutoplay = true
-                player.initialPlaybackTime = 2.0
-                player.endPlaybackTime = 6.0
-                player.currentPlaybackTime = 5.0
                 player.repeatMode = MPMovieRepeatMode.One
                 player.play()
                 self.view.insertSubview(player.view, belowSubview: self.videoContainerView)
@@ -67,7 +63,7 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
         swipe.direction = .Down
         self.scrollView.addGestureRecognizer(swipe)
 
-        self.doneButton.setTitleColor(UIColor.dscribeOrangeText(), forState: .Normal)
+        self.doneButton.setTitleColor(UIColor.dscribeLightOrange(), forState: .Normal)
         self.doneButton.alpha = 0
 
         self.view.layer.insertSublayer(backgroungLayerWithFrame(self.view.bounds), atIndex: 0)
