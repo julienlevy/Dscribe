@@ -19,7 +19,7 @@ class UseKeyboardTutorialView: UIView {
         super.init(frame: CGRectZero)
 
         self.beforeIconLabel.text = "Tap "
-        self.afterIconLabel.text = "and search for emojis."
+        self.afterIconLabel.text = "and search emojis."
         self.detailsLabel.text = "You may use several keywords for precise emojis, but they must be in English."
 
         self.keyIcon.image = UIImage(named: "dscribeKey")
@@ -28,9 +28,18 @@ class UseKeyboardTutorialView: UIView {
         self.afterIconLabel.textColor =  UIColor.whiteColor()
         self.detailsLabel.textColor =  UIColor.whiteColor()
 
-        self.beforeIconLabel.font = UIFont.systemFontOfSize(24)
-        self.afterIconLabel.font = UIFont.systemFontOfSize(24)
+        if #available(iOS 8.2, *) {
+            self.beforeIconLabel.font = UIFont.systemFontOfSize(26, weight: UIFontWeightMedium)
+            self.afterIconLabel.font = UIFont.systemFontOfSize(26, weight: UIFontWeightMedium)
+        } else {
+            self.beforeIconLabel.font = UIFont.systemFontOfSize(26)
+            self.afterIconLabel.font = UIFont.systemFontOfSize(26)
+        }
         self.detailsLabel.font = UIFont.systemFontOfSize(16)
+
+        self.beforeIconLabel.textAlignment = .Center
+        self.afterIconLabel.textAlignment = .Center
+        self.detailsLabel.textAlignment = .Center
 
         self.detailsLabel.numberOfLines = 0
 
@@ -52,6 +61,8 @@ class UseKeyboardTutorialView: UIView {
         self.beforeIconLabel.translatesAutoresizingMaskIntoConstraints = false
         let topFirst: NSLayoutConstraint = NSLayoutConstraint(item: self.keyIcon, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: 0)
         let leftFirst: NSLayoutConstraint = NSLayoutConstraint(item: self.beforeIconLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0)
+        let centerFirst: NSLayoutConstraint = NSLayoutConstraint(item: self.beforeIconLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: -onboardingIconWidth / 2)
+
 
         self.keyIcon.translatesAutoresizingMaskIntoConstraints = false
         let leftIcon: NSLayoutConstraint = NSLayoutConstraint(item: self.keyIcon, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self.beforeIconLabel, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 2)
@@ -66,13 +77,16 @@ class UseKeyboardTutorialView: UIView {
         self.afterIconLabel.translatesAutoresizingMaskIntoConstraints = false
         let bottomAfter: NSLayoutConstraint = NSLayoutConstraint(item: self.afterIconLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.beforeIconLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 4)
         let leftAfter: NSLayoutConstraint = NSLayoutConstraint(item: self.afterIconLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self.beforeIconLabel, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0)
+        let centerAfter: NSLayoutConstraint = NSLayoutConstraint(item: self.afterIconLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0)
+
 
         self.detailsLabel.translatesAutoresizingMaskIntoConstraints = false
-        let topSecond: NSLayoutConstraint = NSLayoutConstraint(item: self.detailsLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.afterIconLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 4)
-        let leftSecond: NSLayoutConstraint = NSLayoutConstraint(item: self.detailsLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self.beforeIconLabel, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0)
+        let topSecond: NSLayoutConstraint = NSLayoutConstraint(item: self.detailsLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.afterIconLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 8)
+        let leftSecond: NSLayoutConstraint = NSLayoutConstraint(item: self.detailsLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0)
         let rightSecond: NSLayoutConstraint = NSLayoutConstraint(item: self.detailsLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0)
 
 
-        self.addConstraints([topFirst, leftFirst, leftIcon, bottomIcon, heightIcon, widthIcon, bottomAfter, leftAfter, topSecond, leftSecond, rightSecond])
+//        self.addConstraints([topFirst, leftFirst, leftIcon, bottomIcon, heightIcon, widthIcon, bottomAfter, leftAfter, topSecond, leftSecond, rightSecond])
+        self.addConstraints([topFirst, centerFirst, leftIcon, bottomIcon, heightIcon, widthIcon, bottomAfter, centerAfter, topSecond, leftSecond, rightSecond])
     }
 }

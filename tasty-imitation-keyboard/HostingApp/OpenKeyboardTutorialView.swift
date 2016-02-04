@@ -25,8 +25,16 @@ class OpenKeyboardTutorialView: UIView {
         self.beforeIconLabel.textColor = UIColor.whiteColor()
         self.secondLineLabel.textColor = UIColor.whiteColor()
 
-        self.beforeIconLabel.font = UIFont.systemFontOfSize(26)
-        self.secondLineLabel.font = UIFont.systemFontOfSize(26.0)
+        if #available(iOS 8.2, *) {
+            self.beforeIconLabel.font = UIFont.systemFontOfSize(26, weight: UIFontWeightMedium)
+            self.secondLineLabel.font = UIFont.systemFontOfSize(26, weight: UIFontWeightMedium)
+        } else {
+            self.beforeIconLabel.font = UIFont.systemFontOfSize(26)
+            self.secondLineLabel.font = UIFont.systemFontOfSize(26)
+        }
+
+        self.beforeIconLabel.textAlignment = .Center
+        self.secondLineLabel.textAlignment = .Center
 
         self.secondLineLabel.numberOfLines = 0
 
@@ -47,6 +55,7 @@ class OpenKeyboardTutorialView: UIView {
         self.beforeIconLabel.translatesAutoresizingMaskIntoConstraints = false
         let topFirst: NSLayoutConstraint = NSLayoutConstraint(item: self.keyboardIcon, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: 0)
         let leftFirst: NSLayoutConstraint = NSLayoutConstraint(item: self.beforeIconLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0)
+        let centerFirst: NSLayoutConstraint = NSLayoutConstraint(item: self.beforeIconLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: -onboardingIconWidth / 2)
 
         self.keyboardIcon.translatesAutoresizingMaskIntoConstraints = false
         let leftIcon: NSLayoutConstraint = NSLayoutConstraint(item: self.keyboardIcon, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self.beforeIconLabel, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 2)
@@ -56,10 +65,11 @@ class OpenKeyboardTutorialView: UIView {
 
         self.secondLineLabel.translatesAutoresizingMaskIntoConstraints = false
         let topSecond: NSLayoutConstraint = NSLayoutConstraint(item: self.secondLineLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.beforeIconLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 2)
-        let leftSecond: NSLayoutConstraint = NSLayoutConstraint(item: self.secondLineLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self.beforeIconLabel, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0)
+        let leftSecond: NSLayoutConstraint = NSLayoutConstraint(item: self.secondLineLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0)
         let rightSecond: NSLayoutConstraint = NSLayoutConstraint(item: self.secondLineLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0)
         
 
-        self.addConstraints([topFirst, leftFirst, leftIcon, bottomIcon, heightIcon, widthIcon, topSecond, leftSecond, rightSecond])
+//        self.addConstraints([topFirst, leftFirst, leftIcon, bottomIcon, heightIcon, widthIcon, topSecond, leftSecond, rightSecond])
+        self.addConstraints([topFirst, centerFirst, leftIcon, bottomIcon, heightIcon, widthIcon, topSecond, leftSecond, rightSecond])
     }
 }

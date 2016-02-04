@@ -54,12 +54,11 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
         self.trialTextField.delegate = self
         self.scrollView.delegate = self
 
-//        self.scrollView.
-
         let swipe: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("dismissKeyboard"))
         swipe.direction = .Down
         self.scrollView.addGestureRecognizer(swipe)
 
+        self.doneButton.setTitleColor(UIColor.dscribeOrangeText(), forState: .Normal)
         self.doneButton.alpha = 0
 
         self.view.layer.insertSublayer(backgroungLayerWithFrame(self.view.bounds), atIndex: 0)
@@ -85,7 +84,7 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
         let width: CGFloat = self.scrollView.bounds.width
         let inset: CGFloat = self.trialTextField.frame.origin.x
 
-        let yOrigin: CGFloat = self.pageControl.frame.origin.y + self.pageControl.frame.height + 40
+        let yOrigin: CGFloat = self.pageControl.frame.origin.y + self.pageControl.frame.height + 30
         let height: CGFloat = self.trialTextField.frame.origin.y - yOrigin
 
         let openKeyboardView = OpenKeyboardTutorialView()

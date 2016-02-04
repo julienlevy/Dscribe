@@ -75,6 +75,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Qbc-qb-I14"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                 <state key="normal" title="Install Keyboard">
                                     <color key="titleColor" red="0.93174606561660767" green="0.65843659639358521" blue="0.16330814361572266" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -193,6 +194,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Ss0-Dc-nqT"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                 <state key="normal" title="Done">
                                     <color key="titleColor" red="0.99607843139999996" green="0.79607843140000001" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
