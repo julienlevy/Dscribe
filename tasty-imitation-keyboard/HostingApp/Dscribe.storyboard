@@ -170,7 +170,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </scrollView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Try it." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9cP-Xh-ND3">
-                                <rect key="frame" x="62" y="575" width="250" height="24"/>
+                                <rect key="frame" x="62" y="575" width="250" height="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -182,7 +182,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NXd-Us-dXC">
-                                <rect key="frame" x="62" y="604" width="250" height="1"/>
+                                <rect key="frame" x="62" y="602" width="250" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Qxe-Dx-WOC"/>
@@ -192,11 +192,11 @@
                                 <rect key="frame" x="79" y="0.0" width="216" height="383"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qVs-iS-Cea">
-                                <rect key="frame" x="-1" y="627" width="375" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qVs-iS-Cea">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Ss0-Dc-nqT"/>
+                                    <constraint firstAttribute="height" constant="50" id="Ss0-Dc-nqT"/>
                                 </constraints>
                                 <state key="normal" title="Done">
                                     <color key="titleColor" red="0.99607843139999996" green="0.79607843140000001" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>

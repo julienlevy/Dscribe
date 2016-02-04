@@ -30,6 +30,7 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
     var moviePlayer : MPMoviePlayerController!
 
     override func viewDidLoad() {
+        print(self.view.frame)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
         
@@ -56,6 +57,8 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
         let swipe: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("dismissKeyboard"))
         swipe.direction = .Down
         self.scrollView.addGestureRecognizer(swipe)
+
+        self.doneButton.alpha = 0
 
         self.view.layer.insertSublayer(backgroungLayerWithFrame(self.view.bounds), atIndex: 0)
 
@@ -105,6 +108,10 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
 
     func dismissKeyboard() {
         self.view.endEditing(true)
+    }
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let percentage = scrollView.contentOffset.x / (scrollView.contentSize.width - scrollView.frame.width)
+        self.doneButton.alpha = percentage
     }
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         self.pageControl.currentPage = Int(self.scrollView.contentOffset.x / self.scrollView.frame.width)
