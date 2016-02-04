@@ -168,7 +168,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HmA-z8-eD0">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HmA-z8-eD0">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </scrollView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iphone6NoTop" translatesAutoresizingMaskIntoConstraints="NO" id="tI8-YK-R1y">
@@ -262,6 +262,7 @@
                     <connections>
                         <outlet property="doneButton" destination="qVs-iS-Cea" id="v4h-c9-tp3"/>
                         <outlet property="doneButtonBottomConstraint" destination="cR5-ff-HCe" id="kOr-Uh-zmC"/>
+                        <outlet property="doneButtonCenterX" destination="Bwb-0D-CQx" id="eFQ-k9-h1b"/>
                         <outlet property="iphoneImage" destination="tI8-YK-R1y" id="w1e-Nw-gej"/>
                         <outlet property="iphoneImageTopConstraint" destination="odx-fP-6AH" id="H9g-Kr-zFv"/>
                         <outlet property="pageControl" destination="l3p-dw-oWT" id="5YF-d6-E9a"/>

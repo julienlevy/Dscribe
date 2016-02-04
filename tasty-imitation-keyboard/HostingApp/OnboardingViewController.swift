@@ -17,38 +17,47 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
 
     @IBOutlet var trialTextField: UITextField!
 
-
-    @IBOutlet var doneButton: UIButton!
-
     @IBOutlet var scrollView: UIScrollView!
+
     @IBOutlet var pageControl: UIPageControl!
 
+    @IBOutlet var doneButton: UIButton!
+    @IBOutlet var doneButtonCenterX: NSLayoutConstraint!
     @IBOutlet var doneButtonBottomConstraint: NSLayoutConstraint!
 
+    let videoNames: [String] = ["OpenKeyboard", "UseKeyboard"]
     let defaultText: String = "Try it."
 
     var moviePlayer : MPMoviePlayerController!
 
+    var currentPage: Int = 0
+
     override func viewDidLoad() {
-        print(self.view.frame)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
-        
-            if let videoPath = NSBundle.mainBundle().pathForResource("OpenKeyboard", ofType: "mov") {
+
+        if let videoPath = NSBundle.mainBundle().pathForResource("OpenKeyboard", ofType: "mov") {
             let videoURL = NSURL.fileURLWithPath(videoPath)
+
             self.moviePlayer = MPMoviePlayerController(contentURL: videoURL)
             if let player = self.moviePlayer {
                 player.view.frame = self.videoContainerView.frame
                 player.scalingMode = MPMovieScalingMode.AspectFill
                 player.fullscreen = true
                 player.controlStyle = MPMovieControlStyle.None
-                player.movieSourceType = MPMovieSourceType.File
+                player.shouldAutoplay = true
+                player.initialPlaybackTime = 2.0
+                player.endPlaybackTime = 6.0
+                player.currentPlaybackTime = 5.0
                 player.repeatMode = MPMovieRepeatMode.One
                 player.play()
-                self.view.addSubview(player.view)
+                self.view.insertSubview(player.view, belowSubview: self.videoContainerView)
+                self.videoContainerView.alpha = 0
+                self.videoContainerView.backgroundColor = UIColor.dscribeDarkOrange()
 
                 self.setPlayerConstraints()
             }
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("movieDidChange:"), name: MPMoviePlayerPlaybackStateDidChangeNotification, object: nil)
         }
 
         self.trialTextField.delegate = self
@@ -113,9 +122,32 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let percentage = scrollView.contentOffset.x / (scrollView.contentSize.width - scrollView.frame.width)
         self.doneButton.alpha = percentage
+        self.doneButtonCenterX.constant = scrollView.frame.width - scrollView.contentOffset.x
+
+        let width = scrollView.frame.width
+        let side = 1 - 2 * (scrollView.contentOffset.x % width) / width
+
+        let offetPage: Int = Int(self.scrollView.contentOffset.x / self.scrollView.frame.width)
+        let toPage: Int = (side > 0 ? offetPage : offetPage + 1)
+
+        if toPage == self.currentPage {
+            self.videoContainerView.alpha = 1 - fabs(side)
+        } else {
+            self.videoContainerView.alpha = 1
+        }
     }
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        self.pageControl.currentPage = Int(self.scrollView.contentOffset.x / self.scrollView.frame.width)
+        let currentPage: Int = Int(self.scrollView.contentOffset.x / self.scrollView.frame.width)
+        self.pageControl.currentPage = currentPage
+
+        if self.currentPage != currentPage {
+            if let videoPath = NSBundle.mainBundle().pathForResource(self.videoNames[currentPage], ofType: "mov") {
+                let videoURL = NSURL.fileURLWithPath(videoPath)
+                self.moviePlayer.contentURL = videoURL
+                self.moviePlayer.play()
+            }
+            self.currentPage = currentPage
+        }
     }
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.trialTextField.resignFirstResponder()
@@ -157,5 +189,24 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
                 })
             }
         }
+    }
+
+    func movieDidChange(notification: NSNotification) {
+        if self.moviePlayer.playbackState == MPMoviePlaybackState.Playing {
+            self.delay(0.2, closure: {
+                UIView.animateWithDuration(0.2, animations: {
+                    self.videoContainerView.alpha = 0
+                })
+            })
+        }
+    }
+
+    func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
     }
 }
