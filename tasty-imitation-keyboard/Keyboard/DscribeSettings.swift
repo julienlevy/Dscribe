@@ -77,7 +77,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         super.loadNib()
         self.tableView?.registerClass(StaticSettingCell.self, forCellReuseIdentifier: "staticCell")
         self.tableView?.registerClass(PickerViewCell.self, forCellReuseIdentifier: "pickerCell")
-        self.tableView?.registerClass(InformationWithButtonCell.self, forCellReuseIdentifier: "informationCell")
+        self.tableView?.registerClass(NoAccessCell.self, forCellReuseIdentifier: "noAccessCell")
 
         self.hasFullAccess = UIPasteboard.generalPasteboard().isKindOfClass(UIPasteboard)
     }
@@ -142,22 +142,18 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
             }
         }
         if key == kInformation {
-            if let informationCell = tableView.dequeueReusableCellWithIdentifier("informationCell") as? InformationWithButtonCell {
+            if let cell = tableView.dequeueReusableCellWithIdentifier("noAccessCell") as? NoAccessCell {
+                cell.backgroundColor = (self.darkMode ? cellBackgroundColorDark : cellBackgroundColorLight)
+                cell.label.textColor = (self.darkMode ? cellLabelColorDark : cellLabelColorLight)
+                cell.descriptionLabel.textColor = (self.darkMode ? cellLabelColorDark : cellLabelColorLight)
 
-                informationCell.label.text = self.settingsNames[key]
-                informationCell.longLabel.text = self.settingsNotes[key]
-                informationCell.button.setTitle("Open App", forState: .Normal)
+                cell.appButton.setTitleColor(self.tintColor, forState: .Normal)
+                cell.settingsButton.setTitleColor(self.tintColor, forState: .Normal)
 
-                informationCell.backgroundColor = (self.darkMode ? cellBackgroundColorDark : cellBackgroundColorLight)
-                informationCell.label.textColor = (self.darkMode ? cellLabelColorDark : cellLabelColorLight)
-                informationCell.longLabel.textColor = (self.darkMode ? cellLabelColorDark : cellLabelColorLight)
-                informationCell.button.setTitleColor(self.tintColor, forState: .Normal)
+                cell.appButton.addTarget(self, action: Selector("openApp"), forControlEvents: UIControlEvents.TouchUpInside)
+                cell.settingsButton.addTarget(self, action: Selector("openSettings"), forControlEvents: UIControlEvents.TouchUpInside)
 
-                informationCell.button.addTarget(self, action: Selector("openApp"), forControlEvents: UIControlEvents.TouchUpInside)
-
-                informationCell.changeConstraints()
-
-                return informationCell
+                return cell
             } else {
                 assert(false, "this is a bad thing that just happened dscribe")
                 return UITableViewCell()
@@ -235,7 +231,6 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
                 wholeString += " - " + NSLocale(localeIdentifier: codes[0]).displayNameForKey(NSLocaleCountryCode, value: codes[1])!
             }
             languageDict[language] = wholeString
-//            availableLanguages.append(wholeString)
         }
 
         //Proper sort
@@ -283,7 +278,18 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         }
     }
     func openApp() {
-//        let myAppUrl = NSURL(string: "dscribe://")!
+        let myAppUrl = NSURL(string: "dscribe://")!
+        var myResponder: UIResponder? = self
+        while myResponder != nil {
+            if myResponder!.respondsToSelector(Selector("openURL:")) {
+                print("responder responding to selector")
+                print(myResponder)
+                myResponder!.performSelector("openURL:", withObject: myAppUrl)
+            }
+            myResponder = myResponder?.nextResponder()
+        }
+    }
+    func openSettings() {
         let myAppUrl = NSURL(string: "prefs:root=General&path=Keyboard/KEYBOARDS")!
         var myResponder: UIResponder? = self
         while myResponder != nil {
@@ -297,30 +303,92 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
     }
 }
 
-class InformationWithButtonCell: DefaultSettingsTableViewCell {
-    var button: UIButton
-
+class NoAccessCell: UITableViewCell {
+    var label: UILabel
+    var descriptionLabel: UILabel
+    var settingsIcon: UIImageView
+    var settingsButton: UIButton
+    var appIcon: UIImageView
+    var appButton: UIButton
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        button = UIButton()
+        self.label = UILabel()
+        self.descriptionLabel = UILabel()
+
+        self.settingsIcon = UIImageView(image: UIImage(named: "settingsIcon"))
+        self.settingsButton = UIButton()
+
+        self.appIcon = UIImageView(image: UIImage(named: "DscribeIconWithBorder"))
+        self.appButton = UIButton()
 
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        sw.hidden = true
-        self.addSubview(button)
+        self.label.text = "Saving"
+        self.descriptionLabel.text = "Unfortunately settings won't be saved properly unless “Allow Full Access“ is enabled for Dscribe in iOS Sttings. Otherwise, you may use the settings in the main app."
 
-        self.addButtonConstraints()
+        self.settingsButton.setTitle("Open Settings", forState: .Normal)
+        self.appButton.setTitle("Open App", forState: .Normal)
+
+        self.settingsIcon.contentMode = .ScaleAspectFit
+        self.appIcon.contentMode = .ScaleAspectFit
+
+        self.descriptionLabel.font = UIFont.systemFontOfSize(12.0)
+        self.descriptionLabel.numberOfLines = 0
+
+        self.appIcon.layer.cornerRadius = 4
+        self.appIcon.layer.borderWidth = 1
+        self.appIcon.layer.borderColor = UIColor.grayColor().CGColor
+
+        self.addSubview(self.label)
+        self.addSubview(self.descriptionLabel)
+        self.addSubview(self.settingsIcon)
+        self.addSubview(self.settingsButton)
+        self.addSubview(self.appIcon)
+        self.addSubview(self.appButton)
+
+        self.setupConstraints()
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setupConstraints() {
+        let margin: CGFloat = 8
+        let sideMargin = margin * 2
+        let insideVerticalMargin: CGFloat = 4
 
-    func addButtonConstraints() {
-        button.translatesAutoresizingMaskIntoConstraints = false
-        let top: NSLayoutConstraint = NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0)
-        let right: NSLayoutConstraint = NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 0)
-        let bottom: NSLayoutConstraint = NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0)
+        self.label.translatesAutoresizingMaskIntoConstraints = false
+        let topLabel: NSLayoutConstraint = NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: margin)
+        let leftLabel: NSLayoutConstraint = NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: sideMargin)
 
-        self.addConstraints([top, right, bottom])
+        self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        let topDescription: NSLayoutConstraint = NSLayoutConstraint(item: self.descriptionLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.label, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: insideVerticalMargin)
+        let leftDescription: NSLayoutConstraint = NSLayoutConstraint(item: self.descriptionLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: sideMargin)
+        let rightDescription: NSLayoutConstraint = NSLayoutConstraint(item: self.descriptionLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -sideMargin)
+
+        self.settingsIcon.translatesAutoresizingMaskIntoConstraints = false
+        let topSettingsIcon: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsIcon, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.descriptionLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: insideVerticalMargin)
+        let leftSettingsIcon: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsIcon, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: sideMargin)
+        let widthSettings: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsIcon, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 30)
+        let heightSettings: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsIcon, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 30)
+
+        self.settingsButton.translatesAutoresizingMaskIntoConstraints = false
+        let centerSettings: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsButton, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.settingsIcon, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
+        let leftSettings: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsButton, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self.settingsIcon, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 2)
+
+        self.appIcon.translatesAutoresizingMaskIntoConstraints = false
+        let topAppIcon: NSLayoutConstraint = NSLayoutConstraint(item: self.appIcon, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.descriptionLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: insideVerticalMargin)
+        let leftAppIcon: NSLayoutConstraint = NSLayoutConstraint(item: self.appIcon, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        let widthApp: NSLayoutConstraint = NSLayoutConstraint(item: self.appIcon, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 30)
+        let heightApp: NSLayoutConstraint = NSLayoutConstraint(item: self.appIcon, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 30)
+
+        self.appButton.translatesAutoresizingMaskIntoConstraints = false
+        let centerApp: NSLayoutConstraint = NSLayoutConstraint(item: self.appButton, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.appIcon, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
+        let leftApp: NSLayoutConstraint = NSLayoutConstraint(item: self.appButton, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self.appIcon, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 2)
+
+        let bottom: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsIcon, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -margin)
+
+        self.addConstraints([topLabel, leftLabel, topDescription, leftDescription, rightDescription, topSettingsIcon, leftSettingsIcon, widthSettings, heightSettings, centerSettings, leftSettings, topAppIcon, leftAppIcon, widthApp, heightApp, centerApp, leftApp, bottom])
     }
 }
 
