@@ -114,6 +114,8 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
         let storyboard = UIStoryboard(name: "Dscribe", bundle: nil)
         let settingsViewController = storyboard.instantiateViewControllerWithIdentifier("SettingsNavigationController")
         self.showViewController(settingsViewController, sender: nil)
+
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasSeenOnboarding")
     }
 
     func dismissKeyboard() {
