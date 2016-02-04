@@ -14,7 +14,7 @@ with open('result.json') as data_file:
     # result += ']'
 
 print(data)
-with open('test.plist', 'w') as outfile:
+with open('EmojiList.plist', 'w') as outfile:
     try:
         plistlib.writePlist(data, outfile)
     finally:

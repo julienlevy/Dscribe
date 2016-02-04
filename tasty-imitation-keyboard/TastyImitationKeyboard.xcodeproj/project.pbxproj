@@ -260,7 +260,7 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
-		4E6AEE5319D2489C00931E8F /* Demo */ = {
+		4E6AEE5319D2489C00931E8F /* Dscribe */ = {
 			isa = PBXGroup;
 			children = (
 				0DE2F8971BECE232000F9B5F /* DscribeBanner.swift */,
@@ -275,7 +275,7 @@
 				0D1F16651C4935D900E0EB43 /* AZERTYKeyboard.swift */,
 				0DC28DD11C39811600F40BA1 /* EmojiList.plist */,
 			);
-			name = Demo;
+			name = Dscribe;
 			sourceTree = "<group>";
 		};
 		4E7CDF901A079E3E0015BB90 /* KeyboardSound */ = {
@@ -354,7 +354,7 @@
 				4E6AEE5019D2486900931E8F /* Model */,
 				4E6AEE4F19D2484B00931E8F /* Views */,
 				4EE7599519F759F300B4E6ED /* Utility */,
-				4E6AEE5319D2489C00931E8F /* Demo */,
+				4E6AEE5319D2489C00931E8F /* Dscribe */,
 				4E807DBB19461DC700D875D1 /* Supporting Files */,
 				4E52A6D51A06BADA006A08CE /* Media.xcassets */,
 			);

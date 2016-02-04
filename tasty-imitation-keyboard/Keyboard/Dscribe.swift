@@ -53,12 +53,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        // TODO review
-        if let savedEmojis = loadEmojis() {
-            emojiClass = savedEmojis
-        } else {
-            loadSampleEmojis()
-        }
 
         //To change the height of the banner
         metrics = [
@@ -77,12 +71,25 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             kSmallLowercase: true,
             kKeyboardType: kQWERTY
             ])
-        autoReplaceActive = NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(kAutoReplace)
+        self.autoReplaceActive = NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(kAutoReplace)
         if let newType: String = NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kKeyboardType) as? String {
             keyboardType = newType
         }
         if let newLanguage: String = NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kAutocorrectLanguage) as? String {
             language = newLanguage
+        }
+
+        // TODO: refacto and improve performances
+        NSUserDefaults.standardUserDefaults().registerDefaults(["version_1.1_emojis_updated": false])
+        if NSUserDefaults.standardUserDefaults().boolForKey("version_1.1_emojis_updated") {
+            if let savedEmojis = self.loadEmojis() {
+                self.emojiClass = savedEmojis
+            } else {
+                self.loadSampleEmojis()
+            }
+        } else {
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "version_1.1_emojis_updated")
+            self.loadSampleEmojis()
         }
     }
     required init?(coder: NSCoder) {
@@ -99,7 +106,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             }
             print("Default changed, language is " + language)
         }
-        autoReplaceActive = NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(kAutoReplace)
+        self.autoReplaceActive = NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(kAutoReplace)
     }
 
     override func viewDidLayoutSubviews() {
@@ -135,8 +142,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     }
 
     override func setupKeys() {
-//        super.setupKeys()
-        // COPY PASTE instead of call to super not to loop through keys twice
 
         if self.layout == nil {
             return

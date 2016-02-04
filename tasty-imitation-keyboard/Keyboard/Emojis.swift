@@ -27,15 +27,14 @@ class Emoji: NSObject, NSCoding {
         let path: String? = NSBundle.mainBundle().pathForResource("EmojiList", ofType: "plist")
         if path != nil {
             if let dictionary: NSDictionary? = NSDictionary(contentsOfFile: path!) {
-//                print("DICTIONARY from memory")
-//                print(dictionary)
+                print("DICTIONARY from memory")
                 self.emojiTag = dictionary as! [String: [String]]
             }
         }
 
         super.init()
     }
-    
+
     init?(emojiScore: [String: Int], emojiTag: [String: [String]]) {
         self.emojiScore = emojiScore
         self.emojiTag = emojiTag

@@ -1165,7 +1165,7 @@
     "category": "animals_and_nature"
   },
   "unicorn_face": {
-    "keywords": ["animal", "nature", "mystical", "unicore", "rare"],
+    "keywords": ["animal", "nature", "mystical"],
     "char": "🦄",
     "category": "animals_and_nature"
   },
@@ -2130,12 +2130,12 @@
     "category": "activity"
   },
   "golf": {
-    "keywords": ["sports", "golf", "business", "flag", "hole", "summer"],
+    "keywords": ["sports", "business", "flag", "hole", "summer"],
     "char": "⛳",
     "category": "activity"
   },
   "golfer": {
-    "keywords": ["sports", "golf", "business"],
+    "keywords": ["sports", "business"],
     "char": "🏌",
     "category": "activity"
   },
@@ -2145,7 +2145,7 @@
     "category": "activity"
   },
   "badminton": {
-    "keywords": ["sports", "badminton", "racket"],
+    "keywords": ["sports"],
     "char": "🏸",
     "category": "activity"
   },
