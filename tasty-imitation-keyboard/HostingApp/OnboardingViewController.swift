@@ -54,6 +54,8 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
         self.trialTextField.delegate = self
         self.scrollView.delegate = self
 
+//        self.scrollView.
+
         let swipe: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("dismissKeyboard"))
         swipe.direction = .Down
         self.scrollView.addGestureRecognizer(swipe)
@@ -81,10 +83,10 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
     }
     func setScrollViewContent() {
         let width: CGFloat = self.scrollView.bounds.width
-        let inset: CGFloat = self.iphoneImage.frame.origin.x
+        let inset: CGFloat = self.trialTextField.frame.origin.x
 
-        let yOrigin: CGFloat = self.pageControl.frame.origin.y + self.pageControl.frame.height
-        let height: CGFloat = self.trialTextField.frame.origin.y - yOrigin - 10
+        let yOrigin: CGFloat = self.pageControl.frame.origin.y + self.pageControl.frame.height + 40
+        let height: CGFloat = self.trialTextField.frame.origin.y - yOrigin
 
         let openKeyboardView = OpenKeyboardTutorialView()
         openKeyboardView.frame = CGRect(x: inset, y: yOrigin, width: width - 2 * inset, height: height)

@@ -25,8 +25,8 @@ class OpenKeyboardTutorialView: UIView {
         self.beforeIconLabel.textColor = UIColor.whiteColor()
         self.secondLineLabel.textColor = UIColor.whiteColor()
 
-        self.beforeIconLabel.font = UIFont.systemFontOfSize(18.0)
-        self.secondLineLabel.font = UIFont.systemFontOfSize(18.0)
+        self.beforeIconLabel.font = UIFont.systemFontOfSize(26)
+        self.secondLineLabel.font = UIFont.systemFontOfSize(26.0)
 
         self.secondLineLabel.numberOfLines = 0
 
@@ -51,8 +51,8 @@ class OpenKeyboardTutorialView: UIView {
         self.keyboardIcon.translatesAutoresizingMaskIntoConstraints = false
         let leftIcon: NSLayoutConstraint = NSLayoutConstraint(item: self.keyboardIcon, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self.beforeIconLabel, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 2)
         let bottomIcon: NSLayoutConstraint = NSLayoutConstraint(item: self.keyboardIcon, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.beforeIconLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 0)
-        let heightIcon: NSLayoutConstraint = NSLayoutConstraint(item: self.keyboardIcon, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: 25)
-        let widthIcon: NSLayoutConstraint = NSLayoutConstraint(item: self.keyboardIcon, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: 25)
+        let heightIcon: NSLayoutConstraint = NSLayoutConstraint(item: self.keyboardIcon, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: onboardingIconWidth)
+        let widthIcon: NSLayoutConstraint = NSLayoutConstraint(item: self.keyboardIcon, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: onboardingIconWidth)
 
         self.secondLineLabel.translatesAutoresizingMaskIntoConstraints = false
         let topSecond: NSLayoutConstraint = NSLayoutConstraint(item: self.secondLineLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.beforeIconLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 2)

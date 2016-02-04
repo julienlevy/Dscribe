@@ -8,6 +8,8 @@
 
 import UIKit
 
+let onboardingIconWidth: CGFloat = 40
+
 extension UIColor {
     class func dscribeDarkOrange() -> UIColor {
         return UIColor(red: 251.0/255, green: 183.0/255, blue: 59.0/255, alpha: 1.0)
