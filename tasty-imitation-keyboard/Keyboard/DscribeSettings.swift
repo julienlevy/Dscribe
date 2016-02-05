@@ -85,7 +85,6 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let rows: Int = self.settingsList[section].1.count
         for row in 0...(rows-1) {
-            // TODO: make this condition with an array when we might have more than one picker
             if (!displayLanguagePicker && self.settingsList[section].1[row] == kLanguagePicker) || (!displayTypePicker && self.settingsList[section].1[row] == kKeyboardPicker) {
                 return self.settingsList[section].1.count - 1
             }
@@ -96,24 +95,28 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         let key = self.settingsList[indexPath.section].1[indexPath.row]
 
         if key == kAutocorrectLanguage || key == kKeyboardType {
-            if let languageCell = tableView.dequeueReusableCellWithIdentifier("staticCell") as? StaticSettingCell {
+            if let cell = tableView.dequeueReusableCellWithIdentifier("staticCell") as? StaticSettingCell {
 
-                languageCell.label.text = self.settingsNames[key]
-                languageCell.longLabel.text = self.settingsNotes[key]
+                cell.label.text = self.settingsNames[key]
+                cell.longLabel.text = self.settingsNotes[key]
                 if key == kAutocorrectLanguage {
-                    languageCell.labelDisplay.text = (currentPickerLanguage != "" ? currentPickerLanguage : self.availableLanguages[self.indexOfCurrentLanguage()!])
+                    cell.labelDisplay.text = (currentPickerLanguage != "" ? currentPickerLanguage : self.availableLanguages[self.indexOfCurrentLanguage()!])
                 } else {
-                    languageCell.labelDisplay.text = (currentPickerType != "" ? currentPickerType : NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kKeyboardType) as? String)
+                    cell.labelDisplay.text = (currentPickerType != "" ? currentPickerType : NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kKeyboardType) as? String)
                 }
-                languageCell.labelDisplay.textColor = UIColor.blackColor()
+                cell.labelDisplay.textColor = UIColor.blackColor()
 
-                languageCell.backgroundColor = (self.darkMode ? cellBackgroundColorDark : cellBackgroundColorLight)
-                languageCell.label.textColor = (self.darkMode ? cellLabelColorDark : cellLabelColorLight)
-                languageCell.longLabel.textColor = (self.darkMode ? cellLongLabelColorDark : cellLongLabelColorLight)
+                cell.backgroundColor = (self.darkMode ? cellBackgroundColorDark : cellBackgroundColorLight)
+                cell.label.textColor = (self.darkMode ? cellLabelColorDark : cellLabelColorLight)
+                cell.longLabel.textColor = (self.darkMode ? cellLongLabelColorDark : cellLongLabelColorLight)
 
-                languageCell.changeConstraints()
+                cell.userInteractionEnabled = self.hasFullAccess
+                cell.label.enabled = self.hasFullAccess
+                cell.labelDisplay.enabled = self.hasFullAccess
 
-                return languageCell
+                cell.changeConstraints()
+
+                return cell
             } else {
                 assert(false, "this is a bad thing that just happened dscribe")
                 return UITableViewCell()
@@ -173,6 +176,10 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
             cell.label.textColor = (self.darkMode ? cellLabelColorDark : cellLabelColorLight)
             cell.longLabel.textColor = (self.darkMode ? cellLongLabelColorDark : cellLongLabelColorLight)
 
+            cell.userInteractionEnabled = !self.hasFullAccess
+            cell.sw.enabled = self.hasFullAccess
+            cell.label.enabled = self.hasFullAccess
+
             cell.changeConstraints()
 
             return cell
@@ -190,7 +197,6 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         }
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("Keyboard is allowed full Access: " + String(self.hasFullAccess))
         self.tableView?.deselectRowAtIndexPath(indexPath, animated: true)
         if self.settingsList[indexPath.section].1[indexPath.row] == kAutocorrectLanguage {
             displayLanguagePicker = !displayLanguagePicker
@@ -324,7 +330,7 @@ class NoAccessCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         self.label.text = "Saving"
-        self.descriptionLabel.text = "Unfortunately settings won't be saved properly unless “Allow Full Access“ is enabled for Dscribe in iOS Sttings. Otherwise, you may use the settings in the main app."
+        self.descriptionLabel.text = "Unfortunately settings won't be saved properly unless “Allow Full Access“ is enabled for Dscribe in iOS Settings. Otherwise, you may use the settings in the main app."
 
         self.settingsButton.setTitle("Open Settings", forState: .Normal)
         self.appButton.setTitle("Open App", forState: .Normal)

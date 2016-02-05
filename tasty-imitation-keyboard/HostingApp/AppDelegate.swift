@@ -54,7 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyboard = UIStoryboard(name: "Dscribe", bundle: nil)
         if keyboardWasActivated() {
             if NSUserDefaults.standardUserDefaults().boolForKey("hasSeenOnboarding") {
-                print("Appears and keyboard activated an has seeeen onboarding")
                 let settingsViewController = storyboard.instantiateViewControllerWithIdentifier("SettingsNavigationController")
                 self.window?.rootViewController = settingsViewController
             } else {
