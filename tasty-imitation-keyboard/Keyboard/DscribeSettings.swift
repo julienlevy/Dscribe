@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Mixpanel
+//import Mixpanel
 
 let kInformation: String = "kInformation"
 let kLanguagePicker: String = "kLanguagePicker"
@@ -195,7 +195,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
                 let key = self.settingsList[indexPath.section].1[indexPath.row]
                 NSUserDefaults(suiteName: "group.dscribekeyboard")!.setBool(sender.on, forKey: key)
 
-                Mixpanel.sharedInstance().track("Keyboard modify setting", properties:[key: sender.on])
+//                Mixpanel.sharedInstance().track("Keyboard modify setting", properties:[key: sender.on])
             }
         }
     }
@@ -278,7 +278,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
                 (self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)) as? StaticSettingCell)?.labelDisplay.text = language
                 currentPickerLanguage = language
 
-                Mixpanel.sharedInstance().track("Keyboard modify setting", properties:[key: language])
+//                Mixpanel.sharedInstance().track("Keyboard modify setting", properties:[key: language])
             }
         }
         if key == kKeyboardType {
@@ -286,7 +286,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
                 (self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)) as? StaticSettingCell)?.labelDisplay.text = type
                 currentPickerType = type
 
-                Mixpanel.sharedInstance().track("Keyboard modify setting", properties:[key: type])
+//                Mixpanel.sharedInstance().track("Keyboard modify setting", properties:[key: type])
             }
         }
     }

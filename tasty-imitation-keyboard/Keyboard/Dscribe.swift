@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Mixpanel
+//import Mixpanel
 
 let kAutoReplace = "kAutoReplace"
 let kAutocorrectLanguage = "kAutocorrectLanguage"
@@ -80,7 +80,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             language = newLanguage
         }
 
-        Mixpanel.sharedInstanceWithToken("2251f78e023ae81fc07ba7b3234cfc23")
+//        Mixpanel.sharedInstanceWithToken("2251f78e023ae81fc07ba7b3234cfc23")
 
         // TODO: refacto and improve performances
         NSUserDefaults.standardUserDefaults().registerDefaults(["version_1.1_emojis_updated": false])
@@ -137,7 +137,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        Mixpanel.sharedInstance().track("Keyboard appears")
+//        Mixpanel.sharedInstance().track("Keyboard appears")
     }
 
     // MARK: Keyboard Setup methods
@@ -563,7 +563,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     }
 
     func askedToOpenSettings() {
-        Mixpanel.sharedInstance().track("Keyboard Settings")
+//        Mixpanel.sharedInstance().track("Keyboard Settings")
     }
 
     // MARK: text input processing tools/functions
@@ -689,9 +689,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             let searched: String = self.deleteSearchText()
             self.toggleSearchMode()
 
-            Mixpanel.sharedInstance().track("Emoji", properties: ["emoji" : emoji, "search": searched])
-        } else {
-            Mixpanel.sharedInstance().track("Emoji", properties: ["emoji" : emoji, "search": "n°" + String(self.numberOfEnteredEmojis + 1)])
+//            Mixpanel.sharedInstance().track("Emoji", properties: ["emoji" : emoji, "search": searched])
+//        } else {
+//            Mixpanel.sharedInstance().track("Emoji", properties: ["emoji" : emoji, "search": "n°" + String(self.numberOfEnteredEmojis + 1)])
         }
 
         self.emojiClass!.incrementScore(emoji)

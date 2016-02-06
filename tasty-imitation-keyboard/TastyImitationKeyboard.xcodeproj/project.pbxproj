@@ -476,6 +476,7 @@
 				4E807DB719461DC700D875D1 /* Resources */,
 				E4866CC6ACF7C2AC6F387B3E /* Embed Pods Frameworks */,
 				ABE2A2D7FE8B26A33ED3E7DA /* Copy Pods Resources */,
+				0D612C9C1C660D2800EC1435 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -621,6 +622,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "";
+		};
+		0D612C9C1C660D2800EC1435 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nif [[ -d \"Frameworks\" ]]; then\n    rm -fr Frameworks\nfi";
 		};
 		2A8B105F436E86424D63DB3A /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
