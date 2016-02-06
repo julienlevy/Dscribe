@@ -58,6 +58,8 @@
 		4EF16F9819D255030076AFCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF16F9519D255030076AFCB /* ViewController.swift */; };
 		4EF16F9B19D2550D0076AFCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF16F9A19D2550D0076AFCB /* AppDelegate.swift */; };
 		4EF16F9F19D2552E0076AFCB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EF16F9D19D2552E0076AFCB /* Main.storyboard */; };
+		8511BB4AED65686BBB03CB52 /* Pods_HostingApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77E4B3F37D6691E1CE5C5017 /* Pods_HostingApp.framework */; };
+		B16DEF1F7ECA18B88B90A723 /* Pods_Keyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683912E18E116FFF1CD4089C /* Pods_Keyboard.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +146,8 @@
 		0DE2F8971BECE232000F9B5F /* DscribeBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeBanner.swift; sourceTree = "<group>"; };
 		0DE2F8991BED3AF0000F9B5F /* Dscribe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dscribe.swift; sourceTree = "<group>"; };
 		0DF7A3F81C31413E0096395F /* DscribeColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DscribeColors.swift; sourceTree = "<group>"; };
+		1383CE47645013360C30B64F /* Pods-HostingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HostingApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HostingApp/Pods-HostingApp.debug.xcconfig"; sourceTree = "<group>"; };
+		4907F482AE9F815C329FFBBB /* Pods-Keyboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keyboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Keyboard/Pods-Keyboard.debug.xcconfig"; sourceTree = "<group>"; };
 		4E3B5A931A0654A8003366F6 /* KeyboardInputTraits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardInputTraits.swift; sourceTree = "<group>"; };
 		4E52A6D11A06A61F006A08CE /* ImageKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageKey.swift; sourceTree = "<group>"; };
 		4E52A6D31A06A626006A08CE /* ExtraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraView.swift; sourceTree = "<group>"; };
@@ -174,6 +178,10 @@
 		4EF16F9519D255030076AFCB /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4EF16F9A19D2550D0076AFCB /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EF16F9E19D2552E0076AFCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
+		5385C22DCF4F43EA54E556AF /* Pods-HostingApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HostingApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-HostingApp/Pods-HostingApp.release.xcconfig"; sourceTree = "<group>"; };
+		683912E18E116FFF1CD4089C /* Pods_Keyboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Keyboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		77E4B3F37D6691E1CE5C5017 /* Pods_HostingApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HostingApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F95A53D798AC6CC8C6490334 /* Pods-Keyboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keyboard.release.xcconfig"; path = "Pods/Target Support Files/Pods-Keyboard/Pods-Keyboard.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E8EF39819F95D75009CBF5D /* KeyboardFramework.framework in Frameworks */,
+				8511BB4AED65686BBB03CB52 /* Pods_HostingApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E8EF3A019F95D93009CBF5D /* KeyboardFramework.framework in Frameworks */,
+				B16DEF1F7ECA18B88B90A723 /* Pods_Keyboard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,6 +232,26 @@
 				0DD5A7E21C62786400DF4996 /* UseKeyboardTutorialView.swift */,
 			);
 			name = Onboarding;
+			sourceTree = "<group>";
+		};
+		23364A36AE95B2371D0D2297 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				77E4B3F37D6691E1CE5C5017 /* Pods_HostingApp.framework */,
+				683912E18E116FFF1CD4089C /* Pods_Keyboard.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		28A82436651254075F310AC6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1383CE47645013360C30B64F /* Pods-HostingApp.debug.xcconfig */,
+				5385C22DCF4F43EA54E556AF /* Pods-HostingApp.release.xcconfig */,
+				4907F482AE9F815C329FFBBB /* Pods-Keyboard.debug.xcconfig */,
+				F95A53D798AC6CC8C6490334 /* Pods-Keyboard.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		4E6AEE4F19D2484B00931E8F /* Views */ = {
@@ -303,6 +333,8 @@
 				4E8EF38219F95D75009CBF5D /* KeyboardFramework */,
 				4E7CDF901A079E3E0015BB90 /* KeyboardSound */,
 				4E807D9419461D9000D875D1 /* Products */,
+				28A82436651254075F310AC6 /* Pods */,
+				23364A36AE95B2371D0D2297 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -412,12 +444,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4E807DAF19461D9000D875D1 /* Build configuration list for PBXNativeTarget "HostingApp" */;
 			buildPhases = (
+				5727224826E8D0BC12E43EFE /* Check Pods Manifest.lock */,
 				4E807D8F19461D9000D875D1 /* Sources */,
 				4E807D9019461D9000D875D1 /* Frameworks */,
 				4E807D9119461D9000D875D1 /* Resources */,
 				4E807DC719461DC700D875D1 /* Embed App Extensions */,
 				4E5B67C4196E07B300114361 /* Embed Frameworks */,
 				0D19B5681C5F9F0500AB8511 /* ShellScript */,
+				CE22F7A0F18018D02A0ECFC2 /* Embed Pods Frameworks */,
+				2A8B105F436E86424D63DB3A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -435,9 +470,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4E807DC419461DC700D875D1 /* Build configuration list for PBXNativeTarget "Keyboard" */;
 			buildPhases = (
+				05B541F2F2975C1D3ACB0950 /* Check Pods Manifest.lock */,
 				4E807DB519461DC700D875D1 /* Sources */,
 				4E807DB619461DC700D875D1 /* Frameworks */,
 				4E807DB719461DC700D875D1 /* Resources */,
+				E4866CC6ACF7C2AC6F387B3E /* Embed Pods Frameworks */,
+				ABE2A2D7FE8B26A33ED3E7DA /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -556,6 +594,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		05B541F2F2975C1D3ACB0950 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		0D19B5681C5F9F0500AB8511 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -568,6 +621,81 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "";
+		};
+		2A8B105F436E86424D63DB3A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HostingApp/Pods-HostingApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5727224826E8D0BC12E43EFE /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		ABE2A2D7FE8B26A33ED3E7DA /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Keyboard/Pods-Keyboard-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE22F7A0F18018D02A0ECFC2 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HostingApp/Pods-HostingApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E4866CC6ACF7C2AC6F387B3E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Keyboard/Pods-Keyboard-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -752,6 +880,7 @@
 		};
 		4E807DB019461D9000D875D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1383CE47645013360C30B64F /* Pods-HostingApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -769,6 +898,7 @@
 		};
 		4E807DB119461D9000D875D1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5385C22DCF4F43EA54E556AF /* Pods-HostingApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -786,6 +916,7 @@
 		};
 		4E807DC519461DC700D875D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4907F482AE9F815C329FFBBB /* Pods-Keyboard.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Keyboard/Keyboard.entitlements;
@@ -802,6 +933,7 @@
 		};
 		4E807DC619461DC700D875D1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F95A53D798AC6CC8C6490334 /* Pods-Keyboard.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Keyboard/Keyboard.entitlements;

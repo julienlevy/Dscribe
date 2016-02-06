@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Mixpanel
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+
+        Mixpanel.sharedInstanceWithToken("2251f78e023ae81fc07ba7b3234cfc23")
 
         self.loadRightViewController()
 
@@ -56,13 +59,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if NSUserDefaults.standardUserDefaults().boolForKey("hasSeenOnboarding") {
                 let settingsViewController = storyboard.instantiateViewControllerWithIdentifier("SettingsNavigationController")
                 self.window?.rootViewController = settingsViewController
+
+                Mixpanel.sharedInstance().track("Opening to settings")
             } else {
                 let onboardingViewController = storyboard.instantiateViewControllerWithIdentifier("OnboardingViewController")
                 self.window?.rootViewController = onboardingViewController
+
+                Mixpanel.sharedInstance().track("Opening to onboarding")
             }
         } else {
             let installViewController = storyboard.instantiateViewControllerWithIdentifier("InstallKeyboardViewController")
             self.window?.rootViewController = installViewController
+
+            Mixpanel.sharedInstance().track("Opening to install instructions")
         }
     }
 }

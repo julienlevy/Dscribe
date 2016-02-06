@@ -1,5 +1,7 @@
 # Dscribe
 
+The dscribe code is added to Tasty-imitation, from there you must run `pod install` and then open *TastyImitationKeyboard.xcworkspace* and not xcodeproject.
+
 Emoji data taken from https://github.com/iamcal/emoji-data
 
 # Run python script

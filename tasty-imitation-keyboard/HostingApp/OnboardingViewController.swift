@@ -8,6 +8,7 @@
 
 import UIKit
 import MediaPlayer
+import Mixpanel
 
 class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
     @IBOutlet var iphoneImageTopConstraint: NSLayoutConstraint!
@@ -112,6 +113,8 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
         self.showViewController(settingsViewController, sender: nil)
 
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasSeenOnboarding")
+
+        Mixpanel.sharedInstance().track("Finish Onboarding", properties: ["trial text": (self.trialTextField.text != nil ? self.trialTextField.text! : "")])
     }
 
     func dismissKeyboard() {
@@ -157,6 +160,8 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
         }
     }
     func textFieldDidEndEditing(textField: UITextField) {
+        Mixpanel.sharedInstance().track("Text field onboarding", properties: ["text": (textField.text != nil ? textField.text! : "")])
+
         if textField.text == "" {
             textField.text = self.defaultText
         }
