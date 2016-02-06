@@ -80,6 +80,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             language = newLanguage
         }
 
+        Mixpanel.sharedInstanceWithToken("2251f78e023ae81fc07ba7b3234cfc23")
+
         // TODO: refacto and improve performances
         NSUserDefaults.standardUserDefaults().registerDefaults(["version_1.1_emojis_updated": false])
         if NSUserDefaults.standardUserDefaults().boolForKey("version_1.1_emojis_updated") {
@@ -134,6 +136,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+
+        Mixpanel.sharedInstance().track("Keyboard appears")
     }
 
     // MARK: Keyboard Setup methods
@@ -558,18 +562,22 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     }
 
     // MARK: text input processing tools/functions
-    func deleteSearchText() {
-        let context = self.textDocumentProxy.documentContextBeforeInput
-        if context != nil {
-            let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
-            if firstRange != nil {
-                let lastIndex = context!.endIndex
-                let count = (firstRange!.startIndex..<lastIndex).count
+    func deleteSearchText() -> String {
+        var search: String = ""
+
+        if let context = self.textDocumentProxy.documentContextBeforeInput {
+
+            if let firstRange = context.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch) {
+                search = context.substringFromIndex(firstRange.startIndex)
+
+                let lastIndex = context.endIndex
+                let count = (firstRange.startIndex..<lastIndex).count
                 for var i = 0; i < count; i++ {
                     self.textDocumentProxy.deleteBackward()
                 }
             }
         }
+        return search
     }
 
     func deleteLastWordAndAppendNew(word: String) {
@@ -673,8 +681,12 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     func appendEmoji(emoji: String) {
         // Uses the data passed back
         if self.escapeMode {
-            self.deleteSearchText()
+            let searched: String = self.deleteSearchText()
             self.toggleSearchMode()
+
+            Mixpanel.sharedInstance().track("Emoji", properties: ["emoji" : emoji, "search": searched])
+        } else {
+            Mixpanel.sharedInstance().track("Emoji", properties: ["emoji" : emoji, "search": "n°" + String(self.numberOfEnteredEmojis + 1)])
         }
 
         self.emojiClass!.incrementScore(emoji)

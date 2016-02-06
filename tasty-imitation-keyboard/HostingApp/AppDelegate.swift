@@ -60,18 +60,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let settingsViewController = storyboard.instantiateViewControllerWithIdentifier("SettingsNavigationController")
                 self.window?.rootViewController = settingsViewController
 
-                Mixpanel.sharedInstance().track("Opening to settings")
+                Mixpanel.sharedInstance().track("App Settings")
             } else {
                 let onboardingViewController = storyboard.instantiateViewControllerWithIdentifier("OnboardingViewController")
                 self.window?.rootViewController = onboardingViewController
 
-                Mixpanel.sharedInstance().track("Opening to onboarding")
+                Mixpanel.sharedInstance().track("Onboarding")
             }
         } else {
             let installViewController = storyboard.instantiateViewControllerWithIdentifier("InstallKeyboardViewController")
             self.window?.rootViewController = installViewController
 
-            Mixpanel.sharedInstance().track("Opening to install instructions")
+            Mixpanel.sharedInstance().track("Install instructions")
         }
     }
 }
