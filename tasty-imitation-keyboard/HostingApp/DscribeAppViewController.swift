@@ -237,7 +237,7 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
                 let key = self.settingsList[indexPath.section].1[indexPath.row]
                 NSUserDefaults(suiteName: "group.dscribekeyboard")!.setBool(sender.on, forKey: key)
 
-                Mixpanel.sharedInstance().track("Modify setting", properties:[key: sender.on]);
+                Mixpanel.sharedInstance().track("Modify setting", properties:[key: sender.on])
             }
         }
     }
@@ -322,7 +322,7 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
                 (self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)) as? StaticSettingCell)?.labelDisplay.text = language
                 currentPickerLanguage = language
 
-                Mixpanel.sharedInstance().track("Modify setting", properties:[key: language]);
+                Mixpanel.sharedInstance().track("Modify setting", properties:[key: language])
             }
         }
         if key == kKeyboardType {
@@ -330,7 +330,7 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
                 (self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)) as? StaticSettingCell)?.labelDisplay.text = type
                 currentPickerType = type
 
-                Mixpanel.sharedInstance().track("Modify setting", properties:[key: type]);
+                Mixpanel.sharedInstance().track("Modify setting", properties:[key: type])
             }
         }
     }

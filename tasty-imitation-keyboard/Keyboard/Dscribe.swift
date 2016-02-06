@@ -175,6 +175,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                             keyView.addTarget(self, action: Selector("modeChangeTapped:"), forControlEvents: .TouchDown)
                         case Key.KeyType.Settings:
                             keyView.addTarget(self, action: Selector("toggleSettings"), forControlEvents: .TouchUpInside)
+                            keyView.addTarget(self, action: Selector("askedToOpenSettings"), forControlEvents: .TouchUpInside)
                         case Key.KeyType.SearchEmoji:
                             keyView.addTarget(self, action: Selector("searchEmojiPressed:"), forControlEvents: .TouchUpInside)
                         default:
@@ -559,6 +560,10 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 self.layout?.setAppearanceForKey(self.searchEmojiKey!, model: keyModel, darkMode: self.darkMode(), solidColorMode: self.solidColorMode())
             }
         }
+    }
+
+    func askedToOpenSettings() {
+        Mixpanel.sharedInstance().track("Keyboard Settings")
     }
 
     // MARK: text input processing tools/functions
