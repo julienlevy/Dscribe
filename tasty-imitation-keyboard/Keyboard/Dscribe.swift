@@ -91,6 +91,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         } else {
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "version_1.1_emojis_updated")
             self.loadSampleEmojis()
+            self.saveEmojis()
         }
     }
     required init?(coder: NSCoder) {
