@@ -312,6 +312,17 @@ class DscribeLayout: KeyboardLayout {
             // TODO:  use this function "setAppearanceForOtherKey" and type Other and type instead of overriding this function
             key.color = (self.inSearchMode ? UIColor(red: 250.0/255, green: 193.0/255, blue: 62.0/255, alpha: 1.0) : self.globalColors.regularKey(darkMode, solidColorMode: solidColorMode))
             key.downColor = self.globalColors.specialKey(darkMode, solidColorMode: solidColorMode)
+        } else if model.type == Key.KeyType.AccentCharacter {
+            //Same as Character and SpecialCharacter
+            key.color = self.self.globalColors.regularKey(darkMode, solidColorMode: solidColorMode)
+            if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+                key.downColor = self.globalColors.specialKey(darkMode, solidColorMode: solidColorMode)
+            }
+            else {
+                key.downColor = nil
+            }
+            key.textColor = (darkMode ? self.globalColors.darkModeTextColor : self.globalColors.lightModeTextColor)
+            key.downTextColor = nil
         }
         super.setAppearanceForKey(key, model: model, darkMode: darkMode, solidColorMode: solidColorMode)
     }

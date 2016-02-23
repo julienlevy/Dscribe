@@ -30,6 +30,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     var escapeMode: Bool = false
     var searchEmojiKey: KeyboardKey?
+    var accentKey: KeyboardKey?
+    var accentKeyModel: Key?
 
     // TODO delete
     var stringToSearch: String = ""
@@ -178,11 +180,15 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                             keyView.addTarget(self, action: Selector("askedToOpenSettings"), forControlEvents: .TouchUpInside)
                         case Key.KeyType.SearchEmoji:
                             keyView.addTarget(self, action: Selector("searchEmojiPressed:"), forControlEvents: .TouchUpInside)
+                        case Key.KeyType.AccentCharacter:
+                            keyView.addTarget(self, action: Selector("accentPressed:"), forControlEvents: .TouchUpInside)
+                            self.accentKeyModel = key
+                            self.accentKey = keyView
                         default:
                             break
                         }
 
-                        if key.isCharacter {
+                        if key.isCharacter || key.type == Key.KeyType.AccentCharacter {
                             if UIDevice.currentDevice().userInterfaceIdiom != UIUserInterfaceIdiom.Pad {
                                 keyView.addTarget(self, action: Selector("showPopup:"), forControlEvents: [.TouchDown, .TouchDragInside, .TouchDragEnter])
                                 keyView.addTarget(keyView, action: Selector("hidePopup"), forControlEvents: [.TouchDragExit, .TouchCancel])
@@ -190,7 +196,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                             }
                         }
 
-                        if key.hasOutput {
+                        if key.hasOutput && key.type != Key.KeyType.AccentCharacter {
                             keyView.addTarget(self, action: "keyPressedHelper:", forControlEvents: .TouchUpInside)
                         }
 
@@ -281,7 +287,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     func switchKeyboard() {
         print("Changing keyboard")
         if keyboardType == kAZERTY {
-            self.keyboard = azertyKeyboard()
+//            self.keyboard = azertyKeyboard()
+            self.keyboard = accentedAZERTYKeyboard()
         } else if keyboardType == kQWERTY {
             self.keyboard = defaultKeyboard()
         } else {
@@ -444,6 +451,10 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
         self.checkAndResetSelectedText()
 
+        if let keyCharacter = keyOutput.characters.first {
+            self.updateAccentKey(keyCharacter)
+        }
+
         if keyOutput == kEscapeCue {
 //            if escapeMode {
 //                self.deleteSearchText()
@@ -535,8 +546,30 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         }
     }
 
+    func updateAccentKey(lastLetter: Character) {
+        if let keyModel = self.accentKeyModel {
+            if lastLetter == "e" {
+                keyModel.setLetter("\u{301}")
+            } else if lastLetter == "a" {
+                keyModel.setLetter("`")
+            } else {
+                keyModel.setLetter("'")
+            }
+        }
+    }
+    func accentPressed(sender: KeyboardKey) {
+        self.textDocumentProxy.insertText(sender.text)
+
+        if let keyModel = self.accentKeyModel {
+            keyModel.setLetter("'")
+            if let key = self.accentKey {
+                key.text = "'"
+            }
+        }
+    }
+
     func searchEmojiPressed(sender: KeyboardKey) {
-        if searchEmojiKey == nil {
+        if self.searchEmojiKey == nil {
             self.searchEmojiKey = sender
         }
         if escapeMode {
