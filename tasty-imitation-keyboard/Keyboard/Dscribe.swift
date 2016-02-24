@@ -539,8 +539,10 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 self.searchEmojis(self.stringToSearch)
             }
         } else if numberOfEnteredEmojis == 0 {
-            let contextString: String = String(context!.characters.dropLast())
-            self.searchSuggestions(contextString, shouldAutoReplace: false)
+            if let lastCharacter = context?.characters.last {
+                self.updateAccentKey(lastCharacter)
+            }
+            self.searchSuggestions(context!, shouldAutoReplace: false)
         } else {
             self.numberOfEnteredEmojis--
         }
@@ -549,7 +551,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     func updateAccentKey(lastLetter: Character) {
         if let keyModel = self.accentKeyModel {
             if let languageCode = language.componentsSeparatedByString("_").first {
-                keyModel.setLetter(accentAfterCharacter(lastLetter, withLanguage: languageCode))
+                let accent = accentAfterCharacter(lastLetter, withLanguage: languageCode)
+                keyModel.setLetter(accent)
+                self.accentKey?.text = accent
             }
         }
     }
