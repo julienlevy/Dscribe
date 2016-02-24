@@ -548,12 +548,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     func updateAccentKey(lastLetter: Character) {
         if let keyModel = self.accentKeyModel {
-            if lastLetter == "e" {
-                keyModel.setLetter("\u{301}")
-            } else if lastLetter == "a" {
-                keyModel.setLetter("`")
-            } else {
-                keyModel.setLetter("'")
+            if let languageCode = language.componentsSeparatedByString("_").first {
+                keyModel.setLetter(accentAfterCharacter(lastLetter, withLanguage: languageCode))
             }
         }
     }

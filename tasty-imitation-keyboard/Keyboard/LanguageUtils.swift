@@ -47,3 +47,46 @@ extension String {
         return self
     }
 }
+
+func accentAfterCharacter(character: Character, withLanguage language: String) -> String {
+    switch language {
+    case "fr":
+        switch character {
+        case "e":
+            return "\u{301}"
+        case "a", "u":
+            return "\u{300}"
+        case "i", "o":
+            return "\u{302}"
+        default:
+            return "'"
+        }
+    case "es":
+        switch character {
+        case "e", "o", "a", "i", "u":
+            return "\u{301}"
+        case "n":
+            return "\u{303}"
+        default:
+            return "'"
+        }
+    case "it":
+        switch character {
+        case "a", "e", "i", "o", "u":
+            return "\u{300}"
+//        case "che", " ne", " se":
+//            return "\u{301}"
+        default:
+            return "'"
+        }
+    case "en":
+        switch character {
+        case "e":
+            return "\u{301}"
+        default:
+            return "'"
+        }
+    default:
+        return "'"
+    }
+}
