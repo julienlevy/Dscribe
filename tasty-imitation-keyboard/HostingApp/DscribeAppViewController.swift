@@ -24,13 +24,14 @@ let kKeyboardPicker: String = "kKeyboardPicker"
 
 let kAZERTY = "AZERTY"
 let kQWERTY = "QWERTY"
+let kAccentedAZERTY = "Accented AZERTY"
 
 class DscribeAppViewController: UITableViewController, PickerDelegate {
     var availableLanguages: [String] = [String]()
     var availableLanguagesCodes: [String] = [String]()
     var currentPickerLanguage: String = ""
 
-    let keyboardTypes: [String] = [kQWERTY, kAZERTY]
+    let keyboardTypes: [String] = [kQWERTY, kAZERTY, kAccentedAZERTY]
     var currentPickerType: String = ""
 
     var displayLanguagePicker: Bool = false

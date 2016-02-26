@@ -16,6 +16,7 @@ let kKeyboardType = "kKeyboardType"
 
 let kAZERTY = "AZERTY"
 let kQWERTY = "QWERTY"
+let kAccentedAZERTY = "Accented AZERTY"
 
 
 class Dscribe: KeyboardViewController, DscribeBannerDelegate {
@@ -287,10 +288,11 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     func switchKeyboard() {
         print("Changing keyboard")
         if keyboardType == kAZERTY {
-//            self.keyboard = azertyKeyboard()
-            self.keyboard = accentedAZERTYKeyboard()
+            self.keyboard = azertyKeyboard()
         } else if keyboardType == kQWERTY {
             self.keyboard = defaultKeyboard()
+        } else if keyboardType == kAccentedAZERTY {
+            self.keyboard = accentedAZERTYKeyboard()
         } else {
             return
         }

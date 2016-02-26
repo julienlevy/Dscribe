@@ -102,8 +102,11 @@ class KeyboardViewController: UIInputViewController {
         ])
         
         // TODO: Find a way to put this in the subclass initializer, not to modify this class
-        if NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kKeyboardType) as? String == kAZERTY {
+        let keyboardType = NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kKeyboardType) as? String
+        if keyboardType == kAZERTY {
             self.keyboard = azertyKeyboard()
+        } else if keyboardType == kAccentedAZERTY {
+            self.keyboard = accentedAZERTYKeyboard()
         } else {
             self.keyboard = defaultKeyboard()
         }

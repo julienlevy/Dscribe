@@ -20,7 +20,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
     var availableLanguagesCodes: [String] = [String]()
     var currentPickerLanguage: String = ""
 
-    let keyboardTypes: [String] = [kQWERTY, kAZERTY]
+    let keyboardTypes: [String] = [kQWERTY, kAZERTY, kAccentedAZERTY]
     var currentPickerType: String = ""
 
     var displayLanguagePicker: Bool = false
