@@ -329,8 +329,14 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 for key in rowKeys {
                     if key.type == Key.KeyType.Space {
                         key.uppercaseKeyCap = spaceText
+                        if let keyboardKey = self.layout?.modelToView[key] {
+                            keyboardKey.text = spaceText
+                        }
                     } else if key.type == Key.KeyType.Return {
                         key.uppercaseKeyCap = returnText
+                        if let keyboardKey = self.layout?.modelToView[key] {
+                            keyboardKey.text = returnText
+                        }
                     }
                 }
             }
