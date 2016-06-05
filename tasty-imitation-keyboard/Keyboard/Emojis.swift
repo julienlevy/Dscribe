@@ -104,7 +104,7 @@ class Emoji: NSObject, NSCoding {
                         if !matched {
                             matched = true
                             //Nb of matches
-                            emojiToMatchData[emoji]![0]++
+                            emojiToMatchData[emoji]![0] += 1
                         }
                         //Percentage of matches
                         emojiToMatchData[emoji]![1] += 1.0/Float(tagsArray.count)

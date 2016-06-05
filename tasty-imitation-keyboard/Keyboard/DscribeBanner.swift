@@ -78,7 +78,7 @@ class DscribeBanner: ExtraView {
         var count: Int = 0
         for subview in self.scrollView.subviews {
             if subview is UIButton {
-                count++
+                count += 1
             }
         }
         if count == 0 {
@@ -191,7 +191,7 @@ class DscribeBanner: ExtraView {
 
         var count: Int = 0
         for emoji in emojiList {
-            count++
+            count += 1
             if count > 15 {
                 break
             }
@@ -216,11 +216,12 @@ class DscribeBanner: ExtraView {
         self.setButtonColors()
     }
 
-    func displaySuggestions(var suggestionList: [String], originalString: String, willReplaceString: String = "") {
+    func displaySuggestions(suggestionList: [String], originalString: String, willReplaceString: String = "") {
+        var varSuggestionList: [String] = suggestionList
         if willReplaceString != "" {
-            suggestionList.insert(willReplaceString, atIndex: 0)
+            varSuggestionList.insert(willReplaceString, atIndex: 0)
         }
-        suggestionList.insert(originalString, atIndex: 0)
+        varSuggestionList.insert(originalString, atIndex: 0)
 
         self.removeAllButtonsFromScrollView()
         self.beforeScrollView.hidden = true
@@ -230,7 +231,7 @@ class DscribeBanner: ExtraView {
         scrollView.scrollEnabled = false
         scrollView.setContentOffset(CGPointZero, animated: false)
 
-        for var index = 0; index < 3; index++ {
+        for index in 0 ..< 3 {
             let button: UIButton = UIButton()
             button.layer.borderWidth = 0.4
             button.layer.borderColor = UIColor.clearColor().CGColor
@@ -239,9 +240,9 @@ class DscribeBanner: ExtraView {
             button.addTarget(self, action: Selector("cancelHighlight:"), forControlEvents: [UIControlEvents.TouchUpInside, UIControlEvents.TouchDragExit, UIControlEvents.TouchUpOutside, UIControlEvents.TouchCancel, UIControlEvents.TouchDragOutside])
             button.addTarget(self, action: Selector("highlightButton:"), forControlEvents: [.TouchDown, .TouchDragInside])
 
-            if suggestionList.count > index {
+            if varSuggestionList.count > index {
                 var suggestion: String = ""
-                suggestion = suggestionList[index]
+                suggestion = varSuggestionList[index]
                 if index == 0 {
                     button.setTitle((suggestion != "" ? "\"" + suggestion + "\"" : ""), forState: UIControlState.Normal)
                     button.addTarget(self, action: Selector("alreadyTypedWord:"), forControlEvents: UIControlEvents.TouchUpInside)

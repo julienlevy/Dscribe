@@ -427,7 +427,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             }
             if !inDifference {
                 if self.fullContextBeforeChange[self.fullContextBeforeChange.startIndex.advancedBy(i)] == fullTextAfter[fullTextAfter.startIndex.advancedBy(j)] {
-                    j++
+                    j += 1
                 } else {
                     firstIndex = i
                     inDifference = true
@@ -526,7 +526,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 }
             }
             if self.numberOfEnteredEmojis > 0 {
-                self.numberOfEnteredEmojis--
+                self.numberOfEnteredEmojis -= 1
             }
         }
 
@@ -554,7 +554,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             }
             self.searchSuggestions(context!, shouldAutoReplace: false, showFormerWord: true)
         } else {
-            self.numberOfEnteredEmojis--
+            self.numberOfEnteredEmojis -= 1
         }
     }
 
@@ -620,7 +620,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
                 let lastIndex = context.endIndex
                 let count = (firstRange.startIndex..<lastIndex).count
-                for var i = 0; i < count; i++ {
+                for _ in 0 ..< count {
                     self.textDocumentProxy.deleteBackward()
                 }
             }
@@ -631,9 +631,10 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     func deleteLastWordAndAppendNew(word: String) {
         let context = self.textDocumentProxy.documentContextBeforeInput
         if context != nil {
-            let lastWord = context!.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " \n")).last
-            for var i = 0; i < lastWord?.characters.count; i++ {
-                self.textDocumentProxy.deleteBackward()
+            if let lastWord = context!.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " \n")).last {
+                for _ in 0 ..< lastWord.characters.count {
+                    self.textDocumentProxy.deleteBackward()
+                }
             }
         }
         self.textDocumentProxy.insertText(word)
@@ -735,9 +736,9 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     func appendEmoji(emoji: String) {
         // Uses the data passed back
         if self.escapeMode {
-            let searched: String = self.deleteSearchText()
             self.toggleSearchMode()
 
+//            let searched: String = self.deleteSearchText()
 //            Mixpanel.sharedInstance().track("Emoji", properties: ["emoji" : emoji, "search": searched])
 //        } else {
 //            Mixpanel.sharedInstance().track("Emoji", properties: ["emoji" : emoji, "search": "n°" + String(self.numberOfEnteredEmojis + 1)])
@@ -747,7 +748,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         self.saveEmojis()
 
         self.textDocumentProxy.insertText(emoji)
-        self.numberOfEnteredEmojis++
+        self.numberOfEnteredEmojis += 1
     }
 
     func appendSuggestion(suggestion: String) {
