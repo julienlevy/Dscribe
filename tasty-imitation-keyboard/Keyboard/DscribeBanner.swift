@@ -64,7 +64,6 @@ class DscribeBanner: ExtraView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        print("layout banner subviews")
 
         self.backgroundColor = UIColor.clearColor()
 

@@ -50,6 +50,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     var fullContextBeforeChange: String = "" //Necessary to communicate between two functions
 
     var numberOfEnteredEmojis: Int = 0
+    var wordBeforeReplace: String = ""
+    var numberOfDeletedCharacters: Int = 0
 
     // MARK: UIInputViewController methods & classes
     override class var globalColors: GlobalColors.Type { get { return DscribeColors.self }}
@@ -550,7 +552,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             if let lastCharacter = context?.characters.last {
                 self.updateAccentKey(lastCharacter)
             }
-            self.searchSuggestions(context!, shouldAutoReplace: false)
+            self.searchSuggestions(context!, shouldAutoReplace: false, showFormerWord: true)
         } else {
             self.numberOfEnteredEmojis--
         }
@@ -667,8 +669,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         }
     }
 
-    func searchSuggestions(contextString: String, shouldAutoReplace: Bool = true) {
-        let lastWord = contextString.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " \n")).last
+    func searchSuggestions(contextString: String, shouldAutoReplace: Bool = true, showFormerWord: Bool = false) {
+        var lastWord = contextString.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " \n")).last
         let rangeOfLast = NSMakeRange(contextString.characters.count - lastWord!.characters.count, lastWord!.characters.count)
 
         let checker: UITextChecker = UITextChecker()
@@ -676,6 +678,12 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         var guesses: [String]? = []
         var completion: [String]? = []
         var autoReplace: Bool = false
+
+        if showFormerWord {
+            lastWord = self.wordBeforeReplace
+        } else if lastWord! != "" {
+            self.wordBeforeReplace = lastWord!
+        }
 
         //Contacts and stuff
         for lexiconEntry in self.appleLexicon.entries {
@@ -751,7 +759,11 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     func refusedSuggestion() {
         let context = self.textDocumentProxy.documentContextBeforeInput
         if context != nil {
-            let lastWord = context!.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " \n")).last
+            var lastWord = context!.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " \n")).last
+            if lastWord! != self.wordBeforeReplace {
+                lastWord = self.wordBeforeReplace
+                self.deleteLastWordAndAppendNew(lastWord!)
+            }
             if !(lastWord ?? "").isEmpty {
                 UITextChecker.learnWord(lastWord!)
             }
