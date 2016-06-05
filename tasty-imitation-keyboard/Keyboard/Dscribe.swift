@@ -51,7 +51,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     var numberOfEnteredEmojis: Int = 0
     var wordBeforeReplace: String = ""
-    var numberOfDeletedCharacters: Int = 0
+
 
     // MARK: UIInputViewController methods & classes
     override class var globalColors: GlobalColors.Type { get { return DscribeColors.self }}
@@ -679,7 +679,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         var completion: [String]? = []
         var autoReplace: Bool = false
 
-        if showFormerWord {
+        if showFormerWord && lastWord!.characters.count > 1 {
             lastWord = self.wordBeforeReplace
         } else if lastWord! != "" {
             self.wordBeforeReplace = lastWord!
