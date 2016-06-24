@@ -419,7 +419,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         var lastIndex: Int = 0
         var j: Int = 0
 
-        for i in 0...self.fullContextBeforeChange.characters.count {
+        for i in 0..<self.fullContextBeforeChange.characters.count {
             if j >= fullTextAfter.characters.count {
                 firstIndex = j
                 lastIndex = self.fullContextBeforeChange.characters.count
@@ -461,44 +461,41 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
         self.checkAndResetSelectedText()
 
-        if let keyCharacter = keyOutput.characters.first {
-            self.updateAccentKey(keyCharacter)
+        self.textDocumentProxy.insertText(keyOutput)
+
+        let context = self.textDocumentProxy.documentContextBeforeInput
+
+//        if let keyCharacter = keyOutput.characters.first {
+//            self.updateAccentKey(keyCharacter)
+//        }
+        if let certainContext = context {
+            let length = certainContext.characters.count
+            if length > 2 {
+                let lastCharacters = certainContext.substringFromIndex(certainContext.startIndex.advancedBy(certainContext.characters.count - 2))
+                self.updateAccentKey(lastCharacters)
+            } else {
+                self.updateAccentKey(keyOutput)
+            }
         }
 
-        if keyOutput == kEscapeCue {
-//            if escapeMode {
-//                self.deleteSearchText()
-//            } else {
-//                //TODO replace with most used emoji
-//                self.searchEmojis("")
-//
-//                self.textDocumentProxy.insertText(keyOutput)
-//            }
-//
-//            escapeMode = !escapeMode
-//            self.displaySearchMode()
-            self.textDocumentProxy.insertText(keyOutput)
+
+        if escapeMode {
+            if keyOutput == "\n" {
+                self.toggleSearchMode()
+                return
+            }
+            let firstRange = context?.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
+            if firstRange != nil {
+                let lastIndex = context!.endIndex
+                self.stringToSearch = context!.substringWithRange(firstRange!.startIndex.successor()..<lastIndex)
+                self.searchEmojis(self.stringToSearch)
+            }
         } else {
-            self.textDocumentProxy.insertText(keyOutput)
-            let context = self.textDocumentProxy.documentContextBeforeInput
-            if escapeMode {
-                if keyOutput == "\n" {
-                    self.toggleSearchMode()
-                    return
-                }
-                let firstRange = context?.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
-                if firstRange != nil {
-                    let lastIndex = context!.endIndex
-                    self.stringToSearch = context!.substringWithRange(firstRange!.startIndex.successor()..<lastIndex)
-                    self.searchEmojis(self.stringToSearch)
-                }
+            if context != nil {
+                self.searchSuggestions(context!)
             } else {
-                if context != nil {
-                    self.searchSuggestions(context!)
-                } else {
-                    print("That was unexpected, context is nil, here is the key output:")
-                    print(keyOutput)
-                }
+                print("That was unexpected, context is nil, here is the key output:")
+                print(keyOutput)
             }
         }
     }
@@ -550,7 +547,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             }
         } else if numberOfEnteredEmojis == 0 {
             if let lastCharacter = context?.characters.last {
-                self.updateAccentKey(lastCharacter)
+                self.updateAccentKey(String(lastCharacter))
             }
             self.searchSuggestions(context!, shouldAutoReplace: false, showFormerWord: true)
         } else {
@@ -558,7 +555,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         }
     }
 
-    func updateAccentKey(lastLetter: Character) {
+    func updateAccentKey(lastLetter: String) {
         if let keyModel = self.accentKeyModel {
             if let languageCode = language.componentsSeparatedByString("_").first {
                 let accent = accentAfterCharacter(lastLetter, withLanguage: languageCode)
@@ -738,7 +735,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         if self.escapeMode {
             self.toggleSearchMode()
 
-//            let searched: String = self.deleteSearchText()
+//            let searched: String =
+            self.deleteSearchText()
 //            Mixpanel.sharedInstance().track("Emoji", properties: ["emoji" : emoji, "search": searched])
 //        } else {
 //            Mixpanel.sharedInstance().track("Emoji", properties: ["emoji" : emoji, "search": "n°" + String(self.numberOfEnteredEmojis + 1)])

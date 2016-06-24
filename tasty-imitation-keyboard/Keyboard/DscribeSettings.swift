@@ -294,6 +294,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         let myAppUrl = NSURL(string: "dscribe://")!
         var myResponder: UIResponder? = self
         while myResponder != nil {
+            print("trying a resp")
             if myResponder!.respondsToSelector(Selector("openURL:")) {
                 print("responder responding to selector")
                 print(myResponder)
@@ -306,6 +307,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         let myAppUrl = NSURL(string: "prefs:root=General&path=Keyboard/KEYBOARDS")!
         var myResponder: UIResponder? = self
         while myResponder != nil {
+            print("Trying a responder \(myResponder!.description)")
             if myResponder!.respondsToSelector(Selector("openURL:")) {
                 print("responder responding to selector")
                 print(myResponder)
