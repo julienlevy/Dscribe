@@ -34,8 +34,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     var accentKey: KeyboardKey?
     var accentKeyModel: Key?
 
-    // TODO delete
-    var stringToSearch: String = ""
 
     var overlayView: UIView = UIView()
 
@@ -413,7 +411,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             fullTextAfter = fullTextAfter + self.textDocumentProxy.documentContextAfterInput!
         }
 
-        // TODO case select is in a totally different context
+        // TODO case selection is in a totally different context
         var inDifference: Bool = false
         var firstIndex: Int = 0
         var lastIndex: Int = 0
@@ -487,8 +485,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             let firstRange = context?.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
             if firstRange != nil {
                 let lastIndex = context!.endIndex
-                self.stringToSearch = context!.substringWithRange(firstRange!.startIndex.successor()..<lastIndex)
-                self.searchEmojis(self.stringToSearch)
+                let stringToSearch = context!.substringWithRange(firstRange!.startIndex.successor()..<lastIndex)
+                self.searchEmojis(stringToSearch)
             }
         } else {
             if context != nil {
@@ -542,8 +540,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             let firstRange = context!.rangeOfString(kEscapeCue, options:NSStringCompareOptions.BackwardsSearch)
             if firstRange != nil {
                 let lastIndex = context!.endIndex
-                self.stringToSearch = context!.substringWithRange(firstRange!.startIndex.successor()..<lastIndex)
-                self.searchEmojis(self.stringToSearch)
+                let stringToSearch = context!.substringWithRange(firstRange!.startIndex.successor()..<lastIndex)
+                self.searchEmojis(stringToSearch)
             }
         } else if numberOfEnteredEmojis == 0 {
             if let lastCharacter = context?.characters.last {

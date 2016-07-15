@@ -64,6 +64,9 @@ class InstallKeyboardViewController: UIViewController {
         if let settingsURL = NSURL(string: "prefs:root=General&path=Keyboard/KEYBOARDS") {
             if !UIApplication.sharedApplication().openURL(settingsURL) {
                 //TODO: Open regular settings not from keyboard page
+                if let mainSettingsURL = NSURL(string: UIApplicationOpenSettingsURLString) {
+                    UIApplication.sharedApplication().openURL(mainSettingsURL)
+                }
             }
         }
     }
