@@ -212,8 +212,8 @@ class ForwardingView: UIView {
         }
     }
 
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        for obj in touches! {
+    override func touchesCancelled(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for obj in touches {
             let touch = obj as UITouch
             let view = self.touchToView[touch]
             

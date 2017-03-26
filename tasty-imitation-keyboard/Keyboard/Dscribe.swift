@@ -168,8 +168,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                         case Key.KeyType.Backspace:
                             let cancelEvents: UIControlEvents = [UIControlEvents.TouchUpInside, UIControlEvents.TouchUpInside, UIControlEvents.TouchDragExit, UIControlEvents.TouchUpOutside, UIControlEvents.TouchCancel, UIControlEvents.TouchDragOutside]
 
-                            keyView.addTarget(self, action: "backspaceDown:", forControlEvents: .TouchDown)
-                            keyView.addTarget(self, action: "backspaceUp:", forControlEvents: cancelEvents)
+                            keyView.addTarget(self, action: #selector(KeyboardViewController.backspaceDown(_:)), forControlEvents: .TouchDown)
+                            keyView.addTarget(self, action: #selector(KeyboardViewController.backspaceUp(_:)), forControlEvents: cancelEvents)
                         case Key.KeyType.Shift:
                             keyView.addTarget(self, action: Selector("shiftDown:"), forControlEvents: .TouchDown)
                             keyView.addTarget(self, action: Selector("shiftUp:"), forControlEvents: .TouchUpInside)
@@ -178,11 +178,11 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                             keyView.addTarget(self, action: Selector("modeChangeTapped:"), forControlEvents: .TouchDown)
                         case Key.KeyType.Settings:
                             keyView.addTarget(self, action: Selector("toggleSettings"), forControlEvents: .TouchUpInside)
-                            keyView.addTarget(self, action: Selector("askedToOpenSettings"), forControlEvents: .TouchUpInside)
+                            keyView.addTarget(self, action: #selector(Dscribe.askedToOpenSettings), forControlEvents: .TouchUpInside)
                         case Key.KeyType.SearchEmoji:
-                            keyView.addTarget(self, action: Selector("searchEmojiPressed:"), forControlEvents: .TouchUpInside)
+                            keyView.addTarget(self, action: #selector(Dscribe.searchEmojiPressed(_:)), forControlEvents: .TouchUpInside)
                         case Key.KeyType.AccentCharacter:
-                            keyView.addTarget(self, action: Selector("accentPressed:"), forControlEvents: .TouchUpInside)
+                            keyView.addTarget(self, action: #selector(Dscribe.accentPressed(_:)), forControlEvents: .TouchUpInside)
                             self.accentKeyModel = key
                             self.accentKey = keyView
                         default:
@@ -220,7 +220,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
                 for rowKeys in page.rows {
                     for key in rowKeys {
                         if let keyView = self.layout!.viewForKey(key) {
-                            keyView.addTarget(self, action: "takeScreenshotDelay", forControlEvents: .TouchDown)
+                            keyView.addTarget(self, action: #selector(Dscribe.takeScreenshotDelay), forControlEvents: .TouchDown)
                         }
                     }
                 }
@@ -236,7 +236,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     override func createSettings() -> ExtraView? {
         let settingsView = DscribeSettings(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
         settingsView.backButton?.addTarget(self, action: Selector("toggleSettings"), forControlEvents: UIControlEvents.TouchUpInside)
-        settingsView.backButton?.addTarget(self, action: Selector("backFromSettings"), forControlEvents: UIControlEvents.TouchUpInside)
+        settingsView.backButton?.addTarget(self, action: #selector(Dscribe.backFromSettings), forControlEvents: UIControlEvents.TouchUpInside)
         return settingsView
     }
 
@@ -346,7 +346,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     // MARK: TODO: define use for those methods
     func takeScreenshotDelay() {
         print("Take Screenshot Delay")
-        NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("takeScreenshot"), userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(Dscribe.takeScreenshot), userInfo: nil, repeats: false)
     }
 
     func takeScreenshot() {
@@ -365,7 +365,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             UIGraphicsEndImageContext()
             let name = (self.interfaceOrientation.isPortrait ? "Screenshot-Portrait" : "Screenshot-Landscape")
             let imagePath = "/Users/archagon/Documents/Programming/OSX/RussianPhoneticKeyboard/External/tasty-imitation-keyboard/\(name).png"
-            UIImagePNGRepresentation(capturedImage)!.writeToFile(imagePath, atomically: true)
+            UIImagePNGRepresentation(capturedImage!)!.writeToFile(imagePath, atomically: true)
 
             self.view.backgroundColor = oldViewColor
         }
@@ -695,8 +695,8 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
         if misspelledRange.location != NSNotFound && shouldAutoReplace && autoReplaceActive {
             autoReplace = true
         }
-        guesses = checker.guessesForWordRange(rangeOfLast, inString: contextString, language: language) as! [String]?
-        completion = checker.completionsForPartialWordRange(rangeOfLast, inString: contextString, language: language) as! [String]?
+        guesses = checker.guessesForWordRange(rangeOfLast, inString: contextString, language: language) 
+        completion = checker.completionsForPartialWordRange(rangeOfLast, inString: contextString, language: language) 
 
         if guesses != nil {
             suggestions += guesses!
@@ -793,14 +793,14 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
     // MARK: Access to memory
     func saveEmojis() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(emojiClass!, toFile: Emoji.ArchiveURL.path!)
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(emojiClass!, toFile: Emoji.ArchiveURL!.path!)
         if !isSuccessfulSave {
             print("Failed to save emojis...")
         }
     }
 
     func loadEmojis() -> Emoji? {
-        return NSKeyedUnarchiver.unarchiveObjectWithFile(Emoji.ArchiveURL.path!) as? Emoji
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(Emoji.ArchiveURL!.path!) as? Emoji
     }
 
     func loadSampleEmojis() {

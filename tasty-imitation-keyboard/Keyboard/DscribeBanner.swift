@@ -198,7 +198,7 @@ class DscribeBanner: ExtraView {
             let button: UIButton = UIButton()
             button.frame = CGRectMake(xOrigin, space / 2, width, self.frame.height + 1)
             button.setTitle(emoji, forState: UIControlState.Normal)
-            button.addTarget(self, action: Selector("emojiSelected:"), forControlEvents: UIControlEvents.TouchUpInside)
+            button.addTarget(self, action: #selector(DscribeBanner.emojiSelected(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             button.titleLabel?.font = button.titleLabel?.font.fontWithSize(22)
             button.tag = 3
 
@@ -237,18 +237,18 @@ class DscribeBanner: ExtraView {
             button.layer.borderColor = UIColor.clearColor().CGColor
             button.frame = CGRectMake(CGFloat(index) * (width + space), 0, width, self.frame.height)
             button.tag = 1
-            button.addTarget(self, action: Selector("cancelHighlight:"), forControlEvents: [UIControlEvents.TouchUpInside, UIControlEvents.TouchDragExit, UIControlEvents.TouchUpOutside, UIControlEvents.TouchCancel, UIControlEvents.TouchDragOutside])
-            button.addTarget(self, action: Selector("highlightButton:"), forControlEvents: [.TouchDown, .TouchDragInside])
+            button.addTarget(self, action: #selector(DscribeBanner.cancelHighlight(_:)), forControlEvents: [UIControlEvents.TouchUpInside, UIControlEvents.TouchDragExit, UIControlEvents.TouchUpOutside, UIControlEvents.TouchCancel, UIControlEvents.TouchDragOutside])
+            button.addTarget(self, action: #selector(DscribeBanner.highlightButton(_:)), forControlEvents: [.TouchDown, .TouchDragInside])
 
             if varSuggestionList.count > index {
                 var suggestion: String = ""
                 suggestion = varSuggestionList[index]
                 if index == 0 {
                     button.setTitle((suggestion != "" ? "\"" + suggestion + "\"" : ""), forState: UIControlState.Normal)
-                    button.addTarget(self, action: Selector("alreadyTypedWord:"), forControlEvents: UIControlEvents.TouchUpInside)
+                    button.addTarget(self, action: #selector(DscribeBanner.alreadyTypedWord(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 } else {
                     button.setTitle(suggestion, forState: UIControlState.Normal)
-                    button.addTarget(self, action: Selector("suggestionSelected:"), forControlEvents: UIControlEvents.TouchUpInside)
+                    button.addTarget(self, action: #selector(DscribeBanner.suggestionSelected(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                     if index == 1 && willReplaceString != "" {
                         button.tag = 2
                     }

@@ -97,7 +97,7 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
 
         getAvailableLanguages()
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("becameActive:"), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DscribeAppViewController.becameActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
     override func viewWillDisappear(animated: Bool) {
         if currentPickerLanguage != "" {
@@ -213,7 +213,7 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
         if let cell = tableView.dequeueReusableCellWithIdentifier("cell") as? DefaultSettingsTableViewCell {
 
             if cell.switchItem.allTargets().count == 0 {
-                cell.switchItem.addTarget(self, action: Selector("toggleSetting:"), forControlEvents: UIControlEvents.ValueChanged)
+                cell.switchItem.addTarget(self, action: #selector(DscribeAppViewController.toggleSetting(_:)), forControlEvents: UIControlEvents.ValueChanged)
             }
 
             cell.switchItem.on = NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(key)

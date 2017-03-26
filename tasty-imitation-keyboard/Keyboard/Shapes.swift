@@ -112,15 +112,15 @@ class Shape: UIView {
             let ctx = UIGraphicsGetCurrentContext()
             let csp = CGColorSpaceCreateDeviceRGB()
             
-            CGContextSaveGState(ctx)
+            CGContextSaveGState(ctx!)
             
             let xOffset = (self.bounds.width - self.shape.bounds.width) / CGFloat(2)
             let yOffset = (self.bounds.height - self.shape.bounds.height) / CGFloat(2)
-            CGContextTranslateCTM(ctx, xOffset, yOffset)
+            CGContextTranslateCTM(ctx!, xOffset, yOffset)
             
             self.shape.drawCall(shape.color != nil ? shape.color! : UIColor.blackColor())
             
-            CGContextRestoreGState(ctx)
+            CGContextRestoreGState(ctx!)
         }
     }
 }
@@ -161,13 +161,13 @@ func centerShape(fromSize: CGSize, toRect: CGRect) {
     let yOffset = (toRect.height - fromSize.height) / CGFloat(2)
     
     let ctx = UIGraphicsGetCurrentContext()
-    CGContextSaveGState(ctx)
-    CGContextTranslateCTM(ctx, xOffset, yOffset)
+    CGContextSaveGState(ctx!)
+    CGContextTranslateCTM(ctx!, xOffset, yOffset)
 }
 
 func endCenter() {
     let ctx = UIGraphicsGetCurrentContext()
-    CGContextRestoreGState(ctx)
+    CGContextRestoreGState(ctx!)
 }
 
 func drawBackspace(bounds: CGRect, color: UIColor) {

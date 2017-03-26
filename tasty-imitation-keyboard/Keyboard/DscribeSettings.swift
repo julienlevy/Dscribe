@@ -154,8 +154,8 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
                 cell.appButton.setTitleColor(self.tintColor, forState: .Normal)
                 cell.settingsButton.setTitleColor(self.tintColor, forState: .Normal)
 
-                cell.appButton.addTarget(self, action: Selector("openApp"), forControlEvents: UIControlEvents.TouchUpInside)
-                cell.settingsButton.addTarget(self, action: Selector("openSettings"), forControlEvents: UIControlEvents.TouchUpInside)
+                cell.appButton.addTarget(self, action: #selector(DscribeSettings.openApp), forControlEvents: UIControlEvents.TouchUpInside)
+                cell.settingsButton.addTarget(self, action: #selector(DscribeSettings.openSettings), forControlEvents: UIControlEvents.TouchUpInside)
 
                 return cell
             } else {
@@ -166,7 +166,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         if let cell = tableView.dequeueReusableCellWithIdentifier("cell") as? DefaultSettingsTableViewCell {
 
             if cell.sw.allTargets().count == 0 {
-                cell.sw.addTarget(self, action: Selector("toggleSetting:"), forControlEvents: UIControlEvents.ValueChanged)
+                cell.sw.addTarget(self, action: #selector(DefaultSettings.toggleSetting(_:)), forControlEvents: UIControlEvents.ValueChanged)
             }
 
             cell.sw.on = NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(key)
@@ -295,10 +295,10 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         var myResponder: UIResponder? = self
         while myResponder != nil {
             print("trying a resp")
-            if myResponder!.respondsToSelector(Selector("openURL:")) {
+            if myResponder!.respondsToSelector(#selector(UIApplication.openURL(_:))) {
                 print("responder responding to selector")
                 print(myResponder)
-                myResponder!.performSelector("openURL:", withObject: myAppUrl)
+                myResponder!.performSelector(#selector(UIApplication.openURL(_:)), withObject: myAppUrl)
             }
             myResponder = myResponder?.nextResponder()
         }
@@ -308,10 +308,10 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         var myResponder: UIResponder? = self
         while myResponder != nil {
             print("Trying a responder \(myResponder!.description)")
-            if myResponder!.respondsToSelector(Selector("openURL:")) {
+            if myResponder!.respondsToSelector(#selector(UIApplication.openURL(_:))) {
                 print("responder responding to selector")
                 print(myResponder)
-                myResponder!.performSelector("openURL:", withObject: myAppUrl)
+                myResponder!.performSelector(#selector(UIApplication.openURL(_:)), withObject: myAppUrl)
             }
             myResponder = myResponder?.nextResponder()
         }

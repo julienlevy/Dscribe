@@ -34,8 +34,8 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
     var currentPage: Int = 0
 
     override func viewDidLoad() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(OnboardingViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(OnboardingViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
 
         if let videoPath = NSBundle.mainBundle().pathForResource("OpenKeyboard", ofType: "mov") {
             let videoURL = NSURL.fileURLWithPath(videoPath)
@@ -54,13 +54,13 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
 
                 self.setPlayerConstraints()
             }
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("movieDidChange:"), name: MPMoviePlayerPlaybackStateDidChangeNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(OnboardingViewController.movieDidChange(_:)), name: MPMoviePlayerPlaybackStateDidChangeNotification, object: nil)
         }
 
         self.trialTextField.delegate = self
         self.scrollView.delegate = self
 
-        let swipe: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("dismissKeyboard"))
+        let swipe: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(OnboardingViewController.dismissKeyboard))
         swipe.direction = .Down
         self.scrollView.addGestureRecognizer(swipe)
 

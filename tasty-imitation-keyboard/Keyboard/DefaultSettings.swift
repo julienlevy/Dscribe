@@ -69,8 +69,8 @@ class DefaultSettings: ExtraView, UITableViewDataSource, UITableViewDelegate {
     func loadNib() {
         let assets = NSBundle(forClass: self.dynamicType).loadNibNamed("DefaultSettings", owner: self, options: nil)
         
-        if assets.count > 0 {
-            if let rootView = assets.first as? UIView {
+        if assets!.count > 0 {
+            if let rootView = assets!.first as? UIView {
                 rootView.translatesAutoresizingMaskIntoConstraints = false
                 self.addSubview(rootView)
                 
@@ -126,7 +126,7 @@ class DefaultSettings: ExtraView, UITableViewDataSource, UITableViewDelegate {
             let key = self.settingsList[indexPath.section].1[indexPath.row]
             
             if cell.sw.allTargets().count == 0 {
-                cell.sw.addTarget(self, action: Selector("toggleSetting:"), forControlEvents: UIControlEvents.ValueChanged)
+                cell.sw.addTarget(self, action: #selector(DefaultSettings.toggleSetting(_:)), forControlEvents: UIControlEvents.ValueChanged)
             }
             
             cell.sw.on = NSUserDefaults.standardUserDefaults().boolForKey(key)
