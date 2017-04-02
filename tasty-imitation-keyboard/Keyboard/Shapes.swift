@@ -41,7 +41,7 @@ class GlobeShape: Shape {
 class Shape: UIView {
     var color: UIColor? {
         didSet {
-            if let color = self.color {
+            if (self.color != nil) {
                 self.overflowCanvas.setNeedsDisplay()
             }
         }
@@ -230,7 +230,7 @@ func drawShift(_ bounds: CGRect, color: UIColor, withRect: Bool) {
     let factors = getFactors(CGSize(width: 38, height: (withRect ? 34 + 4 : 32)), toRect: bounds)
     let xScalingFactor = factors.xScalingFactor
     let yScalingFactor = factors.yScalingFactor
-    let lineWidthScalingFactor = factors.lineWidthScalingFactor
+    _ = factors.lineWidthScalingFactor
     
     centerShape(CGSize(width: 38 * xScalingFactor, height: (withRect ? 34 + 4 : 32) * yScalingFactor), toRect: bounds)
     

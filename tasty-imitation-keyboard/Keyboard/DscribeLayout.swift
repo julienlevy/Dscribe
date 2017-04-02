@@ -41,17 +41,17 @@ class DscribeLayout: KeyboardLayout {
             switch model.type {
             case Key.KeyType.shift:
                 if key.shape == nil {
-                    let shiftShape = self.getShape(ShiftShape)
+                    let shiftShape = self.getShape(ShiftShape.self)
                     key.shape = shiftShape
                 }
             case Key.KeyType.backspace:
                 if key.shape == nil {
-                    let backspaceShape = self.getShape(BackspaceShape)
+                    let backspaceShape = self.getShape(BackspaceShape.self)
                     key.shape = backspaceShape
                 }
             case Key.KeyType.keyboardChange:
                 if key.shape == nil {
-                    let globeShape = self.getShape(GlobeShape)
+                    let globeShape = self.getShape(GlobeShape.self)
                     key.shape = globeShape
                 }
             default:
@@ -83,7 +83,7 @@ class DscribeLayout: KeyboardLayout {
 
         if model.type == Key.KeyType.shift {
             if key.shape == nil {
-                let shiftShape = self.getShape(ShiftShape)
+                let shiftShape = self.getShape(ShiftShape.self)
                 key.shape = shiftShape
             }
 
@@ -125,8 +125,8 @@ class DscribeLayout: KeyboardLayout {
         let rowGap: CGFloat = (isLandscape ? self.layoutConstants.rowGapLandscape : self.layoutConstants.rowGapPortrait(bounds.width))
         let lastRowGap: CGFloat = (isLandscape ? rowGap : self.layoutConstants.rowGapPortraitLastRow(bounds.width))
 
-        let flexibleEndRowM = (isLandscape ? self.layoutConstants.flexibleEndRowTotalWidthToKeyWidthMLandscape : self.layoutConstants.flexibleEndRowTotalWidthToKeyWidthMPortrait)
-        let flexibleEndRowC = (isLandscape ? self.layoutConstants.flexibleEndRowTotalWidthToKeyWidthCLandscape : self.layoutConstants.flexibleEndRowTotalWidthToKeyWidthCPortrait)
+//        let flexibleEndRowM = (isLandscape ? self.layoutConstants.flexibleEndRowTotalWidthToKeyWidthMLandscape : self.layoutConstants.flexibleEndRowTotalWidthToKeyWidthMPortrait)
+//        let flexibleEndRowC = (isLandscape ? self.layoutConstants.flexibleEndRowTotalWidthToKeyWidthCLandscape : self.layoutConstants.flexibleEndRowTotalWidthToKeyWidthCPortrait)
 
         let lastRowLeftSideRatio = (isLandscape ? self.layoutConstants.lastRowLandscapeFirstTwoButtonAreaWidthToKeyboardAreaWidth : self.layoutConstants.lastRowPortraitFirstTwoButtonAreaWidthToKeyboardAreaWidth)
         let lastRowRightSideRatio = (isLandscape ? self.layoutConstants.lastRowLandscapeLastButtonAreaWidthToKeyboardAreaWidth : self.layoutConstants.lastRowPortraitLastButtonAreaWidthToKeyboardAreaWidth)

@@ -448,17 +448,17 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
             switch model.type {
             case Key.KeyType.shift:
                 if key.shape == nil {
-                    let shiftShape = self.getShape(ShiftShape)
+                    let shiftShape = self.getShape(ShiftShape.self)
                     key.shape = shiftShape
                 }
             case Key.KeyType.backspace:
                 if key.shape == nil {
-                    let backspaceShape = self.getShape(BackspaceShape)
+                    let backspaceShape = self.getShape(BackspaceShape.self)
                     key.shape = backspaceShape
                 }
             case Key.KeyType.keyboardChange:
                 if key.shape == nil {
-                    let globeShape = self.getShape(GlobeShape)
+                    let globeShape = self.getShape(GlobeShape.self)
                     key.shape = globeShape
                 }
             default:
@@ -479,7 +479,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
         
         if model.type == Key.KeyType.shift {
             if key.shape == nil {
-                let shiftShape = self.getShape(ShiftShape)
+                let shiftShape = self.getShape(ShiftShape.self)
                 key.shape = shiftShape
             }
             
@@ -782,7 +782,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
             
             let mostKeysInRow: Int = {
                 var currentMax: Int = 0
-                for (i, row) in page.rows.enumerated() {
+                for (_, row) in page.rows.enumerated() {
                     currentMax = max(currentMax, row.count)
                 }
                 return currentMax
@@ -863,7 +863,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
         
         var currentOrigin = frame.origin.x + sideSpace
         
-        for (k, key) in row.enumerated() {
+        for (_, _) in row.enumerated() {
             let roundedOrigin = rounded(currentOrigin)
             
             // avoiding rounding errors
@@ -910,7 +910,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
         let specialCharacterGap = sideSpace - specialCharacterWidth
         
         var currentOrigin = frame.origin.x
-        for (k, key) in row.enumerated() {
+        for (k, _) in row.enumerated() {
             if k == 0 {
                 frames.append(CGRect(x: rounded(currentOrigin), y: frame.origin.y, width: specialCharacterWidth, height: frame.height))
                 currentOrigin += (specialCharacterWidth + specialCharacterGap)
@@ -940,7 +940,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
         var keysBeforeSpace = 0
         var keysAfterSpace = 0
         var reachedSpace = false
-        for (k, key) in row.enumerated() {
+        for (_, key) in row.enumerated() {
             if key.type == Key.KeyType.space {
                 reachedSpace = true
             }

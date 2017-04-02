@@ -250,7 +250,7 @@ class KeyboardKey: UIControl {
                 path?.apply(transformFromShapeToView)
                 if path != nil { toPath.append(path!) }
                 if let edgePaths = shape.edgePaths {
-                    for (e, anEdgePath) in edgePaths.enumerated() {
+                    for (_, anEdgePath) in edgePaths.enumerated() {
                         let editablePath = anEdgePath
                         editablePath.apply(transformFromShapeToView)
                         toEdgePaths.append(editablePath)

@@ -70,6 +70,6 @@ class OpenKeyboardTutorialView: UIView {
         
 
 //        self.addConstraints([topFirst, leftFirst, leftIcon, bottomIcon, heightIcon, widthIcon, topSecond, leftSecond, rightSecond])
-        self.addConstraints([topFirst, centerFirst, leftIcon, bottomIcon, heightIcon, widthIcon, topSecond, leftSecond, rightSecond])
+        self.addConstraints([topFirst, leftFirst, centerFirst, leftIcon, bottomIcon, heightIcon, widthIcon, topSecond, leftSecond, rightSecond])
     }
 }

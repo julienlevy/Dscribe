@@ -164,20 +164,20 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
                         switch key.type {
                         case Key.KeyType.keyboardChange:
-                            keyView.addTarget(self, action: "advanceTapped:", for: .touchUpInside)
+                            keyView.addTarget(self, action: #selector(KeyboardViewController.advanceTapped(_:)), for: .touchUpInside)
                         case Key.KeyType.backspace:
                             let cancelEvents: UIControlEvents = [UIControlEvents.touchUpInside, UIControlEvents.touchUpInside, UIControlEvents.touchDragExit, UIControlEvents.touchUpOutside, UIControlEvents.touchCancel, UIControlEvents.touchDragOutside]
 
                             keyView.addTarget(self, action: #selector(KeyboardViewController.backspaceDown(_:)), for: .touchDown)
                             keyView.addTarget(self, action: #selector(KeyboardViewController.backspaceUp(_:)), for: cancelEvents)
                         case Key.KeyType.shift:
-                            keyView.addTarget(self, action: Selector("shiftDown:"), for: .touchDown)
-                            keyView.addTarget(self, action: Selector("shiftUp:"), for: .touchUpInside)
-                            keyView.addTarget(self, action: Selector("shiftDoubleTapped:"), for: .touchDownRepeat)
+                            keyView.addTarget(self, action: #selector(KeyboardViewController.shiftDown(_:)), for: .touchDown)
+                            keyView.addTarget(self, action: #selector(KeyboardViewController.shiftUp(_:)), for: .touchUpInside)
+                            keyView.addTarget(self, action: #selector(KeyboardViewController.shiftDoubleTapped(_:)), for: .touchDownRepeat)
                         case Key.KeyType.modeChange:
-                            keyView.addTarget(self, action: Selector("modeChangeTapped:"), for: .touchDown)
+                            keyView.addTarget(self, action: #selector(KeyboardViewController.modeChangeTapped(_:)), for: .touchDown)
                         case Key.KeyType.settings:
-                            keyView.addTarget(self, action: Selector("toggleSettings"), for: .touchUpInside)
+                            keyView.addTarget(self, action: #selector(KeyboardViewController.toggleSettings), for: .touchUpInside)
                             keyView.addTarget(self, action: #selector(Dscribe.askedToOpenSettings), for: .touchUpInside)
                         case Key.KeyType.searchEmoji:
                             keyView.addTarget(self, action: #selector(Dscribe.searchEmojiPressed(_:)), for: .touchUpInside)
@@ -191,22 +191,22 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
 
                         if key.isCharacter || key.type == Key.KeyType.accentCharacter {
                             if UIDevice.current.userInterfaceIdiom != UIUserInterfaceIdiom.pad {
-                                keyView.addTarget(self, action: Selector("showPopup:"), for: [.touchDown, .touchDragInside, .touchDragEnter])
-                                keyView.addTarget(keyView, action: Selector("hidePopup"), for: [.touchDragExit, .touchCancel])
-                                keyView.addTarget(self, action: Selector("hidePopupDelay:"), for: [.touchUpInside, .touchUpOutside, .touchDragOutside])
+                                keyView.addTarget(self, action: #selector(KeyboardViewController.showPopup(_:)), for: [.touchDown, .touchDragInside, .touchDragEnter])
+                                keyView.addTarget(keyView, action: #selector(KeyboardKey.hidePopup), for: [.touchDragExit, .touchCancel])
+                                keyView.addTarget(self, action: #selector(KeyboardViewController.hidePopupDelay(_:)), for: [.touchUpInside, .touchUpOutside, .touchDragOutside])
                             }
                         }
 
                         if key.hasOutput && key.type != Key.KeyType.accentCharacter {
-                            keyView.addTarget(self, action: "keyPressedHelper:", for: .touchUpInside)
+                            keyView.addTarget(self, action: #selector(KeyboardViewController.keyPressedHelper(_:)), for: .touchUpInside)
                         }
 
                         if key.type != Key.KeyType.shift && key.type != Key.KeyType.modeChange {
-                            keyView.addTarget(self, action: Selector("highlightKey:"), for: [.touchDown, .touchDragInside, .touchDragEnter])
-                            keyView.addTarget(self, action: Selector("unHighlightKey:"), for: [.touchUpInside, .touchUpOutside, .touchDragOutside, .touchDragExit, .touchCancel])
+                            keyView.addTarget(self, action: #selector(KeyboardViewController.highlightKey(_:)), for: [.touchDown, .touchDragInside, .touchDragEnter])
+                            keyView.addTarget(self, action: #selector(KeyboardViewController.unHighlightKey(_:)), for: [.touchUpInside, .touchUpOutside, .touchDragOutside, .touchDragExit, .touchCancel])
                         }
 
-                        keyView.addTarget(self, action: Selector("playKeySound"), for: .touchDown)
+                        keyView.addTarget(self, action: #selector(KeyboardViewController.playKeySound), for: .touchDown)
                     }
                 }
             }
@@ -355,7 +355,6 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             UIDevice.current.beginGeneratingDeviceOrientationNotifications()
 
             let oldViewColor = self.view.backgroundColor
-            print(oldViewColor)
             self.view.backgroundColor = UIColor(hue: (216/360.0), saturation: 0.05, brightness: 0.86, alpha: 1)
 
             let rect = self.view.bounds
@@ -376,13 +375,13 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
     //selection functions not working, never called...
     override func selectionWillChange(_ textInput: UITextInput?) {
         print("SELECTION WILL change")
-        print(textInput)
-        print(textInputContextIdentifier)
+        print(textInput ?? "Text input was nil")
+        print(textInputContextIdentifier ?? "Text input context id was nil")
     }
     override func selectionDidChange(_ textInput: UITextInput?) {
         print("SELECTION DID change")
-        print(textInput)
-        print(textInputContextIdentifier)
+        print(textInput ?? "Text input was nil")
+        print(textInputContextIdentifier ?? "Text input context id was nil")
     }
     override func textWillChange(_ textInput: UITextInput?) {
         super.textWillChange(textInput)
@@ -580,7 +579,7 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             self.searchEmojiKey = sender
         }
         if escapeMode {
-            self.deleteSearchText()
+            _ = self.deleteSearchText()
         } else {
             self.searchEmojis("")
 
@@ -736,14 +735,14 @@ class Dscribe: KeyboardViewController, DscribeBannerDelegate {
             self.toggleSearchMode()
 
 //            let searched: String =
-            self.deleteSearchText()
+            _ = self.deleteSearchText()
 //            Mixpanel.sharedInstance().track("Emoji", properties: ["emoji" : emoji, "search": searched])
 //        } else {
 //            Mixpanel.sharedInstance().track("Emoji", properties: ["emoji" : emoji, "search": "n°" + String(self.numberOfEnteredEmojis + 1)])
         }
 
-        self.emojiClass!.incrementScore(emoji)
-        self.saveEmojis()
+        _ = self.emojiClass!.incrementScore(emoji)
+        _ = self.saveEmojis()
 
         self.textDocumentProxy.insertText(emoji)
         self.numberOfEnteredEmojis += 1

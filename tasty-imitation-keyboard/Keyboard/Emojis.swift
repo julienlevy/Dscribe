@@ -50,7 +50,7 @@ class Emoji: NSObject, NSCoding {
 
         let path: String? = Bundle.main.path(forResource: "EmojiList", ofType: "plist")
         if path != nil {
-            if let dictionary: NSDictionary? = NSDictionary(contentsOfFile: path!) {
+            if let dictionary = NSDictionary(contentsOfFile: path!) {
                 print("DICTIONARY from memory")
                 self.emojiTag = dictionary as! [String: [String]]
             }
@@ -167,7 +167,6 @@ class Emoji: NSObject, NSCoding {
 
     func incrementScore(_ emoji: String) -> Int {
         print("incrementing " + emoji)
-        print(self.emojiScore[emoji])
         if self.emojiScore[emoji] != nil {
             self.emojiScore[emoji] = (self.emojiScore[emoji] as Int!) + 1
             return (self.emojiScore[emoji] as Int!)

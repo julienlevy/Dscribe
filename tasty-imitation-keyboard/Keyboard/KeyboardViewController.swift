@@ -187,7 +187,7 @@ class KeyboardViewController: UIInputViewController {
             self.setupKludge()
             
             self.updateKeyCaps(self.shiftState.uppercase())
-            var capsWasSet = self.setCapsIfNeeded()
+            _ = self.setCapsIfNeeded()
             
             self.updateAppearances(self.darkMode())
             self.addInputTraitsObservers()
@@ -333,7 +333,7 @@ class KeyboardViewController: UIInputViewController {
                         if key.isCharacter {
                             if UIDevice.current.userInterfaceIdiom != UIUserInterfaceIdiom.pad {
                                 keyView.addTarget(self, action: #selector(KeyboardViewController.showPopup(_:)), for: [.touchDown, .touchDragInside, .touchDragEnter])
-                                keyView.addTarget(keyView, action: Selector("hidePopup"), for: [.touchDragExit, .touchCancel])
+                                keyView.addTarget(keyView, action: #selector(KeyboardKey.hidePopup), for: [.touchDragExit, .touchCancel])
                                 keyView.addTarget(self, action: #selector(KeyboardViewController.hidePopupDelay(_:)), for: [.touchUpInside, .touchUpOutside, .touchDragOutside])
                             }
                         }
@@ -402,7 +402,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func contextChanged() {
-        self.setCapsIfNeeded()
+        _ = self.setCapsIfNeeded()
         self.autoPeriodState = .noSpace
     }
     
@@ -460,14 +460,14 @@ class KeyboardViewController: UIInputViewController {
             // auto period on double space
             // TODO: timeout
             
-            var lastCharCountInBeforeContext: Int = 0
-            var readyForDoubleSpacePeriod: Bool = true
+//            var lastCharCountInBeforeContext: Int = 0
+//            var readyForDoubleSpacePeriod: Bool = true
             
             self.handleAutoPeriod(model)
             // TODO: reset context
         }
         
-        self.setCapsIfNeeded()
+        _ = self.setCapsIfNeeded()
     }
     
     func handleAutoPeriod(_ key: Key) {
@@ -537,7 +537,7 @@ class KeyboardViewController: UIInputViewController {
         
         self.textDocumentProxy.deleteBackward()
         
-        self.setCapsIfNeeded()
+        _ = self.setCapsIfNeeded()
         
         // trigger for subsequent deletes
         self.backspaceDelayTimer = Timer.scheduledTimer(timeInterval: backspaceDelay - backspaceRepeat, target: self, selector: #selector(KeyboardViewController.backspaceDelayCallback), userInfo: nil, repeats: false)
@@ -557,7 +557,7 @@ class KeyboardViewController: UIInputViewController {
         
         self.textDocumentProxy.deleteBackward()
         
-        self.setCapsIfNeeded()
+        _ = self.setCapsIfNeeded()
     }
     
     func shiftDown(_ sender: KeyboardKey) {
@@ -746,7 +746,6 @@ class KeyboardViewController: UIInputViewController {
         let traits = self.textDocumentProxy as UITextInputTraits
         if let autocapitalization = traits.autocapitalizationType {
             let documentProxy = self.textDocumentProxy
-            var beforeContext = documentProxy.documentContextBeforeInput
             
             switch autocapitalization {
             case .none:

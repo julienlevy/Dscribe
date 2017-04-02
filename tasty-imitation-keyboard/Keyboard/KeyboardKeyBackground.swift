@@ -55,7 +55,7 @@ class KeyboardKeyBackground: UIView, Connectable {
         arcCenters.reserveCapacity(4)
         arcStartingAngles.reserveCapacity(4)
         
-        for i in 0..<4 {
+        for _ in 0..<4 {
             startingPoints.append(CGPoint.zero)
             segmentPoints.append((CGPoint.zero, CGPoint.zero))
             arcCenters.append(CGPoint.zero)
