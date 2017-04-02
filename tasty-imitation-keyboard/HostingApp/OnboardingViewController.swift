@@ -34,19 +34,19 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
     var currentPage: Int = 0
 
     override func viewDidLoad() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(OnboardingViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(OnboardingViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(OnboardingViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(OnboardingViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 
-        if let videoPath = NSBundle.mainBundle().pathForResource("OpenKeyboard", ofType: "mov") {
-            let videoURL = NSURL.fileURLWithPath(videoPath)
+        if let videoPath = Bundle.main.path(forResource: "OpenKeyboard", ofType: "mov") {
+            let videoURL = URL(fileURLWithPath: videoPath)
 
             self.moviePlayer = MPMoviePlayerController(contentURL: videoURL)
             if let player = self.moviePlayer {
                 player.view.frame = self.videoContainerView.frame
-                player.scalingMode = MPMovieScalingMode.AspectFill
-                player.fullscreen = true
-                player.controlStyle = MPMovieControlStyle.None
-                player.repeatMode = MPMovieRepeatMode.One
+                player.scalingMode = MPMovieScalingMode.aspectFill
+                player.isFullscreen = true
+                player.controlStyle = MPMovieControlStyle.none
+                player.repeatMode = MPMovieRepeatMode.one
                 player.play()
                 self.view.insertSubview(player.view, belowSubview: self.videoContainerView)
                 self.videoContainerView.alpha = 0
@@ -54,35 +54,35 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
 
                 self.setPlayerConstraints()
             }
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(OnboardingViewController.movieDidChange(_:)), name: MPMoviePlayerPlaybackStateDidChangeNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(OnboardingViewController.movieDidChange(_:)), name: NSNotification.Name.MPMoviePlayerPlaybackStateDidChange, object: nil)
         }
 
         self.trialTextField.delegate = self
         self.scrollView.delegate = self
 
         let swipe: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(OnboardingViewController.dismissKeyboard))
-        swipe.direction = .Down
+        swipe.direction = .down
         self.scrollView.addGestureRecognizer(swipe)
 
-        self.doneButton.setTitleColor(UIColor.dscribeLightOrange(), forState: .Normal)
+        self.doneButton.setTitleColor(UIColor.dscribeLightOrange(), for: UIControlState())
         self.doneButton.alpha = 0
 
-        self.view.layer.insertSublayer(backgroungLayerWithFrame(self.view.bounds), atIndex: 0)
+        self.view.layer.insertSublayer(backgroungLayerWithFrame(self.view.bounds), at: 0)
 
         self.setScrollViewContent()
     }
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     func setPlayerConstraints() {
         self.moviePlayer.view.translatesAutoresizingMaskIntoConstraints = false
-        let centerY: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.videoContainerView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0)
-        let centerX: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.videoContainerView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0)
-        let width: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self.videoContainerView, attribute: NSLayoutAttribute.Width, multiplier: 1.0, constant: 0)
-        let height: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self.videoContainerView, attribute: NSLayoutAttribute.Height, multiplier: 1.0, constant: 0)
+        let centerY: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: self.videoContainerView, attribute: NSLayoutAttribute.centerY, multiplier: 1.0, constant: 0)
+        let centerX: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.videoContainerView, attribute: NSLayoutAttribute.centerX, multiplier: 1.0, constant: 0)
+        let width: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self.videoContainerView, attribute: NSLayoutAttribute.width, multiplier: 1.0, constant: 0)
+        let height: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: self.videoContainerView, attribute: NSLayoutAttribute.height, multiplier: 1.0, constant: 0)
 
         self.view.addConstraints([centerX, centerY, width, height])
     }
@@ -106,13 +106,13 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
         self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width * 2, height: self.scrollView.frame.height)
     }
 
-    @IBAction func doneClicked(sender: AnyObject) {
+    @IBAction func doneClicked(_ sender: AnyObject) {
         print("Appears and keyboard activated an has seeeen onboarding")
         let storyboard = UIStoryboard(name: "Dscribe", bundle: nil)
-        let settingsViewController = storyboard.instantiateViewControllerWithIdentifier("SettingsNavigationController")
-        self.showViewController(settingsViewController, sender: nil)
+        let settingsViewController = storyboard.instantiateViewController(withIdentifier: "SettingsNavigationController")
+        self.show(settingsViewController, sender: nil)
 
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasSeenOnboarding")
+        UserDefaults.standard.set(true, forKey: "hasSeenOnboarding")
 
         Mixpanel.sharedInstance().track("Finish Onboarding", properties: ["trial text": (self.trialTextField.text != nil ? self.trialTextField.text! : "")])
     }
@@ -120,13 +120,13 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
     func dismissKeyboard() {
         self.view.endEditing(true)
     }
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let percentage = scrollView.contentOffset.x / (scrollView.contentSize.width - scrollView.frame.width)
         self.doneButton.alpha = percentage
         self.doneButtonCenterX.constant = scrollView.frame.width - scrollView.contentOffset.x
 
         let width = scrollView.frame.width
-        let side = 1 - 2 * (scrollView.contentOffset.x % width) / width
+        let side = 1 - 2 * (scrollView.contentOffset.x.truncatingRemainder(dividingBy: width)) / width
 
         let offetPage: Int = Int(self.scrollView.contentOffset.x / self.scrollView.frame.width)
         let toPage: Int = (side > 0 ? offetPage : offetPage + 1)
@@ -137,29 +137,29 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
             self.videoContainerView.alpha = 1
         }
     }
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let currentPage: Int = Int(self.scrollView.contentOffset.x / self.scrollView.frame.width)
         self.pageControl.currentPage = currentPage
 
         if self.currentPage != currentPage {
-            if let videoPath = NSBundle.mainBundle().pathForResource(self.videoNames[currentPage], ofType: "mov") {
-                let videoURL = NSURL.fileURLWithPath(videoPath)
+            if let videoPath = Bundle.main.path(forResource: self.videoNames[currentPage], ofType: "mov") {
+                let videoURL = URL(fileURLWithPath: videoPath)
                 self.moviePlayer.contentURL = videoURL
                 self.moviePlayer.play()
             }
             self.currentPage = currentPage
         }
     }
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.trialTextField.resignFirstResponder()
         return true
     }
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField.text == self.defaultText {
             textField.text = ""
         }
     }
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         Mixpanel.sharedInstance().track("Text field onboarding", properties: ["text": (textField.text != nil ? textField.text! : "")])
 
         if textField.text == "" {
@@ -167,49 +167,45 @@ class OnboardingViewController: UIViewController, UITextFieldDelegate, UIScrollV
         }
     }
 
-    func keyboardWillShow(notification: NSNotification) {
+    func keyboardWillShow(_ notification: Notification) {
         if let info =  notification.userInfo {
 
-            if let keyboardFrame = info[UIKeyboardFrameEndUserInfoKey]?.CGRectValue {
-                if let duration = info[UIKeyboardAnimationDurationUserInfoKey]?.doubleValue {
+            if let keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue {
+                if let duration = (info[UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue {
                     self.iphoneImageTopConstraint.constant = -keyboardFrame.height
                     self.doneButtonBottomConstraint.constant = keyboardFrame.height
-                    UIView.animateWithDuration(duration, animations: {
+                    UIView.animate(withDuration: duration, animations: {
                         self.view.layoutIfNeeded()
                     })
                 }
             }
         }
     }
-    func keyboardWillHide(notification: NSNotification) {
+    func keyboardWillHide(_ notification: Notification) {
         if let info =  notification.userInfo {
 
-            if let duration = info[UIKeyboardAnimationDurationUserInfoKey]?.doubleValue {
+            if let duration = (info[UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue {
                 self.iphoneImageTopConstraint.constant = 0
                 self.doneButtonBottomConstraint.constant = 0
-                UIView.animateWithDuration(duration, animations: {
+                UIView.animate(withDuration: duration, animations: {
                     self.view.layoutIfNeeded()
                 })
             }
         }
     }
 
-    func movieDidChange(notification: NSNotification) {
-        if self.moviePlayer.playbackState == MPMoviePlaybackState.Playing {
+    func movieDidChange(_ notification: Notification) {
+        if self.moviePlayer.playbackState == MPMoviePlaybackState.playing {
             self.delay(0.2, closure: {
-                UIView.animateWithDuration(0.2, animations: {
+                UIView.animate(withDuration: 0.2, animations: {
                     self.videoContainerView.alpha = 0
                 })
             })
         }
     }
 
-    func delay(delay:Double, closure:()->()) {
-        dispatch_after(
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(delay * Double(NSEC_PER_SEC))
-            ),
-            dispatch_get_main_queue(), closure)
+    func delay(_ delay:Double, closure:@escaping ()->()) {
+        DispatchQueue.main.asyncAfter(
+            deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
     }
 }

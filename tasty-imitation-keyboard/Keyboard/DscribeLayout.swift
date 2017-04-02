@@ -11,18 +11,18 @@ import UIKit
 class DscribeLayout: KeyboardLayout {
     var inSearchMode: Bool = false
 
-    override func updateKeyCap(key: KeyboardKey, model: Key, fullReset: Bool, uppercase: Bool, characterUppercase: Bool, shiftState: ShiftState) {
+    override func updateKeyCap(_ key: KeyboardKey, model: Key, fullReset: Bool, uppercase: Bool, characterUppercase: Bool, shiftState: ShiftState) {
 
         self.updateKeyCapText(key, model: model, uppercase: uppercase, characterUppercase: characterUppercase)
 
         // font size
         switch model.type {
         case
-        Key.KeyType.ModeChange,
-        Key.KeyType.Space,
-        Key.KeyType.Return:
+        Key.KeyType.modeChange,
+        Key.KeyType.space,
+        Key.KeyType.return:
             key.label.adjustsFontSizeToFitWidth = true
-            key.label.font = key.label.font.fontWithSize(16)
+            key.label.font = key.label.font.withSize(16)
         default:
             key.label.font = fontForKeyWithText(key.text, keytype: model.type)
         }
@@ -31,7 +31,7 @@ class DscribeLayout: KeyboardLayout {
             // label inset
             switch model.type {
             case
-            Key.KeyType.ModeChange:
+            Key.KeyType.modeChange:
                 key.labelInset = 3
             default:
                 key.labelInset = 0
@@ -39,17 +39,17 @@ class DscribeLayout: KeyboardLayout {
 
             // shapes
             switch model.type {
-            case Key.KeyType.Shift:
+            case Key.KeyType.shift:
                 if key.shape == nil {
                     let shiftShape = self.getShape(ShiftShape)
                     key.shape = shiftShape
                 }
-            case Key.KeyType.Backspace:
+            case Key.KeyType.backspace:
                 if key.shape == nil {
                     let backspaceShape = self.getShape(BackspaceShape)
                     key.shape = backspaceShape
                 }
-            case Key.KeyType.KeyboardChange:
+            case Key.KeyType.keyboardChange:
                 if key.shape == nil {
                     let globeShape = self.getShape(GlobeShape)
                     key.shape = globeShape
@@ -59,7 +59,7 @@ class DscribeLayout: KeyboardLayout {
             }
 
             // images
-            if model.type == Key.KeyType.Settings {
+            if model.type == Key.KeyType.settings {
                 if let imageKey = key as? DscribeImageKey {
                     if imageKey.image == nil {
                         imageKey.bigImage = false
@@ -69,7 +69,7 @@ class DscribeLayout: KeyboardLayout {
                     }
                 }
             }
-            if model.type == Key.KeyType.SearchEmoji {
+            if model.type == Key.KeyType.searchEmoji {
                 if let imageKey = key as? DscribeImageKey {
                     if true { //imageKey.image == nil {
                         imageKey.bigImage = true
@@ -81,26 +81,26 @@ class DscribeLayout: KeyboardLayout {
             }
         }
 
-        if model.type == Key.KeyType.Shift {
+        if model.type == Key.KeyType.shift {
             if key.shape == nil {
                 let shiftShape = self.getShape(ShiftShape)
                 key.shape = shiftShape
             }
 
             switch shiftState {
-            case .Disabled:
-                key.highlighted = false
-            case .Enabled:
-                key.highlighted = true
-            case .Locked:
-                key.highlighted = true
+            case .disabled:
+                key.isHighlighted = false
+            case .enabled:
+                key.isHighlighted = true
+            case .locked:
+                key.isHighlighted = true
             }
 
-            (key.shape as? ShiftShape)?.withLock = (shiftState == .Locked)
+            (key.shape as? ShiftShape)?.withLock = (shiftState == .locked)
         }
     }
 
-    override func generateKeyFrames(model: Keyboard, bounds: CGRect, page pageToLayout: Int) -> [Key:CGRect]? {
+    override func generateKeyFrames(_ model: Keyboard, bounds: CGRect, page pageToLayout: Int) -> [Key:CGRect]? {
         if bounds.height == 0 || bounds.width == 0 {
             return nil
         }
@@ -132,7 +132,7 @@ class DscribeLayout: KeyboardLayout {
         let lastRowRightSideRatio = (isLandscape ? self.layoutConstants.lastRowLandscapeLastButtonAreaWidthToKeyboardAreaWidth : self.layoutConstants.lastRowPortraitLastButtonAreaWidthToKeyboardAreaWidth)
         let lastRowKeyGap = (isLandscape ? self.layoutConstants.lastRowKeyGapLandscape(bounds.width) : self.layoutConstants.lastRowKeyGapPortrait)
 
-        for (p, page) in model.pages.enumerate() {
+        for (p, page) in model.pages.enumerated() {
             if p != pageToLayout {
                 continue
             }
@@ -141,7 +141,7 @@ class DscribeLayout: KeyboardLayout {
 
             let mostKeysInRow: Int = {
                 var currentMax: Int = 0
-                for (_, row) in page.rows.enumerate() {
+                for (_, row) in page.rows.enumerated() {
                     currentMax = max(currentMax, row.count)
                 }
                 return currentMax
@@ -163,16 +163,16 @@ class DscribeLayout: KeyboardLayout {
                 return self.rounded(returnWidth)
             }()
 
-            let processRow = { (row: [Key], frames: [CGRect], inout map: [Key:CGRect]) -> Void in
+            let processRow = { (row: [Key], frames: [CGRect], map: inout [Key:CGRect]) -> Void in
                 assert(row.count == frames.count, "row and frames don't match")
-                for (k, key) in row.enumerate() {
+                for (k, key) in row.enumerated() {
                     map[key] = frames[k]
                 }
             }
 
-            for (r, row) in page.rows.enumerate() {
+            for (r, row) in page.rows.enumerated() {
                 let rowGapCurrentTotal = (r == page.rows.count - 1 ? rowGapTotal : CGFloat(r) * rowGap)
-                let frame = CGRectMake(rounded(sideEdges), rounded(topEdge + (CGFloat(r) * keyHeight) + rowGapCurrentTotal), rounded(bounds.width - CGFloat(2) * sideEdges), rounded(keyHeight))
+                let frame = CGRect(x: rounded(sideEdges), y: rounded(topEdge + (CGFloat(r) * keyHeight) + rowGapCurrentTotal), width: rounded(bounds.width - CGFloat(2) * sideEdges), height: rounded(keyHeight))
 
                 var frames: [CGRect]!
 
@@ -181,7 +181,7 @@ class DscribeLayout: KeyboardLayout {
                     frames = self.layoutCharacterRow(row, keyWidth: letterKeyWidth, gapWidth: keyGap, frame: frame)
                 } else if self.doubleSidedRowHeuristic(row) { // character row with side buttons: shift, backspace, etc.
                     //DIFFERENCE with superclass method
-                    frames = (p == 0 ? self.layoutCharacterWithSidesRowNonFlexibleKeys : self.layoutCharacterWithSidesRow)(row, frame: frame, isLandscape: isLandscape, keyWidth: letterKeyWidth, keyGap: keyGap)
+                    frames = (p == 0 ? self.layoutCharacterWithSidesRowNonFlexibleKeys : self.layoutCharacterWithSidesRow)(row, frame, isLandscape, letterKeyWidth, keyGap)
                 } else { // bottom row with things like space, return, etc.
                     frames = self.layoutSpecialKeysRow(row, keyWidth: letterKeyWidth, gapWidth: lastRowKeyGap, leftSideRatio: lastRowLeftSideRatio, rightSideRatio: lastRowRightSideRatio, micButtonRatio: self.layoutConstants.micButtonPortraitWidthRatioToOtherSpecialButtons, isLandscape: isLandscape, frame: frame)
                 }
@@ -193,11 +193,11 @@ class DscribeLayout: KeyboardLayout {
         return keyMap
     }
 
-    func layoutCharacterWithSidesRowNonFlexibleKeys(row: [Key], frame: CGRect, isLandscape: Bool, keyWidth: CGFloat, keyGap: CGFloat) -> [CGRect] {
+    func layoutCharacterWithSidesRowNonFlexibleKeys(_ row: [Key], frame: CGRect, isLandscape: Bool, keyWidth: CGFloat, keyGap: CGFloat) -> [CGRect] {
         var frames = [CGRect]()
 
         let standardFullKeyCount = Int(self.layoutConstants.keyCompressedThreshhold) - 1
-        let standardGap = (isLandscape ? self.layoutConstants.keyGapLandscape : self.layoutConstants.keyGapPortrait)(frame.width, rowCharacterCount: standardFullKeyCount)
+        let standardGap = (isLandscape ? self.layoutConstants.keyGapLandscape : self.layoutConstants.keyGapPortrait)(frame.width, standardFullKeyCount)
         let sideEdges = (isLandscape ? self.layoutConstants.sideEdgesLandscape : self.layoutConstants.sideEdgesPortrait(frame.width))
         var standardKeyWidth = (frame.width - sideEdges - (standardGap * CGFloat(standardFullKeyCount - 1)) - sideEdges)
         standardKeyWidth /= CGFloat(standardFullKeyCount)
@@ -223,16 +223,16 @@ class DscribeLayout: KeyboardLayout {
         let specialCharacterGap = sideSpace - specialCharacterWidth
 
         var currentOrigin = frame.origin.x
-        for (k, _) in row.enumerate() {
+        for (k, _) in row.enumerated() {
             if k == 0 {
-                frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, specialCharacterWidth, frame.height))
+                frames.append(CGRect(x: rounded(currentOrigin), y: frame.origin.y, width: specialCharacterWidth, height: frame.height))
                 currentOrigin += (specialCharacterWidth + specialCharacterGap)
             } else if k == row.count - 1 {
                 currentOrigin += specialCharacterGap
-                frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, specialCharacterWidth, frame.height))
+                frames.append(CGRect(x: rounded(currentOrigin), y: frame.origin.y, width: specialCharacterWidth, height: frame.height))
                 currentOrigin += specialCharacterWidth
             } else {
-                frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, actualKeyWidth, frame.height))
+                frames.append(CGRect(x: rounded(currentOrigin), y: frame.origin.y, width: actualKeyWidth, height: frame.height))
                 if k == row.count - 2 {
                     currentOrigin += (actualKeyWidth)
                 } else {
@@ -243,14 +243,14 @@ class DscribeLayout: KeyboardLayout {
 
         return frames
     }
-    override func layoutSpecialKeysRow(row: [Key], keyWidth: CGFloat, gapWidth: CGFloat, leftSideRatio: CGFloat, rightSideRatio: CGFloat, micButtonRatio: CGFloat, isLandscape: Bool, frame: CGRect) -> [CGRect] {
+    override func layoutSpecialKeysRow(_ row: [Key], keyWidth: CGFloat, gapWidth: CGFloat, leftSideRatio: CGFloat, rightSideRatio: CGFloat, micButtonRatio: CGFloat, isLandscape: Bool, frame: CGRect) -> [CGRect] {
         var frames = [CGRect]()
 
         var keysBeforeSpace = 0
         var keysAfterSpace = 0
         var reachedSpace = false
-        for (_, key) in row.enumerate() {
-            if key.type == Key.KeyType.Space {
+        for (_, key) in row.enumerated() {
+            if key.type == Key.KeyType.space {
                 reachedSpace = true
             } else {
                 if !reachedSpace {
@@ -285,21 +285,21 @@ class DscribeLayout: KeyboardLayout {
 
         var currentOrigin = frame.origin.x
         var beforeSpace: Bool = true
-        for (k, key) in row.enumerate() {
-            if key.type == Key.KeyType.Space {
-                frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, spaceWidth, frame.height))
+        for (k, key) in row.enumerated() {
+            if key.type == Key.KeyType.space {
+                frames.append(CGRect(x: rounded(currentOrigin), y: frame.origin.y, width: spaceWidth, height: frame.height))
                 currentOrigin += (spaceWidth + gapWidth)
                 beforeSpace = false
             } else if beforeSpace {
                 if hasButtonInMicButtonPosition && k == 2 { //mic button position
-                    frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, micButtonWidth, frame.height))
+                    frames.append(CGRect(x: rounded(currentOrigin), y: frame.origin.y, width: micButtonWidth, height: frame.height))
                     currentOrigin += (micButtonWidth + gapWidth)
                 } else {
-                    frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, leftButtonWidth, frame.height))
+                    frames.append(CGRect(x: rounded(currentOrigin), y: frame.origin.y, width: leftButtonWidth, height: frame.height))
                     currentOrigin += (leftButtonWidth + gapWidth)
                 }
             } else {
-                frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, rightButtonWidth, frame.height))
+                frames.append(CGRect(x: rounded(currentOrigin), y: frame.origin.y, width: rightButtonWidth, height: frame.height))
                 currentOrigin += (rightButtonWidth + gapWidth)
             }
         }
@@ -307,15 +307,15 @@ class DscribeLayout: KeyboardLayout {
         return frames
     }
 
-    override func setAppearanceForKey(key: KeyboardKey, model: Key, darkMode: Bool, solidColorMode: Bool) {
-        if model.type == Key.KeyType.SearchEmoji {
+    override func setAppearanceForKey(_ key: KeyboardKey, model: Key, darkMode: Bool, solidColorMode: Bool) {
+        if model.type == Key.KeyType.searchEmoji {
             // TODO:  use this function "setAppearanceForOtherKey" and type Other and type instead of overriding this function
             key.color = (self.inSearchMode ? UIColor(red: 250.0/255, green: 193.0/255, blue: 62.0/255, alpha: 1.0) : self.globalColors.regularKey(darkMode, solidColorMode: solidColorMode))
             key.downColor = self.globalColors.specialKey(darkMode, solidColorMode: solidColorMode)
-        } else if model.type == Key.KeyType.AccentCharacter {
+        } else if model.type == Key.KeyType.accentCharacter {
             //Same as Character and SpecialCharacter
             key.color = self.self.globalColors.regularKey(darkMode, solidColorMode: solidColorMode)
-            if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
                 key.downColor = self.globalColors.specialKey(darkMode, solidColorMode: solidColorMode)
             }
             else {

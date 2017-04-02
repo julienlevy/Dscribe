@@ -7,13 +7,37 @@
 //
 
 import Foundation
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class Emoji: NSObject, NSCoding {
     var emojiScore: [String: Int]
     var emojiTag: [String: [String]]
     
-    static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-    static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("emojis")
+    static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
+    static let ArchiveURL = DocumentsDirectory.appendingPathComponent("emojis")
 
     struct PropertyKey {
         static let emojiScoreKey = "emojiScore"
@@ -24,7 +48,7 @@ class Emoji: NSObject, NSCoding {
         self.emojiScore = ["😂": 3, "😍": 3, "😭": 3, "😊": 3, "❤": 3, "💕": 3, "✨": 2, "😘": 3, "👏": 3, "🔥": 2, "👍": 3, "👌": 3, "😎": 3, "😒": 2, "🙈": 3, "😏": 2]
         self.emojiTag = [String: [String]]()
 
-        let path: String? = NSBundle.mainBundle().pathForResource("EmojiList", ofType: "plist")
+        let path: String? = Bundle.main.path(forResource: "EmojiList", ofType: "plist")
         if path != nil {
             if let dictionary: NSDictionary? = NSDictionary(contentsOfFile: path!) {
                 print("DICTIONARY from memory")
@@ -45,14 +69,14 @@ class Emoji: NSObject, NSCoding {
         }
     }
 
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(emojiScore, forKey: PropertyKey.emojiScoreKey)
-        aCoder.encodeObject(emojiTag, forKey: PropertyKey.emojiTagKey)
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(emojiScore, forKey: PropertyKey.emojiScoreKey)
+        aCoder.encode(emojiTag, forKey: PropertyKey.emojiTagKey)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
-        let emojiScore = aDecoder.decodeObjectForKey(PropertyKey.emojiScoreKey) as! [String: Int]
-        let emojiTag = aDecoder.decodeObjectForKey(PropertyKey.emojiTagKey) as! [String: [String]]
+        let emojiScore = aDecoder.decodeObject(forKey: PropertyKey.emojiScoreKey) as! [String: Int]
+        let emojiTag = aDecoder.decodeObject(forKey: PropertyKey.emojiTagKey) as! [String: [String]]
 
         self.init(emojiScore: emojiScore, emojiTag: emojiTag)
     }
@@ -69,20 +93,20 @@ class Emoji: NSObject, NSCoding {
                 }
             }
         }
-        let sortedKeys = Array(result.keys).sort( {
+        let sortedKeys = Array(result.keys).sorted( by: {
             return result[$0]! > result[$1]!
         })
         return sortedKeys
     }
 
-    func tagSearch(sentence: String) -> [String] {
-        if sentence.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).isEmpty {
+    func tagSearch(_ sentence: String) -> [String] {
+        if sentence.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty {
             return self.getMostUsedEmojis()
         }
 
         var emojiToMatchData: [String: [Float]] = [String: [Float]]() //IMPORTANT: key=emoji, value=[Number of occurrences of emoji, percentage of matches out of tags, Quality of match (percentage of characters)]
 
-        let wordsArray = sentence.lowercaseString.componentsSeparatedByString(" ")
+        let wordsArray = sentence.lowercased().components(separatedBy: " ")
         for keyword in wordsArray {
             if keyword.isEmpty {
                 continue
@@ -120,7 +144,7 @@ class Emoji: NSObject, NSCoding {
         }
 
         let emojiArray = Array(emojiToMatchData.keys)
-        let sortedKeys = emojiArray.sort( {
+        let sortedKeys = emojiArray.sorted( by: {
             let obj1Matches: Int = Int(emojiToMatchData[$0]![0])
             let obj2Matches: Int = Int(emojiToMatchData[$1]![0])
             let obj1Score: Int = self.emojiScore[$0]! // emojiToMatchData[$0]![1] as Int
@@ -141,7 +165,7 @@ class Emoji: NSObject, NSCoding {
         return sortedKeys
     }
 
-    func incrementScore(emoji: String) -> Int {
+    func incrementScore(_ emoji: String) -> Int {
         print("incrementing " + emoji)
         print(self.emojiScore[emoji])
         if self.emojiScore[emoji] != nil {

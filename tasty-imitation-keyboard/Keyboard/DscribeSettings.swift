@@ -68,7 +68,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
 
         getAvailableLanguages()
-        self.hasFullAccess = UIPasteboard.generalPasteboard().isKindOfClass(UIPasteboard)
+        self.hasFullAccess = UIPasteboard.general.isKind(of: UIPasteboard.self)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -76,14 +76,14 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
 
     override func loadNib() {
         super.loadNib()
-        self.tableView?.registerClass(StaticSettingCell.self, forCellReuseIdentifier: "staticCell")
-        self.tableView?.registerClass(PickerViewCell.self, forCellReuseIdentifier: "pickerCell")
-        self.tableView?.registerClass(NoAccessCell.self, forCellReuseIdentifier: "noAccessCell")
+        self.tableView?.register(StaticSettingCell.self, forCellReuseIdentifier: "staticCell")
+        self.tableView?.register(PickerViewCell.self, forCellReuseIdentifier: "pickerCell")
+        self.tableView?.register(NoAccessCell.self, forCellReuseIdentifier: "noAccessCell")
 
-        self.hasFullAccess = UIPasteboard.generalPasteboard().isKindOfClass(UIPasteboard)
+        self.hasFullAccess = UIPasteboard.general.isKind(of: UIPasteboard.self)
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let rows: Int = self.settingsList[section].1.count
         for row in 0...(rows-1) {
             if (!displayLanguagePicker && self.settingsList[section].1[row] == kLanguagePicker) || (!displayTypePicker && self.settingsList[section].1[row] == kKeyboardPicker) {
@@ -92,28 +92,28 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         }
         return self.settingsList[section].1.count
     }
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let key = self.settingsList[indexPath.section].1[indexPath.row]
 
         if key == kAutocorrectLanguage || key == kKeyboardType {
-            if let cell = tableView.dequeueReusableCellWithIdentifier("staticCell") as? StaticSettingCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "staticCell") as? StaticSettingCell {
 
                 cell.label.text = self.settingsNames[key]
                 cell.longLabel.text = self.settingsNotes[key]
                 if key == kAutocorrectLanguage {
                     cell.labelDisplay.text = (currentPickerLanguage != "" ? currentPickerLanguage : self.availableLanguages[self.indexOfCurrentLanguage()!])
                 } else {
-                    cell.labelDisplay.text = (currentPickerType != "" ? currentPickerType : NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kKeyboardType) as? String)
+                    cell.labelDisplay.text = (currentPickerType != "" ? currentPickerType : UserDefaults(suiteName: "group.dscribekeyboard")!.object(forKey: kKeyboardType) as? String)
                 }
-                cell.labelDisplay.textColor = UIColor.blackColor()
+                cell.labelDisplay.textColor = UIColor.black
 
                 cell.backgroundColor = (self.darkMode ? cellBackgroundColorDark : cellBackgroundColorLight)
                 cell.label.textColor = (self.darkMode ? cellLabelColorDark : cellLabelColorLight)
                 cell.longLabel.textColor = (self.darkMode ? cellLongLabelColorDark : cellLongLabelColorLight)
 
-                cell.userInteractionEnabled = self.hasFullAccess
-                cell.label.enabled = self.hasFullAccess
-                cell.labelDisplay.enabled = self.hasFullAccess
+                cell.isUserInteractionEnabled = self.hasFullAccess
+                cell.label.isEnabled = self.hasFullAccess
+                cell.labelDisplay.isEnabled = self.hasFullAccess
 
                 cell.changeConstraints()
 
@@ -124,14 +124,14 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
             }
         }
         if key == kLanguagePicker || key == kKeyboardPicker {
-            if let pickerCell = tableView.dequeueReusableCellWithIdentifier("pickerCell") as? PickerViewCell {
+            if let pickerCell = tableView.dequeueReusableCell(withIdentifier: "pickerCell") as? PickerViewCell {
                 pickerCell.data = (key == kLanguagePicker ? availableLanguages : keyboardTypes)
                 pickerCell.pickerView.reloadAllComponents()
                 let indexToSelect: Int = (key == kLanguagePicker ?
                     self.indexOfCurrentLanguage()!
-                    : self.keyboardTypes.indexOf(
-                        currentPickerType != "" ? currentPickerType :
-                            NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kKeyboardType) as! String
+                    : self.keyboardTypes.index(
+                        of: currentPickerType != "" ? currentPickerType :
+                            UserDefaults(suiteName: "group.dscribekeyboard")!.object(forKey: kKeyboardType) as! String
                         )!)
                 pickerCell.pickerView.selectRow(indexToSelect, inComponent: 0, animated: false)
 
@@ -146,16 +146,16 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
             }
         }
         if key == kInformation {
-            if let cell = tableView.dequeueReusableCellWithIdentifier("noAccessCell") as? NoAccessCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "noAccessCell") as? NoAccessCell {
                 cell.backgroundColor = (self.darkMode ? cellBackgroundColorDark : cellBackgroundColorLight)
                 cell.label.textColor = (self.darkMode ? cellLabelColorDark : cellLabelColorLight)
                 cell.descriptionLabel.textColor = (self.darkMode ? cellLabelColorDark : cellLabelColorLight)
 
-                cell.appButton.setTitleColor(self.tintColor, forState: .Normal)
-                cell.settingsButton.setTitleColor(self.tintColor, forState: .Normal)
+                cell.appButton.setTitleColor(self.tintColor, for: UIControlState())
+                cell.settingsButton.setTitleColor(self.tintColor, for: UIControlState())
 
-                cell.appButton.addTarget(self, action: #selector(DscribeSettings.openApp), forControlEvents: UIControlEvents.TouchUpInside)
-                cell.settingsButton.addTarget(self, action: #selector(DscribeSettings.openSettings), forControlEvents: UIControlEvents.TouchUpInside)
+                cell.appButton.addTarget(self, action: #selector(DscribeSettings.openApp), for: UIControlEvents.touchUpInside)
+                cell.settingsButton.addTarget(self, action: #selector(DscribeSettings.openSettings), for: UIControlEvents.touchUpInside)
 
                 return cell
             } else {
@@ -163,13 +163,13 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
                 return UITableViewCell()
             }
         }
-        if let cell = tableView.dequeueReusableCellWithIdentifier("cell") as? DefaultSettingsTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? DefaultSettingsTableViewCell {
 
-            if cell.sw.allTargets().count == 0 {
-                cell.sw.addTarget(self, action: #selector(DefaultSettings.toggleSetting(_:)), forControlEvents: UIControlEvents.ValueChanged)
+            if cell.sw.allTargets.count == 0 {
+                cell.sw.addTarget(self, action: #selector(DefaultSettings.toggleSetting(_:)), for: UIControlEvents.valueChanged)
             }
 
-            cell.sw.on = NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(key)
+            cell.sw.isOn = UserDefaults(suiteName: "group.dscribekeyboard")!.bool(forKey: key)
             cell.label.text = self.settingsNames[key]
             cell.longLabel.text = self.settingsNotes[key]
 
@@ -177,9 +177,9 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
             cell.label.textColor = (self.darkMode ? cellLabelColorDark : cellLabelColorLight)
             cell.longLabel.textColor = (self.darkMode ? cellLongLabelColorDark : cellLongLabelColorLight)
 
-            cell.userInteractionEnabled = !self.hasFullAccess
-            cell.sw.enabled = self.hasFullAccess
-            cell.label.enabled = self.hasFullAccess
+            cell.isUserInteractionEnabled = !self.hasFullAccess
+            cell.sw.isEnabled = self.hasFullAccess
+            cell.label.isEnabled = self.hasFullAccess
 
             cell.changeConstraints()
 
@@ -189,18 +189,18 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
             return UITableViewCell()
         }
     }
-    override func toggleSetting(sender: UISwitch) {
+    override func toggleSetting(_ sender: UISwitch) {
         if let cell = sender.superview as? UITableViewCell {
-            if let indexPath = self.tableView?.indexPathForCell(cell) {
+            if let indexPath = self.tableView?.indexPath(for: cell) {
                 let key = self.settingsList[indexPath.section].1[indexPath.row]
-                NSUserDefaults(suiteName: "group.dscribekeyboard")!.setBool(sender.on, forKey: key)
+                UserDefaults(suiteName: "group.dscribekeyboard")!.set(sender.isOn, forKey: key)
 
 //                Mixpanel.sharedInstance().track("Keyboard modify setting", properties:[key: sender.on])
             }
         }
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.tableView?.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+        self.tableView?.deselectRow(at: indexPath, animated: true)
         if self.settingsList[indexPath.section].1[indexPath.row] == kAutocorrectLanguage {
             displayLanguagePicker = !displayLanguagePicker
             if !displayLanguagePicker {
@@ -208,11 +208,11 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
                     saveLanguage(currentPickerLanguage)
                 }
             }
-            self.tableView?.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
+            self.tableView?.reloadSections(IndexSet(integer: indexPath.section), with: UITableViewRowAnimation.fade)
             if displayLanguagePicker {
-                self.tableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section), atScrollPosition: UITableViewScrollPosition.None, animated: true)
+                self.tableView?.scrollToRow(at: IndexPath(row: indexPath.row + 1, section: indexPath.section), at: UITableViewScrollPosition.none, animated: true)
             } else {
-                self.tableView?.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.None, animated: true)
+                self.tableView?.scrollToRow(at: indexPath, at: UITableViewScrollPosition.none, animated: true)
             }
         } else if self.settingsList[indexPath.section].1[indexPath.row] == kKeyboardType {
             displayTypePicker = !displayTypePicker
@@ -221,29 +221,29 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
                     saveKeyboardType(currentPickerType)
                 }
             }
-            self.tableView?.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
+            self.tableView?.reloadSections(IndexSet(integer: indexPath.section), with: UITableViewRowAnimation.fade)
             if displayTypePicker {
-                self.tableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section), atScrollPosition: UITableViewScrollPosition.None, animated: true)
+                self.tableView?.scrollToRow(at: IndexPath(row: indexPath.row + 1, section: indexPath.section), at: UITableViewScrollPosition.none, animated: true)
             } else {
-                self.tableView?.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.None, animated: true)
+                self.tableView?.scrollToRow(at: indexPath, at: UITableViewScrollPosition.none, animated: true)
             }
         }
     }
     func getAvailableLanguages() {
-        availableLanguagesCodes = (UITextChecker.availableLanguages() as! [String]).sort({ $0 < $1 })
+        availableLanguagesCodes = (UITextChecker.availableLanguages ).sorted(by: { $0 < $1 })
 
         var languageDict: [String: String] = [String: String]()
         for language in availableLanguagesCodes {
-            let codes: [String] = language.componentsSeparatedByString("_")
-            var wholeString: String = NSLocale(localeIdentifier: "en").displayNameForKey(NSLocaleLanguageCode, value: codes[0])!
+            let codes: [String] = language.components(separatedBy: "_")
+            var wholeString: String = (Locale(identifier: "en") as NSLocale).displayName(forKey: NSLocale.Key.languageCode, value: codes[0])!
             if codes.count > 1 {
-                wholeString += " - " + NSLocale(localeIdentifier: codes[0]).displayNameForKey(NSLocaleCountryCode, value: codes[1])!
+                wholeString += " - " + (Locale(identifier: codes[0]) as NSLocale).displayName(forKey: NSLocale.Key.countryCode, value: codes[1])!
             }
             languageDict[language] = wholeString
         }
 
         //Proper sort
-        let sorted = languageDict.sort({ $0.1 < $1.1 })
+        let sorted = languageDict.sorted(by: { $0.1 < $1.1 })
         availableLanguages = [String]()
         availableLanguagesCodes = [String]()
         for tuple in sorted {
@@ -252,30 +252,30 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         }
     }
     func indexOfCurrentLanguage() -> Int? {
-        let defaultLanguage: String? = (currentPickerLanguage != "" ? currentPickerLanguage : (NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kAutocorrectLanguage) as? String))
+        let defaultLanguage: String? = (currentPickerLanguage != "" ? currentPickerLanguage : (UserDefaults(suiteName: "group.dscribekeyboard")!.object(forKey: kAutocorrectLanguage) as? String))
         if defaultLanguage == nil {
             return 0
         }
-        let index: Int? = availableLanguagesCodes.indexOf({ $0 == defaultLanguage! })
+        let index: Int? = availableLanguagesCodes.index(where: { $0 == defaultLanguage! })
         if index == nil {
             return 0
         }
         return index
     }
-    func saveLanguage(language: String) {
-        let index: Int? = availableLanguages.indexOf({ $0 == language })
+    func saveLanguage(_ language: String) {
+        let index: Int? = availableLanguages.index(where: { $0 == language })
         if index == nil {
             return
         }
-        NSUserDefaults(suiteName: "group.dscribekeyboard")!.setObject(availableLanguagesCodes[index!], forKey: kAutocorrectLanguage)
+        UserDefaults(suiteName: "group.dscribekeyboard")!.set(availableLanguagesCodes[index!], forKey: kAutocorrectLanguage)
     }
-    func saveKeyboardType(type: String) {
-        NSUserDefaults(suiteName: "group.dscribekeyboard")!.setObject(type, forKey: kKeyboardType)
+    func saveKeyboardType(_ type: String) {
+        UserDefaults(suiteName: "group.dscribekeyboard")!.set(type, forKey: kKeyboardType)
     }
-    func updateValue(value: AnyObject, key: String, indexPath: NSIndexPath) {
+    func updateValue(_ value: AnyObject, key: String, indexPath: IndexPath) {
         if key == kAutocorrectLanguage {
             if let language: String = value as? String {
-                (self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)) as? StaticSettingCell)?.labelDisplay.text = language
+                (self.tableView!.cellForRow(at: IndexPath(row: indexPath.row - 1, section: indexPath.section)) as? StaticSettingCell)?.labelDisplay.text = language
                 currentPickerLanguage = language
 
 //                Mixpanel.sharedInstance().track("Keyboard modify setting", properties:[key: language])
@@ -283,7 +283,7 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         }
         if key == kKeyboardType {
             if let type: String = value as? String {
-                (self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)) as? StaticSettingCell)?.labelDisplay.text = type
+                (self.tableView!.cellForRow(at: IndexPath(row: indexPath.row - 1, section: indexPath.section)) as? StaticSettingCell)?.labelDisplay.text = type
                 currentPickerType = type
 
 //                Mixpanel.sharedInstance().track("Keyboard modify setting", properties:[key: type])
@@ -291,30 +291,33 @@ class DscribeSettings: DefaultSettings, PickerDelegate {
         }
     }
     func openApp() {
-        let myAppUrl = NSURL(string: "dscribe://")!
-        var myResponder: UIResponder? = self
-        while myResponder != nil {
-            print("trying a resp")
-            if myResponder!.respondsToSelector(#selector(UIApplication.openURL(_:))) {
-                print("responder responding to selector")
-                print(myResponder)
-                myResponder!.performSelector(#selector(UIApplication.openURL(_:)), withObject: myAppUrl)
-            }
-            myResponder = myResponder?.nextResponder()
-        }
+        let myAppUrl = URL(string: "dscribe://")!
+        
+        // FIXME replace with correct code
+//        var myResponder: UIResponder? = self
+//        while myResponder != nil {
+//            print("trying a resp")
+//            if myResponder!.responds(to: #selector(UIApplication.openURL(_:))) {
+//                print("responder responding to selector")
+//                print(myResponder)
+//                myResponder!.perform(#selector(UIApplication.openURL(_:)), with: myAppUrl)
+//            }
+//            myResponder = myResponder?.next
+//        }
     }
     func openSettings() {
-        let myAppUrl = NSURL(string: "prefs:root=General&path=Keyboard/KEYBOARDS")!
-        var myResponder: UIResponder? = self
-        while myResponder != nil {
-            print("Trying a responder \(myResponder!.description)")
-            if myResponder!.respondsToSelector(#selector(UIApplication.openURL(_:))) {
-                print("responder responding to selector")
-                print(myResponder)
-                myResponder!.performSelector(#selector(UIApplication.openURL(_:)), withObject: myAppUrl)
-            }
-            myResponder = myResponder?.nextResponder()
-        }
+        // FIXME replace with correct code
+        let myAppUrl = URL(string: "prefs:root=General&path=Keyboard/KEYBOARDS")!
+//        var myResponder: UIResponder? = self
+//        while myResponder != nil {
+//            print("Trying a responder \(myResponder!.description)")
+//            if myResponder!.responds(to: #selector(UIApplication.openURL(_:))) {
+//                print("responder responding to selector")
+//                print(myResponder)
+//                myResponder!.perform(#selector(UIApplication.openURL(_:)), with: myAppUrl)
+//            }
+//            myResponder = myResponder?.next
+//        }
     }
 }
 
@@ -341,18 +344,18 @@ class NoAccessCell: UITableViewCell {
         self.label.text = "Saving"
         self.descriptionLabel.text = "Unfortunately settings won't be saved properly unless “Allow Full Access“ is enabled for Dscribe in iOS Settings. Otherwise, you may use the settings in the main app."
 
-        self.settingsButton.setTitle("Open Settings", forState: .Normal)
-        self.appButton.setTitle("Open App", forState: .Normal)
+        self.settingsButton.setTitle("Open Settings", for: UIControlState())
+        self.appButton.setTitle("Open App", for: UIControlState())
 
-        self.settingsIcon.contentMode = .ScaleAspectFit
-        self.appIcon.contentMode = .ScaleAspectFit
+        self.settingsIcon.contentMode = .scaleAspectFit
+        self.appIcon.contentMode = .scaleAspectFit
 
-        self.descriptionLabel.font = UIFont.systemFontOfSize(12.0)
+        self.descriptionLabel.font = UIFont.systemFont(ofSize: 12.0)
         self.descriptionLabel.numberOfLines = 0
 
         self.appIcon.layer.cornerRadius = 4
         self.appIcon.layer.borderWidth = 1
-        self.appIcon.layer.borderColor = UIColor.grayColor().CGColor
+        self.appIcon.layer.borderColor = UIColor.gray.cgColor
 
         self.addSubview(self.label)
         self.addSubview(self.descriptionLabel)
@@ -373,35 +376,35 @@ class NoAccessCell: UITableViewCell {
         let insideVerticalMargin: CGFloat = 4
 
         self.label.translatesAutoresizingMaskIntoConstraints = false
-        let topLabel: NSLayoutConstraint = NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: margin)
-        let leftLabel: NSLayoutConstraint = NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: sideMargin)
+        let topLabel: NSLayoutConstraint = NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.top, multiplier: 1, constant: margin)
+        let leftLabel: NSLayoutConstraint = NSLayoutConstraint(item: self.label, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.left, multiplier: 1, constant: sideMargin)
 
         self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        let topDescription: NSLayoutConstraint = NSLayoutConstraint(item: self.descriptionLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.label, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: insideVerticalMargin)
-        let leftDescription: NSLayoutConstraint = NSLayoutConstraint(item: self.descriptionLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: sideMargin)
-        let rightDescription: NSLayoutConstraint = NSLayoutConstraint(item: self.descriptionLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -sideMargin)
+        let topDescription: NSLayoutConstraint = NSLayoutConstraint(item: self.descriptionLabel, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.label, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: insideVerticalMargin)
+        let leftDescription: NSLayoutConstraint = NSLayoutConstraint(item: self.descriptionLabel, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.left, multiplier: 1, constant: sideMargin)
+        let rightDescription: NSLayoutConstraint = NSLayoutConstraint(item: self.descriptionLabel, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.right, multiplier: 1, constant: -sideMargin)
 
         self.settingsIcon.translatesAutoresizingMaskIntoConstraints = false
-        let topSettingsIcon: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsIcon, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.descriptionLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: insideVerticalMargin)
-        let leftSettingsIcon: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsIcon, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: sideMargin)
-        let widthSettings: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsIcon, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 30)
-        let heightSettings: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsIcon, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 30)
+        let topSettingsIcon: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsIcon, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.descriptionLabel, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: insideVerticalMargin)
+        let leftSettingsIcon: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsIcon, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.left, multiplier: 1, constant: sideMargin)
+        let widthSettings: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsIcon, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 30)
+        let heightSettings: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsIcon, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 30)
 
         self.settingsButton.translatesAutoresizingMaskIntoConstraints = false
-        let centerSettings: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsButton, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.settingsIcon, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
-        let leftSettings: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsButton, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self.settingsIcon, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 2)
+        let centerSettings: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsButton, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: self.settingsIcon, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
+        let leftSettings: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsButton, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self.settingsIcon, attribute: NSLayoutAttribute.right, multiplier: 1, constant: 2)
 
         self.appIcon.translatesAutoresizingMaskIntoConstraints = false
-        let topAppIcon: NSLayoutConstraint = NSLayoutConstraint(item: self.appIcon, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.descriptionLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: insideVerticalMargin)
-        let leftAppIcon: NSLayoutConstraint = NSLayoutConstraint(item: self.appIcon, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
-        let widthApp: NSLayoutConstraint = NSLayoutConstraint(item: self.appIcon, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 30)
-        let heightApp: NSLayoutConstraint = NSLayoutConstraint(item: self.appIcon, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 30)
+        let topAppIcon: NSLayoutConstraint = NSLayoutConstraint(item: self.appIcon, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.descriptionLabel, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: insideVerticalMargin)
+        let leftAppIcon: NSLayoutConstraint = NSLayoutConstraint(item: self.appIcon, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
+        let widthApp: NSLayoutConstraint = NSLayoutConstraint(item: self.appIcon, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 30)
+        let heightApp: NSLayoutConstraint = NSLayoutConstraint(item: self.appIcon, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 30)
 
         self.appButton.translatesAutoresizingMaskIntoConstraints = false
-        let centerApp: NSLayoutConstraint = NSLayoutConstraint(item: self.appButton, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.appIcon, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
-        let leftApp: NSLayoutConstraint = NSLayoutConstraint(item: self.appButton, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self.appIcon, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 2)
+        let centerApp: NSLayoutConstraint = NSLayoutConstraint(item: self.appButton, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: self.appIcon, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
+        let leftApp: NSLayoutConstraint = NSLayoutConstraint(item: self.appButton, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self.appIcon, attribute: NSLayoutAttribute.right, multiplier: 1, constant: 2)
 
-        let bottom: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsIcon, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -margin)
+        let bottom: NSLayoutConstraint = NSLayoutConstraint(item: self.settingsIcon, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: -margin)
 
         self.addConstraints([topLabel, leftLabel, topDescription, leftDescription, rightDescription, topSettingsIcon, leftSettingsIcon, widthSettings, heightSettings, centerSettings, leftSettings, topAppIcon, leftAppIcon, widthApp, heightApp, centerApp, leftApp, bottom])
     }
@@ -415,7 +418,7 @@ class StaticSettingCell: DefaultSettingsTableViewCell {
 
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        self.sw.hidden = true
+        self.sw.isHidden = true
 
         labelDisplay.tag = 4
 
@@ -434,22 +437,22 @@ class StaticSettingCell: DefaultSettingsTableViewCell {
         if labelDisplay.superview == nil {
             return
         }
-        let topLabel: NSLayoutConstraint = NSLayoutConstraint(item: labelDisplay, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0)
-        let rightLabel: NSLayoutConstraint = NSLayoutConstraint(item: labelDisplay, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 0)
-        let bottomLabel: NSLayoutConstraint = NSLayoutConstraint(item: labelDisplay, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: sw, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0)
+        let topLabel: NSLayoutConstraint = NSLayoutConstraint(item: labelDisplay, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: sw, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0)
+        let rightLabel: NSLayoutConstraint = NSLayoutConstraint(item: labelDisplay, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: sw, attribute: NSLayoutAttribute.right, multiplier: 1, constant: 0)
+        let bottomLabel: NSLayoutConstraint = NSLayoutConstraint(item: labelDisplay, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: sw, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0)
         self.addConstraints([topLabel, rightLabel, bottomLabel])
     }
 }
 
 protocol PickerDelegate {
-    func updateValue(value: AnyObject, key: String, indexPath: NSIndexPath)
+    func updateValue(_ value: AnyObject, key: String, indexPath: IndexPath)
 }
 class PickerViewCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegate {
     var pickerView: UIPickerView
     var data: [String] = [String]()
 
     var key: String = ""
-    var indexPath: NSIndexPath?
+    var indexPath: IndexPath?
     var delegate: PickerDelegate?
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -470,33 +473,33 @@ class PickerViewCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDeleg
         let margin: CGFloat = 8
         let sideMargin = margin * 2
 
-        let left = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: 2 * sideMargin)
-        let right = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -2 * sideMargin)
-        let top = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: margin)
-        let bottom = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -margin)
+        let left = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.left, multiplier: 1, constant: 2 * sideMargin)
+        let right = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.right, multiplier: 1, constant: -2 * sideMargin)
+        let top = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.top, multiplier: 1, constant: margin)
+        let bottom = NSLayoutConstraint(item: pickerView, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: -margin)
 
         self.addConstraint(left)
         self.addConstraint(right)
         self.addConstraint(top)
         self.addConstraint(bottom)
     }
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return data.count
     }
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return data[row]
     }
-    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 20
     }
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.delegate?.updateValue(data[row], key: key, indexPath: indexPath!)
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.delegate?.updateValue(data[row] as AnyObject, key: key, indexPath: indexPath!)
     }
-    func selectCurrentLanguage(language: String) {
-        let index: Int? = data.indexOf({ $0 == language })
+    func selectCurrentLanguage(_ language: String) {
+        let index: Int? = data.index(where: { $0 == language })
         if index == nil {
             return
         }

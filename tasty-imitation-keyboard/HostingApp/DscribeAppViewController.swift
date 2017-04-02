@@ -75,7 +75,7 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
     }
 
     override func viewDidLoad() {
-        NSUserDefaults(suiteName: "group.dscribekeyboard")!.registerDefaults([
+        UserDefaults(suiteName: "group.dscribekeyboard")!.register(defaults: [
             kAutoCapitalization: true,
             kPeriodShortcut: true,
             kKeyboardClicks: false,
@@ -84,36 +84,36 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
             kKeyboardType: kQWERTY
             ])
 
-        self.tableView?.registerClass(DefaultSettingsTableViewCell.self, forCellReuseIdentifier: "cell")
-        self.tableView?.registerClass(StaticSettingCell.self, forCellReuseIdentifier: "staticCell")
-        self.tableView?.registerClass(PickerViewCell.self, forCellReuseIdentifier: "picker")
-        self.tableView?.registerClass(InformationCell.self, forCellReuseIdentifier: "informationCell")
+        self.tableView?.register(DefaultSettingsTableViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView?.register(StaticSettingCell.self, forCellReuseIdentifier: "staticCell")
+        self.tableView?.register(PickerViewCell.self, forCellReuseIdentifier: "picker")
+        self.tableView?.register(InformationCell.self, forCellReuseIdentifier: "informationCell")
         self.tableView?.estimatedRowHeight = 44
         self.tableView?.rowHeight = UITableViewAutomaticDimension
 
-        self.tableView?.backgroundColor = UIColor.groupTableViewBackgroundColor()
+        self.tableView?.backgroundColor = UIColor.groupTableViewBackground
 
         self.navigationItem.titleView = NavigationTitle(frame: self.view.bounds, leftText: "Dscribe", rightText: "Keyboard")
 
         getAvailableLanguages()
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DscribeAppViewController.becameActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(DscribeAppViewController.becameActive(_:)), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
     }
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         if currentPickerLanguage != "" {
             saveLanguage(currentPickerLanguage)
         }
     }
 
-    func becameActive(notification: NSNotification) {
+    func becameActive(_ notification: Notification) {
         self.tableView.reloadData()
     }
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return self.settingsList.count
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let rows: Int = self.settingsList[section].1.count
         for row in 0...(rows-1) {
             // TODO: make this condition with an array when we might have more than one picker
@@ -124,14 +124,14 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
         return self.settingsList[section].1.count
     }
 
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 35 + 20
         }
         return 35
     }
 
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == self.settingsList.count - 1 {
             return 50
         } else {
@@ -139,28 +139,28 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
         }
     }
 
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.settingsList[section].0
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let key = self.settingsList[indexPath.section].1[indexPath.row]
 
         if key == kAutocorrectLanguage || key == kKeyboardType {
-            if let languageCell = tableView.dequeueReusableCellWithIdentifier("staticCell") as? StaticSettingCell {
+            if let languageCell = tableView.dequeueReusableCell(withIdentifier: "staticCell") as? StaticSettingCell {
 
                 languageCell.label.text = self.settingsNames[key]
                 languageCell.longLabel.text = self.settingsNotes[key]
                 if key == kAutocorrectLanguage {
                     languageCell.labelDisplay.text = (currentPickerLanguage != "" ? currentPickerLanguage : self.availableLanguages[self.indexOfCurrentLanguage()!])
                 } else {
-                    languageCell.labelDisplay.text = (currentPickerType != "" ? currentPickerType : NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kKeyboardType) as? String)
+                    languageCell.labelDisplay.text = (currentPickerType != "" ? currentPickerType : UserDefaults(suiteName: "group.dscribekeyboard")!.object(forKey: kKeyboardType) as? String)
                 }
-                languageCell.labelDisplay.textColor = UIColor.blackColor()
+                languageCell.labelDisplay.textColor = UIColor.black
 
-                languageCell.backgroundColor = UIColor.whiteColor()
-                languageCell.label.textColor = UIColor.blackColor()
-                languageCell.longLabel.textColor =  UIColor.grayColor()
+                languageCell.backgroundColor = UIColor.white
+                languageCell.label.textColor = UIColor.black
+                languageCell.longLabel.textColor =  UIColor.gray
 
                 languageCell.changeConstraints()
 
@@ -171,14 +171,14 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
             }
         }
         if key == kLanguagePicker || key == kKeyboardPicker {
-            if let pickerCell = tableView.dequeueReusableCellWithIdentifier("picker") as? PickerViewCell {
+            if let pickerCell = tableView.dequeueReusableCell(withIdentifier: "picker") as? PickerViewCell {
                 pickerCell.data = (key == kLanguagePicker ? availableLanguages : keyboardTypes)
                 pickerCell.pickerView.reloadAllComponents()
                 let indexToSelect: Int = (key == kLanguagePicker ?
                     self.indexOfCurrentLanguage()!
-                    : self.keyboardTypes.indexOf(
-                        currentPickerType != "" ? currentPickerType :
-                            NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kKeyboardType) as! String
+                    : self.keyboardTypes.index(
+                        of: currentPickerType != "" ? currentPickerType :
+                            UserDefaults(suiteName: "group.dscribekeyboard")!.object(forKey: kKeyboardType) as! String
                         )!)
                 pickerCell.pickerView.selectRow(indexToSelect, inComponent: 0, animated: false)
 
@@ -193,14 +193,14 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
             }
         }
         if key == kUseInformation || key == kSettingsInformation {
-            if let informationCell = tableView.dequeueReusableCellWithIdentifier("informationCell") as? InformationCell {
+            if let informationCell = tableView.dequeueReusableCell(withIdentifier: "informationCell") as? InformationCell {
 
                 informationCell.label.text = self.settingsNames[key]
                 informationCell.longLabel.text = self.settingsNotes[key]
 
-                informationCell.backgroundColor = UIColor.whiteColor()
-                informationCell.label.textColor = UIColor.blackColor()
-                informationCell.longLabel.textColor =  UIColor.blackColor()
+                informationCell.backgroundColor = UIColor.white
+                informationCell.label.textColor = UIColor.black
+                informationCell.longLabel.textColor =  UIColor.black
 
                 informationCell.changeConstraints()
 
@@ -210,19 +210,19 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
                 return UITableViewCell()
             }
         }
-        if let cell = tableView.dequeueReusableCellWithIdentifier("cell") as? DefaultSettingsTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? DefaultSettingsTableViewCell {
 
-            if cell.switchItem.allTargets().count == 0 {
-                cell.switchItem.addTarget(self, action: #selector(DscribeAppViewController.toggleSetting(_:)), forControlEvents: UIControlEvents.ValueChanged)
+            if cell.switchItem.allTargets.count == 0 {
+                cell.switchItem.addTarget(self, action: #selector(DscribeAppViewController.toggleSetting(_:)), for: UIControlEvents.valueChanged)
             }
 
-            cell.switchItem.on = NSUserDefaults(suiteName: "group.dscribekeyboard")!.boolForKey(key)
+            cell.switchItem.isOn = UserDefaults(suiteName: "group.dscribekeyboard")!.bool(forKey: key)
             cell.label.text = self.settingsNames[key]
             cell.longLabel.text = self.settingsNotes[key]
 
-            cell.backgroundColor = UIColor.whiteColor()
-            cell.label.textColor = UIColor.blackColor()
-            cell.longLabel.textColor =  UIColor.grayColor()
+            cell.backgroundColor = UIColor.white
+            cell.label.textColor = UIColor.black
+            cell.longLabel.textColor =  UIColor.gray
 
             cell.changeConstraints()
 
@@ -232,18 +232,18 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
             return UITableViewCell()
         }
     }
-    func toggleSetting(sender: UISwitch) {
+    func toggleSetting(_ sender: UISwitch) {
         if let cell = sender.superview as? UITableViewCell {
-            if let indexPath = self.tableView?.indexPathForCell(cell) {
+            if let indexPath = self.tableView?.indexPath(for: cell) {
                 let key = self.settingsList[indexPath.section].1[indexPath.row]
-                NSUserDefaults(suiteName: "group.dscribekeyboard")!.setBool(sender.on, forKey: key)
+                UserDefaults(suiteName: "group.dscribekeyboard")!.set(sender.isOn, forKey: key)
 
-                Mixpanel.sharedInstance().track("Modify setting", properties:[key: sender.on])
+                Mixpanel.sharedInstance().track("Modify setting", properties:[key: sender.isOn])
             }
         }
     }
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
         if self.settingsList[indexPath.section].1[indexPath.row] == kAutocorrectLanguage {
             displayLanguagePicker = !displayLanguagePicker
             if !displayLanguagePicker {
@@ -251,11 +251,11 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
                     saveLanguage(currentPickerLanguage)
                 }
             }
-            self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
+            self.tableView.reloadSections(IndexSet(integer: indexPath.section), with: UITableViewRowAnimation.fade)
             if displayLanguagePicker {
-                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section), atScrollPosition: UITableViewScrollPosition.None, animated: true)
+                self.tableView.scrollToRow(at: IndexPath(row: indexPath.row + 1, section: indexPath.section), at: UITableViewScrollPosition.none, animated: true)
             } else {
-                self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.None, animated: true)
+                self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.none, animated: true)
             }
         } else if self.settingsList[indexPath.section].1[indexPath.row] == kKeyboardType {
             displayTypePicker = !displayTypePicker
@@ -264,30 +264,30 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
                     saveKeyboardType(currentPickerType)
                 }
             }
-            self.tableView?.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
+            self.tableView?.reloadSections(IndexSet(integer: indexPath.section), with: UITableViewRowAnimation.fade)
             if displayTypePicker {
-                self.tableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section), atScrollPosition: UITableViewScrollPosition.None, animated: true)
+                self.tableView?.scrollToRow(at: IndexPath(row: indexPath.row + 1, section: indexPath.section), at: UITableViewScrollPosition.none, animated: true)
             } else {
-                self.tableView?.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.None, animated: true)
+                self.tableView?.scrollToRow(at: indexPath, at: UITableViewScrollPosition.none, animated: true)
             }
         }
     }
     func getAvailableLanguages() {
-        availableLanguagesCodes = (UITextChecker.availableLanguages() as! [String]).sort({ $0 < $1 })
+        availableLanguagesCodes = (UITextChecker.availableLanguages ).sorted(by: { $0 < $1 })
 
         var languageDict: [String: String] = [String: String]()
         for language in availableLanguagesCodes {
-            let codes: [String] = language.componentsSeparatedByString("_")
-            var wholeString: String = NSLocale(localeIdentifier: "en").displayNameForKey(NSLocaleLanguageCode, value: codes[0])!
+            let codes: [String] = language.components(separatedBy: "_")
+            var wholeString: String = (Locale(identifier: "en") as NSLocale).displayName(forKey: NSLocale.Key.languageCode, value: codes[0])!
             if codes.count > 1 {
-                wholeString += " - " + NSLocale(localeIdentifier: codes[0]).displayNameForKey(NSLocaleCountryCode, value: codes[1])!
+                wholeString += " - " + (Locale(identifier: codes[0]) as NSLocale).displayName(forKey: NSLocale.Key.countryCode, value: codes[1])!
             }
             languageDict[language] = wholeString
             //            availableLanguages.append(wholeString)
         }
 
         //Proper sort
-        let sorted = languageDict.sort({ $0.1 < $1.1 })
+        let sorted = languageDict.sorted(by: { $0.1 < $1.1 })
         availableLanguages = [String]()
         availableLanguagesCodes = [String]()
         for tuple in sorted {
@@ -296,31 +296,31 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
         }
     }
     func indexOfCurrentLanguage() -> Int? {
-        let defaultLanguage: String? = (currentPickerLanguage != "" ? currentPickerLanguage : (NSUserDefaults(suiteName: "group.dscribekeyboard")!.objectForKey(kAutocorrectLanguage) as? String))
+        let defaultLanguage: String? = (currentPickerLanguage != "" ? currentPickerLanguage : (UserDefaults(suiteName: "group.dscribekeyboard")!.object(forKey: kAutocorrectLanguage) as? String))
         if defaultLanguage == nil {
             return 0
         }
-        let index: Int? = availableLanguagesCodes.indexOf({ $0 == defaultLanguage! })
+        let index: Int? = availableLanguagesCodes.index(where: { $0 == defaultLanguage! })
         if index == nil {
             return 0
         }
         return index
     }
-    func saveLanguage(language: String) {
-        let index: Int? = availableLanguages.indexOf({ $0 == language })
+    func saveLanguage(_ language: String) {
+        let index: Int? = availableLanguages.index(where: { $0 == language })
         if index == nil {
             return
         }
-        NSUserDefaults(suiteName: "group.dscribekeyboard")!.setObject(availableLanguagesCodes[index!], forKey: kAutocorrectLanguage)
+        UserDefaults(suiteName: "group.dscribekeyboard")!.set(availableLanguagesCodes[index!], forKey: kAutocorrectLanguage)
     }
-    func saveKeyboardType(type: String) {
-        NSUserDefaults(suiteName: "group.dscribekeyboard")!.setObject(type, forKey: kKeyboardType)
+    func saveKeyboardType(_ type: String) {
+        UserDefaults(suiteName: "group.dscribekeyboard")!.set(type, forKey: kKeyboardType)
     }
     // PICKER DELEGATE
-    func updateValue(value: AnyObject, key: String, indexPath: NSIndexPath) {
+    func updateValue(_ value: AnyObject, key: String, indexPath: IndexPath) {
         if key == kAutocorrectLanguage {
             if let language: String = value as? String {
-                (self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)) as? StaticSettingCell)?.labelDisplay.text = language
+                (self.tableView!.cellForRow(at: IndexPath(row: indexPath.row - 1, section: indexPath.section)) as? StaticSettingCell)?.labelDisplay.text = language
                 currentPickerLanguage = language
 
                 Mixpanel.sharedInstance().track("Modify setting", properties:[key: language])
@@ -328,7 +328,7 @@ class DscribeAppViewController: UITableViewController, PickerDelegate {
         }
         if key == kKeyboardType {
             if let type: String = value as? String {
-                (self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)) as? StaticSettingCell)?.labelDisplay.text = type
+                (self.tableView!.cellForRow(at: IndexPath(row: indexPath.row - 1, section: indexPath.section)) as? StaticSettingCell)?.labelDisplay.text = type
                 currentPickerType = type
 
                 Mixpanel.sharedInstance().track("Modify setting", properties:[key: type])

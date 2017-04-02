@@ -13,11 +13,11 @@ class DscribeImageKey: ImageKey {
 
     override func redrawImage() {
         if let image = self.image {
-            let imageSize = (bigImage ? CGSizeMake(25, 25) : CGSizeMake(20, 20))
-            let imageOrigin = CGPointMake(
-                (self.bounds.width - imageSize.width) / CGFloat(2),
-                (self.bounds.height - imageSize.height) / CGFloat(2))
-            var imageFrame = CGRectZero
+            let imageSize = (bigImage ? CGSize(width: 25, height: 25) : CGSize(width: 20, height: 20))
+            let imageOrigin = CGPoint(
+                x: (self.bounds.width - imageSize.width) / CGFloat(2),
+                y: (self.bounds.height - imageSize.height) / CGFloat(2))
+            var imageFrame = CGRect.zero
             imageFrame.origin = imageOrigin
             imageFrame.size = imageSize
 

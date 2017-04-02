@@ -9,8 +9,8 @@
 import UIKit
 
 func keyboardWasActivated() -> Bool {
-    if let appBundleID = NSBundle.mainBundle().bundleIdentifier {
-        if let keyboards = NSUserDefaults.standardUserDefaults().objectForKey("AppleKeyboards") as? [String] {
+    if let appBundleID = Bundle.main.bundleIdentifier {
+        if let keyboards = UserDefaults.standard.object(forKey: "AppleKeyboards") as? [String] {
             if keyboards.contains(appBundleID + ".Keyboard") {
                 print("Yes Utils")
                 return true
@@ -21,10 +21,10 @@ func keyboardWasActivated() -> Bool {
     return false
 }
 
-func backgroungLayerWithFrame(frame: CGRect) -> CAGradientLayer {
+func backgroungLayerWithFrame(_ frame: CGRect) -> CAGradientLayer {
     let gradientLayer = CAGradientLayer()
     gradientLayer.frame = frame
-    gradientLayer.colors = [UIColor.dscribeDarkOrange().CGColor, UIColor.dscribeLightOrange().CGColor]
+    gradientLayer.colors = [UIColor.dscribeDarkOrange().cgColor, UIColor.dscribeLightOrange().cgColor]
 
     return gradientLayer
 }

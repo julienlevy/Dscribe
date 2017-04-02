@@ -9,7 +9,7 @@
 import Foundation
 
 extension String {
-    func translation(language: String) -> String {
+    func translation(_ language: String) -> String {
         switch language {
         case "es":
             if self == "space" {
@@ -48,7 +48,7 @@ extension String {
     }
 }
 
-func accentAfterCharacter(lastTwo: String, withLanguage language: String) -> String {
+func accentAfterCharacter(_ lastTwo: String, withLanguage language: String) -> String {
     if lastTwo == "qu" {
         return "'"
     }

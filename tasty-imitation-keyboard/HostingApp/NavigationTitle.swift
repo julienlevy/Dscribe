@@ -39,13 +39,13 @@ class NavigationTitle: UIView {
     }
 
     func setConstraints() {
-        let horCenter: NSLayoutConstraint = NSLayoutConstraint(item: icon, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
-        let verCenter: NSLayoutConstraint = NSLayoutConstraint(item: icon, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
+        let horCenter: NSLayoutConstraint = NSLayoutConstraint(item: icon, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
+        let verCenter: NSLayoutConstraint = NSLayoutConstraint(item: icon, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
 
-        let left: NSLayoutConstraint = NSLayoutConstraint(item: leftLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: icon, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: -8)
-        let leftCenter: NSLayoutConstraint = NSLayoutConstraint(item: leftLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: icon, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
-        let right: NSLayoutConstraint = NSLayoutConstraint(item: rightLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: icon, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 8)
-        let rightCenter: NSLayoutConstraint = NSLayoutConstraint(item: rightLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: icon, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
+        let left: NSLayoutConstraint = NSLayoutConstraint(item: leftLabel, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: icon, attribute: NSLayoutAttribute.left, multiplier: 1, constant: -8)
+        let leftCenter: NSLayoutConstraint = NSLayoutConstraint(item: leftLabel, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: icon, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
+        let right: NSLayoutConstraint = NSLayoutConstraint(item: rightLabel, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: icon, attribute: NSLayoutAttribute.right, multiplier: 1, constant: 8)
+        let rightCenter: NSLayoutConstraint = NSLayoutConstraint(item: rightLabel, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: icon, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
 
         self.addConstraints([horCenter, verCenter, left, leftCenter, right, rightCenter])
     }

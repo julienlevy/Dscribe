@@ -13,7 +13,7 @@ let bigOffset: [String] = ["{", "}", "[", "]", "+", "=", "\\", "/", "|", "<", ">
 let mediumOffset: [String] = ["_", "•", ".", ","] //2-3
 let smallOffset: [String] = ["#", "%", "~", "€", "¥", "£", "*", "?", "!", "'", "$", "&", "\""] //1 - 2
 
-func keyLabelOffsetForCharacter(character: String, font: UIFont) -> CGFloat {
+func keyLabelOffsetForCharacter(_ character: String, font: UIFont) -> CGFloat {
     if bigOffset.contains(character) {
         return 4.4
     }
@@ -23,22 +23,22 @@ func keyLabelOffsetForCharacter(character: String, font: UIFont) -> CGFloat {
     if smallOffset.contains(character) {
         return 1.3
     }
-    if character == character.lowercaseString && Int(character) == nil {
+    if character == character.lowercased() && Int(character) == nil {
         return 0.7 * (font.capHeight - font.xHeight) * 2
     }
     return 1.0
 }
 
-func fontForKeyWithText(keyText: String, keytype: Key.KeyType) -> UIFont {
-    if keytype == Key.KeyType.Character && keyText == keyText.lowercaseString {
+func fontForKeyWithText(_ keyText: String, keytype: Key.KeyType) -> UIFont {
+    if keytype == Key.KeyType.character && keyText == keyText.lowercased() {
         if #available(iOSApplicationExtension 8.2, *) {
 //            print(UIFont.systemFontOfSize(24.0).description)
-            return UIFont.systemFontOfSize(24.5, weight: UIFontWeightLight)
+            return UIFont.systemFont(ofSize: 24.5, weight: UIFontWeightLight)
         }
-        return UIFont.systemFontOfSize(24)
+        return UIFont.systemFont(ofSize: 24)
     }
     else if smallPunctuation.contains(keyText) {
-        return UIFont.systemFontOfSize(24)
+        return UIFont.systemFont(ofSize: 24)
     }
-    return UIFont.systemFontOfSize(22)
+    return UIFont.systemFont(ofSize: 22)
 }

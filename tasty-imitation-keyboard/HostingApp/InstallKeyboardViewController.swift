@@ -18,16 +18,16 @@ class InstallKeyboardViewController: UIViewController {
     override func viewDidLoad() {
         self.installButton.layer.cornerRadius = self.installButton.bounds.height / 2
 
-        if let videoPath = NSBundle.mainBundle().pathForResource("InstallKeyboard", ofType: "mov") {
-            let videoURL = NSURL.fileURLWithPath(videoPath)
+        if let videoPath = Bundle.main.path(forResource: "InstallKeyboard", ofType: "mov") {
+            let videoURL = URL(fileURLWithPath: videoPath)
             self.moviePlayer = MPMoviePlayerController(contentURL: videoURL)
             if let player = self.moviePlayer {
                 player.view.frame = self.videoFrameView.frame
-                player.scalingMode = MPMovieScalingMode.AspectFill
-                player.fullscreen = true
-                player.controlStyle = MPMovieControlStyle.None
-                player.movieSourceType = MPMovieSourceType.File
-                player.repeatMode = MPMovieRepeatMode.One
+                player.scalingMode = MPMovieScalingMode.aspectFill
+                player.isFullscreen = true
+                player.controlStyle = MPMovieControlStyle.none
+                player.movieSourceType = MPMovieSourceType.file
+                player.repeatMode = MPMovieRepeatMode.one
                 player.play()
                 self.view.addSubview(player.view)
 
@@ -35,37 +35,37 @@ class InstallKeyboardViewController: UIViewController {
             }
         }
 
-        self.view.layer.insertSublayer(backgroungLayerWithFrame(self.view.bounds), atIndex: 0)
+        self.view.layer.insertSublayer(backgroungLayerWithFrame(self.view.bounds), at: 0)
 
-        self.installButton.setTitleColor(UIColor.dscribeOrangeText(), forState: .Normal)
+        self.installButton.setTitleColor(UIColor.dscribeOrangeText(), for: UIControlState())
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear")
         
     }
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         print("viewDidAppear")
     }
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
 
     func setPlayerConstraints() {
         self.moviePlayer.view.translatesAutoresizingMaskIntoConstraints = false
-        let centerY: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.videoFrameView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0)
-        let centerX: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.videoFrameView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0)
-        let width: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self.videoFrameView, attribute: NSLayoutAttribute.Width, multiplier: 1.0, constant: 0)
-        let height: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self.videoFrameView, attribute: NSLayoutAttribute.Height, multiplier: 1.0, constant: 0)
+        let centerY: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: self.videoFrameView, attribute: NSLayoutAttribute.centerY, multiplier: 1.0, constant: 0)
+        let centerX: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.videoFrameView, attribute: NSLayoutAttribute.centerX, multiplier: 1.0, constant: 0)
+        let width: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self.videoFrameView, attribute: NSLayoutAttribute.width, multiplier: 1.0, constant: 0)
+        let height: NSLayoutConstraint = NSLayoutConstraint(item: self.moviePlayer.view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: self.videoFrameView, attribute: NSLayoutAttribute.height, multiplier: 1.0, constant: 0)
 
         self.view.addConstraints([centerX, centerY, width, height])
     }
 
-    @IBAction func installKeyboardPressed(sender: AnyObject) {
-        if let settingsURL = NSURL(string: "prefs:root=General&path=Keyboard/KEYBOARDS") {
-            if !UIApplication.sharedApplication().openURL(settingsURL) {
+    @IBAction func installKeyboardPressed(_ sender: AnyObject) {
+        if let settingsURL = URL(string: "prefs:root=General&path=Keyboard/KEYBOARDS") {
+            if !UIApplication.shared.openURL(settingsURL) {
                 //TODO: Open regular settings not from keyboard page
-                if let mainSettingsURL = NSURL(string: UIApplicationOpenSettingsURLString) {
-                    UIApplication.sharedApplication().openURL(mainSettingsURL)
+                if let mainSettingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+                    UIApplication.shared.openURL(mainSettingsURL)
                 }
             }
         }

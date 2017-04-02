@@ -15,8 +15,8 @@ with something (or leave it blank if you like.)
 */
 
 protocol DscribeBannerDelegate {
-    func appendEmoji(emoji: String)
-    func appendSuggestion(suggestion: String)
+    func appendEmoji(_ emoji: String)
+    func appendSuggestion(_ suggestion: String)
     func refusedSuggestion()
 }
 
@@ -65,11 +65,11 @@ class DscribeBanner: ExtraView {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
 
         self.setupScrollView()
 
-        self.beforeScrollView.frame = CGRectMake( -self.frame.width, space / 2, self.frame.width, self.frame.height)
+        self.beforeScrollView.frame = CGRect( x: -self.frame.width, y: space / 2, width: self.frame.width, height: self.frame.height)
 
         //Frame defined at the end of displayEmojis function
         self.scrollView.addSubview(self.afterScrollView)
@@ -88,29 +88,29 @@ class DscribeBanner: ExtraView {
     }
     func setupScrollView() {
         self.scrollView.translatesAutoresizingMaskIntoConstraints = false
-        self.scrollView.contentSize = CGSizeMake(self.frame.width, self.frame.height)
-        self.scrollView.scrollEnabled = true
+        self.scrollView.contentSize = CGSize(width: self.frame.width, height: self.frame.height)
+        self.scrollView.isScrollEnabled = true
         self.scrollView.showsHorizontalScrollIndicator = false
         self.addSubview(self.scrollView)
 
         self.addConstraint(NSLayoutConstraint(
-                item: scrollView, attribute: NSLayoutAttribute.Height,
-                relatedBy: NSLayoutRelation.Equal,
-                toItem: self, attribute: NSLayoutAttribute.Height,
+                item: scrollView, attribute: NSLayoutAttribute.height,
+                relatedBy: NSLayoutRelation.equal,
+                toItem: self, attribute: NSLayoutAttribute.height,
                 multiplier: 1, constant: 0))
         self.addConstraint(NSLayoutConstraint(
-                item: scrollView, attribute: NSLayoutAttribute.CenterY,
-                relatedBy: NSLayoutRelation.Equal,
-                toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
+                item: scrollView, attribute: NSLayoutAttribute.centerY,
+                relatedBy: NSLayoutRelation.equal,
+                toItem: self, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0))
         self.addConstraint(NSLayoutConstraint(
-                item: scrollView, attribute: NSLayoutAttribute.Width,
-                relatedBy: NSLayoutRelation.Equal,
-                toItem: self, attribute: NSLayoutAttribute.Width,
+                item: scrollView, attribute: NSLayoutAttribute.width,
+                relatedBy: NSLayoutRelation.equal,
+                toItem: self, attribute: NSLayoutAttribute.width,
                 multiplier: 1, constant: 0))
         self.addConstraint(NSLayoutConstraint(
-                item: scrollView, attribute: NSLayoutAttribute.CenterX,
-                relatedBy: NSLayoutRelation.Equal,
-                toItem: self, attribute: NSLayoutAttribute.CenterX,
+                item: scrollView, attribute: NSLayoutAttribute.centerX,
+                relatedBy: NSLayoutRelation.equal,
+                toItem: self, attribute: NSLayoutAttribute.centerX,
                 multiplier: 1, constant: 0))
     }
 
@@ -129,11 +129,11 @@ class DscribeBanner: ExtraView {
             if let button = subview as? UIButton {
                 if button.tag == 1 { //Normal suggestion
                     button.backgroundColor = suggestionBackgroundColor
-                    button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
+                    button.setTitleColor(UIColor.black, for: UIControlState.highlighted)
                 } else if subview.tag == 2 { //Will Replace suggestion
                     button.backgroundColor = selectedSuggestionBackgroungColor
-                    button.setTitleColor(selectedTextColor, forState: [UIControlState.Normal, UIControlState.Highlighted])
-                    button.setTitleColor(selectedTextColor, forState: .Normal)
+                    button.setTitleColor(selectedTextColor, for: UIControlState.highlighted)
+                    button.setTitleColor(selectedTextColor, for: UIControlState())
                 } else if subview.tag == 3 { //Emoji
                     button.backgroundColor = emojiBackgroundColor
                 }
@@ -146,26 +146,26 @@ class DscribeBanner: ExtraView {
                 if subview.tag == 2 { //Will Replace suggestion
                     subview.tag = 1 //Normal suggestion
                     button.backgroundColor = suggestionBackgroundColor
-                    button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
-                    button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+                    button.setTitleColor(UIColor.black, for: UIControlState.highlighted)
+                    button.setTitleColor(UIColor.white, for: UIControlState())
                 }
             }
         }
     }
 
-    func emojiSelected(sender: UIButton!) {
+    func emojiSelected(_ sender: UIButton!) {
         delegate?.appendEmoji((sender.titleLabel?.text)!)
     }
 
-    func suggestionSelected(sender: UIButton!) {
+    func suggestionSelected(_ sender: UIButton!) {
         delegate?.appendSuggestion((sender.titleLabel?.text)!)
     }
 
-    func alreadyTypedWord(sender: UIButton!) {
+    func alreadyTypedWord(_ sender: UIButton!) {
         delegate?.refusedSuggestion()
     }
 
-    func displayEmojis(emojiList: [String], stringToSearch: String = "") {
+    func displayEmojis(_ emojiList: [String], stringToSearch: String = "") {
         let numberEmoji: Int = emojiList.count
 
         if numberEmoji == 0 {
@@ -173,20 +173,20 @@ class DscribeBanner: ExtraView {
         }
 
         self.removeAllButtonsFromScrollView()
-        self.beforeScrollView.hidden = false
-        self.afterScrollView.hidden = false
+        self.beforeScrollView.isHidden = false
+        self.afterScrollView.isHidden = false
 
         var xOrigin: CGFloat = 0
         var width: CGFloat = 80
         var lastButton: UIButton = UIButton()
 
-        scrollView.scrollEnabled = true
+        scrollView.isScrollEnabled = true
         // To scroll back to the first page of emojis:
         self.scrollView.contentSize.width = scrollView.bounds.width
 
         if numberEmoji <= 4 {
             width = (self.frame.width) / CGFloat(numberEmoji)
-            scrollView.scrollEnabled = false
+            scrollView.isScrollEnabled = false
         }
 
         var count: Int = 0
@@ -196,10 +196,10 @@ class DscribeBanner: ExtraView {
                 break
             }
             let button: UIButton = UIButton()
-            button.frame = CGRectMake(xOrigin, space / 2, width, self.frame.height + 1)
-            button.setTitle(emoji, forState: UIControlState.Normal)
-            button.addTarget(self, action: #selector(DscribeBanner.emojiSelected(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-            button.titleLabel?.font = button.titleLabel?.font.fontWithSize(22)
+            button.frame = CGRect(x: xOrigin, y: space / 2, width: width, height: self.frame.height + 1)
+            button.setTitle(emoji, for: UIControlState())
+            button.addTarget(self, action: #selector(DscribeBanner.emojiSelected(_:)), for: UIControlEvents.touchUpInside)
+            button.titleLabel?.font = button.titleLabel?.font.withSize(22)
             button.tag = 3
 
             xOrigin += width + 1
@@ -211,44 +211,44 @@ class DscribeBanner: ExtraView {
         self.scrollView.contentSize.width = lastButton.frame.origin.x + lastButton.frame.width
         self.scrollView.contentSize.height = self.frame.height
 
-        self.afterScrollView.frame = CGRectMake( self.scrollView.contentSize.width - 1, space / 2, self.frame.width, self.frame.height)
+        self.afterScrollView.frame = CGRect( x: self.scrollView.contentSize.width - 1, y: space / 2, width: self.frame.width, height: self.frame.height)
 
         self.setButtonColors()
     }
 
-    func displaySuggestions(suggestionList: [String], originalString: String, willReplaceString: String = "") {
+    func displaySuggestions(_ suggestionList: [String], originalString: String, willReplaceString: String = "") {
         var varSuggestionList: [String] = suggestionList
         if willReplaceString != "" {
-            varSuggestionList.insert(willReplaceString, atIndex: 0)
+            varSuggestionList.insert(willReplaceString, at: 0)
         }
-        varSuggestionList.insert(originalString, atIndex: 0)
+        varSuggestionList.insert(originalString, at: 0)
 
         self.removeAllButtonsFromScrollView()
-        self.beforeScrollView.hidden = true
-        self.afterScrollView.hidden = true
+        self.beforeScrollView.isHidden = true
+        self.afterScrollView.isHidden = true
 
         let width: CGFloat = ((self.frame.width - CGFloat(2) * space) / CGFloat(3))
-        scrollView.scrollEnabled = false
-        scrollView.setContentOffset(CGPointZero, animated: false)
+        scrollView.isScrollEnabled = false
+        scrollView.setContentOffset(CGPoint.zero, animated: false)
 
         for index in 0 ..< 3 {
             let button: UIButton = UIButton()
             button.layer.borderWidth = 0.4
-            button.layer.borderColor = UIColor.clearColor().CGColor
-            button.frame = CGRectMake(CGFloat(index) * (width + space), 0, width, self.frame.height)
+            button.layer.borderColor = UIColor.clear.cgColor
+            button.frame = CGRect(x: CGFloat(index) * (width + space), y: 0, width: width, height: self.frame.height)
             button.tag = 1
-            button.addTarget(self, action: #selector(DscribeBanner.cancelHighlight(_:)), forControlEvents: [UIControlEvents.TouchUpInside, UIControlEvents.TouchDragExit, UIControlEvents.TouchUpOutside, UIControlEvents.TouchCancel, UIControlEvents.TouchDragOutside])
-            button.addTarget(self, action: #selector(DscribeBanner.highlightButton(_:)), forControlEvents: [.TouchDown, .TouchDragInside])
+            button.addTarget(self, action: #selector(DscribeBanner.cancelHighlight(_:)), for: [UIControlEvents.touchUpInside, UIControlEvents.touchDragExit, UIControlEvents.touchUpOutside, UIControlEvents.touchCancel, UIControlEvents.touchDragOutside])
+            button.addTarget(self, action: #selector(DscribeBanner.highlightButton(_:)), for: [.touchDown, .touchDragInside])
 
             if varSuggestionList.count > index {
                 var suggestion: String = ""
                 suggestion = varSuggestionList[index]
                 if index == 0 {
-                    button.setTitle((suggestion != "" ? "\"" + suggestion + "\"" : ""), forState: UIControlState.Normal)
-                    button.addTarget(self, action: #selector(DscribeBanner.alreadyTypedWord(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                    button.setTitle((suggestion != "" ? "\"" + suggestion + "\"" : ""), for: UIControlState())
+                    button.addTarget(self, action: #selector(DscribeBanner.alreadyTypedWord(_:)), for: UIControlEvents.touchUpInside)
                 } else {
-                    button.setTitle(suggestion, forState: UIControlState.Normal)
-                    button.addTarget(self, action: #selector(DscribeBanner.suggestionSelected(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                    button.setTitle(suggestion, for: UIControlState())
+                    button.addTarget(self, action: #selector(DscribeBanner.suggestionSelected(_:)), for: UIControlEvents.touchUpInside)
                     if index == 1 && willReplaceString != "" {
                         button.tag = 2
                     }
@@ -268,10 +268,10 @@ class DscribeBanner: ExtraView {
             }
         }
     }
-    func highlightButton(sender: UIButton) {
+    func highlightButton(_ sender: UIButton) {
         sender.backgroundColor = selectedSuggestionBackgroungColor
     }
-    func cancelHighlight(sender: UIButton) {
+    func cancelHighlight(_ sender: UIButton) {
         if sender.tag == 1 {
             sender.backgroundColor = suggestionBackgroundColor
         }
